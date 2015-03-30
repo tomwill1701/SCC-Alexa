@@ -1,0 +1,48 @@
+# == Schema Information
+#
+# Table name: commands
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :text
+#  ctype       :integer
+#  model       :text
+#  prompts     :string
+#  source      :string
+#  member      :string
+#  keys        :string
+#  chart_type  :integer
+#  chart_x     :string
+#  chart_y     :string
+#  chart_opt   :text
+#  cclass      :string
+#  tags        :string
+#  preload     :string
+#  cache_time  :integer
+#  rscript     :text
+#  vscript     :text
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  data_source: MyString
+  type: 
+  description: MyString
+  model: MyString
+  prompts: MyString
+  source: MyString
+  keys: MyString
+  comment: MyText
+
+two:
+  data_source: MyString
+  type: 
+  description: MyString
+  model: MyString
+  prompts: MyString
+  source: MyString
+  keys: MyString
+  comment: MyText

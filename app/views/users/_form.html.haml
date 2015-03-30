@@ -1,0 +1,11 @@
+= bootstrap_form_for(@user) do |f|
+  = f.text_field :name
+  = f.password_field :password
+  = f.text_field :department
+  = f.text_field :phone
+  = f.text_field :email
+  = f.text_field :racf_userid, label: "RACF Userid"
+  = f.text_field :racf_group, label: "RACF Group"
+  = f.text_field :racf_password, label: "RACF Password"
+  = f.submit "Update"
+  = f.submit "Cancel"

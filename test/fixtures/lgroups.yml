@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: lgroups
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :text
+#  sysplex     :boolean          default("false")
+#  private     :boolean          default("false")
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  racf_group: MyString
+  comment: MyText
+  ind: false
+
+two:
+  name: MyString
+  description: MyString
+  racf_group: MyString
+  comment: MyText
+  ind: false

@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: cloads
+#
+#  id         :integer          not null, primary key
+#  dsname     :string
+#  volser     :string
+#  lpar_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  member: MyString
+  description: MyText
+  keys: MyString
+  ctype: MyString
+  model: MyString
+  prompts: MyString
+  chart: MyString
+  command_id: 
+
+two:
+  name: MyString
+  member: MyString
+  description: MyText
+  keys: MyString
+  ctype: MyString
+  model: MyString
+  prompts: MyString
+  chart: MyString
+  command_id: 

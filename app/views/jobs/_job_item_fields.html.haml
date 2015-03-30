@@ -1,0 +1,10 @@
+.nested-fields
+  = f.inputs do
+    = f.input :cgroup, label: "Command"
+    = f.input :lgroup, label: "LPAR"
+    = f.input :cache
+    = f.input :chart_type, as: :select, collection: ["Bar", "Pie", "Gage"]
+    = f.input :chart_x
+    = f.input :chart_y
+    = f.input :chart_opt
+    = link_to_remove_association "remove item", f

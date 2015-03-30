@@ -1,0 +1,14 @@
+.modal-content#modal
+  .modal-header
+    %h4#modalLabel.modal-title Enter prompt values
+  .modal-body
+    = bootstrap_form_tag url: prompt_create_path, method: "post" do |f|
+      - @prompts.keys.each do |key|
+        = f.label key
+        = text_field_tag "prompts[" + key + "]", @prompts[key]
+      .modal-footer
+        = f.submit "Cancel", class: "btn btn-default"
+        = f.primary "Accept", class: "btn btn-primary"
+- if flash[:manifesto_modal]
+  :javascript
+    $(document).ready(function(){ $("#modal").dialog({modal: true}); });

@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: jobs
+#
+#  id                 :integer          not null, primary key
+#  name               :string
+#  jtype              :string
+#  description        :text
+#  menu               :string
+#  cclass             :string
+#  tags               :string
+#  when               :string
+#  when_time          :string
+#  run_type           :string
+#  background         :boolean          default("false")
+#  private            :boolean          default("false")
+#  notify_email       :boolean          default("false")
+#  notify_email_group :boolean          default("false")
+#  notify_dash        :boolean          default("false")
+#  owner_id           :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#
+
+require 'test_helper'
+
+class JobTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

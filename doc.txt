@@ -1,0 +1,36 @@
+
+Controllers
+
+Jobs
+
+/index  show all available jobs with search class/type/private/favorite
+   (run link)
+/show   show basic job info with past runs
+   (run link)
+/edit   edit job info
+   (run link)
+/delete delete the job (private only)
+/run    run job -> go to run/show or run/view
+/clone  clone a job and make it private
+    (go to edit)
+
+
+Runs
+
+/index  show runs with search on class/type/jobname/date/error/new/date run
+/delete delete the run
+/show   show command/view details with raw data
+/view   show end txt/grid/chart
+/rerun  rerun current job
+
+Need:
+cache
+activejob
+delayed job
+
+
+
+
+
+
+

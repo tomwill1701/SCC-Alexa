@@ -1,0 +1,23 @@
+.page-header
+  %h3.chardin_box{ "data-position": :right }
+    Job Selection
+.well
+  = search_form_for @q do |f|
+    .row
+      .col-md-12
+        .form-group.chardin_box
+          = f.label :name_cont
+          = f.search_field :name_cont
+          = f.label :type
+          = f.select :jtype_eq, Job.uniq.pluck(:jtype), include_blank: true
+          = f.label :class
+          = f.select :cclass_eq, Job.uniq.pluck(:cclass), include_blank: true
+          = f.label :favorite
+          = f.check_box :with_favorite, {}, current_user.id
+          = f.label :private
+          = f.check_box :with_private, {}, current_user.id
+          = f.submit
+          = link_to 'Clear Filters', jobs_path
+          = link_to 'New Job', new_job_path
+#results
+  = render :partial => 'jobs/list', locals: { jobs: @jobs }

@@ -1,0 +1,27 @@
+%style{:media => "screen", :type => "text/css"}
+  \.label {
+  display: block;
+  width: 20%;
+  float: left;
+  font-size: 1.0em;
+  font-weight: bold;
+  color: #5E6469;
+  text-align: left;
+  }
+%h4
+  Job
+= semantic_form_for @job do |f|
+  = f.inputs do
+    = f.input :name
+    = f.input :jtype, label: "Type", collection: ["Text", "Grid", "Chart"]
+    = f.input :cclass, label: "Class"
+    = f.input :description, input_html: {:class => 'autogrow', :rows => 3}
+    = f.hidden_field :owner_id, value: @job.owner_id
+  = f.inputs "Command Group" do
+    = f.semantic_fields_for :job_items do | jobitem |
+      = render 'job_item_fields', f: jobitem
+    .links
+      = link_to_add_association 'add item', f, :job_items
+  = f.actions do
+    = f.action :submit, as: :button
+    = f.action :cancel, as: :link

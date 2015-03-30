@@ -1,0 +1,38 @@
+# == Schema Information
+#
+# Table name: lpars
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :text
+#  ip          :string
+#  port        :integer
+#  location    :string
+#  zos_release :string
+#  subsystems  :string
+#  monproc     :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ip: MyString
+  port: 1
+  name: MyString
+  description: MyString
+  location: MyString
+  zos_release: MyString
+  string: MyString
+  commant: MyText
+
+two:
+  ip: MyString
+  port: 1
+  name: MyString
+  description: MyString
+  location: MyString
+  zos_release: MyString
+  string: MyString
+  commant: MyText

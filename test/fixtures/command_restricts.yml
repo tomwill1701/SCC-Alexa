@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: command_restricts
+#
+#  id         :integer          not null, primary key
+#  cgroup_id  :integer
+#  ugroup_id  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  command_id: 
+  ugroup_id: 
+
+two:
+  command_id: 
+  ugroup_id: 

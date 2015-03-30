@@ -1,0 +1,22 @@
+%table.table
+  %tr
+    %th Name
+    %th Type
+    %th Class
+  - jobs.each do |job|
+    %tr
+      %td= link_to job.name, job, {"data-toggle" => "tooltip", title: job.description}
+      %td= job.jtype
+      %td= job.cclass
+      - if job.favorite_job?(current_user)
+        %td= link_to 'Unfav', unfavorite_job_path(job), method: :delete
+      -else
+        %td= link_to 'Fav', favorite_job_path(job), method: :post
+      %td= link_to 'Clone', clone_job_path(job)
+      %td= link_to 'Run', run_job_path(job)
+      - if job.owner?(current_user)
+        %td= link_to 'Edit', edit_job_path(job)
+        %td= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you surex?' }
+
+.chardin_box{ :'data-position' => 'top', :'data-intro' => "will_paginate's paginator works as expected." }
+  = paginate jobs

@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: lpar_restricts
+#
+#  id         :integer          not null, primary key
+#  lgroup_id  :integer
+#  ugroup_id  :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lpar_id: 
+  ugroup_id: 
+
+two:
+  lpar_id: 
+  ugroup_id: 

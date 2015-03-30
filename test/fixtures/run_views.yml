@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: run_views
+#
+#  id             :integer          not null, primary key
+#  type           :string
+#  file           :string
+#  file_type      :string
+#  run_command_id :integer
+#  command_id     :integer
+#  job_item_id    :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  log: MyText
+  command_id: 
+  run_data_id: 
+
+two:
+  log: MyText
+  command_id: 
+  run_data_id: 

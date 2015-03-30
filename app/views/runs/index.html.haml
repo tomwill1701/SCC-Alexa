@@ -1,0 +1,29 @@
+.page-header
+  %h3.chardin_box{ "data-position": :right }
+    Runs Selection
+.well
+  = search_form_for @q do |f|
+    .row
+      .col-md-9
+        .form-group.col-md-3
+          = f.label "Run Date"
+          .div.form-group
+            = f.text_field :start_gteq, class: 'datepicker'
+            = f.text_field :start_lteq, class: 'datepicker'
+        .form-group
+          = f.label :status
+          = f.select :status, Run.uniq.pluck(:status), include_blank: true
+        .form-group
+          = f.label :background
+          = f.check_box :with_background
+          = f.label :error
+          = f.check_box :with_error
+          = f.label :done
+          = f.check_box :with_done
+          = f.label :never_viewed
+          = f.check_box :with_nv
+        .form-group
+          = f.submit
+          = link_to 'Clear Filters', runs_path
+#results
+  = render :partial => 'runs/list', locals: { runs: @runs }

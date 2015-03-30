@@ -1,0 +1,16 @@
+%table.table
+  %tr
+    %th Name
+    %th Type
+    %th Class
+  - runs.each do |run|
+    %tr
+      %td= run.job.name
+      %td= run.status
+      %td= run.error
+      %td= link_to 'View', job_run_view_path(run)
+      %td= link_to 'Show', run_views_path(run)
+      %td= link_to 'Delete', run, method: :delete, data: { confirm: 'Are you sure?' }
+
+.chardin_box{ :'data-position' => 'top' }
+  = paginate runs

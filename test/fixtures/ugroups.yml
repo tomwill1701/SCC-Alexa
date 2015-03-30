@@ -1,0 +1,28 @@
+# == Schema Information
+#
+# Table name: ugroups
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :text
+#  racf_group  :string
+#  private     :boolean          default("false")
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  racf_group: MyString
+  command: MyText
+  ind: false
+
+two:
+  name: MyString
+  description: MyString
+  racf_group: MyString
+  command: MyText
+  ind: false

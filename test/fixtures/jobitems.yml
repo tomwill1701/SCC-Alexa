@@ -1,0 +1,24 @@
+# == Schema Information
+#
+# Table name: jobitems
+#
+#  id         :integer          not null, primary key
+#  job_id     :integer
+#  lgroup_id  :integer
+#  cgroup_id  :integer
+#  staged     :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  job: 
+  ugroup: 
+  cgroup: 
+
+two:
+  job: 
+  ugroup: 
+  cgroup: 

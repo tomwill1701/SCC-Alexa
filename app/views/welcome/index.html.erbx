@@ -1,0 +1,16 @@
+<div id="grid_here" style="width: 600px; height: 400px;"></div>
+
+<script type="text/javascript" charset="UTF-8">
+  var grid = new dhtmlXGridObject("grid_here");
+  grid.setImagePath("assets/imgs/");
+  grid.setHeader("First name, Last name, Phone");
+  grid.attachHeader("#text_filter,#text_filter,#text_filter");
+  grid.setColSorting("str,str,str");
+  grid.setInitWidths("100,100,100");
+  grid.setSkin("dhx_skyblue");
+  grid.enableAutoWidth(true);
+  grid.enableAutoHeight(true);
+  grid.setSizes();
+  grid.init();
+  grid.parse('<%= @data2.to_json.html_safe %>', "jsarray");
+</script>
