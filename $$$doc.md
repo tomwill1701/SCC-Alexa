@@ -4,7 +4,7 @@
 - UGroup
 - User_Ugroup (join)
 
-- LPAR
+- LPAR (LPAR is a system or image to talk to)
 - LGroup
 - LPAR_LGroup (join)
 
@@ -19,7 +19,7 @@
 - RunCommand
 - RunView
 
-- CommandLoad
+- CommandLoad (just used to load/import commands)
 - CommandLoadItem
 
 - Notice
@@ -72,6 +72,7 @@
 - View can also show raw data from tcpip request
 - Email should have links to Views
 
+- Prompt for other values in commands
 - For External command build email with attachment
 - Use S3 for attachments (PDF)
 - Drill down from one command to another based on keys or target command
