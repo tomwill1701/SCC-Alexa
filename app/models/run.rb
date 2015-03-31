@@ -38,9 +38,23 @@ class Run < ActiveRecord::Base
     [:with_background, :with_error, :with_done, :with_nv]
   end
 
+  #
+  #  add log message to log array
+  #
   def <<(string)
     self.log ||= Array.new
     self.log << string
+  end
+
+  #
+  #  build status message
+  #
+  def dstatus
+    status = ""
+    status += "Background " if self.background
+    status += "Done " if self.done
+    status += "Error " if self.error
+    return status
   end
 
   #
@@ -57,7 +71,7 @@ class Run < ActiveRecord::Base
     unless self.job
       self.job = job
       self.user = user
-      self.ugroup = user.ugroup
+      self.ugroup = user.ugroups.first
     end
 
     #
@@ -142,8 +156,9 @@ class Run < ActiveRecord::Base
             puts rc.rtext
             self << "cache: #{ckey} used"
             rc.source = "Cache"
+            rc.save
           else
-            self << "cahce: #{ckey} not found"
+            self << "cache: #{ckey} not found"
             fin = false
           end
         else
@@ -193,7 +208,7 @@ class Run < ActiveRecord::Base
       if !rc.error && rc.rtext.length > 0 && rc.command.cache_time > 0
         ckey = "#{rc.lpar.id}/#{rc.model}"
         Rails.cache.write(ckey, rc.rtext, expires_in: rc.command.cache_time.seconds)
-        self << "cahce: #{ckey} set"
+        self << "cache: #{ckey} set"
       end
 
     end

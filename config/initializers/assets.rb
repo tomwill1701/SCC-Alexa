@@ -2,10 +2,6 @@
 
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
-Rails.application.config.assets.precompile += %w( dhtmlxgrid.css )
-Rails.application.config.assets.precompile += %w( skins/dhtmlxgrid_dhx_skyblue.css )
-Rails.application.config.assets.precompile += %w( dhtmlxgrid.js )
-Rails.application.config.assets.precompile += %w( ext/dhtmlxgrid_filter.js )
 
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path

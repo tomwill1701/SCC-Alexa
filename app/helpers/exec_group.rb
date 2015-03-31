@@ -60,7 +60,7 @@ class ExecGroup
       exec.response_code = response.code
 
       if response.success?
-        # yes
+        exec.rtext.sub!('<html><body><pre>','')
       elsif response.timed_out?
         exec.errors ||= Array.new
         exec.errors << "time out"

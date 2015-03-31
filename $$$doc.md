@@ -1,16 +1,19 @@
 # Models
 
-- User
-- UGroup
+- User (activeadmin)
+- UGroup (activeadmin)
 - User_Ugroup (join)
 
-- LPAR (LPAR is a system or image to talk to)
-- LGroup
+- LPAR (LPAR is a system or image to talk to) (activeadmin)
+- LGroup (activeadmin)
 - LPAR_LGroup (join)
 
-- Command
-- CGroup
+- Command (activeadmin)
+- CGroup (activeadmin)
 - Command_Cgroup (join)
+
+- CommandLoad (just used to load/import commands) (activeadmin)
+- CommandLoadItem (activeadmin)
 
 - Job
 - JobItem
@@ -18,9 +21,6 @@
 - Run
 - RunCommand
 - RunView
-
-- CommandLoad (just used to load/import commands)
-- CommandLoadItem
 
 - Notice
 
@@ -46,6 +46,15 @@
 - Run_views
   - Show entire job output (all run_views = Index?)
   - Show just one part of job (one run_view = Show?)
+
+# Using the app
+
+- User login and creates jobs
+- Jobs consists of entries of LPAR / Command
+  - Each entry tells what command to run and where to run it
+- Jobs are run and once all the data is acquired a Run View is created
+- Views are use to display the data in text/grid/chart form
+- More than one View per job
 
 
 # Features

@@ -11,6 +11,8 @@ class RunsController < ApplicationController
   #  show function
   #
   def show
+    @job = @run.job
+    @rc = @run.run_commands
   end
 
   #  delete function
@@ -40,11 +42,14 @@ class RunsController < ApplicationController
     #
     @run.execute(current_user) unless @run.done
     @run.save
-    if @run.done
-      redirect_to job_run_view_path(@run)
-    else
+#    if @run.done
+#       render :show
+#      redirect_to job_run_view_path(@run)
+#    else
+      @job = @run.job
+      @rc = @run.run_commands
       render :show
-    end
+#    end
 
   end
 

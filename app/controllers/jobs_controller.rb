@@ -85,6 +85,7 @@ class JobsController < ApplicationController
   def run
     run = Run.new
     run.build(@job, current_user)
+    run.save
     redirect_to execute_run_path(run)
   end
 
