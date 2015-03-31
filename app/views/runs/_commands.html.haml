@@ -1,0 +1,7 @@
+- @rc.each do |rc|
+  - if rc.lpar
+    %br #{rc.lpar.name}
+  = rc.source
+  = rc.model
+  .code.scroll #{rc.rtext.gsub("\r",'<br>').html_safe}
+  = render :partial => 'runs/views', locals: { rc: rc }

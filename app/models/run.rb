@@ -45,8 +45,8 @@ class Run < ActiveRecord::Base
   #  add log message to log array
   #
   def <<(string)
-    self.log ||= Array.new
-    self.log << string
+    self.log ||= String.new
+    self.log += string + "\r"
   end
 
   #
@@ -179,7 +179,7 @@ class Run < ActiveRecord::Base
         self.save
         return
       end
-      
+
     end
 
     #

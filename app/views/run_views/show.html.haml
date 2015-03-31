@@ -1,1 +1,3 @@
-Test
+- @rv.each do |rv|
+  - if rv.type != "a"
+    = render :partial => 'run_views/grid', locals: { rv: rv }

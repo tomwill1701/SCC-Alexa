@@ -19,4 +19,24 @@ class RunView < ActiveRecord::Base
   belongs_to :command
   belongs_to :job_item
 
+  def columnNames
+    rc = self.run_command
+    list = rc.columns.map { |c| c.name}
+    list.join(",")
+  end
+
+  def columnTypes
+    rc = self.run_command
+    list = rc.columns.map { |c| c.type}
+    list.join(",")
+  end
+
+  def columnWidths
+    return ""
+  end
+
+  def rows
+    self.run_command.rows
+  end
+
 end

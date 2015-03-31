@@ -9,7 +9,9 @@ class RunViewsController < ApplicationController
   #  show function
   #
   def show
-    @rc = @rv.run_command.build
+    @rc = @rv.run_command
+    @rc.build
+    @rv = [@rv]
   end
 
   #

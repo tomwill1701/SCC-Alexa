@@ -38,7 +38,8 @@ class RunCommand < ActiveRecord::Base
     if self.command.ctype == "Grid" && rtext && done && !error
 
       line = rtext.split("\r")
-      columns = Array.new
+      self.columns = Array.new
+      self.rows = Array.new
 
       #
       #  look for a schema line in the output and build a
@@ -55,20 +56,20 @@ class RunCommand < ActiveRecord::Base
           column.type = line[27..31]
           column.key= line[32..40]
           column.ftype = line[41..49]
-          columns << column
+          self.columns << column
+          puts column.inspect
         end
 
         #
         #  look at each data line and create an array of values for the row
         #
-        rows = Array.new
         if line[0..10] == "MON10103-I "
           row = Array.new
           line = line[11..-1]
           columns.each do |col|
             row << line[col.offset..col.offset+col.length-1]
           end
-          rows << row
+          self.rows << row
         end
 
       end
