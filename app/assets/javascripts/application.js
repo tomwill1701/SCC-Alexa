@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require cocoon
 //= require bootstrap-datepicker
+//= require dhtmlxgrid.js
+//= require ext/dhtmlxgrid_filter.js
 //= require_tree .

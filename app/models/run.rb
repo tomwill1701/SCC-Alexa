@@ -34,6 +34,9 @@ class Run < ActiveRecord::Base
   scope :with_done, -> { where("done = true")  }
   scope :with_nv, -> { where("viewed_at IS NULL")  }
 
+  #
+  #  ransack filters
+  #
   def self.ransackable_scopes(auth_object = nil)
     [:with_background, :with_error, :with_done, :with_nv]
   end
@@ -146,34 +149,37 @@ class Run < ActiveRecord::Base
     #
     #  see if all the data is in cache
     #
-    fin = true
-    self.run_commands.each do | rc |
-      unless rc.done
-        if rc.command.cache_time > 0
-          ckey = "#{rc.lpar.id}/#{rc.model}"
-          rc.rtext = Rails.cache.read(ckey)
-          if rc.rtext
-            puts rc.rtext
-            self << "cache: #{ckey} used"
-            rc.source = "Cache"
-            rc.save
+    unless self.background
+      fin = true
+      self.run_commands.each do | rc |
+        unless rc.done
+          if rc.command.cache_time > 0
+            ckey = "#{rc.lpar.id}/#{rc.model}"
+            rc.rtext = Rails.cache.read(ckey)
+            if rc.rtext
+              puts rc.rtext
+              self << "cache: #{ckey} used"
+              rc.source = "Cache"
+              rc.save
+            else
+              self << "cache: #{ckey} not found"
+              fin = false
+            end
           else
-            self << "cache: #{ckey} not found"
             fin = false
           end
-        else
-          fin = false
         end
       end
-    end
 
-    #
-    #  if we got all data from cache then return
-    #
-    if fin
-      self.done = true
-      self.save
-      return
+      #
+      #  if we got all data from cache then return
+      #
+      if fin
+        self.done = true
+        self.save
+        return
+      end
+      
     end
 
     #

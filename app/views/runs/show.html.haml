@@ -14,5 +14,5 @@
       %br #{rc.lpar.name}
     = rc.source
     = rc.model
-    .scroll #{rc.rtext.gsub("\r",'<br>').html_safe}
+    .code.scroll #{rc.rtext.gsub("\r",'<br>').html_safe}
   = link_to 'Edit', root_path
