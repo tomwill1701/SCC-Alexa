@@ -9,3 +9,7 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w( dhtmlxgrid.css )
+Rails.application.config.assets.precompile += %w( skins/dhtmlxgrid_dhx_skyblue.css )
+Rails.application.config.assets.precompile += %w( dhtmlxgrid.js )
+Rails.application.config.assets.precompile += %w( ext/dhtmlxgrid_filter.js )
