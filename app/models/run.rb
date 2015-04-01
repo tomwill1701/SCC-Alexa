@@ -78,7 +78,7 @@ class Run < ActiveRecord::Base
       self.job = job
       self.user = user
       self.ugroup = user.ugroups.first
-      self.log = Array.new
+      self.log = String.new
     end
 
     #
@@ -179,13 +179,13 @@ class Run < ActiveRecord::Base
       fin = true
       self.run_commands.each do | rc |
         unless rc.done
-          if self.cache && rc.command.cache_time && rc.command.cache_time > 0
+          if self.cache
             ckey = "#{rc.lpar.id}/#{rc.model}"
             rc.rtext = Rails.cache.read(ckey)
             if rc.rtext
-              puts rc.rtext
               self << "cache: #{ckey} used"
               rc.source = "Cache"
+              rc.done = true
               rc.save
             else
               self << "cache: #{ckey} not found"
@@ -214,6 +214,7 @@ class Run < ActiveRecord::Base
     execgroup = ExecGroup.new
     self.run_commands.each do | rc |
       unless rc.done
+        rc.source = "TCPIP"
         exec = Exec.new
         exec.lpar = rc.lpar
         exec.cmd = rc.model
@@ -237,9 +238,9 @@ class Run < ActiveRecord::Base
       rc.done = true
       rc.save
 
-      if !rc.error && rc.rtext.length > 0 && self.cache && rc.command.cache_time && rc.command.cache_time > 0
+      if !rc.error && self.cache && rc.command.cache_time && rc.command.cache_time > 0 && rc.rtext.length > 0
         ckey = "#{rc.lpar.id}/#{rc.model}"
-        Rails.cache.write(ckey, rc.rtext, expires_in: rc.command.cache_time.seconds)
+        Rails.cache.write(ckey, rc.rtext, expires_in: rc.command.cache_time.minutes)
         self << "cache: #{ckey} set"
       end
 

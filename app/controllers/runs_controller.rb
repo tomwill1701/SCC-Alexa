@@ -40,16 +40,24 @@ class RunsController < ApplicationController
     #
     #  execute the job to get the data
     #
-    @run.execute(current_user) unless @run.done
-    @run.save
-#    if @run.done
-#       render :show
-#      redirect_to job_run_view_path(@run)
-#    else
+    if self.background
+      @run.status = "Background run queued"
+      @run.save
+      Run.perform_later @run
       @job = @run.job
       @rc = @run.run_commands
       render :show
+    else
+      @run.execute(current_user) unless @run.done
+      @run.save
+#    if @run.done
+#      redirect_to job_run_view_path(@run)
+#    else
+        @job = @run.job
+        @rc = @run.run_commands
+        render :show
 #    end
+    end
 
   end
 
