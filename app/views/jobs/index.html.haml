@@ -9,7 +9,7 @@
           = f.label :name_cont
           = f.search_field :name_cont
           = f.label :type
-          = f.select :jtype_eq, Job.uniq.pluck(:jtype), include_blank: true
+          = f.select :run_type_eq, Job.uniq.pluck(:run_type), include_blank: true
           = f.label :class
           = f.select :cclass_eq, Job.uniq.pluck(:cclass), include_blank: true
           = f.label :favorite

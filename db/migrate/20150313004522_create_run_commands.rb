@@ -5,7 +5,7 @@ class CreateRunCommands < ActiveRecord::Migration
       t.text :rtext
       t.boolean :done, default: false
       t.boolean :error, default: false
-      t.boolean :grid, default: false
+      t.boolean :add_lpar, default: false
       t.string  :error_text
       t.string :status
       t.string :source

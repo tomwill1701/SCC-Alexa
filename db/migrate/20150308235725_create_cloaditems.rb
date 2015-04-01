@@ -7,11 +7,12 @@ class CreateCloaditems < ActiveRecord::Migration
       t.string :member
       t.text   :model
       t.string :keys
-      t.integer :ctype
+      t.string :ctype
       t.string :cclass
       t.string :tags
       t.string :prompts
-      t.integer :chart_type
+      t.string :size
+      t.string :chart_type
       t.string :chart_x
       t.string :chart_y
       t.text   :chart_opt

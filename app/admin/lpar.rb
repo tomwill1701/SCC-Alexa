@@ -64,7 +64,7 @@ ActiveAdmin.register Lpar do
       input :name
       f.has_many :lpar_lgroups, allow_destroy: true do |ug|
         ug.input :lgroup, label: "Group", collection: Lgroup.is_group(name),
-        member_label: lambda {|g| "#{g.qual("LOCKED-")}" }
+        member_label: lambda {|g| "#{g.qual("LOCKED-","")}" }
       end
       input :ip
       input :port

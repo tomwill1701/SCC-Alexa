@@ -3,20 +3,21 @@ class CreateCommands < ActiveRecord::Migration
     create_table :commands do |t|
       t.string :name
       t.text   :description
-      t.integer :ctype
+      t.string :ctype
       t.text   :model
       t.string :prompts
       t.string :source
       t.string :member
       t.string :keys
-      t.integer :chart_type
+      t.string :size
+      t.string :chart_type
       t.string :chart_x
       t.string :chart_y
       t.text   :chart_opt
       t.string :cclass
       t.string :tags
       t.string :preload
-      t.integer :cache_time
+      t.integer :cache_time, default: 0
       t.text   :rscript
       t.text   :vscript
 

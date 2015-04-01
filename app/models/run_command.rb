@@ -7,7 +7,7 @@
 #  rtext         :text
 #  done          :boolean          default("false")
 #  error         :boolean          default("false")
-#  grid          :boolean          default("false")
+#  add_lpar      :boolean          default("false")
 #  error_text    :string
 #  status        :string
 #  source        :string

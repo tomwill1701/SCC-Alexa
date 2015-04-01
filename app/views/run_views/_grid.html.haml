@@ -3,12 +3,14 @@
   var grid = new dhtmlXGridObject("grid#{rv.id}");
   grid.setImagePath("assets/imgs/");
   grid.setHeader('#{rv.columnNames.html_safe}');
-  grid.attachHeader("#text_filter,#text_filter,#text_filter");
   grid.setColSorting('#{rv.columnTypes.html_safe}');
-  grid.setInitWidths("100,100,100");
+  grid.setColSorting('str,int,int');
+  grid.setColAlign("left,right,center,justify");
+  grid.attachHeader("#select_filter");
   grid.setSkin("dhx_skyblue");
   grid.enableAutoWidth(true);
   grid.enableAutoHeight(true);
+  grid.enableMultiselect(true);
   grid.setSizes();
   grid.init();
   grid.parse('#{rv.rows.to_json.html_safe}', "jsarray");

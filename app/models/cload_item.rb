@@ -9,11 +9,12 @@
 #  member      :string
 #  model       :text
 #  keys        :string
-#  ctype       :integer
+#  ctype       :string
 #  cclass      :string
 #  tags        :string
 #  prompts     :string
-#  chart_type  :integer
+#  size        :string
+#  chart_type  :string
 #  chart_x     :string
 #  chart_y     :string
 #  chart_opt   :text
@@ -33,9 +34,6 @@ class CloadItem < ActiveRecord::Base
   belongs_to :command
 
   validates :cload_id, presence: true
-
-  enum ctype: [:DIFCmd, :MVSCmd, :Grid, :Chart, :External]
-  enum chart_type: [:Bar, :Pie, :Gage, :Line]
 
   #
   #  create or update the command table entry using the cload_item info

@@ -3,15 +3,18 @@
 # Table name: runs
 #
 #  id         :integer          not null, primary key
-#  background :boolean          default("false")
+#  background :boolean          default("true")
+#  cache      :boolean          default("true")
 #  error      :boolean          default("false")
 #  done       :boolean          default("false")
+#  notify     :boolean          default("false")
 #  status     :string
 #  error_text :string
 #  log        :text
+#  total_data :integer
 #  start      :datetime
 #  end        :datetime
-#  viewed_at  :datetime
+#  viewed     :datetime
 #  delete_at  :datetime
 #  ugroup_id  :integer
 #  job_id     :integer

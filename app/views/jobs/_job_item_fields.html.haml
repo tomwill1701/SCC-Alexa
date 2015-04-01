@@ -1,8 +1,10 @@
 .nested-fields
   = f.inputs do
-    = f.input :cgroup, label: "Command"
-    = f.input :lgroup, label: "LPAR"
-    = f.input :cache
+    = f.input :cgroup_id, as: :select, collection: Cgroup.all, input_html: {class: 'chosen-select'},
+      label: "Command", member_label: :qual
+    = f.input :lgroup_id, as: :select, collection: Lgroup.all, label: "LPAR",
+        member_label: :qual
+    = f.input :size
     = f.input :chart_type, as: :select, collection: ["Bar", "Pie", "Gage"]
     = f.input :chart_x
     = f.input :chart_y

@@ -1,6 +1,7 @@
 ActiveAdmin.register Job do
 
-  permit_params :id, :name, :jtype, :description, ugroup_ids:[] ,
+  permit_params :id, :name, :jtype, :description,
+        :background, :notify_email, :notify_dash, :keep_days, ugroup_ids:[],
         job_items_attributes: [:id, :job_id, :lgroup_id, :cgroup_id,
         :cache, :chart_type, :chart_x, :chart_y, :chart_opt, :_destroy]
 
@@ -12,10 +13,13 @@ ActiveAdmin.register Job do
 
   filter :name
   filter :description
-  filter :jtype, label: "Type", as: :select
   filter :cclass, label: "Class", as: :select
   filter :users, label: "User/favorite", as: :select
   filter :owner, label: "Owner", as: :select
+  filter :tags
+  filter :private
+  filter :notify
+  filter :keep_days
 
   #
   #  show
@@ -23,8 +27,11 @@ ActiveAdmin.register Job do
   show do "Jobs"
     attributes_table do
       row :name
-      row :jtype, label: "Type"
+      row "Class", :cclass
+      row :runtype
       row :description
+      row "Keep for", :keep_days
+      row :notify
       panel "Commands" do
         table_for job.job_items do
           column "LPAR" do |jobitem|
@@ -33,7 +40,7 @@ ActiveAdmin.register Job do
           column "Command" do |jobitem|
             name_qual(Cgroup.find_by(id: jobitem.cgroup_id))
           end
-          column :cache
+          column :size
           column :chart_type
           column :chart_x
           column :chart_y
@@ -51,6 +58,7 @@ ActiveAdmin.register Job do
     column :name
     column "Type", :jtype
     column "Class", :cclass
+    column :owner
     actions
   end
 
@@ -61,8 +69,12 @@ ActiveAdmin.register Job do
     f.semantic_errors *f.object.errors.keys
     inputs "Details" do
       input :name
-      input :jtype, label: "Type", collection: ["Text", "Grid", "Chart"]
       input :cclass, label: "Class"
+      input :run_type, as: :select, collection: ["Real-Time", "Background", "External"]
+      input :tags
+      input :keep_days
+      input :notify
+      input :private
       input :users, label: "Users", as: :check_boxes
       input :description
     end
@@ -75,8 +87,8 @@ ActiveAdmin.register Job do
         a.input :lgroup_id, as: :select, collection: Lgroup.all, label: "LPAR",
     #    member_label: lambda {|g| "#{g.qual("","group: ")}" }
           member_label: :qual
-          a.input :cache
-          a.input :chart_type
+          a.input :size
+          a.input :chart_type, collection: ["Bar", "Line", "Pie", "Gage"]
           a.input :chart_x
           a.input :chart_y
           a.input :chart_opt

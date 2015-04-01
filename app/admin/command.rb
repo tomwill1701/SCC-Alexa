@@ -2,7 +2,7 @@ ActiveAdmin.register Command do
 
   permit_params :id, :name, :description, :source,
         :ctype, :model, :prompts, :keys, :tags, :cclass, :preload,
-        :chart_type, :chart_x, :chart_y, :chart_opt, :cache_time,
+        :chart_type, :chart_x, :chart_y, :chart_opt, :cache_time, :size,
         command_cgroups_attributes: [:id, :name, :command_id, :cgroup_id, :_destroy]
 
   sidebar "Commands" do
@@ -11,14 +11,14 @@ ActiveAdmin.register Command do
   menu label: "Commands", priority: 4
 
   filter :name
-  filter :ctype, as: :select, label: "Type", collection: Command.ctypes.keys
+  filter :ctype, as: :select, label: "Type"
   filter :cclass, as: :select, label: "Class"
   filter :cgroups, as: :select, label: "Group", collection: proc { Cgroup.is_group }
   filter :source, as: :select
   filter :tags
   filter :keys
   filter :prompts
-  filter :chart_type, as: :select, collection: Command.chart_types.keys
+  filter :chart_type, as: :select
   filter :preload
   filter :description
 
@@ -39,6 +39,7 @@ ActiveAdmin.register Command do
       row :model
       row :prompts
       row :keys
+      row :size
       row :chart_type
       row :chart_x
       row :chart_y
@@ -58,7 +59,6 @@ ActiveAdmin.register Command do
     column "Type", :ctype
     column "Class", :cclass
     column :source
-    column :tags
     actions
   end
 
@@ -76,15 +76,18 @@ ActiveAdmin.register Command do
       input :name
       f.has_many :command_cgroups, allow_destroy: true do |ug|
         ug.input :cgroup, label: "Group", collection: Cgroup.is_group(name),
-        member_label: lambda {|g| "#{g.qual("LOCKED-")}" }
+        member_label: lambda {|g| "#{g.qual("LOCKED-","")}" }
       end
-      input :ctype, label: "Type", as: :select, collection: Command.ctypes.keys
+      input :ctype, label: "Type", as: :select,
+        collection:  ["DIFCmd", "MVSCmd", "Grid", "Chart", "External"]
       input :cclass, label: "Class"
       input :tags
       input :model, input_html: {rows: 4}
       input :prompts
       input :keys
-      input :chart_type, as: :select, collection: Command.chart_types.keys
+      input :size
+      input :chart_type, as: :select,
+        collection: ["Pie", "Bar", "Line", "Gage"]
       input :chart_x
       input :chart_y
       input :chart_opt, input_html: {rows: 2}

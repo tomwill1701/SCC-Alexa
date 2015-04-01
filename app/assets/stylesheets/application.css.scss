@@ -13,11 +13,11 @@
  *= require formtastic-bootstrap
  *= require bootstrap-datepicker3
  *= require dhtmlxgrid.css
- *= require skins/dhtmlxgrid_dhx_skyblue.css 
+ *= require skins/dhtmlxgrid_dhx_skyblue.css
+ *= require skins/dhtmlxgrid_dhx_web.css
  *= require_self
  */
  @import 'active_admin';
  @import 'welcome';
  @import 'chosen';
  @import 'runs';
-

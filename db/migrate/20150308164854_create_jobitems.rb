@@ -4,7 +4,7 @@ class CreateJobitems < ActiveRecord::Migration
       t.references :job
       t.references :lgroup
       t.references :cgroup
-      t.string     :cache
+      t.string     :size
       t.string     :chart_type
       t.string     :chart_x
       t.string     :chart_y

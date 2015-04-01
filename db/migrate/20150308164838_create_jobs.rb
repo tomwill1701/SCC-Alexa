@@ -10,11 +10,10 @@ class CreateJobs < ActiveRecord::Migration
       t.string :when
       t.string :when_time
       t.string :run_type
-      t.boolean :background, default: false
+      t.integer :keep_days
       t.boolean :private, default: false
-      t.boolean :notify_email, default: false
-      t.boolean :notify_email_group, default: false
-      t.boolean :notify_dash, default: false
+      t.boolean :notify, default: true
+      t.boolean :notify_group, default: true
       t.integer :owner_id
 
       t.timestamps null: false

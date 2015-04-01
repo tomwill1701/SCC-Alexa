@@ -31,6 +31,9 @@ ActiveAdmin.register Ugroup do
   index do
     selectable_column
     column :name
+    column "Users" do |ugroup|
+      names_comma(ugroup.users)
+    end
     actions
   end
 

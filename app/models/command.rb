@@ -5,20 +5,21 @@
 #  id          :integer          not null, primary key
 #  name        :string
 #  description :text
-#  ctype       :integer
+#  ctype       :string
 #  model       :text
 #  prompts     :string
 #  source      :string
 #  member      :string
 #  keys        :string
-#  chart_type  :integer
+#  size        :string
+#  chart_type  :string
 #  chart_x     :string
 #  chart_y     :string
 #  chart_opt   :text
 #  cclass      :string
 #  tags        :string
 #  preload     :string
-#  cache_time  :integer
+#  cache_time  :integer          default("0")
 #  rscript     :text
 #  vscript     :text
 #  created_at  :datetime         not null
@@ -35,9 +36,6 @@ class Command < ActiveRecord::Base
 
   accepts_nested_attributes_for :command_cgroups, allow_destroy: true,
       reject_if: proc { |a| a[:cgroup_id].blank? }
-
-  enum ctype: [:DIFCmd, :MVSCmd, :Grid, :Chart, :External, :REXXCmd, :MONCmd]
-  enum chart_type: [:Bar, :Pie, :Gage, :Line]
 
   after_save :reset_group
   after_destroy :delete_group
@@ -63,8 +61,6 @@ class Command < ActiveRecord::Base
       new = Cgroup.create(name: name, private: true)
       CommandCgroup.create(command: self, cgroup: new)
     end
-    all = Cgroup.where(name: "All").first_or_create
-    CommandCgroup.where(command: self, cgroup: all).first_or_create
   end
 
 

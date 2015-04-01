@@ -29,6 +29,9 @@ ActiveAdmin.register Lgroup do
   index do
     selectable_column
     column :name
+    column "LPARs" do |lgroup|
+      names_comma(lgroup.lpars)
+    end
     actions
   end
 

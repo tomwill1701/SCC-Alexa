@@ -6,7 +6,7 @@
 #  job_id        :integer
 #  lgroup_id     :integer
 #  cgroup_id     :integer
-#  cache         :string
+#  size          :string
 #  chart_type    :string
 #  chart_x       :string
 #  chart_y       :string

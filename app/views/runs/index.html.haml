@@ -4,12 +4,11 @@
 .well
   = search_form_for @q do |f|
     .row
-      .col-md-9
-        .form-group.col-md-3
-          = f.label "Run Date"
-          .div.form-group
-            = f.text_field :start_gteq, class: 'datepicker'
-            = f.text_field :start_lteq, class: 'datepicker'
+      .col-md-3
+        = f.label "Run Date"
+        .filter_form_field.filter_date_range
+          = f.text_field :start_gteq, class: 'datepicker', size: "12"
+          = f.text_field :start_lteq, class: 'datepicker'
         .form-group
           = f.label :status
           = f.select :status, Run.uniq.pluck(:status), include_blank: true

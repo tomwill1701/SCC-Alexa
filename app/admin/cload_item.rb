@@ -14,12 +14,12 @@ ActiveAdmin.register CloadItem do
   sidebar "Command Load Items" do
   end
 
-  filter :ctype, as: :select, label: "Type", collection: Command.ctypes.keys
+  filter :ctype, as: :select, label: "Type"
   filter :cclass, as: :select, label: "Class"
   filter :tags
   filter :keys
   filter :prompts
-  filter :chart_type, as: :select, collection: Command.chart_types.keys
+  filter :chart_type, as: :select
   filter :preload
   filter :description
 
@@ -53,6 +53,7 @@ ActiveAdmin.register CloadItem do
       row :group
       row :tags
       row :prompts
+      row :size
       row :chart_type
       row :chart_x
       row :chart_y
@@ -72,11 +73,14 @@ ActiveAdmin.register CloadItem do
       input :member
       input :model, input_html: {rows: 4}
       input :keys
-      input :ctype, label: "Type", as: :select, collection: Command.ctypes.keys
+      input :ctype, label: "Type", as: :select,
+        collection: ["DIFCmd", "MVSCmd", "Grid", "Chart", "External"]
       input :cclass, label: "Class"
       input :tags
+      input :size
       input :prompts
-      input :chart_type, as: :select, collection: Command.chart_types.keys
+      input :chart_type, as: :select,
+        collection: ["Pie", "Bar", "Line", "Gage"]
       input :chart_x
       input :chart_y
       input :chart_opt, input_html: {rows: 2}

@@ -2,6 +2,7 @@ ActiveAdmin.register User do
 
   permit_params :id, :name, :department, :phone, :email, :lpar_id,
         :racf_userid, :racf_group, :racf_password, :admin, :password,
+        :background, :notify, :last_login, :login_count,
         user_ugroups_attributes: [:id, :name, :user_id, :ugroup_id, :_destroy]
 
 
@@ -15,12 +16,14 @@ ActiveAdmin.register User do
   filter :department, as: :select
   filter :racf_group
   filter :admin, as: :check_boxes
+  filter :last_login
 
   #
   #  show
   #
   show do |user|
     attributes_table do
+      row :username
       row :name
       row :department
       row "Groups" do |user|
@@ -32,6 +35,10 @@ ActiveAdmin.register User do
       row :lpar, label: "LPAR/Signon"
       row :phone
       row :email
+      row :background
+      row :notify
+      row :last_login
+      row :login_count
     end
   end
 
@@ -40,10 +47,12 @@ ActiveAdmin.register User do
   #
   index do
     selectable_column
+    column :username
     column :name
     column :department
     column :email
     column :admin
+    column :last_login
     actions
   end
 
@@ -58,6 +67,7 @@ ActiveAdmin.register User do
     end
     f.semantic_errors *f.object.errors.keys
     inputs '' do
+      input :username
       input :name
       input :password
       input :lpar, label: "LPAR/Signon"
@@ -65,13 +75,16 @@ ActiveAdmin.register User do
       input :department
       f.has_many :user_ugroups, allow_destroy: true do |ug|
         ug.input :ugroup, label: "Group", collection: Ugroup.is_group(name),
-        member_label: lambda {|g| "#{g.qual("LOCKED-")}" }
+        member_label: lambda {|g| "#{g.qual("LOCKED-","")}" }
       end
       input :racf_userid, label: "RACF Userid"
       input :racf_group, label: "RACF Group`"
       input :racf_password, label: "RACF Password"
       input :phone
       input :email
+      input :background, collection: ["Never", "Always"]
+      input :notify, collection: ["Never", "Always"]
+      input :login_count
     end
     actions
   end

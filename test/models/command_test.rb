@@ -5,20 +5,21 @@
 #  id          :integer          not null, primary key
 #  name        :string
 #  description :text
-#  ctype       :integer
+#  ctype       :string
 #  model       :text
 #  prompts     :string
 #  source      :string
 #  member      :string
 #  keys        :string
-#  chart_type  :integer
+#  size        :string
+#  chart_type  :string
 #  chart_x     :string
 #  chart_y     :string
 #  chart_opt   :text
 #  cclass      :string
 #  tags        :string
 #  preload     :string
-#  cache_time  :integer
+#  cache_time  :integer          default("0")
 #  rscript     :text
 #  vscript     :text
 #  created_at  :datetime         not null

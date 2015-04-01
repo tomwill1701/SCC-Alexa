@@ -46,11 +46,12 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.string   "member"
     t.text     "model"
     t.string   "keys"
-    t.integer  "ctype"
+    t.string   "ctype"
     t.string   "cclass"
     t.string   "tags"
     t.string   "prompts"
-    t.integer  "chart_type"
+    t.string   "size"
+    t.string   "chart_type"
     t.string   "chart_x"
     t.string   "chart_y"
     t.text     "chart_opt"
@@ -97,24 +98,25 @@ ActiveRecord::Schema.define(version: 20150325211513) do
   create_table "commands", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.integer  "ctype"
+    t.string   "ctype"
     t.text     "model"
     t.string   "prompts"
     t.string   "source"
     t.string   "member"
     t.string   "keys"
-    t.integer  "chart_type"
+    t.string   "size"
+    t.string   "chart_type"
     t.string   "chart_x"
     t.string   "chart_y"
     t.text     "chart_opt"
     t.string   "cclass"
     t.string   "tags"
     t.string   "preload"
-    t.integer  "cache_time"
+    t.integer  "cache_time",  default: 0
     t.text     "rscript"
     t.text     "vscript"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -140,7 +142,7 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.integer  "job_id"
     t.integer  "lgroup_id"
     t.integer  "cgroup_id"
-    t.string   "cache"
+    t.string   "size"
     t.string   "chart_type"
     t.string   "chart_x"
     t.string   "chart_y"
@@ -160,14 +162,13 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.string   "when"
     t.string   "when_time"
     t.string   "run_type"
-    t.boolean  "background",         default: false
-    t.boolean  "private",            default: false
-    t.boolean  "notify_email",       default: false
-    t.boolean  "notify_email_group", default: false
-    t.boolean  "notify_dash",        default: false
+    t.integer  "keep_days"
+    t.boolean  "private",      default: false
+    t.boolean  "notify",       default: true
+    t.boolean  "notify_group", default: true
     t.integer  "owner_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "lgroups", force: :cascade do |t|
@@ -226,7 +227,7 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.text     "rtext"
     t.boolean  "done",          default: false
     t.boolean  "error",         default: false
-    t.boolean  "grid",          default: false
+    t.boolean  "add_lpar",      default: false
     t.string   "error_text"
     t.string   "status"
     t.string   "source"
@@ -258,15 +259,18 @@ ActiveRecord::Schema.define(version: 20150325211513) do
   add_index "run_views", ["run_command_id"], name: "index_run_views_on_run_command_id", using: :btree
 
   create_table "runs", force: :cascade do |t|
-    t.boolean  "background", default: false
+    t.boolean  "background", default: true
+    t.boolean  "cache",      default: true
     t.boolean  "error",      default: false
     t.boolean  "done",       default: false
+    t.boolean  "notify",     default: false
     t.string   "status"
     t.string   "error_text"
     t.text     "log"
+    t.integer  "total_data"
     t.datetime "start"
     t.datetime "end"
-    t.datetime "viewed_at"
+    t.datetime "viewed"
     t.datetime "delete_at"
     t.integer  "ugroup_id"
     t.integer  "job_id"
