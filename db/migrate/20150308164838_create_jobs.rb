@@ -15,6 +15,7 @@ class CreateJobs < ActiveRecord::Migration
       t.boolean :notify, default: true
       t.boolean :notify_group, default: true
       t.boolean :cache, default: true
+      t.boolean :debug, default: true
       t.integer :owner_id
 
       t.timestamps null: false

@@ -103,7 +103,7 @@ class Run < ActiveRecord::Base
             @rc = RunCommand.new(run: self, lpar: lpar, command: command, model: ctext)
             self.run_commands << @rc
             if %w(DIFCmd MVSCmd).include? command.ctype
-              @rv = RunView.new(run_command: @rc, command: command, job_item: ji)
+              @rv = RunView.new(run_command: @rc, command: command, job_item: ji, rtext: "")
               @rc.run_views << @rv
             end
           end
@@ -183,12 +183,12 @@ class Run < ActiveRecord::Base
             ckey = "#{rc.lpar.id}/#{rc.model}"
             rc.rtext = Rails.cache.read(ckey)
             if rc.rtext
-              self << "cache: #{ckey} used"
+              self << "cache used: #{ckey}"
               rc.source = "Cache"
               rc.done = true
               rc.save
             else
-              self << "cache: #{ckey} not found"
+              self << "no cache: #{ckey}"
               fin = false
             end
           else
@@ -226,7 +226,9 @@ class Run < ActiveRecord::Base
     #
     #  run the tcpip requests
     #
+    self << "TCPIP started at #{Time.now}"
     execgroup.run(current_user)
+    self << "TCPIP ended at #{Time.now}"
 
     #
     #  look at each request
@@ -241,7 +243,7 @@ class Run < ActiveRecord::Base
       if !rc.error && self.cache && rc.command.cache_time && rc.command.cache_time > 0 && rc.rtext.length > 0
         ckey = "#{rc.lpar.id}/#{rc.model}"
         Rails.cache.write(ckey, rc.rtext, expires_in: rc.command.cache_time.minutes)
-        self << "cache: #{ckey} set"
+        self << "cache set: #{ckey}"
       end
 
     end

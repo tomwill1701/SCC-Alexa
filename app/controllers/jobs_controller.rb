@@ -121,7 +121,7 @@ class JobsController < ApplicationController
   def job_params
     params.require(:job).permit(:name, :description, :menu, :cclass, :tags, :jtype,
       :when, :when_time, :private, :notify, :user_ids, :owner_id,
-      :run_type, :keep_days,
+      :run_type, :keep_days, :cache,
       job_items_attributes: [:id, :cgroup_id, :lgroup_id, :cache, :chart_type,
           :chart_x, :chart_y, :chart_opt, :size, :_destroy])
   end
