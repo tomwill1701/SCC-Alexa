@@ -14,9 +14,10 @@
 #  admin           :boolean          default("false")
 #  password_digest :string
 #  last_login      :datetime
-#  login_count     :integer
+#  login_count     :integer          default("0")
 #  background      :string
 #  notify          :string
+#  cache           :string
 #  prompt_ok       :string
 #  prompt_cancel   :string
 #  prompt_values   :string
@@ -87,8 +88,6 @@ class User < ActiveRecord::Base
       new = Ugroup.create(name: name, private: true)
       UserUgroup.create(user: self, ugroup: new)
     end
-    all = Ugroup.where(name: "All").first_or_create
-    UserUgroup.where(user: self, ugroup: all).first_or_create
 
   end
 

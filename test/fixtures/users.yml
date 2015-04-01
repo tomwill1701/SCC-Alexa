@@ -14,9 +14,10 @@
 #  admin           :boolean          default("false")
 #  password_digest :string
 #  last_login      :datetime
-#  login_count     :integer
+#  login_count     :integer          default("0")
 #  background      :string
 #  notify          :string
+#  cache           :string
 #  prompt_ok       :string
 #  prompt_cancel   :string
 #  prompt_values   :string

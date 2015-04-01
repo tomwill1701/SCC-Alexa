@@ -1,11 +1,29 @@
-= bootstrap_form_for(@user) do |f|
-  = f.text_field :name
-  = f.password_field :password
-  = f.text_field :department
-  = f.text_field :phone
-  = f.text_field :email
-  = f.text_field :racf_userid, label: "RACF Userid"
-  = f.text_field :racf_group, label: "RACF Group"
-  = f.text_field :racf_password, label: "RACF Password"
+%style{:media => "screen", :type => "text/css"}
+  \.label {
+  display: block;
+  width: 20%;
+  float: left;
+  font-size: 1.0em;
+  font-weight: bold;
+  color: #5E6469;
+  text-align: left;
+  }
+= semantic_form_for @user do |f|
+  = f.inputs do
+    = f.input :name
+    = f.input :password
+    = f.input :department
+    = f.input :phone
+    = f.input :email
+  = f.inputs do
+    = f.input :background,  as: :select, collection: ["Never", "Always"]
+    = f.input :notify, as: :select, collection: ["Never", "Always"]
+    = f.input :cache, as: :select, collection: ["Never", "Always"]
+  = f.inputs do
+    = f.input :racf_userid, label: "RACF Userid"
+    = f.input :racf_group, label: "RACF Group"
+    = f.input :racf_password, label: "RACF Password"
+    = f.input :lpar
+
   = f.submit "Update"
   = f.submit "Cancel"

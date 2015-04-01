@@ -78,6 +78,7 @@ class Run < ActiveRecord::Base
       self.job = job
       self.user = user
       self.ugroup = user.ugroups.first
+      self.log = Array.new
     end
 
     #
@@ -116,6 +117,28 @@ class Run < ActiveRecord::Base
       end
     end
 
+    #
+    #  set background/notify/cache options
+    #
+    self.background = false if job.run_type == "Real-Time"
+    self.background = true if user.background == "Always"
+    self.background = false if user.background == "Never"
+
+    self.notify = job.notify
+    self.notify = true if user.notify == "Always"
+    self.notify = false if user.notify == "Never"
+
+    self.cache = job.cache
+    self.cache = true if user.cache == "Always"
+    self.cache = false if user.cache == "Never"
+
+    #
+    #  set exp date
+    #
+    if job.keep_days
+      self.delete_at = Date.today + job.keep_days
+    end
+
     self.save
 
   end
@@ -132,15 +155,15 @@ class Run < ActiveRecord::Base
   #
   def ctype(lpar, command, ctext)
     if command.ctype == "DIFCmd"
-      return ctext.gsub(' ','+')
+      return ctext
     elsif command.ctype == "MVSCmd"
-      return "OPERCMD #{ctext}".gsub(' ','+')
+      return "OPERCMD #{ctext}"
     elsif command.ctype == "REXXCmd"
-      return "REXX #{ctext}".gsub(' ','+')
+      return "REXX #{ctext}"
     elsif %w(Grid Chart).include?(command.ctype)
       mon = lpar.monproc
       mon = "MONRUNM" unless mon
-      return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext}".gsub(' ','+')
+      return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext}"
     end
   end
 
@@ -156,7 +179,7 @@ class Run < ActiveRecord::Base
       fin = true
       self.run_commands.each do | rc |
         unless rc.done
-          if rc.command.cache_time > 0
+          if self.cache && rc.command.cache_time && rc.command.cache_time > 0
             ckey = "#{rc.lpar.id}/#{rc.model}"
             rc.rtext = Rails.cache.read(ckey)
             if rc.rtext
@@ -214,7 +237,7 @@ class Run < ActiveRecord::Base
       rc.done = true
       rc.save
 
-      if !rc.error && rc.rtext.length > 0 && rc.command.cache_time > 0
+      if !rc.error && rc.rtext.length > 0 && self.cache && rc.command.cache_time && rc.command.cache_time > 0
         ckey = "#{rc.lpar.id}/#{rc.model}"
         Rails.cache.write(ckey, rc.rtext, expires_in: rc.command.cache_time.seconds)
         self << "cache: #{ckey} set"

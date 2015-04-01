@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.boolean  "private",      default: false
     t.boolean  "notify",       default: true
     t.boolean  "notify_group", default: true
+    t.boolean  "cache",        default: true
     t.integer  "owner_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
@@ -322,9 +323,10 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.boolean  "admin",           default: false
     t.string   "password_digest"
     t.datetime "last_login"
-    t.integer  "login_count"
+    t.integer  "login_count",     default: 0
     t.string   "background"
     t.string   "notify"
+    t.string   "cache"
     t.string   "prompt_ok"
     t.string   "prompt_cancel"
     t.string   "prompt_values"

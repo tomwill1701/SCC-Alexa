@@ -2,7 +2,7 @@ ActiveAdmin.register User do
 
   permit_params :id, :name, :department, :phone, :email, :lpar_id,
         :racf_userid, :racf_group, :racf_password, :admin, :password,
-        :background, :notify, :last_login, :login_count,
+        :background, :notify, :last_login, :login_count, :cache,
         user_ugroups_attributes: [:id, :name, :user_id, :ugroup_id, :_destroy]
 
 
@@ -16,6 +16,9 @@ ActiveAdmin.register User do
   filter :department, as: :select
   filter :racf_group
   filter :admin, as: :check_boxes
+  filter :cache
+  filter :notify
+  filter :background
   filter :last_login
 
   #
@@ -37,6 +40,7 @@ ActiveAdmin.register User do
       row :email
       row :background
       row :notify
+      row :cache
       row :last_login
       row :login_count
     end
@@ -84,6 +88,7 @@ ActiveAdmin.register User do
       input :email
       input :background, collection: ["Never", "Always"]
       input :notify, collection: ["Never", "Always"]
+      input :cache, collection: ["Never", "Always"]
       input :login_count
     end
     actions

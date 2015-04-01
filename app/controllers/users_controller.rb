@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   #
   def update
     respond_to do |format|
-      if @user.update(pin_params)
+      if @user.update(user_params)
         format.html { redirect_to user_path, action: :edit,
             notice: 'User profile was successfully updated.' }
           format.json { render :edit, status: :ok, location: @user }
@@ -23,15 +23,17 @@ class UsersController < ApplicationController
   end
 
   #
-  #  set pin based on its id
+  #  set user based on its id
   #
   def set_user
     @user = current_user
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def pin_params
-    params.require(:user).permit(:title, :desc, :board_id, :url, :image, :image_cache)
+  def user_params
+    params.require(:user).permit(:name, :department, :phone, :email, :lpar_id,
+          :racf_userid, :racf_group, :racf_password, :password,
+          :background, :notify, :cache)
   end
 
 

@@ -14,8 +14,10 @@
     = f.input :name
     = f.input :cclass, label: "Class"
     = f.input :run_type, as: :select, collection: ["Real-Time", "Background", "External"]
-    = f.input :keep_days, as: :number
     = f.input :notify, as: :boolean
+    = f.input :cache, as: :boolean
+    = f.input :keep_days, as: :number
+  = f.inputs do
     = f.input :description, input_html: {:class => 'autogrow', :rows => 3}
     = f.hidden_field :owner_id, value: @job.owner_id
   = f.inputs "Command Group" do

@@ -12,9 +12,10 @@ class CreateUsers < ActiveRecord::Migration
       t.boolean :admin, default: false
       t.string :password_digest
       t.datetime :last_login
-      t.integer :login_count
+      t.integer :login_count, default: 0
       t.string :background
       t.string :notify
+      t.string :cache
       t.string :prompt_ok
       t.string :prompt_cancel
       t.string :prompt_values

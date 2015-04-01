@@ -30,7 +30,7 @@ class ExecGroup
       userid = current_user.prompt("Userid")
       password = current_user.prompt("Password")
 
-      req = Typhoeus::Request.new("http://#{lpar.ip}:#{lpar.port}/#{e.cmd}",
+      req = Typhoeus::Request.new("http://#{lpar.ip}:#{lpar.port}/#{e.cmd}".gsub(' ','+'),
           userpwd: "#{userid}:#{password}" )
       hydra.queue(req)
       @request << req
