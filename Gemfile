@@ -33,7 +33,6 @@ gem 'pry'
 
 group :production do
   gem 'rails_12factor'
-  gem 'better_errors'
 end
 
 group :development, :test do
