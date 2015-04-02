@@ -8,13 +8,13 @@
 #  done          :boolean          default("false")
 #  error         :boolean          default("false")
 #  add_lpar      :boolean          default("false")
+#  cache_time    :integer
 #  error_text    :string
 #  status        :string
 #  source        :string
 #  data_acquired :datetime
 #  run_id        :integer
 #  lpar_id       :integer
-#  command_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #
@@ -23,7 +23,6 @@ class RunCommand < ActiveRecord::Base
 
   belongs_to :run
   belongs_to :lpar
-  belongs_to :command
 
   has_many :run_views, dependent: :destroy
 

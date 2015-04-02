@@ -14,3 +14,6 @@
   grid.init();
   grid.parse('<%= @data2.to_json.html_safe %>', "jsarray");
 </script>
+
+<div id='chart'></div>
+<%= render_chart(@chart, 'chart') %>

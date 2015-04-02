@@ -2,26 +2,30 @@
   %h3.chardin_box{ "data-position": :right }
     Runs Selection
 .well
+  %h4 Search options
   = search_form_for @q do |f|
     .row
-      .col-md-3
-        = f.label "Run Date"
-        .filter_form_field.filter_date_range
-          = f.text_field :start_gteq, class: 'datepicker', size: "12"
-          = f.text_field :start_lteq, class: 'datepicker'
-        .form-group
+      .col-md-12
+        .form-group.chardin_box
+          .col-md-4
+            = f.label "Run on"
+            = f.text_field :start_gteq, class: 'datepicker'
+          .col-md-4
+            = f.label "Delete on"
+            = f.text_field :delete_at_gteq, class: 'datepicker'
+          .col-md-4
+            = f.label "Viewed on"
+            = f.text_field :viewed_gteq, class: 'datepicker'
+        .form-group.chardin_box
           = f.label :status
-          = f.select :status, Run.uniq.pluck(:status), include_blank: true
-        .form-group
-          = f.label :background
-          = f.check_box :with_background
+          = f.select :status_eq, Run.order(:status).uniq.pluck(:status), include_blank: true
           = f.label :error
           = f.check_box :with_error
           = f.label :done
           = f.check_box :with_done
           = f.label :never_viewed
           = f.check_box :with_nv
-        .form-group
+        .form-group.chardin_box
           = f.submit
           = link_to 'Clear Filters', runs_path
 #results

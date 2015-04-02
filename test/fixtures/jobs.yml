@@ -17,6 +17,7 @@
 #  notify       :boolean          default("true")
 #  notify_group :boolean          default("true")
 #  cache        :boolean          default("true")
+#  debug        :boolean          default("true")
 #  owner_id     :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

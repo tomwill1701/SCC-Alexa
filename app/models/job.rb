@@ -17,6 +17,7 @@
 #  notify       :boolean          default("true")
 #  notify_group :boolean          default("true")
 #  cache        :boolean          default("true")
+#  debug        :boolean          default("true")
 #  owner_id     :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -34,6 +35,8 @@ class Job < ActiveRecord::Base
 
   has_many :lgroups, through: :job_item
   has_many :lpars, through: :lgroups
+
+  has_many :runs, dependent: :destroy
 
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
 

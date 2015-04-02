@@ -1,16 +1,22 @@
 %table.table
   %tr
-    %th Name
-    %th Type
-    %th Class
+    %th Job name
+    %th Status
+    %th Done
+    %th Error
+    %th Run date
+    %th Delete date
   - runs.each do |run|
     %tr
       %td= run.job.name
       %td= run.status
+      %td= run.done
       %td= run.error
+      %td= run.start
+      %td= run.delete_at
       %td= link_to 'View', job_run_view_path(run)
       %td= link_to 'Show', run_path(run)
-      %td= link_to 'Delete', run, method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Delete', run, method: :delete
 
 .chardin_box{ :'data-position' => 'top' }
   = paginate runs

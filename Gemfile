@@ -29,6 +29,7 @@ gem 'delayed_job_active_record'
 gem 'progress_job'
 gem 'bootstrap-datepicker-rails'
 gem 'pry'
+gem "google_visualr", ">= 2.1"
 #gem 'rack-mini-profiler'
 
 group :production do

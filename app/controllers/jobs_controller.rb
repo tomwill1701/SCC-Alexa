@@ -49,7 +49,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       if @job.save
-        format.html { redirect_to jobs_path, notice: 'Job was successfully created.' }
+        format.html { redirect_to @job, notice: 'Job was successfully created.' }
       else
         format.html { render :new }
       end
@@ -62,7 +62,7 @@ class JobsController < ApplicationController
   def update
     respond_to do |format|
       if @job.update(job_params)
-        format.html { redirect_to jobs_path, notice: 'Job was successfully updated.' }
+        format.html { redirect_to @job, notice: 'Job was successfully updated.' }
       else
         format.html { render :edit }
       end

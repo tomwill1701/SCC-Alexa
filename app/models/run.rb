@@ -8,6 +8,7 @@
 #  error      :boolean          default("false")
 #  done       :boolean          default("false")
 #  notify     :boolean          default("false")
+#  name       :string
 #  status     :string
 #  error_text :string
 #  log        :text
@@ -35,13 +36,13 @@ class Run < ActiveRecord::Base
   scope :with_background, -> { where("background = true")  }
   scope :with_error, -> { where("error = true")  }
   scope :with_done, -> { where("done = true")  }
-  scope :with_nv, -> { where("viewed_at IS NULL")  }
+  scope :with_nv, -> { where("viewed IS NULL")  }
 
   #
   #  ransack filters
   #
   def self.ransackable_scopes(auth_object = nil)
-    [:with_background, :with_error, :with_done, :with_nv]
+    [:with_background, :with_error, :with_done, :with_nv, :name]
   end
 
   #
@@ -63,6 +64,7 @@ class Run < ActiveRecord::Base
     return status
   end
 
+
   #
   #  take the passed job and build a new run
   #  this will consist of one or more run_command entries (data acquisition)
@@ -76,6 +78,7 @@ class Run < ActiveRecord::Base
     job = Job.find(jobid)
     unless self.job
       self.job = job
+      self.name = job.name
       self.user = user
       self.ugroup = user.ugroups.first
       self.log = String.new
@@ -100,10 +103,10 @@ class Run < ActiveRecord::Base
             #  build a new RunCommand that we will send to a lpar
             #
             ctext = ctype(lpar, command, command.model)
-            @rc = RunCommand.new(run: self, lpar: lpar, command: command, model: ctext)
+            @rc = RunCommand.new(run: self, lpar: lpar, model: ctext, cache_time: command.cache_time)
             self.run_commands << @rc
             if %w(DIFCmd MVSCmd).include? command.ctype
-              @rv = RunView.new(run_command: @rc, command: command, job_item: ji, rtext: "")
+              @rv = RunView.new(run: self, run_command: @rc)
               @rc.run_views << @rv
             end
           end
@@ -112,7 +115,7 @@ class Run < ActiveRecord::Base
           #
         end
         unless @rv
-          @rc.run_views << RunView.new(run_command: @rc, command: command, job_item: ji) if @rc
+          @rc.run_views << RunView.new(run: self, run_command: @rc) if @rc
         end
       end
     end
@@ -120,6 +123,7 @@ class Run < ActiveRecord::Base
     #
     #  set background/notify/cache options
     #
+    self.background = true
     self.background = false if job.run_type == "Real-Time"
     self.background = true if user.background == "Always"
     self.background = false if user.background == "Never"
@@ -143,11 +147,15 @@ class Run < ActiveRecord::Base
 
   end
 
+
+
   #
   #  see if we need to do any prompts
   #
   def prompts(lpar, command, ctext)
   end
+
+
 
 
   #
@@ -167,46 +175,47 @@ class Run < ActiveRecord::Base
     end
   end
 
+
+  #
+  #  see if all the data is in cache
+  #
+  def try_cache
+    if self.cache
+      fin = true
+      self.run_commands.each do | rc |
+        unless rc.done
+          ckey = "#{rc.lpar.id}/#{rc.model}"
+          rc.rtext = Rails.cache.read(ckey)
+          if rc.rtext
+            self << "cache used: #{ckey}"
+            rc.source = "Cache"
+            rc.done = true
+            rc.save
+          else
+            self << "no cache: #{ckey}"
+            fin = false
+          end
+        else
+          fin = false
+        end
+      end
+    end
+
+    #
+    #  if we got all data from cache then return
+    #
+    if fin
+      self.done = true
+    end
+    self.save
+
+  end
+
+
   #
   #  run the job to get the raw data from each lpar
   #
   def execute(current_user)
-
-    #
-    #  see if all the data is in cache
-    #
-    unless self.background
-      fin = true
-      self.run_commands.each do | rc |
-        unless rc.done
-          if self.cache
-            ckey = "#{rc.lpar.id}/#{rc.model}"
-            rc.rtext = Rails.cache.read(ckey)
-            if rc.rtext
-              self << "cache used: #{ckey}"
-              rc.source = "Cache"
-              rc.done = true
-              rc.save
-            else
-              self << "no cache: #{ckey}"
-              fin = false
-            end
-          else
-            fin = false
-          end
-        end
-      end
-
-      #
-      #  if we got all data from cache then return
-      #
-      if fin
-        self.done = true
-        self.save
-        return
-      end
-
-    end
 
     #
     #  build tcpip call for each run_command
@@ -240,9 +249,9 @@ class Run < ActiveRecord::Base
       rc.done = true
       rc.save
 
-      if !rc.error && self.cache && rc.command.cache_time && rc.command.cache_time > 0 && rc.rtext.length > 0
+      if !rc.error && rc.cache_time && rc.cache_time > 0 && rc.rtext.length > 0
         ckey = "#{rc.lpar.id}/#{rc.model}"
-        Rails.cache.write(ckey, rc.rtext, expires_in: rc.command.cache_time.minutes)
+        Rails.cache.write(ckey, rc.rtext, expires_in: rc.cache_time.minutes)
         self << "cache set: #{ckey}"
       end
 

@@ -1,7 +1,12 @@
 class RunJob < ActiveJob::Base
   queue_as :run
 
+
+  #
+  #  turn off cache and run the job
+  #
   def perform(run)
+
     run.cache == false
     run.status = "Background run started"
     run << "Background job started at #{Time.now}"
@@ -11,5 +16,6 @@ class RunJob < ActiveJob::Base
     run << "Background job ended at #{Time.now}"
     run.status = "Background run done"
     run.save
+    
   end
 end

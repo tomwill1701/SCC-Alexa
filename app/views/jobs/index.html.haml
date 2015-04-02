@@ -2,22 +2,32 @@
   %h3.chardin_box{ "data-position": :right }
     Job Selection
 .well
+  %h4 Search options
   = search_form_for @q do |f|
     .row
       .col-md-12
         .form-group.chardin_box
-          = f.label :name_cont
+          = f.label :name
           = f.search_field :name_cont
+          = f.label :description
+          = f.search_field :description_cont
+          = f.label :tags
+          = f.search_field :tags_cont
+        .form-group.chardin_box
           = f.label :type
-          = f.select :run_type_eq, Job.uniq.pluck(:run_type), include_blank: true
+          = f.select :run_type_eq, Job.order(:run_type).uniq.pluck(:run_type), include_blank: true
           = f.label :class
-          = f.select :cclass_eq, Job.uniq.pluck(:cclass), include_blank: true
+          = f.select :cclass_eq, Job.order(:cclass).uniq.pluck(:cclass), include_blank: true
           = f.label :favorite
           = f.check_box :with_favorite, {}, current_user.id
           = f.label :private
           = f.check_box :with_private, {}, current_user.id
+        .form-group.chardin_box
           = f.submit
           = link_to 'Clear Filters', jobs_path
-          = link_to 'New Job', new_job_path
+.div.pull-right
+  = link_to 'New Job', new_job_path, class: "button"
+%br
+%br
 #results
-  = render :partial => 'jobs/list', locals: { jobs: @jobs }
+  = render partial: 'jobs/list', locals: { jobs: @jobs }

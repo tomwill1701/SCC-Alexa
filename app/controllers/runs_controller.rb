@@ -21,8 +21,8 @@ class RunsController < ApplicationController
     @run.destroy
     respond_to do |format|
       format.html { redirect_to runs_path, notice: 'Run was successfully deleted.' }
-      end
     end
+  end
 
   #
   #  execute function
@@ -40,26 +40,26 @@ class RunsController < ApplicationController
     #
     #  execute the job to get the data
     #
-    if @run.background
-      @run.status = "Background run queued"
-      @run << "Background job queued at #{Time.now}"
-      @run.save
-      RunJob.perform_later @run
-      binding.pry
-      @job = @run.job
-      @rc = @run.run_commands
-      redirect_to run_path(@run)
-    else
-      @run.execute(current_user) unless @run.done
-      @run.save
-#    if @run.done
-#      redirect_to job_run_view_path(@run)
-#    else
+    @run.try_cache
+    unless @run.done
+      if @run.background
+        @run.status = "Background run queued"
+        @run << "Background job queued at #{Time.now}"
+        @run.save
+        RunJob.perform_later @run
         @job = @run.job
         @rc = @run.run_commands
-        redirect_to run_path(@run)
-#    end
+      else
+        @run.execute(current_user) unless @run.done
+        @run.save
+        #    if @run.done
+        #      redirect_to job_run_view_path(@run)
+        #    else
+      end
     end
+    @job = @run.job
+    @rc = @run.run_commands
+    redirect_to run_path(@run)
 
   end
 

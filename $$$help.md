@@ -5,3 +5,10 @@ rake jobs:workouut
 rake jobs:work
 rake jobs:clear
 
+Heroku
+
+rake assets:precomile
+heroku pg:reset DATABASE
+heroku run rake db:migrate
+heroku run rake db:seed
+

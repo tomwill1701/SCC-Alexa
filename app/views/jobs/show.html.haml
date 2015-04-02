@@ -1,0 +1,37 @@
+.div.pull-right
+  = link_to 'Edit', edit_job_path(@job), class: "button"
+  = link_to 'Clone', clone_job_path(@job), class: "button"
+  = link_to 'Run', run_job_path(@job), class: "button"
+  = link_to 'Run/options', "#modal", class: "button", "data-toggle": "modal"
+%br
+%br
+%h4
+= semantic_form_for @job do |f|
+  = f.inputs do
+    = f.input :name, input_html: { disabled: true}
+    = f.input :cclass, label: "Class", input_html: { disabled: true}
+    = f.input :run_type, input_html: { disabled: true}
+    = f.input :notify, as: :boolean, input_html: { disabled: true}
+    = f.input :cache, as: :boolean, input_html: { disabled: true}
+    = f.input :keep_days, as: :number, input_html: { disabled: true}
+  = f.inputs do
+    = f.input :description, input_html: { disabled: true, rows: 3}
+  = f.inputs "Command Group" do
+    = f.semantic_fields_for :job_items do | jobitem |
+      = render 'show_item_fields', f: jobitem
+  = f.action :cancel
+
+.modal.fade#modal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4#modalLabel.modal-title Enter Run options
+      .modal-body
+        = bootstrap_form_tag url: run_job_path(@job), method: :get do |f|
+          = f.check_box :background, checked: true
+          = f.check_box :cache, checked: true
+          = f.check_box :notify, checked: true
+          = f.check_box :keep
+          .modal-footer
+            = f.submit "Cancel", class: "btn btn-default", "data-dismiss": "modal"
+            = f.primary "Run", class: "btn btn-primary"

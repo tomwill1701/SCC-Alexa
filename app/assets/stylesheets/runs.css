@@ -4,3 +4,18 @@
       background-color: #DCDCDC;
       overflow: scroll;
 }
+
+.label {
+  display: block;
+  width: 20%;
+  float: left;
+  font-size: 1.0em;
+  font-weight: bold;
+  color: #5E6469;
+  text-align: left;
+  }
+
+a, a:link, a:visited {
+color: #38678b;
+text-decoration: none;
+}

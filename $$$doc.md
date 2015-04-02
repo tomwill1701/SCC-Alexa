@@ -97,19 +97,22 @@
 
 # Gems
 - ActiveAdmin
-- Fog
-- Draper
+
+
 - typhoeus (concurrent tcpip)
 - haml
 - bcrypt (signon)
 - ransack (search)
 - formtastic
-- cocoon (formtastic one-t0-many forms)
+- cocoon (formtastic one-to-many forms)
 - delayed job (with activejob)
 - bootstrap-datepicker (search dates)
-- Mailer
+- Kaminari (pagination)
+- GoogleVisualr
 
 # Other technology
+- ActiveJob
+- Mailer
 - Google Charts
 - dhtmlgrid
 

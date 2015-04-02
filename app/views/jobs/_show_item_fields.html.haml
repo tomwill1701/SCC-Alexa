@@ -1,0 +1,11 @@
+.nested-fields
+  = f.inputs do
+    = f.input :cgroup_id, as: :select, collection: Cgroup.all, input_html: { disabled: true},
+      label: "Command"
+    = f.input :lgroup_id, as: :select, collection: Lgroup.all, input_html: { disabled: true},
+      label: "LPAR"
+    = f.input :size, input_html: { disabled: true}
+    = f.input :chart_type, input_html: { disabled: true}
+    = f.input :chart_x, input_html: { disabled: true}
+    = f.input :chart_y, input_html: { disabled: true}
+    = f.input :chart_opt, input_html: { disabled: true}

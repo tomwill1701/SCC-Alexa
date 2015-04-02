@@ -167,6 +167,7 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.boolean  "notify",       default: true
     t.boolean  "notify_group", default: true
     t.boolean  "cache",        default: true
+    t.boolean  "debug",        default: true
     t.integer  "owner_id"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
@@ -229,18 +230,17 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.boolean  "done",          default: false
     t.boolean  "error",         default: false
     t.boolean  "add_lpar",      default: false
+    t.integer  "cache_time"
     t.string   "error_text"
     t.string   "status"
     t.string   "source"
     t.datetime "data_acquired"
     t.integer  "run_id"
     t.integer  "lpar_id"
-    t.integer  "command_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
 
-  add_index "run_commands", ["command_id"], name: "index_run_commands_on_command_id", using: :btree
   add_index "run_commands", ["lpar_id"], name: "index_run_commands_on_lpar_id", using: :btree
   add_index "run_commands", ["run_id"], name: "index_run_commands_on_run_id", using: :btree
 
@@ -248,16 +248,21 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.string   "type"
     t.string   "file"
     t.string   "file_type"
+    t.string   "size"
+    t.string   "chart_type"
+    t.string   "chart_x"
+    t.string   "chart_y"
+    t.string   "chart_opt"
     t.integer  "run_command_id"
     t.integer  "command_id"
-    t.integer  "job_item_id"
+    t.integer  "run_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
 
   add_index "run_views", ["command_id"], name: "index_run_views_on_command_id", using: :btree
-  add_index "run_views", ["job_item_id"], name: "index_run_views_on_job_item_id", using: :btree
   add_index "run_views", ["run_command_id"], name: "index_run_views_on_run_command_id", using: :btree
+  add_index "run_views", ["run_id"], name: "index_run_views_on_run_id", using: :btree
 
   create_table "runs", force: :cascade do |t|
     t.boolean  "background", default: true
@@ -265,6 +270,7 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.boolean  "error",      default: false
     t.boolean  "done",       default: false
     t.boolean  "notify",     default: false
+    t.string   "name"
     t.string   "status"
     t.string   "error_text"
     t.text     "log"
@@ -357,12 +363,11 @@ ActiveRecord::Schema.define(version: 20150325211513) do
   add_foreign_key "lpar_restricts", "lgroups"
   add_foreign_key "lpar_restricts", "ugroups"
   add_foreign_key "notices", "ugroups"
-  add_foreign_key "run_commands", "commands"
   add_foreign_key "run_commands", "lpars"
   add_foreign_key "run_commands", "runs"
   add_foreign_key "run_views", "commands"
-  add_foreign_key "run_views", "job_items"
   add_foreign_key "run_views", "run_commands"
+  add_foreign_key "run_views", "runs"
   add_foreign_key "user_jobs", "jobs"
   add_foreign_key "user_jobs", "users"
   add_foreign_key "user_ugroups", "ugroups"

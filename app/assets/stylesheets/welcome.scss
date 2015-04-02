@@ -7,10 +7,6 @@ body.mbody {
   font-weight: bold;
   font-size: 32px;
 }
-.main-top {
-  margin-left: 35px;
-  @include background(linear-gradient(white, green) left repeat);
-}
 .main-top  #title {
   font-weight: bold;
   position: relative;

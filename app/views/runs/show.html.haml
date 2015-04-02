@@ -9,4 +9,4 @@
     %dt Log:
     %dd #{@run.log.gsub("\r",'<br>').html_safe}
     %br Commands:
-    = render :partial => 'runs/commands'
+    = render partial: 'runs/commands'
