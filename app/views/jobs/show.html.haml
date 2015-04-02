@@ -1,5 +1,8 @@
 .div.pull-right
-  = link_to 'Edit', edit_job_path(@job), class: "button"
+  - if @job.owner?(current_user)
+    = link_to 'Edit', edit_job_path(@job), class: "button"
+    = link_to 'Delete', @job, method: :delete, class: "button",
+        data: { confirm: 'Are you sure?' }
   = link_to 'Clone', clone_job_path(@job), class: "button"
   = link_to 'Run', run_job_path(@job), class: "button"
   = link_to 'Run/options', "#modal", class: "button", "data-toggle": "modal"
@@ -11,9 +14,11 @@
     = f.input :name, input_html: { disabled: true}
     = f.input :cclass, label: "Class", input_html: { disabled: true}
     = f.input :run_type, input_html: { disabled: true}
+    = f.input :private, input_html: { disabled: true}
     = f.input :notify, as: :boolean, input_html: { disabled: true}
     = f.input :cache, as: :boolean, input_html: { disabled: true}
     = f.input :keep_days, as: :number, input_html: { disabled: true}
+    = f.input :tags, input_html: { disabled: true}
   = f.inputs do
     = f.input :description, input_html: { disabled: true, rows: 3}
   = f.inputs "Command Group" do
@@ -28,6 +33,8 @@
         %h4#modalLabel.modal-title Enter Run options
       .modal-body
         = bootstrap_form_tag url: run_job_path(@job), method: :get do |f|
+          = f.collection_select :ugroup_id, current_user.ugroups, :id, :name,
+            label: "Group"
           = f.check_box :background, checked: true
           = f.check_box :cache, checked: true
           = f.check_box :notify, checked: true

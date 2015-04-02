@@ -1,14 +1,14 @@
 %table.table
   %tr
-    %th Job name
-    %th Status
-    %th Done
-    %th Error
-    %th Run date
-    %th Delete date
+    %th=sort_link @q, :name, "Jobname"
+    %th=sort_link @q, :status, "Status"
+    %th=sort_link @q, :done, "Done"
+    %th=sort_link @q, :error, "Error"
+    %th=sort_link @q, :start, "Run date"
+    %th=sort_link @q, :delete_at, "Delete date"
   - runs.each do |run|
     %tr
-      %td= run.job.name
+      %td= run.name
       %td= run.status
       %td= run.done
       %td= run.error

@@ -7,7 +7,7 @@ rake jobs:clear
 
 Heroku
 
-rake assets:precomile
+rake assets:precompile
 heroku pg:reset DATABASE
 heroku run rake db:migrate
 heroku run rake db:seed

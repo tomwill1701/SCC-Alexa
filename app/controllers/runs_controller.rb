@@ -40,8 +40,11 @@ class RunsController < ApplicationController
     #
     #  execute the job to get the data
     #
+    @run.start = DateTime.now
     @run.try_cache
-    unless @run.done
+    if @run.done
+      @run.end = DateTime.now
+    else
       if @run.background
         @run.status = "Background run queued"
         @run << "Background job queued at #{Time.now}"
@@ -51,14 +54,21 @@ class RunsController < ApplicationController
         @rc = @run.run_commands
       else
         @run.execute(current_user) unless @run.done
+        @run.end = DateTime.now
         @run.save
         #    if @run.done
         #      redirect_to job_run_view_path(@run)
         #    else
       end
     end
+
     @job = @run.job
     @rc = @run.run_commands
+    if @run.notify
+      JobMailer.finished(@run).deliver_now
+      @run << "Email sent"
+      @run.save
+    end
     redirect_to run_path(@run)
 
   end

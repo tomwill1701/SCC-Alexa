@@ -8,14 +8,13 @@
       .col-md-12
         .form-group.chardin_box
           .col-md-4
+            = f.label "Name"
+            = f.search_field :name_cont, class: 'datepicker'
+          .col-md-4
             = f.label "Run on"
             = f.text_field :start_gteq, class: 'datepicker'
-          .col-md-4
-            = f.label "Delete on"
-            = f.text_field :delete_at_gteq, class: 'datepicker'
-          .col-md-4
-            = f.label "Viewed on"
-            = f.text_field :viewed_gteq, class: 'datepicker'
+    .row
+      .col-md-12
         .form-group.chardin_box
           = f.label :status
           = f.select :status_eq, Run.order(:status).uniq.pluck(:status), include_blank: true

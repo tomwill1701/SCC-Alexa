@@ -80,7 +80,8 @@ class Run < ActiveRecord::Base
       self.job = job
       self.name = job.name
       self.user = user
-      self.ugroup = user.ugroups.first
+      self.ugroup = user.ugroup
+      self.ugroup = user.ugroups.first if self.ugroup == 0
       self.log = String.new
     end
 
@@ -103,10 +104,10 @@ class Run < ActiveRecord::Base
             #  build a new RunCommand that we will send to a lpar
             #
             ctext = ctype(lpar, command, command.model)
-            @rc = RunCommand.new(run: self, lpar: lpar, model: ctext, cache_time: command.cache_time)
+            @rc = RunCommand.new(run: self, lpar: lpar, model: ctext, job_item: ji, command: command)
             self.run_commands << @rc
             if %w(DIFCmd MVSCmd).include? command.ctype
-              @rv = RunView.new(run: self, run_command: @rc)
+              @rv = RunView.new(run: self, run_command: @rc, job_item: ji, command: command)
               @rc.run_views << @rv
             end
           end
@@ -115,7 +116,8 @@ class Run < ActiveRecord::Base
           #
         end
         unless @rv
-          @rc.run_views << RunView.new(run: self, run_command: @rc) if @rc
+          @rc.run_views << RunView.new(run: self, run_command: @rc,  job_item: ji,
+              command: command) if @rc
         end
       end
     end
@@ -236,8 +238,10 @@ class Run < ActiveRecord::Base
     #  run the tcpip requests
     #
     self << "TCPIP started at #{Time.now}"
+    self.save
     execgroup.run(current_user)
     self << "TCPIP ended at #{Time.now}"
+    self.save
 
     #
     #  look at each request
@@ -249,14 +253,15 @@ class Run < ActiveRecord::Base
       rc.done = true
       rc.save
 
-      if !rc.error && rc.cache_time && rc.cache_time > 0 && rc.rtext.length > 0
+      if !rc.error && rc.command.cache_time && rc.command.cache_time > 0 && rc.rtext.length > 0
         ckey = "#{rc.lpar.id}/#{rc.model}"
-        Rails.cache.write(ckey, rc.rtext, expires_in: rc.cache_time.minutes)
+        Rails.cache.write(ckey, rc.rtext, expires_in: rc.command.cache_time.minutes)
         self << "cache set: #{ckey}"
       end
 
     end
     self.done = true
+    self.end = DateTime.now
     self.save
 
   end

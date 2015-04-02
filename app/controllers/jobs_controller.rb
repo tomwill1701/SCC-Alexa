@@ -76,8 +76,8 @@ class JobsController < ApplicationController
     @job.destroy
     respond_to do |format|
       format.html { redirect_to jobs_path, notice: 'Job was successfully deleted.' }
-      end
     end
+  end
 
   #
   #  run function
@@ -85,6 +85,13 @@ class JobsController < ApplicationController
   def run
     run = Run.new
     run.build(@job, current_user)
+    if params.has_key?("background")
+      run.background = params[:background]
+      run.cache = params[:cache]
+      run.notify = params[:notify]
+      run.delete_at = Date.today + 2000 if params[:keep]
+      run.ugroup_id = params[:ugroup_id]
+    end
     run.save
     redirect_to execute_run_path(run)
   end
@@ -120,11 +127,11 @@ class JobsController < ApplicationController
   #
   def job_params
     params.require(:job).permit(:name, :description, :menu, :cclass, :tags, :jtype,
-      :when, :when_time, :private, :notify, :user_ids, :owner_id,
-      :run_type, :keep_days, :cache,
-      job_items_attributes: [:id, :cgroup_id, :lgroup_id, :cache, :chart_type,
-          :chart_x, :chart_y, :chart_opt, :size, :_destroy])
+    :when, :when_time, :private, :notify, :user_ids, :owner_id,
+    :run_type, :keep_days, :cache,
+    job_items_attributes: [:id, :cgroup_id, :lgroup_id, :cache, :chart_type,
+      :chart_x, :chart_y, :chart_opt, :size, :_destroy])
+    end
+
+
   end
-
-
-end

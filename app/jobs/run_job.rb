@@ -3,11 +3,10 @@ class RunJob < ActiveJob::Base
 
 
   #
-  #  turn off cache and run the job
+  #  run the job
   #
   def perform(run)
 
-    run.cache == false
     run.status = "Background run started"
     run << "Background job started at #{Time.now}"
     run.save
@@ -15,7 +14,11 @@ class RunJob < ActiveJob::Base
     run.execute(current_user) unless run.done
     run << "Background job ended at #{Time.now}"
     run.status = "Background run done"
+    if run.notify
+      JobMailer.finished(run).deliver_now
+      run << "Email sent"
+    end
     run.save
-    
+
   end
 end

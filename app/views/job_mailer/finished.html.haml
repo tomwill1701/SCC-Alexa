@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h3
+      SCC Job #{@run.name} finished at #{Time.now}
+    %p
+      =link_to "click here ", job_run_view_url(@job)
+      to see the entire job output
+      %br
+      The job status page can be seen
+      =link_to "here", run_view_url(@job)
+      %p
+      Data was acquired from the following sources:
+      %br
+      - @run.run_commands.each do |rc|
+        %p LPAR: #{rc.lpar.name} / Command: #{rc.command.name}
+        - if rc.run_views
+          %br and generated reports:
+          - rc.run_views.each do |rv|
+            %br
+            =link_to rv.command.name, run_view_url(rv)
