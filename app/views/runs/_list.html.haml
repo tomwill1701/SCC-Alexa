@@ -4,18 +4,19 @@
     %th=sort_link @q, :status, "Status"
     %th=sort_link @q, :done, "Done"
     %th=sort_link @q, :error, "Error"
-    %th=sort_link @q, :start, "Run date"
-    %th=sort_link @q, :delete_at, "Delete date"
+    %th=sort_link @q, :start, "Ran on"
+    %th=sort_link @q, :viewed, "Last viewed"
+    %th=sort_link @q, :delete_at, "Delete at"
   - runs.each do |run|
     %tr
-      %td= run.name
+      %td= link_to run.name, job_run_view_path(run)
       %td= run.status
       %td= run.done
       %td= run.error
       %td= run.start
+      %td= run.viewed
       %td= run.delete_at
-      %td= link_to 'View', job_run_view_path(run)
-      %td= link_to 'Show', run_path(run)
+      %td= link_to 'Details', run_path(run)
       %td= link_to 'Delete', run, method: :delete
 
 .chardin_box{ :'data-position' => 'top' }

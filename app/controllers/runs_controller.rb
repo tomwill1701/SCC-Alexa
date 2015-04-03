@@ -40,35 +40,55 @@ class RunsController < ApplicationController
     #
     #  execute the job to get the data
     #
+
+    #
+    #  try cache
+    #
     @run.start = DateTime.now
     @run.try_cache
     if @run.done
       @run.end = DateTime.now
+
     else
+      #
+      #  see if we need to run background
+      #
       if @run.background
         @run.status = "Background run queued"
         @run << "Background job queued at #{Time.now}"
         @run.save
         RunJob.perform_later @run
-        @job = @run.job
-        @rc = @run.run_commands
+
+      #
+      #  run forground
+      #
       else
+        @run.status = "Real-time run"
         @run.execute(current_user) unless @run.done
         @run.end = DateTime.now
-        @run.save
-        #    if @run.done
-        #      redirect_to job_run_view_path(@run)
-        #    else
+        @run.status = "Real-time run finished"
+        #
+        #  if job ran ok then display view else show run status
+        #
+        if @run.done && !@run.error
+          @run.save
+          redirect_to job_run_view_path(@run)
+          return
+        end
       end
     end
 
-    @job = @run.job
-    @rc = @run.run_commands
+=begin
     if @run.notify
       JobMailer.finished(@run).deliver_now
-      @run << "Email sent"
-      @run.save
+      @run << "Email sent
     end
+=end
+
+    #
+    #  show run status
+    #
+    @run.save
     redirect_to run_path(@run)
 
   end

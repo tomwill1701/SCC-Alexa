@@ -1,3 +1,12 @@
+.row
+  .col-md-6
+    %h1 Run View
+  .col-md-6
+    .pull-right
+      = link_to 'Details', run_path(@run), class: "button"
+      = link_to 'Rerun', run_path(@run), class: "button"
+      = link_to 'Delete', @run, method: :delete, class: "button", data: { confirm: 'Are you sure?' }
 - @rv.each do |rv|
-  - if rv.type != "a"
+  - if rv.command.ctype == "Grid"
+    Grid #{rv.command.name}
     = render :partial => 'run_views/grid', locals: { rv: rv }

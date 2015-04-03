@@ -1,12 +1,21 @@
-.container
+.row
+  .col-md-6
+    %h1 Run details
+  .col-md-6
+    .pull-right
+      = link_to 'View run', job_run_view_path(@run), class: "button"
+      = link_to 'Rerun', run_path(@run), class: "button"
+      = link_to 'Delete', @run, method: :delete, class: "button", data: { confirm: 'Are you sure?' }
+%h4
   %dl.dl-horizontal
     %dt Job:
-    %dd #{@job.name}
+    %dd=link_to @job.name, job_path(@job)
     %dt Status
     %dd #{@run.dstatus}
     %dt Owner:
     %dd #{@run.user.name}
     %dt Log:
     %dd #{@run.log.gsub("\r",'<br>').html_safe}
-    %br Commands:
-    = render partial: 'runs/commands'
+    %h6
+      %br Commands:
+      = render partial: 'runs/commands'

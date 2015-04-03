@@ -1,11 +1,12 @@
+%h1 Job details
 .div.pull-right
   - if @job.owner?(current_user)
     = link_to 'Edit', edit_job_path(@job), class: "button"
-    = link_to 'Delete', @job, method: :delete, class: "button",
-        data: { confirm: 'Are you sure?' }
   = link_to 'Clone', clone_job_path(@job), class: "button"
   = link_to 'Run', run_job_path(@job), class: "button"
   = link_to 'Run/options', "#modal", class: "button", "data-toggle": "modal"
+  = link_to 'Delete', @job, method: :delete, class: "button",
+      data: { confirm: 'Are you sure?' }
 %br
 %br
 %h4

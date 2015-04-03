@@ -29,7 +29,7 @@ class RunCommand < ActiveRecord::Base
 
   has_many :run_views, dependent: :destroy
 
-  attr_accessor :columns, :rows
+  attr_accessor :columns, :rows, :built
 
 
   #
@@ -37,11 +37,12 @@ class RunCommand < ActiveRecord::Base
   #
   def build
 
+    self.columns = Array.new
+    self.rows = Array.new
+
     if self.command.ctype == "Grid" && rtext && done && !error
 
       line = rtext.split("\r")
-      self.columns = Array.new
-      self.rows = Array.new
 
       #
       #  look for a schema line in the output and build a
@@ -68,8 +69,12 @@ class RunCommand < ActiveRecord::Base
         if line[0..10] == "MON10103-I "
           row = Array.new
           line = line[11..-1]
-          columns.each do |col|
-            row << line[col.offset..col.offset+col.length-1]
+          columns.each_with_index do |col, i|
+            str = line[col.offset..col.offset+col.length-1]
+            if columns[i].ftype = "INT"
+            #  str = str.to_i
+            end
+            row << str
           end
           self.rows << row
         end
@@ -77,6 +82,9 @@ class RunCommand < ActiveRecord::Base
       end
 
     end
+
+    self.built = true
+
   end
 
 

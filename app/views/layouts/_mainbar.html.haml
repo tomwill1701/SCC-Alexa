@@ -18,6 +18,7 @@
           = link_to "Logoff", application_signout_path, method: :delete
           - if current_user.admin?
             = link_to "Admin", admin_root_path
+            = link_to "Background", "/delayed_job", target: "_blank"
       - else
         %form.navbar-form.navbar-right
         = bootstrap_form_tag url: application_signin_path, layout: :inline, method: "post" do |f|

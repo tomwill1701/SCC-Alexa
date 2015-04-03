@@ -14,6 +14,8 @@
   grid.init();
   grid.parse('<%= @data2.to_json.html_safe %>', "jsarray");
 </script>
+<input type="button" value="Get as PDF" onclick="grid.toPDF('http://dhtmlxgrid.appspot.com/export/pdf');">
+
 
 <div id='chart'></div>
 <%= render_chart(@chart, 'chart') %>

@@ -3,9 +3,8 @@
   var grid = new dhtmlXGridObject("grid#{rv.id}");
   grid.setImagePath("assets/imgs/");
   grid.setHeader('#{rv.columnNames.html_safe}');
-  grid.setColSorting('#{rv.columnTypes.html_safe}');
-  grid.setColSorting('str,int,int');
-  grid.setColAlign("left,right,center,justify");
+  grid.setColSorting('#{rv.columnSorting.html_safe}');
+  grid.setColAlign('#{rv.columnAlign.html_safe}');
   grid.attachHeader("#select_filter");
   grid.setSkin("dhx_skyblue");
   grid.enableAutoWidth(true);

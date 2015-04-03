@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   ActiveAdmin.routes(self)
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
   root "welcome#index"
   get 'welcome/index'

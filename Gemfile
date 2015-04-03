@@ -30,6 +30,7 @@ gem 'progress_job'
 gem 'bootstrap-datepicker-rails'
 gem 'pry'
 gem "google_visualr", ">= 2.1"
+gem "delayed_job_web"
 #gem 'rack-mini-profiler'
 
 group :production do
@@ -46,5 +47,5 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'quiet_assets'
-  gem "letter_opener"
+  gem 'letter_opener'
 end

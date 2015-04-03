@@ -17,4 +17,5 @@
 //= require bootstrap-datepicker
 //= require dhtmlxgrid.js
 //= require ext/dhtmlxgrid_filter.js
+//= require ext/dhtmlxgrid_export.js
 //= require_tree .

@@ -10,7 +10,6 @@ class RunViewsController < ApplicationController
   #
   def show
     @rc = @rv.run_command
-    @rc.build
     @rv = [@rv]
   end
 
@@ -18,12 +17,15 @@ class RunViewsController < ApplicationController
   #  show all views for the run
   #
   def job
-    @rv = Run.find(params[:id]).run_views.first
-    @rc = @rv.run_command.build
+    @run = Run.find(params[:id])
+    @run.viewed = DateTime.now
+    @run.save
+    @rv = @run.run_views
+    render :show
   end
 
   def set_views
-    @rv = RunView.find(params[:id]) if current_user
+    @rv = RunView.find(params[:id])
   end
 
 
