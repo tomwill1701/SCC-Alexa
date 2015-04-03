@@ -1,0 +1,12 @@
+<script src='https://www.google.com/jsapi'></script>
+
+<div class='chart' id='chart66'></div>
+
+<script type='text/javascript'>
+  google.load('visualization','1', {packages: ['corechart'], callback: draw_chart66});
+  function draw_chart66() {
+    var data_table = new google.visualization.DataTable();data_table.addColumn({"type":"string","label":"POOL"});data_table.addColumn({"type":"number","label":"FREE CYL"});data_table.addRow([{v: "TOM     "}, 0}]);data_table.addRow([{v: "ABPOOL  "}, {v:0}]);data_table.addRow([{v: "DBCLASS "}, {v: "         0"}]);data_table.addRow([{v: "HFSCLASS"}, {v: "         0"}]);data_table.addRow([{v: "MTL3590A"}, {v: "         0"}]);data_table.addRow([{v: "MTL3590B"}, {v: "         0"}]);data_table.addRow([{v: "OAMDB2  "}, {v: "      2275"}]);data_table.addRow([{v: "OSG     "}, {v: "         0"}]);data_table.addRow([{v: "OSGBKUP "}, {v: "         0"}]);data_table.addRow([{v: "POOL30  "}, {v: "         0"}]);data_table.addRow([{v: "POOL40  "}, {v: "         0"}]);data_table.addRow([{v: "RMPOOL  "}, {v: "         0"}]);data_table.addRow([{v: "STGMTLX "}, {v: "         0"}]);data_table.addRow([{v: "STGMTL1 "}, {v: "         0"}]);data_table.addRow([{v: "STGMTL2 "}, {v: "         0"}]);data_table.addRow([{v: "STGMTL3 "}, {v: "         0"}]);data_table.addRow([{v: "STGMTL4 "}, {v: "         0"}]);data_table.addRow([{v: "STG1    "}, {v: "        49"}]);data_table.addRow([{v: "STG2    "}, {v: "         0"}]);data_table.addRow([{v: "STG3    "}, {v: "         0"}]);data_table.addRow([{v: "STG4    "}, {v: "      9812"}]);data_table.addRow([{v: "STG5    "}, {v: "         0"}]);data_table.addRow([{v: "VNPOOL  "}, {v: "         0"}]);data_table.addRow([{v: "XAPOOL  "}, {v: "         0"}]);data_table.addRow([{v: "X7POOL  "}, {v: "         0"}]);data_table.addRow([{v: "X8POOL  "}, {v: "         0"}]);data_table.addRow([{v: "NONSMSPL"}, {v: "     19657"}]);
+    var chart = new google.visualization.PieChart(document.getElementById('chart66'));
+    chart.draw(data_table, {width: 800, height: 240, title: "GAGE CHART OF POOL FREE SPACE"});
+  };
+</script>

@@ -16,6 +16,4 @@
     %dd #{@run.user.name}
     %dt Log:
     %dd #{@run.log.gsub("\r",'<br>').html_safe}
-    %h6
-      %br Commands:
-      = render partial: 'runs/commands'
+    = render partial: 'runs/commands'

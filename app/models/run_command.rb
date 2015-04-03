@@ -48,19 +48,22 @@ class RunCommand < ActiveRecord::Base
       #  look for a schema line in the output and build a
       #  column object
       #
+      cindex = 0
       line.each do |line|
         if line[0..10] == "MON10172-I "
           column = Column.new
           line = line[11..-1]
-          column.name = line[0..16]
+          column.name = line[0..16].strip
           column.hidden = true if column.name[0] == '#'
           column.offset = line[17..21].to_i - 1
           column.length = line[22..26].to_i
           column.type = line[27..31]
           column.key= line[32..40]
           column.ftype = line[41..49]
+          column.index = cindex
           self.columns << column
           puts column.inspect
+          cindex += 1
         end
 
         #
@@ -71,8 +74,8 @@ class RunCommand < ActiveRecord::Base
           line = line[11..-1]
           columns.each_with_index do |col, i|
             str = line[col.offset..col.offset+col.length-1]
-            if columns[i].ftype = "INT"
-            #  str = str.to_i
+            if columns[i].ftype == "INT"
+              str = str.to_i
             end
             row << str
           end

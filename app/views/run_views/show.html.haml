@@ -7,6 +7,7 @@
       = link_to 'Rerun', run_path(@run), class: "button"
       = link_to 'Delete', @run, method: :delete, class: "button", data: { confirm: 'Are you sure?' }
 - @rv.each do |rv|
-  - if rv.command.ctype == "Grid"
-    Grid #{rv.command.name}
+  - if rv.command.chart_type.length > 0
+    = render :partial => 'run_views/chart', locals: { rv: rv }
+  - elsif rv.command.ctype == "Grid"
     = render :partial => 'run_views/grid', locals: { rv: rv }

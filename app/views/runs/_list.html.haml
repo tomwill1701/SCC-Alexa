@@ -9,13 +9,14 @@
     %th=sort_link @q, :delete_at, "Delete at"
   - runs.each do |run|
     %tr
-      %td= link_to run.name, job_run_view_path(run)
+      %td= link_to run.name, job_path(run.job)
       %td= run.status
       %td= run.done
       %td= run.error
       %td= run.start
       %td= run.viewed
       %td= run.delete_at
+      %td= link_to 'View', job_run_view_path(run)
       %td= link_to 'Details', run_path(run)
       %td= link_to 'Delete', run, method: :delete
 

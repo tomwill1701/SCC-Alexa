@@ -87,7 +87,8 @@ ActiveAdmin.register Command do
       input :keys
       input :size
       input :chart_type, as: :select,
-        collection: ["Pie", "Bar", "Line", "Gage"]
+        collection: ["Pie", "Bar", "Line", "Gauge", "Area", "Candle", "Bubble",
+          "Column", "Combo", "Scatter", "Spark"]
       input :chart_x
       input :chart_y
       input :chart_opt, input_html: {rows: 2}

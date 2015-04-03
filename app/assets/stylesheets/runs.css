@@ -1,8 +1,9 @@
 .scroll {
-      width: 700px;
+      width: 900px;
       height: 300px;
       background-color: #DCDCDC;
       overflow: scroll;
+      font-family: 'Courier', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
 }
 
 .label {

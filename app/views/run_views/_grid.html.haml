@@ -1,4 +1,5 @@
-.grid{:id => "grid#{rv.id}", :style => "width: 600px; height: 400px;"}
+Grid #{rv.command.name}
+.grid{:id => "grid#{rv.id}", :style => "width: #{rv.size[0]}; height: #{rv.size[1]};"}
 %script{:charset => "UTF-8", :type => "text/javascript"}
   var grid = new dhtmlXGridObject("grid#{rv.id}");
   grid.setImagePath("assets/imgs/");
