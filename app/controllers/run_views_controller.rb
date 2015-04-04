@@ -26,6 +26,7 @@ class RunViewsController < ApplicationController
 
   def set_views
     @rv = RunView.find(params[:id])
+    @run = @rv.run
   end
 
 

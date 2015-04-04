@@ -131,7 +131,7 @@ class JobsController < ApplicationController
     :run_type, :keep_days, :cache,
     job_items_attributes: [:id, :cgroup_id, :lgroup_id, :cache, :chart_type,
       :chart_x, :chart_y, :chart_opt, :size, :_destroy])
-    end
+  end
 
 
   end

@@ -88,12 +88,15 @@ class Run < ActiveRecord::Base
     #
     #  look at each job item and see what lpars and commands we have
     #
+    @rc = nil
     job.job_items.each do |ji|
-      @rc = nil
+
       #
       #  look at each command in the group
       #
+      @rv = nil
       ji.cgroup.commands.each do |command|
+
         #
         #  look at each lpar in the group
         #
@@ -107,20 +110,29 @@ class Run < ActiveRecord::Base
             @rc = RunCommand.new(run: self, lpar: lpar, model: ctext, job_item: ji, command: command)
             self.run_commands << @rc
             if %w(DIFCmd MVSCmd).include? command.ctype
-              @rv = RunView.new(run: self, run_command: @rc, job_item: ji, command: command)
+              @rv = RunView.create(run: self, run_command: @rc, job_item: ji, command: command)
               @rc.run_views << @rv
             end
           end
           #
           #  build a RunView that will use all the data acquired from the lpars
           #
+          if !@rv && @rc
+            @rv = RunView.create(run: self, run_command: @rc, job_item: ji,
+            command: command)
+            @rc.run_views << @rv
+          end
         end
-        unless @rv
-          @rc.run_views << RunView.new(run: self, run_command: @rc,  job_item: ji,
-              command: command) if @rc
+        if !@rv && @rc
+          @rv = RunView.create(run: self, run_command: @rc, job_item: ji,
+          command: command)
+          @rc.run_views << @rv
         end
+
       end
+
     end
+
 
     #
     #  set background/notify/cache options

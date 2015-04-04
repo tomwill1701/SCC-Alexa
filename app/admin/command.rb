@@ -57,6 +57,7 @@ ActiveAdmin.register Command do
     selectable_column
     column :name
     column "Type", :ctype
+    column :chart_type
     column "Class", :cclass
     column :source
     actions
@@ -92,7 +93,7 @@ ActiveAdmin.register Command do
       input :chart_x
       input :chart_y
       input :chart_opt, input_html: {rows: 2}
-      input :cache_time
+      input :cache_time, label: "Cache time (min)"
       input :preload
       input :source
       input :description

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325211513) do
+ActiveRecord::Schema.define(version: 20150404140413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -240,6 +240,7 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.integer  "command_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.boolean  "cloud"
   end
 
   add_index "run_commands", ["command_id"], name: "index_run_commands_on_command_id", using: :btree
@@ -284,6 +285,7 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.integer  "user_id"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.string   "note"
   end
 
   add_index "runs", ["job_id"], name: "index_runs_on_job_id", using: :btree

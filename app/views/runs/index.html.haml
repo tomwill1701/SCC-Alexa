@@ -7,10 +7,12 @@
     .row
       .col-md-12
         .form-group.chardin_box
-          .col-md-4
+          .col-md-5
             = f.label "Name"
-            = f.search_field :name_cont, class: 'datepicker'
-          .col-md-4
+            = f.search_field :name_cont
+            = f.label "Notes"
+            = f.search_field :note_cont
+          .col-md-2
             = f.label "Run on"
             = f.text_field :start_gteq, class: 'datepicker'
     .row

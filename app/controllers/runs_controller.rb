@@ -1,6 +1,6 @@
 class RunsController < ApplicationController
 
-  before_action :set_run, only: [:execute, :show, :destroy]
+  before_action :set_run, only: [:execute, :show, :destroy, :update]
 
   def index
     @q = current_user.runs.ransack(params[:q])
@@ -15,6 +15,20 @@ class RunsController < ApplicationController
     @rc = @run.run_commands
   end
 
+  #
+  # update function
+  #
+  def update
+    respond_to do |format|
+      if @run.update(run_params)
+        format.html { redirect_to @run, notice: 'Run was successfully updated.' }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
+
+
   #  delete function
   #
   def destroy
@@ -23,6 +37,14 @@ class RunsController < ApplicationController
       format.html { redirect_to runs_path, notice: 'Run was successfully deleted.' }
     end
   end
+
+  #
+  #  make sure the passed parms are ok
+  #
+  def run_params
+    params.require(:run).permit(:ugroup_id, :note)
+  end
+
 
   #
   #  execute function
@@ -48,8 +70,8 @@ class RunsController < ApplicationController
     @run.try_cache
     if @run.done
       @run.end = DateTime.now
-
     else
+
       #
       #  see if we need to run background
       #
@@ -59,37 +81,27 @@ class RunsController < ApplicationController
         @run.save
         RunJob.perform_later @run
 
-      #
-      #  run forground
-      #
       else
-        @run.status = "Real-time run"
+
+        #
+        #  run forground
+        #
+        @run.status = "Real-time run started"
         @run.execute(current_user) unless @run.done
         @run.end = DateTime.now
         @run.status = "Real-time run finished"
-        #
-        #  if job ran ok then display view else show run status
-        #
-        if @run.done && !@run.error
-          @run.save
-          redirect_to job_run_view_path(@run)
-          return
-        end
       end
     end
 
-=begin
-    if @run.notify
-      JobMailer.finished(@run).deliver_now
-      @run << "Email sent
-    end
-=end
-
     #
-    #  show run status
+    #  if job ran ok then display view else show run status
     #
     @run.save
-    redirect_to run_path(@run)
+    if @run.done && !@run.error
+      redirect_to job_run_view_path(@run)
+    else
+      redirect_to run_path(@run)
+    end
 
   end
 

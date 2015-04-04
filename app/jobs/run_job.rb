@@ -17,7 +17,7 @@ class RunJob < ActiveJob::Base
       run << "Email sent"
     end
     run << "Background job ended at #{Time.now}"
-    run.status = "Background run done"
+    run.status = "Background run finished"
     run.save
 
   end

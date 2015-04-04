@@ -2,7 +2,7 @@
   %tr
     %th=sort_link @q, :name, "Jobname"
     %th=sort_link @q, :status, "Status"
-    %th=sort_link @q, :done, "Done"
+    %th=sort_link @q, :status, "Group"
     %th=sort_link @q, :error, "Error"
     %th=sort_link @q, :start, "Ran on"
     %th=sort_link @q, :viewed, "Last viewed"
@@ -11,7 +11,7 @@
     %tr
       %td= link_to run.name, job_path(run.job)
       %td= run.status
-      %td= run.done
+      %td= run.ugroup.name
       %td= run.error
       %td= run.start
       %td= run.viewed
