@@ -18,6 +18,8 @@
 #  command_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  cloud         :boolean          default("false")
+#  compressed    :boolean          default("false")
 #
 
 class RunCommand < ActiveRecord::Base
@@ -29,7 +31,28 @@ class RunCommand < ActiveRecord::Base
 
   has_many :run_views, dependent: :destroy
 
+  default_scope {order('id ASC')}
+
   attr_accessor :columns, :rows, :built
+
+  #
+  #  decompress the text
+  #
+  def rtext
+    if self.compressed
+      Zlib::Inflate.inflate(Base64.decode64(self[:rtext]))
+    else
+      self[:rtext]
+    end
+  end
+
+  #
+  #  compress the text
+  #
+  def rtext=(data)
+    self.compressed = true
+    super(Base64.encode64(Zlib::Deflate.deflate(data)))
+  end
 
 
   #

@@ -6,7 +6,7 @@
       at #{@run.start}
   .col-md-6
     .pull-right
-      = link_to 'View run', job_run_view_path(@run), class: "button"
+      = link_to 'View', job_run_view_path(@run), class: "button"
       = link_to 'Edit', "#modal", class: "button", "data-toggle": "modal"
       = link_to 'Rerun', run_path(@run), class: "button"
       = link_to 'Delete', @run, method: :delete, class: "button", data: { confirm: 'Are you sure?' }

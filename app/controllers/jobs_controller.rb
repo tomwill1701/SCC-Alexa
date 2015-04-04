@@ -35,9 +35,13 @@ class JobsController < ApplicationController
   #  clone the existing job and make it private for this user
   #
   def clone
-    @job = @job.dup
-    @job.private = true
-    @job.owner = current_user
+    @job2 = @job.dup
+    @job2.private = true
+    @job2.owner = current_user
+    @job.job_items.each do |ji|
+      @job2.job_items << ji.dup
+    end
+    @job = @job2
     render :edit
   end
 
@@ -130,7 +134,7 @@ class JobsController < ApplicationController
     :when, :when_time, :private, :notify, :user_ids, :owner_id,
     :run_type, :keep_days, :cache,
     job_items_attributes: [:id, :cgroup_id, :lgroup_id, :cache, :chart_type,
-      :chart_x, :chart_y, :chart_opt, :size, :_destroy])
+      :chart_title, :chart_x, :chart_y, :chart_opt, :size, :_destroy])
   end
 
 

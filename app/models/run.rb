@@ -22,6 +22,7 @@
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  note       :string
 #
 
 class Run < ActiveRecord::Base
@@ -70,12 +71,11 @@ class Run < ActiveRecord::Base
   #  this will consist of one or more run_command entries (data acquisition)
   #  and one ore more run_views attached to the command to show text/grid/charts
   #
-  def build(jobid, user)
+  def build(job, user)
 
     #
     #  find the current job and build a new run
     #
-    job = Job.find(jobid)
     unless self.job
       self.job = job
       self.name = job.name
@@ -83,6 +83,7 @@ class Run < ActiveRecord::Base
       self.ugroup = user.ugroup
       self.ugroup = user.ugroups.first if self.ugroup == 0
       self.log = String.new
+      self.note =  String.new
     end
 
     #

@@ -23,4 +23,6 @@ class JobItem < ActiveRecord::Base
   belongs_to :cgroup
   belongs_to :lgroup
 
+  default_scope {order('id ASC')}
+
 end

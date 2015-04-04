@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404140413) do
+ActiveRecord::Schema.define(version: 20150404190215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(version: 20150404140413) do
     t.string   "racf_password"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "chart_title"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -240,7 +241,8 @@ ActiveRecord::Schema.define(version: 20150404140413) do
     t.integer  "command_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "cloud"
+    t.boolean  "cloud",         default: false
+    t.boolean  "compressed",    default: false
   end
 
   add_index "run_commands", ["command_id"], name: "index_run_commands_on_command_id", using: :btree

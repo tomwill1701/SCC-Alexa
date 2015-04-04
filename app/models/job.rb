@@ -41,7 +41,6 @@ class Job < ActiveRecord::Base
   belongs_to :owner, class_name: 'User', foreign_key: 'owner_id'
 
   validates :name, presence: true
-  validates :name, uniqueness: true
 
   accepts_nested_attributes_for :job_items, allow_destroy: true, reject_if: :all_blank
 

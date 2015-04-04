@@ -23,6 +23,8 @@ class RunView < ActiveRecord::Base
   belongs_to :job_item
   belongs_to :command
 
+  default_scope {order('id ASC')}
+
   #
   # get size of grid
   #
@@ -124,11 +126,13 @@ class RunView < ActiveRecord::Base
     #
     #  get chart type and x/y field names
     #
+    title = command.name
     ct = command.chart_type
     fn = command.chart_x + "," + command.chart_y
     if ji.chart_type.length > 0
-      ct = ji.chart_type
+      ct = ji.chart_type if ji.chart_type
       fn = ji.chart_x + "," + ji.chart_y
+      title = ji.chart_title if ji.chart_title
     end
 
     #
@@ -164,8 +168,8 @@ class RunView < ActiveRecord::Base
     #
     #  build chart
     #
-    option = { width: size[0], height: size[1], title: command.name }
-    case command.chart_type
+    option = { width: size[0], height: size[1], title: title }
+    case ct
     when "Pie"
       GoogleVisualr::Interactive::PieChart.new(data_table, option)
     when "Bar"

@@ -5,6 +5,7 @@
     = f.input :lgroup_id, as: :select, collection: Lgroup.all, label: "LPAR",
         member_label: :qual
     = f.input :size
+    = f.input :chart_title
     = f.input :chart_type, as: :select,
         collection: ["Pie", "Bar", "Line", "Gauge", "Area", "Candle", "Bubble",
           "Column", "Combo", "Scatter", "Spark"]

@@ -20,10 +20,13 @@ class RunViewsController < ApplicationController
     @run = Run.find(params[:id])
     @run.viewed = DateTime.now
     @run.save
-    @rv = @run.run_views
+    @rv = @run.run_views.includes(:run_command, :run)
     render :show
   end
 
+  #
+  # get current RunView
+  #
   def set_views
     @rv = RunView.find(params[:id])
     @run = @rv.run
