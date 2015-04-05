@@ -1,10 +1,10 @@
 .row
-  .col-md-6
+  .col-md-8
     %h3
-      Run for Job
+      Run view for Job
       = link_to @run.name, job_path(@run.job)
-      at #{@run.start}
-  .col-md-6
+      %br at #{@run.start}
+  .col-md-8
     .pull-right
       = link_to 'Details', run_path(@run), class: "button"
       = link_to 'Rerun', run_path(@run), class: "button"

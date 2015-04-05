@@ -85,7 +85,7 @@ ActiveAdmin.register Lpar do
   batch_action :test do |ids|
     ids.each do |ids|
       lpar = Lpar.find(ids)
-      test_connection(lpar)
+      test_connection(lpar, current_user)
       lpar.status = "ok"
     end
     redirect_to admin_lpars_path, alert: "All LPARs are active"

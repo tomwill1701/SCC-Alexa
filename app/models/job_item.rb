@@ -14,6 +14,7 @@
 #  racf_password :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  chart_title   :string
 #
 
 class JobItem < ActiveRecord::Base

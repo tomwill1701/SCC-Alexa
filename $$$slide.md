@@ -88,6 +88,20 @@ tom@dtssoftware.com
 
 www.dtssoftware.com
 
+---
+
+to do:
+
+* Spinner has wrong font
+* tabs will not show selection
+* Select runs to delete from list
+* Prompts
+* drill down
+* merge grids
+
+
+
+
 
 
 

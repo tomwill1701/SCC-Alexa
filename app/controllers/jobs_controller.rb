@@ -5,8 +5,9 @@ class JobsController < ApplicationController
 
   def index
     if current_user
-      @q = Job.for_user(current_user).includes(:user_jobs).ransack(params[:q])
+      @q = Job.for_user(current_user).with_jtype(session[:tab_name]).includes(:user_jobs).ransack(params[:q])
       @jobs = @q.result(distinct: true).page(params[:page]).per(15)
+      @tabs = Job.for_user(current_user).uniq.pluck(:jtype).compact
     end
   end
 
@@ -95,6 +96,7 @@ class JobsController < ApplicationController
       run.notify = params[:notify]
       run.delete_at = Date.today + 2000 if params[:keep]
       run.ugroup_id = params[:ugroup_id]
+      run.delete_when = params[:delete_when]
     end
     run.save
     redirect_to execute_run_path(run)
@@ -117,6 +119,15 @@ class JobsController < ApplicationController
   end
 
   #
+  #  set tab name in session data
+  #
+  def search
+    session[:tab_name] = params[:tab]
+    index
+    render :index
+  end
+
+  #
   #  find the job for the passed id
   #
   def set_job_update
@@ -132,7 +143,7 @@ class JobsController < ApplicationController
   def job_params
     params.require(:job).permit(:name, :description, :menu, :cclass, :tags, :jtype,
     :when, :when_time, :private, :notify, :user_ids, :owner_id,
-    :run_type, :keep_days, :cache,
+    :run_type, :keep_days, :cache, :delete_when,
     job_items_attributes: [:id, :cgroup_id, :lgroup_id, :cache, :chart_type,
       :chart_title, :chart_x, :chart_y, :chart_opt, :size, :_destroy])
   end

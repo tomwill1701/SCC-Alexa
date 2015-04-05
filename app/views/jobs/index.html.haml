@@ -29,5 +29,12 @@
   = link_to 'New Job', new_job_path, class: "button"
 %br
 %br
+-if @tabs
+  %ul.nav.nav-tabs#tabs{:role => "tablist"}
+    %li.active{:role => "presentation"}
+      = link_to "All", search_jobs_path(tab: "ALL"), {"aria-controls" => "home", :role => "tab"}
+    - @tabs.each do |tab|
+      %li{:role => "presentation"}
+        = link_to tab, search_jobs_path(tab: tab), {"aria-controls" => "home", :role => "tab"}
 #results
   = render partial: 'jobs/list', locals: { jobs: @jobs }

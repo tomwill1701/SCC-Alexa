@@ -50,8 +50,12 @@ class RunCommand < ActiveRecord::Base
   #  compress the text
   #
   def rtext=(data)
-    self.compressed = true
-    super(Base64.encode64(Zlib::Deflate.deflate(data)))
+    if data
+      self.compressed = true
+      super(Base64.encode64(Zlib::Deflate.deflate(data)))
+    else
+      super
+    end
   end
 
 

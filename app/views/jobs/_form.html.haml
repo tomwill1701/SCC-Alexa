@@ -2,6 +2,7 @@
 = semantic_form_for @job do |f|
   = f.inputs do
     = f.input :name
+    = f.input :jtype, label: "Tab"
     = f.input :cclass, label: "Class"
     = f.input :run_type, as: :select, collection: ["Real-Time", "Background", "External"]
     = f.input :private, as: :boolean

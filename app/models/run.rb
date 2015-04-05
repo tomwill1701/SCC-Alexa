@@ -2,30 +2,33 @@
 #
 # Table name: runs
 #
-#  id         :integer          not null, primary key
-#  background :boolean          default("true")
-#  cache      :boolean          default("true")
-#  error      :boolean          default("false")
-#  done       :boolean          default("false")
-#  notify     :boolean          default("false")
-#  name       :string
-#  status     :string
-#  error_text :string
-#  log        :text
-#  total_data :integer
-#  start      :datetime
-#  end        :datetime
-#  viewed     :datetime
-#  delete_at  :datetime
-#  ugroup_id  :integer
-#  job_id     :integer
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  note       :string
+#  id          :integer          not null, primary key
+#  background  :boolean          default("true")
+#  cache       :boolean          default("true")
+#  error       :boolean          default("false")
+#  done        :boolean          default("false")
+#  notify      :boolean          default("false")
+#  name        :string
+#  status      :string
+#  error_text  :string
+#  log         :text
+#  total_data  :integer
+#  start       :datetime
+#  end         :datetime
+#  viewed      :datetime
+#  delete_at   :datetime
+#  ugroup_id   :integer
+#  job_id      :integer
+#  user_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  note        :string
+#  delete_when :string
 #
 
 class Run < ActiveRecord::Base
+
+  attr_accessor :select
 
   belongs_to :ugroup
   belongs_to :job

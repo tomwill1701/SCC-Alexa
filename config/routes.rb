@@ -21,6 +21,9 @@ Rails.application.routes.draw do
       get 'clone'
       get 'run'
     end
+    collection do
+      get 'search'
+    end
   end
 
   resources :runs do

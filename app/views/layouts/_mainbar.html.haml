@@ -1,29 +1,24 @@
-%nav.navbar.navbar-inverse.navbar-fixed-top
+.navbar.navbar-inverse.navbar-fixed-top
   .container
     .navbar-header
-      %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
       = link_to "Storage Control Center", root_path, class: "navbar-brand"
     #navbar.navbar-collapse.collapse.navbar-right
-      - if current_user
-        = current_user.name
-        %h3
+      #nav
+        - if current_user
+          Logged in as
+          = link_to current_user.name, edit_user_path(current_user)
+          = link_to "Logoff", application_signout_path, method: :delete
           = link_to "Home", edit_user_path(current_user)
-          = link_to "Profile", edit_user_path(current_user)
           = link_to "Jobs", jobs_path
           = link_to "Runs", runs_path
-          = link_to "Logoff", application_signout_path, method: :delete
           - if current_user.admin?
             = link_to "Admin", admin_root_path
             = link_to "Background", "/delayed_job", target: "_blank"
-      - else
-        %form.navbar-form.navbar-right
-        = bootstrap_form_tag url: application_signin_path, layout: :inline, method: "post" do |f|
-          .form-group
-            = f.text_field :name, placeholder: "Name", hide_label: true, id: "username"
+        - else
+          .navbar-form.navbar-right
+          = bootstrap_form_tag url: application_signin_path, layout: :inline, method: "post" do |f|
             .form-group
-            = f.password_field :password, placeholder: "Password", hide_label: true, id: "pwd"
-            = f.submit "Login", id: "login"
+              = f.text_field :name, placeholder: "Name", hide_label: true, id: "username"
+              .form-group
+              = f.password_field :password, placeholder: "Password", hide_label: true, id: "pwd"
+              = f.submit "Login", id: "login"

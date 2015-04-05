@@ -19,9 +19,13 @@ class RunViewsController < ApplicationController
   def job
     @run = Run.find(params[:id])
     @run.viewed = DateTime.now
-    @run.save
     @rv = @run.run_views.includes(:run_command, :run)
     render :show
+    if @run.delete_when == "ViewedXX"
+      @run.delete
+    else
+      @run.save
+    end
   end
 
   #

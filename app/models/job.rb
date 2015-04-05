@@ -52,6 +52,8 @@ class Job < ActiveRecord::Base
 
   scope :for_user, lambda { |id| where('private =  false OR owner_id = ?', id) }
 
+  scope :with_jtype, -> type { where("jtype = ?", type) unless !type || type == "ALL"}
+
   def self.ransackable_scopes(auth_object = nil)
     [:with_favorite, :with_private]
   end

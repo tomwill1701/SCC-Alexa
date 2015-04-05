@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150404190215) do
+ActiveRecord::Schema.define(version: 20150405201534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -268,11 +268,11 @@ ActiveRecord::Schema.define(version: 20150404190215) do
   add_index "run_views", ["run_id"], name: "index_run_views_on_run_id", using: :btree
 
   create_table "runs", force: :cascade do |t|
-    t.boolean  "background", default: true
-    t.boolean  "cache",      default: true
-    t.boolean  "error",      default: false
-    t.boolean  "done",       default: false
-    t.boolean  "notify",     default: false
+    t.boolean  "background",  default: true
+    t.boolean  "cache",       default: true
+    t.boolean  "error",       default: false
+    t.boolean  "done",        default: false
+    t.boolean  "notify",      default: false
     t.string   "name"
     t.string   "status"
     t.string   "error_text"
@@ -285,9 +285,10 @@ ActiveRecord::Schema.define(version: 20150404190215) do
     t.integer  "ugroup_id"
     t.integer  "job_id"
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.string   "note"
+    t.string   "delete_when"
   end
 
   add_index "runs", ["job_id"], name: "index_runs_on_job_id", using: :btree

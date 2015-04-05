@@ -3,7 +3,7 @@
     %h3
       Run details for Job
       = link_to @run.name, job_path(@run.job)
-      at #{@run.start}
+      %br at #{@run.start}
   .col-md-6
     .pull-right
       = link_to 'View', job_run_view_path(@run), class: "button"

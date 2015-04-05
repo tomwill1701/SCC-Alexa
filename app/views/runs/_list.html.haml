@@ -1,5 +1,6 @@
 %table.table
   %tr
+    %th=link_to 'Del', {}, {href:'#', class: "batch_action", data_action: "delete"}
     %th=sort_link @q, :name, "Jobname"
     %th=sort_link @q, :status, "Status"
     %th=sort_link @q, :status, "Group"
@@ -9,6 +10,8 @@
     %th=sort_link @q, :delete_at, "Delete at"
   - runs.each do |run|
     %tr
+      %td
+        = check_box_tag 'select[]', run.id
       %td= link_to run.name, job_path(run.job)
       %td= run.status
       %td= run.ugroup.name
