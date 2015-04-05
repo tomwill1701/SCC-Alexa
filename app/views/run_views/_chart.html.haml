@@ -1,2 +1,3 @@
 .chart{:id => "chart#{rv.id}"}
-=render_chart(rv.chart, "chart#{rv.id}")
+-if rv.chart
+  =render_chart(rv.chart, "chart#{rv.id}")

@@ -140,6 +140,7 @@ class RunView < ActiveRecord::Base
     #
     data_table = GoogleVisualr::DataTable.new
     fna = fn.downcase.split(',')
+    puts "Cname", fna.inspect
     col = rc.columns.select{|c| fna.include?(c.name.downcase) }
     col.each do |column|
       type = column.ftype
@@ -151,6 +152,7 @@ class RunView < ActiveRecord::Base
       else
         type = 'string'
       end
+      puts "Col:", type, column.name
       data_table.new_column(type, column.name )
     end
 
@@ -163,6 +165,7 @@ class RunView < ActiveRecord::Base
         crow << row[column.index]
       end
       data_table.add_row(crow)
+      puts "Data:", crow.inspect
     end
 
     #
