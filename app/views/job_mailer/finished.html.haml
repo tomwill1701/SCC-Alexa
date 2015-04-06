@@ -6,11 +6,11 @@
     %h3
       SCC Job #{@run.name} finished at #{Time.now}
     %p
-      =link_to "click here ", job_run_view_url(@job)
+      =link_to "click here ", job_run_view_url(@run)
       to see the entire job output
       %br
       The job status page can be seen
-      =link_to "here", run_view_url(@job)
+      =link_to "here", run_url(@run)  
       %p
       Data was acquired from the following sources:
       %br
