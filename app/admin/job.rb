@@ -13,6 +13,7 @@ ActiveAdmin.register Job do
 
   filter :name
   filter :description
+  filter :jtype, label: "Tab"
   filter :cclass, label: "Class", as: :select
   filter :users, label: "User/favorite", as: :select
   filter :owner, label: "Owner", as: :select
@@ -27,6 +28,7 @@ ActiveAdmin.register Job do
   show do "Jobs"
     attributes_table do
       row :name
+      row "Tab", :jtype
       row "Class", :cclass
       row :runtype
       row :description
@@ -69,6 +71,7 @@ ActiveAdmin.register Job do
     f.semantic_errors *f.object.errors.keys
     inputs "Details" do
       input :name
+      input :jtype, label: "Tab"
       input :cclass, label: "Class"
       input :run_type, as: :select, collection: ["Real-Time", "Background", "External"]
       input :tags

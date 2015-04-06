@@ -29,6 +29,8 @@ class ExecGroup
       lpar = e.lpar
       userid = current_user.prompt("Userid")
       password = current_user.prompt("Password")
+      userid = current_user.racf_userid if !userid
+      password = current_user.racf_password if !password
 
       req = Typhoeus::Request.new("http://#{lpar.ip}:#{lpar.port}/#{e.cmd}".gsub(' ','+'),
           userpwd: "#{userid}:#{password}" )

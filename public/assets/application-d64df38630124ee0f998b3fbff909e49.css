@@ -4502,6 +4502,11 @@ body.mbody {
   margin-bottom: 21px;
 }
 
+/* line 25, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+#nav {
+  font-size: 18px;
+}
+
 /*!
 Chosen, a Select Box Enhancer for jQuery and Prototype
 by Patrick Filler for Harvest, http://getharvest.com

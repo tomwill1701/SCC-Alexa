@@ -83,8 +83,8 @@ class Run < ActiveRecord::Base
       self.job = job
       self.name = job.name
       self.user = user
-      self.ugroup = user.ugroup
-      self.ugroup = user.ugroups.first if self.ugroup == 0
+      self.ugroup_id = user.ugroup_id
+      self.ugroup_id = user.ugroups.first.id if !self.ugroup_id
       self.log = String.new
       self.note =  String.new
     end
