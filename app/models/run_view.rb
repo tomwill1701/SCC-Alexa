@@ -180,7 +180,7 @@ class RunView < ActiveRecord::Base
     when "Line"
       GoogleVisualr::Interactive::LineChart.new(data_table, option)
     when "Gauge"
-      GoogleVisualr::Interactive::Guage.new(data_table, option)
+      GoogleVisualr::Interactive::Gauge.new(data_table, option)
     when "Area"
       GoogleVisualr::Interactive::AreaChart.new(data_table, option)
     when "Candle"
