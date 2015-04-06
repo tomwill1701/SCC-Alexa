@@ -222,9 +222,7 @@ class Run < ActiveRecord::Base
     #
     #  if we got all data from cache then return
     #
-    if fin
-      self.done = true
-    end
+    self.done = true if fin
     self.save
 
   end
@@ -233,7 +231,7 @@ class Run < ActiveRecord::Base
   #
   #  run the job to get the raw data from each lpar
   #
-  def execute(current_user)
+  def execute
 
     #
     #  build tcpip call for each run_command
@@ -255,7 +253,7 @@ class Run < ActiveRecord::Base
     #
     self << "TCPIP started at #{Time.now}"
     self.save
-    execgroup.run(current_user)
+    execgroup.run(self.user)
     self << "TCPIP ended at #{Time.now}"
     self.save
 

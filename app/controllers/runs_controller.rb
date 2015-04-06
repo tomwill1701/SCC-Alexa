@@ -60,10 +60,6 @@ class RunsController < ApplicationController
     #
 
     #
-    #  execute the job to get the data
-    #
-
-    #
     #  try cache
     #
     @run.start = DateTime.now
@@ -87,7 +83,7 @@ class RunsController < ApplicationController
         #  run forground
         #
         @run.status = "Real-time run started"
-        @run.execute(current_user) unless @run.done
+        @run.execute unless @run.done
         @run.end = DateTime.now
         @run.status = "Real-time run finished"
       end

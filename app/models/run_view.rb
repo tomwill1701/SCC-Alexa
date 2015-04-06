@@ -199,4 +199,11 @@ class RunView < ActiveRecord::Base
 
   end
 
+  #
+  #  return text form difcmd and mvscmd
+  #
+  def text
+    self.run_command.rtext
+  end
+
 end

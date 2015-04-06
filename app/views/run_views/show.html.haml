@@ -14,5 +14,7 @@
     = render :partial => 'run_views/chart', locals: { rv: rv }
   - elsif rv.command.ctype == "Grid"
     = render :partial => 'run_views/grid', locals: { rv: rv }
+  - elsif rv.command.ctype == "DIFCmd" || rv.command.ctype == "MVSCmd"
+    = render :partial => 'run_views/text', locals: { rv: rv }
   %br
   %br

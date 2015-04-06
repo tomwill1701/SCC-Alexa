@@ -243,6 +243,7 @@ ActiveRecord::Schema.define(version: 20150405201534) do
     t.datetime "updated_at",                    null: false
     t.boolean  "cloud",         default: false
     t.boolean  "compressed",    default: false
+    t.boolean  "merge_grid",    default: false
   end
 
   add_index "run_commands", ["command_id"], name: "index_run_commands_on_command_id", using: :btree

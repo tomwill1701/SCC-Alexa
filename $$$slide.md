@@ -11,6 +11,7 @@ MVS assembler programmer for over 35 years with DTS Software in Raleigh, NC
 
 (what is MVS?)
 
+
 ---
 
 MVS/Zos (Multiple Virutal Storage) is the operating system used on large scale IBM mainframes
@@ -18,6 +19,18 @@ MVS/Zos (Multiple Virutal Storage) is the operating system used on large scale I
 Released in 1974
 
 Still used by many large corporations for batch and transaction processing
+
+---
+
+Why am I here?
+
+When I started there was no PCs or internet.  Just punched cards and paper tape.
+
+NO expereience with any Web based systems.  No html/css/java script/backend.
+
+Wanted to understand how web application were written.
+
+Much better weather in Florida!
 
 ---
 
@@ -31,22 +44,28 @@ SCC-Monitor is a web interface to a product with the same name that is sold by D
 
 This product provides alerts and reports for MVS subsystems
 
-When run on MVS, SCC-Monitor can only produce old style column/row reports
+When run on MVS, SCC-Monitor can only produce old style column/row reports (green bar paper)
 
 ---
 
-App will allow real-time access to the MVS reporting information and produce Grids and Charts
+App will allow real-time access to the MVS reporting information and produce
+interactive Grids and Charts
 
 App consists of:
 
 ---
 
-* Users in multiple groups
-* Systems/images (called LPARs) in multiple groups (called SYSPLEX)
-* Commands in groups that request data from SCC-Monitor (API)
-* Jobs are defined to make Command request to LPARs
- * Jobs can have more than one reguest for data and/or display
+* Users
+* Systems/images (called LPARs) where information is obtained
+* Commands that request information from system (API request)
+* Jobs are created to make Command (API) request to LPARs (Systems)
+ * Jobs can have more than one reguest for information and/or display
 * Jobs are "run" to actually get the data and display it
+
+---
+
+https://sccdemo.herokuapp.com
+
 
 ---
 
@@ -69,7 +88,7 @@ Technology used:
 * Kaminari (pagination)
 
 - Google Charts
-- dhtmlgrid
+- dhtmlxgrid
 
 - 20 Models
 
