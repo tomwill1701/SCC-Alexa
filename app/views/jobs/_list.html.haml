@@ -10,14 +10,14 @@
       %td= job.cclass
       %td= job.run_type
       %td= job.updated_at
+      %td= link_to 'Run', run_job_path(job)
       - if job.favorite_job?(current_user)
         %td= link_to 'Unfav', unfavorite_job_path(job), method: :delete
       -else
         %td= link_to 'Fav', favorite_job_path(job), method: :post
-      %td= link_to 'Run', run_job_path(job)
       - if job.owner?(current_user)
         %td= link_to 'Edit', edit_job_path(job)
-        %td= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' } 
 
-.chardin_box{ :'data-position' => 'top', :'data-intro' => "will_paginate's paginator works as expected." }
+.chardin_box{ :'data-position' => 'top' }
   = paginate jobs

@@ -63,9 +63,9 @@ class ExecGroup
 
       if response.success?
         exec.rtext.sub!('<html><body><pre>','')
+
       elsif response.timed_out?
-        exec.errors ||= Array.new
-        exec.errors << "time out"
+        add_error("#{exec.lpar.name}: request time out")
 
         #
         #  prompt for userid/password
@@ -76,10 +76,7 @@ class ExecGroup
         elsif response.code == 0
           add_error(response.return_message)
         else
-          add_error("HTTP request failed: " + response.code.to_s)
-        end
-        if exec.errors
-          add_error(errors << exec.errors)
+          add_error("#{exec.lpar.name}: HTTP request failed with " + response.code.to_s)
         end
       end
     end

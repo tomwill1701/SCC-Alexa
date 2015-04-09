@@ -20,6 +20,7 @@ class RunJob < ActiveJob::Base
 
     run << "Background job ended at #{Time.now}"
     run.status = "Background run finished"
+    Notice.create(title: "Background job finished", ugroup: run.ugroup, run: run)
     run.save
 
   end

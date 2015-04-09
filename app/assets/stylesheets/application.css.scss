@@ -10,6 +10,8 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require bootstrap.min.css
+ *= require bootstrap-theme.min.css
  *= require formtastic-bootstrap
  *= require bootstrap-datepicker3
  *= require dhtmlxgrid.css
@@ -21,3 +23,12 @@
  @import 'welcome';
  @import 'chosen';
  @import 'runs';
+
+ @font-face {
+   font-family: 'Glyphicons Halflings';
+   src: url('/assets/glyphicons-halflings-regular.eot');
+   src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+      url('/assets/glyphicons-halflings-regular.woff') format('woff'),
+      url('/assets/glyphicons-halflings-regular.ttf') format('truetype'),
+      url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}

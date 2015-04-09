@@ -16,6 +16,8 @@ class CreateRuns < ActiveRecord::Migration
       t.datetime :end
       t.datetime :viewed
       t.datetime :delete_at
+      t.string   :delete_when
+      t.string   :note
       t.references :ugroup, index: true
       t.references :job, index: true
       t.references :user, index: true

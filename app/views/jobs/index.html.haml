@@ -14,10 +14,10 @@
           = f.label :tag
           = f.search_field :tags_cont
         .form-group.chardin_box
-          = f.label :type
-          = f.select :run_type_eq, Job.order(:run_type).uniq.pluck(:run_type), include_blank: true
           = f.label :class
           = f.select :cclass_eq, Job.order(:cclass).uniq.pluck(:cclass), include_blank: true
+          = f.label :type
+          = f.select :run_type_eq, Job.order(:run_type).uniq.pluck(:run_type), include_blank: true
           = f.label :favorite
           = f.check_box :with_favorite, {}, current_user.id
           = f.label :private

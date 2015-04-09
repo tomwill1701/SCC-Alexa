@@ -4,17 +4,18 @@
       Run view for Job
       = link_to @run.name, job_path(@run.job)
       %br at #{@run.start}
-  .col-md-8
+  .col-md-12
     .pull-right
       = link_to 'Details', run_path(@run), class: "button"
       = link_to 'Rerun', run_path(@run), class: "button"
       = link_to 'Delete', @run, method: :delete, class: "button", data: { confirm: 'Are you sure?' }
 - @rv.each do |rv|
-  - if rv.command.chart_type && rv.command.chart_type.length > 0
+  - rv.attr
+  - if rv.vtype == 'chart'
     = render :partial => 'run_views/chart', locals: { rv: rv }
-  - elsif rv.command.ctype == "Grid"
+  - elsif rv.vtype == "grid"
     = render :partial => 'run_views/grid', locals: { rv: rv }
-  - elsif rv.command.ctype == "DIFCmd" || rv.command.ctype == "MVSCmd"
+  - elsif rv.vtype == 'text'
     = render :partial => 'run_views/text', locals: { rv: rv }
   %br
   %br

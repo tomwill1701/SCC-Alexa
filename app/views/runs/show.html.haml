@@ -18,11 +18,13 @@
     %dd #{@run.user.name}
     %dt Group:
     %dd #{@run.ugroup.name}
+    %dt Keep until:
+    %dd #{@run.delete_at.try(:strftime, '%b %d, %Y')}
     %dt Notes:
     %dd #{@run.note.gsub("\r",'<br>').html_safe}
     %dt Log:
-    %dd #{@run.log.gsub("\r",'<br>').html_safe}
-    = render partial: 'runs/commands'
+    =render 'log'
+    =render partial: 'runs/commands'
 .modal.fade#modal
   .modal-dialog
     .modal-content
@@ -32,8 +34,17 @@
         = bootstrap_form_for @run do |f|
           = f.collection_select :ugroup_id, current_user.ugroups, :id, :name,
             label: "Group"
+          .row
+            .col-md-4
+              = f.number_field :keep_days, hide_label: true, append: "days",
+                class: "input-sm", placeholder: "keep run"
           = f.text_area :note
           .modal-footer
             = f.submit "Cancel", class: "btn btn-default", "data-dismiss": "modal"
             = f.submit "Save", class: "btn btn-primary"
 
+:javascript
+  function test(){ window.location.reload(true); }
+  $(document).ready(function(){
+   setInterval(test, 3000000);
+  });

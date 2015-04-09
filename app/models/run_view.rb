@@ -16,8 +16,6 @@
 
 class RunView < ActiveRecord::Base
 
-
-
   belongs_to :run
   belongs_to :run_command
   belongs_to :job_item
@@ -25,24 +23,68 @@ class RunView < ActiveRecord::Base
 
   default_scope {order('id ASC')}
 
+  attr_accessor :vtype, :chart_type, :x_fields, :y_fields,
+                :options, :size, :title
+
   #
-  # get size of grid
+  #  get attributes of this view
   #
-  def size
+  def attr
+
+    #
+    #  get command and job_item
+    #
     rc = self.run_command
+    cmd = self.command
+    ji = self.job_item
     rc.build unless rc.built
-    size = self.command.size
-    size = self.job_item.size if self.job_item.size
-    return size.split(';')
+
+    #
+    #  set type of view
+    #
+    if cmd.chart_type.present? || ji.chart_type.present?
+      self.vtype = 'chart'
+    elsif cmd.ctype == 'DIFCmd' || cmd.ctype == 'MVSCmd'
+      self.vtype = 'text'
+    elsif cmd.ctype == 'Grid'
+      self.vtype = 'grid'
+    end
+
+    #
+    #  set chart options
+    #
+    self.x_fields = set(cmd.chart_x, ji.chart_x)
+    self.y_fields = set(cmd.chart_y, ji.chart_y)
+    self.chart_type = set(cmd.chart_type, ji.chart_type)
+
+    self.options = set(cmd.chart_opt, ji.chart_opt)
+
+    self.size = set(cmd.size, ji.size)
+    self.size = "" if !size
+    self.size = size.split(';')
+
+    self.title = set(cmd.name, ji.chart_title)
+
   end
 
+  #
+  #  set field from first value or second value if second value exists
+  #
+  def set(fv, sv)
+    if sv.present?
+      return sv
+    else
+      return fv
+    end
+
+  end
 
   #
   #  build column names for grid
   #
   def columnNames
-    rc = self.run_command
-    list = rc.columns.map { |c| c.name unless c.hidden}
+    rc = run_command
+    list = rc.columns.map { |c| c.name unless c.hidden }
     list.compact.join(",")
   end
 
@@ -50,7 +92,7 @@ class RunView < ActiveRecord::Base
   #  build column types for grid
   #
   def columnTypes
-    rc = self.run_command
+    rc = run_command
     list = rc.columns.map { |c| c.type unless c.hidden}
     list.compact.join(",")
   end
@@ -66,7 +108,7 @@ class RunView < ActiveRecord::Base
   #  build column sorting for grid
   #
   def columnSorting
-    rc = self.run_command
+    rc = run_command
     list = rc.columns.map { |c| c.grid_ftype unless c.hidden}
     str = list.join(",")
     str.gsub!('STRING','str')
@@ -90,7 +132,7 @@ class RunView < ActiveRecord::Base
   #  return data rows
   #
   def rows
-    rows = self.run_command.rows.dup
+    rows = run_command.rows.dup
     self.run_command.columns.to_enum.with_index.reverse_each do |c, i|
       if c.hidden
         rows.each do |r|
@@ -105,7 +147,7 @@ class RunView < ActiveRecord::Base
   #  return row colors
   #
   def rowColors
-    color = self.run_command.columns.find {|c| c.name == '#COLOR' }
+    color = run_command.columns.find {|c| c.name == '#COLOR' }
     if !color
       return ""
     else
@@ -118,22 +160,13 @@ class RunView < ActiveRecord::Base
   #  build google chart
   #
   def chart
-    rc = self.run_command
-    ji = self.job_item
-    command = self.command
-    rc.build unless rc.built
 
     #
     #  get chart type and x/y field names
     #
-    title = command.name
-    ct = command.chart_type
-    fn = command.chart_x + "," + command.chart_y
-    if ji.chart_type.length > 0
-      ct = ji.chart_type if ji.chart_type
-      fn = ji.chart_x + "," + ji.chart_y
-      title = ji.chart_title if ji.chart_title
-    end
+    return unless x_fields && y_fields
+    rc = run_command
+    fn = x_fields + "," + y_fields
 
     #
     #  build columns
@@ -152,8 +185,8 @@ class RunView < ActiveRecord::Base
       else
         type = 'string'
       end
-      puts "Col:", type, column.name
-      data_table.new_column(type, column.name )
+      puts "Col:", type, title
+      data_table.new_column(type, title )
     end
 
     #
@@ -172,7 +205,7 @@ class RunView < ActiveRecord::Base
     #  build chart
     #
     option = { width: size[0], height: size[1], title: title }
-    case ct
+    case chart_type
     when "Pie"
       GoogleVisualr::Interactive::PieChart.new(data_table, option)
     when "Bar"
@@ -203,7 +236,7 @@ class RunView < ActiveRecord::Base
   #  return text form difcmd and mvscmd
   #
   def text
-    self.run_command.rtext
+    run_command.rtext
   end
 
 end

@@ -1,6 +1,6 @@
 .nested-fields
   = f.inputs do
-    = f.input :cgroup_id, as: :select, collection: Cgroup.all, input_html: {class: 'chosen-select'},
+    = f.input :cgroup_id, as: :select, collection: Cgroup.all, input_html: {},
       label: "Command", member_label: :qual
     = f.input :lgroup_id, as: :select, collection: Lgroup.all, label: "LPAR",
         member_label: :qual

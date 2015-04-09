@@ -26,7 +26,7 @@
   cclass = ["class1", "class2", "class3", "class4"]
   tag = ["tag1 tag2", "tag3", "tag4"]
 
-  50.times do |x|
+  0.times do |x|
       job = Job.create(name: Faker::Lorem.characters(30),
         description: Faker::Lorem.sentences(rand(2...4)).join(" "),
         jtype: jtype[rand(0..2)], cclass: cclass[rand(0..3)],

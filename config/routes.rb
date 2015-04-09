@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'prompt/show'
   post 'prompt/create'
 
+  resources :home
+
   resources :users
 
   resources :jobs do

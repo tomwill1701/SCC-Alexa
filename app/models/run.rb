@@ -36,11 +36,14 @@ class Run < ActiveRecord::Base
 
   has_many :run_commands, dependent: :destroy
   has_many :run_views, through: :run_commands
+  has_many :notices, dependent: :destroy
 
   scope :with_background, -> { where("background = true")  }
   scope :with_error, -> { where("error = true")  }
   scope :with_done, -> { where("done = true")  }
   scope :with_nv, -> { where("viewed IS NULL")  }
+
+  attr_accessor :keep_days
 
   #
   #  ransack filters
@@ -48,6 +51,14 @@ class Run < ActiveRecord::Base
   def self.ransackable_scopes(auth_object = nil)
     [:with_background, :with_error, :with_done, :with_nv, :name]
   end
+
+  #
+  #  keep days run attribute
+  #
+  def keep_days=(days)
+    self.delete_at = Date.today + days.to_i
+  end
+
 
   #
   #  add log message to log array
@@ -254,6 +265,10 @@ class Run < ActiveRecord::Base
     self << "TCPIP started at #{Time.now}"
     self.save
     execgroup.run(self.user)
+    if execgroup.errors
+      self.error = true
+      execgroup.errors.each { |t| self << t}
+    end
     self << "TCPIP ended at #{Time.now}"
     self.save
 
@@ -262,7 +277,7 @@ class Run < ActiveRecord::Base
     #
     execgroup.execs.each do |exec|
       rc = exec.command
-      execgroup.error = true if exec.errors
+      execgroup.errors = true if exec.errors
       rc.rtext = exec.rtext
       rc.done = true
       rc.save

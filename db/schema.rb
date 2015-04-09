@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405201534) do
+ActiveRecord::Schema.define(version: 20150325211513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -147,10 +147,10 @@ ActiveRecord::Schema.define(version: 20150405201534) do
     t.string   "chart_x"
     t.string   "chart_y"
     t.string   "chart_opt"
+    t.string   "chart_title"
     t.string   "racf_password"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.string   "chart_title"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -219,10 +219,12 @@ ActiveRecord::Schema.define(version: 20150405201534) do
   create_table "notices", force: :cascade do |t|
     t.text     "title"
     t.integer  "ugroup_id"
+    t.integer  "run_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "notices", ["run_id"], name: "index_notices_on_run_id", using: :btree
   add_index "notices", ["ugroup_id"], name: "index_notices_on_ugroup_id", using: :btree
 
   create_table "run_commands", force: :cascade do |t|
@@ -235,15 +237,15 @@ ActiveRecord::Schema.define(version: 20150405201534) do
     t.string   "status"
     t.string   "source"
     t.datetime "data_acquired"
+    t.boolean  "cloud",         default: false
+    t.boolean  "compressed",    default: false
+    t.boolean  "merge_grid",    default: false
     t.integer  "run_id"
     t.integer  "lpar_id"
     t.integer  "job_item_id"
     t.integer  "command_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "cloud",         default: false
-    t.boolean  "compressed",    default: false
-    t.boolean  "merge_grid",    default: false
   end
 
   add_index "run_commands", ["command_id"], name: "index_run_commands_on_command_id", using: :btree
@@ -283,13 +285,13 @@ ActiveRecord::Schema.define(version: 20150405201534) do
     t.datetime "end"
     t.datetime "viewed"
     t.datetime "delete_at"
+    t.string   "delete_when"
+    t.string   "note"
     t.integer  "ugroup_id"
     t.integer  "job_id"
     t.integer  "user_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.string   "note"
-    t.string   "delete_when"
   end
 
   add_index "runs", ["job_id"], name: "index_runs_on_job_id", using: :btree
@@ -368,6 +370,7 @@ ActiveRecord::Schema.define(version: 20150405201534) do
   add_foreign_key "lpar_lgroups", "lpars"
   add_foreign_key "lpar_restricts", "lgroups"
   add_foreign_key "lpar_restricts", "ugroups"
+  add_foreign_key "notices", "runs"
   add_foreign_key "notices", "ugroups"
   add_foreign_key "run_commands", "commands"
   add_foreign_key "run_commands", "job_items"

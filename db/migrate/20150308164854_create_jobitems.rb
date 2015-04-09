@@ -9,6 +9,7 @@ class CreateJobitems < ActiveRecord::Migration
       t.string     :chart_x
       t.string     :chart_y
       t.string     :chart_opt
+      t.string     :chart_title
       t.string     :racf_password
 
       t.timestamps null: false

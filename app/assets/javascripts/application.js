@@ -19,4 +19,5 @@
 //= require ext/dhtmlxgrid_filter.js
 //= require ext/dhtmlxgrid_export.js
 //= require loading_overlay.js
+//= require bootstrap.min.js
 //= require_tree .

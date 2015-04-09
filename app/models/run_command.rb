@@ -12,14 +12,15 @@
 #  status        :string
 #  source        :string
 #  data_acquired :datetime
+#  cloud         :boolean          default("false")
+#  compressed    :boolean          default("false")
+#  merge_grid    :boolean          default("false")
 #  run_id        :integer
 #  lpar_id       :integer
 #  job_item_id   :integer
 #  command_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  cloud         :boolean          default("false")
-#  compressed    :boolean          default("false")
 #
 
 class RunCommand < ActiveRecord::Base

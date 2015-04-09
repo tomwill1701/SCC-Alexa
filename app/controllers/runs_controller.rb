@@ -29,6 +29,7 @@ class RunsController < ApplicationController
   end
 
 
+  #
   #  delete function
   #
   def destroy
@@ -42,7 +43,7 @@ class RunsController < ApplicationController
   #  make sure the passed parms are ok
   #
   def run_params
-    params.require(:run).permit(:ugroup_id, :note)
+    params.require(:run).permit(:ugroup_id, :note, :keep_days)
   end
 
 
@@ -80,7 +81,7 @@ class RunsController < ApplicationController
       else
 
         #
-        #  run forground
+        #  run foreground
         #
         @run.status = "Real-time run started"
         @run.execute unless @run.done
@@ -107,3 +108,7 @@ class RunsController < ApplicationController
   end
 
 end
+
+
+
+

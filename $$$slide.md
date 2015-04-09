@@ -7,7 +7,7 @@ Iron yard student
 
 Current Career
 
-MVS assembler programmer for over 35 years with DTS Software in Raleigh, NC
+MVS assembler programmer with DTS Software in Raleigh, NC
 
 (what is MVS?)
 
@@ -26,7 +26,7 @@ Why am I here?
 
 When I started there was no PCs or internet.  Just punched cards and paper tape.
 
-NO expereience with any Web based systems.  No html/css/java script/backend.
+NO expereience with any Web based systems.  No html/css/javascript/backend.
 
 Wanted to understand how web application were written.
 
@@ -58,8 +58,8 @@ App consists of:
 * Users
 * Systems/images (called LPARs) where information is obtained
 * Commands that request information from system (API request)
-* Jobs are created to make Command (API) request to LPARs (Systems)
- * Jobs can have more than one reguest for information and/or display
+* Users create Jobs which make Command (API) request to LPARs (Systems)
+ * Jobs can have more than one request for information and/or display
 * Jobs are "run" to actually get the data and display it
 
 ---
@@ -106,17 +106,6 @@ Contact Me at:
 tom@dtssoftware.com
 
 www.dtssoftware.com
-
----
-
-to do:
-
-* Spinner has wrong font
-* tabs will not show selection
-* Select runs to delete from list
-* Prompts
-* drill down
-* merge grids
 
 
 
