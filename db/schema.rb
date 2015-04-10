@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325211513) do
+ActiveRecord::Schema.define(version: 20150410234118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,7 +254,6 @@ ActiveRecord::Schema.define(version: 20150325211513) do
   add_index "run_commands", ["run_id"], name: "index_run_commands_on_run_id", using: :btree
 
   create_table "run_views", force: :cascade do |t|
-    t.string   "type"
     t.string   "file"
     t.string   "file_type"
     t.integer  "run_command_id"
