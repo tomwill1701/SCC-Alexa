@@ -17,5 +17,7 @@
     = render :partial => 'run_views/grid', locals: { rv: rv }
   - elsif rv.vtype == 'text'
     = render :partial => 'run_views/text', locals: { rv: rv }
+  - elsif rv.vtype == 'file'
+    = render :partial => 'run_views/file', locals: { rv: rv }
   %br
   %br

@@ -197,6 +197,8 @@ class Run < ActiveRecord::Base
       return "OPERCMD #{ctext}"
     elsif command.ctype == "REXXCmd"
       return "REXX #{ctext}"
+    elsif command.ctype == "External"
+      return ctext
     elsif %w(Grid Chart).include?(command.ctype)
       mon = lpar.monproc
       mon = "MONRUNM" unless mon
@@ -289,10 +291,36 @@ class Run < ActiveRecord::Base
       end
 
     end
+
+    #
+    #  check for any views that are external
+    #
+
+    extview
+
     self.done = true
     self.end = DateTime.now
     self.save
 
+  end
+
+  #
+  #  process any views that are external
+  #
+  def extview
+
+    rv = self.run_views
+    rv.each do |rv|
+      if rv.command.ctype == "External"
+        operands = rv.command.model.split(' ')
+        if operands[0].downcase == "pdf"
+          File.open(operands[1]) do |f|
+            rv.file = f
+          end
+        end
+      end
+      rv.save
+    end
   end
 
 

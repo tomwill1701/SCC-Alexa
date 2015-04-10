@@ -26,6 +26,8 @@ class RunView < ActiveRecord::Base
   attr_accessor :vtype, :chart_type, :x_fields, :y_fields,
                 :options, :size, :title
 
+  mount_uploader :file, ExtUploader
+
   #
   #  get attributes of this view
   #
@@ -48,6 +50,8 @@ class RunView < ActiveRecord::Base
       self.vtype = 'text'
     elsif cmd.ctype == 'Grid'
       self.vtype = 'grid'
+    elsif cmd.ctype == 'External'
+      self.vtype = 'file'
     end
 
     #

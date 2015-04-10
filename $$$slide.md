@@ -3,34 +3,31 @@ Tom Williamson
 
 Iron yard student
 
+Ruby on Rails
+
 ---
 
 Current Career
 
 MVS assembler programmer with DTS Software in Raleigh, NC
 
-(what is MVS?)
+(what is assembler? what is MVS?)
 
 
 ---
+
+Assembler -> Machine code programming
 
 MVS/Zos (Multiple Virutal Storage) is the operating system used on large scale IBM mainframes
 
-Released in 1974
-
-Still used by many large corporations for batch and transaction processing
 
 ---
 
-Why am I here?
+I have Programming experience.
 
-When I started there was no PCs or internet.  Just punched cards and paper tape.
-
-NO expereience with any Web based systems.  No html/css/javascript/backend.
+But NO expereience with any Web based systems.  No html/css/javascript/backend.
 
 Wanted to understand how web application were written.
-
-Much better weather in Florida!
 
 ---
 
@@ -42,11 +39,13 @@ SCC-Monitor (Storage Control Center)
 
 SCC-Monitor is a web interface to a product with the same name that is sold by DTS Software
 
-This product provides alerts and reports for MVS subsystems
+This product provides alerts and reports for MVS subsystems.
 
-When run on MVS, SCC-Monitor can only produce old style column/row reports (green bar paper)
+Product produces 
 
 ---
+
+App will merge the mainframe world with the web
 
 App will allow real-time access to the MVS reporting information and produce
 interactive Grids and Charts
@@ -88,14 +87,16 @@ Technology used:
 * Kaminari (pagination)
 
 - Google Charts
-- dhtmlxgrid
+- dhtmlxgrid (JavaScript)
 
-- 20 Models
+- 20 Models/Tables
 
 
 ---
 
 My Goals
+
+Continue to learn about web programming
 
 To remember how all this works two years from now
 
