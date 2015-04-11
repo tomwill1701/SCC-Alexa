@@ -2,7 +2,7 @@
 
 class ExtUploader < CarrierWave::Uploader::Base
 
-  storage :fog
+#  storage :fog
 
   def store_dir
     "pdf/"
