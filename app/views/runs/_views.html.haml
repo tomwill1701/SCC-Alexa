@@ -3,4 +3,10 @@
 -if rc.run_views
   %h6 View:
 - rc.run_views.each do |rv|
-  %br= link_to rv.name, run_view_path(rv)
+  - if !rv.hide
+    %br
+    %br
+    - if rv.file.present?
+      = link_to rv.name, rv.file.url
+    -else
+      = link_to rv.name, run_view_path(rv)

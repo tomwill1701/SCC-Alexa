@@ -2,7 +2,7 @@ ActiveAdmin.register Command do
 
   permit_params :id, :name, :description, :source,
         :ctype, :model, :prompts, :keys, :tags, :cclass, :preload,
-        :chart_type, :chart_x, :chart_y, :chart_opt, :cache_time, :size,
+        :chart_type, :chart_x, :chart_y, :chart_opt, :cache_time, :size, :hide,
         command_cgroups_attributes: [:id, :name, :command_id, :cgroup_id, :_destroy]
 
   sidebar "Commands" do
@@ -15,6 +15,7 @@ ActiveAdmin.register Command do
   filter :cclass, as: :select, label: "Class"
   filter :cgroups, as: :select, label: "Group", collection: proc { Cgroup.is_group }
   filter :source, as: :select
+  filter :hide
   filter :tags
   filter :keys
   filter :prompts
@@ -37,6 +38,7 @@ ActiveAdmin.register Command do
       row :source
       row :tags
       row :model
+      row :hide
       row :prompts
       row :keys
       row :size
@@ -83,7 +85,8 @@ ActiveAdmin.register Command do
         collection:  ["DIFCmd", "MVSCmd", "Grid", "Chart", "External"]
       input :cclass, label: "Class"
       input :tags
-      input :model, input_html: {rows: 4}
+      input :model, input_html: {rows: 6}
+      input :hide
       input :prompts
       input :keys
       input :size

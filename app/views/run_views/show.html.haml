@@ -10,14 +10,15 @@
       = link_to 'Rerun', run_path(@run), class: "button"
       = link_to 'Delete', @run, method: :delete, class: "button", data: { confirm: 'Are you sure?' }
 - @rv.each do |rv|
-  - rv.attr
-  - if rv.vtype == 'chart'
-    = render :partial => 'run_views/chart', locals: { rv: rv }
-  - elsif rv.vtype == "grid"
-    = render :partial => 'run_views/grid', locals: { rv: rv }
-  - elsif rv.vtype == 'text'
-    = render :partial => 'run_views/text', locals: { rv: rv }
-  - elsif rv.vtype == 'file'
-    = render :partial => 'run_views/file', locals: { rv: rv }
-  %br
-  %br
+  - if !rv.hide
+    - rv.attr
+    - if rv.vtype == 'chart'
+      = render :partial => 'run_views/chart', locals: { rv: rv }
+    - elsif rv.vtype == "grid"
+      = render :partial => 'run_views/grid', locals: { rv: rv }
+    - elsif rv.vtype == 'text'
+      = render :partial => 'run_views/text', locals: { rv: rv }
+    - elsif rv.vtype == 'file'
+      = render :partial => 'run_views/file', locals: { rv: rv }
+    %br
+    %br

@@ -74,7 +74,7 @@ class RunsController < ApplicationController
       #
       if @run.background
         @run.status = "Background run queued"
-        @run << "Background job queued at #{Time.now}"
+        @run << "Background job queued"
         @run.save
         RunJob.perform_later @run
 

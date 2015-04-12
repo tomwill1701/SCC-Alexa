@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412164800) do
+ActiveRecord::Schema.define(version: 20150412220737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20150412164800) do
     t.text     "vscript"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.boolean  "hide"
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -246,6 +247,8 @@ ActiveRecord::Schema.define(version: 20150412164800) do
     t.integer  "command_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.boolean  "download"
+    t.boolean  "hide"
   end
 
   add_index "run_commands", ["command_id"], name: "index_run_commands_on_command_id", using: :btree
@@ -263,6 +266,7 @@ ActiveRecord::Schema.define(version: 20150412164800) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "name"
+    t.boolean  "hide"
   end
 
   add_index "run_views", ["command_id"], name: "index_run_views_on_command_id", using: :btree

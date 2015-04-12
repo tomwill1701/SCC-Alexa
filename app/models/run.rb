@@ -125,7 +125,8 @@ class Run < ActiveRecord::Base
             @rc = RunCommand.new(run: self, lpar: lpar, model: ctext, job_item: ji, command: command)
             self.run_commands << @rc
             if %w(DIFCmd MVSCmd).include? command.ctype
-              @rv = RunView.create(run: self, run_command: @rc, job_item: ji, command: command, name: command.name)
+              @rv = RunView.create(run: self, run_command: @rc, job_item: ji, command: command, name: command.name,
+                hide: command.hide)
               @rc.run_views << @rv
             end
           end
@@ -134,13 +135,13 @@ class Run < ActiveRecord::Base
           #
           if !@rv && @rc
             @rv = RunView.create(run: self, run_command: @rc, job_item: ji,
-            command: command, name: command.name)
+            command: command, name: command.name, hide: command.hide)
             @rc.run_views << @rv
           end
         end
         if !@rv && @rc
           @rv = RunView.create(run: self, run_command: @rc, job_item: ji,
-          command: command, name: command.name)
+          command: command, name: command.name, hide: command.hide)
           @rc.run_views << @rv
         end
 

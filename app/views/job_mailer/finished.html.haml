@@ -19,5 +19,9 @@
         - if rc.run_views
           %br and generated reports:
           - rc.run_views.each do |rv|
-            %br
-            =link_to rv.name, run_view_url(rv)
+            - if !rv.hide
+              %br
+              - if rv.file.present?
+                = link_to rv.name, rv.file.url
+              -else
+                = link_to rv.name, run_view_path(rv)

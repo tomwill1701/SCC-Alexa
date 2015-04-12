@@ -11,6 +11,8 @@
 #  command_id     :integer
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  name           :string
+#  hide           :boolean
 #
 
 class RunView < ActiveRecord::Base
