@@ -16,7 +16,7 @@ class Exec
     @cmd = str.strip
     if str[0..3] == "FILE"
       oper = str.split(' ',3)
-      self.filename = './tmp/' + oper[1]
+      self.filename = "#{Rails.root}/tmp/" + oper[1]
       @cmd = oper[2]
     end
   end
