@@ -39,6 +39,7 @@ class RunView < ActiveRecord::Base
       self.vtype = 'file'
       return
     end
+    return unless command
 
     #
     #  get command and job_item
