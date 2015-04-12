@@ -35,11 +35,8 @@ class RunView < ActiveRecord::Base
     #
     #  check for external generated view
     #
-    puts "v", self.inspect
-    puts "file", file
     if !self.file.present?
       self.vtype = 'file'
-      puts "return"
       return
     end
     return unless command

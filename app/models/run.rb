@@ -347,6 +347,8 @@ class Run < ActiveRecord::Base
           #  run a birt report
           #
           if oper[0].downcase == "birt"
+            self << "birt started: #{oper[1]}"
+            self.save
             cmd = "sh " + ENV["HOMEDIR"] + "/reports/birt.sh " + oper[1]
             crc = system(cmd)
             if crc
@@ -355,13 +357,14 @@ class Run < ActiveRecord::Base
               self << "BIRT failed: #{oper[1]}"
               self.error = true
             end
+            self.save
           end
 
           #
           #  create new view and upload the pdf file
           #
           if oper[0].downcase == "view"
-            fn =  ENV["HOMEDIR"] + '/tmp/' + oper[1]
+            fn =  Rails.root + '/tmp/' + oper[1]
             if File.exists?(fn)
               File.open(fn) do |f|
                 rc = rv.run_command
