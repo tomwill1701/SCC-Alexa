@@ -26,9 +26,6 @@ SCC-Monitor (Storage Control Center)
 
 SCC-Monitor is a web interface to a product with the same name that runs on the mainframe
 
-
----
-
 App will take legacy mainframe data and convert it to modern web based Grids and Charts
 
 

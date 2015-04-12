@@ -364,7 +364,7 @@ class Run < ActiveRecord::Base
           #  create new view and upload the pdf file
           #
           if oper[0].downcase == "view"
-            fn =  Rails.root + '/tmp/' + oper[1]
+            fn =  ENV["HOMEDIR"] + '/tmp/' + oper[1]
             if File.exists?(fn)
               File.open(fn) do |f|
                 rc = rv.run_command

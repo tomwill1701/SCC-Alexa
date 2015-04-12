@@ -5,7 +5,7 @@ class ExtUploader < CarrierWave::Uploader::Base
   storage :fog
 
   def store_dir
-    "pdf/"
+    "scc/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
 
