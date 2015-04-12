@@ -3,4 +3,4 @@
 -if rc.run_views
   %h6 View:
 - rc.run_views.each do |rv|
-  %br= link_to rv.command.name, run_view_path(rv)
+  %br= link_to rv.name, run_view_path(rv)

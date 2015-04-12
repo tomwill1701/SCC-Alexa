@@ -1,6 +1,6 @@
 -if rv.file != "x"
   %br
   %a{"aria-expanded" => "false", "data-toggle" => "collapse", :href => "#file#{rv.id}"}
-    %h4 PDF: #{rv.command.name}
+    %h4 PDF: #{rv.name}
   .collapse{:id => "file#{rv.id}"}
     %iframe{:frameborder => "0", :src => "#{rv.file.url}", :style => "width:1000px; height:700px;"}

@@ -14,5 +14,6 @@
       .panel-collapse.collapse{id: "collapse#{rc.id}", "aria-labelledby" => "headingOne", :role => "tabpanel"}
         .panel-body
           - if rc.rtext
-            .code.scroll #{rc.rtext.gsub("\r",'<br>').html_safe}
+            .code.scroll
+              %pre #{rc.rtext.gsub("\r",'<br>').html_safe}
     = render :partial => 'runs/views', locals: { rc: rc }

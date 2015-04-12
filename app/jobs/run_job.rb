@@ -8,7 +8,7 @@ class RunJob < ActiveJob::Base
   def perform(run)
 
     run.status = "Background run started"
-    run << "Background job started at #{Time.now}"
+    run << "Background job started"
     run.save
     unless run.done
       run.execute
@@ -18,7 +18,7 @@ class RunJob < ActiveJob::Base
       end
     end
 
-    run << "Background job ended at #{Time.now}"
+    run << "Background job ended"
     run.status = "Background run finished"
     Notice.create(title: "Background job finished", ugroup: run.ugroup, run: run)
     run.save

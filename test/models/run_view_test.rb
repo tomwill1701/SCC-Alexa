@@ -3,7 +3,6 @@
 # Table name: run_views
 #
 #  id             :integer          not null, primary key
-#  type           :string
 #  file           :string
 #  file_type      :string
 #  run_command_id :integer

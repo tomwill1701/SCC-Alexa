@@ -65,7 +65,7 @@ class Run < ActiveRecord::Base
   #
   def <<(string)
     self.log ||= String.new
-    self.log += string + "\r"
+    self.log += "#{Time.now}: #{string}" + "\r"
   end
 
   #
@@ -83,7 +83,7 @@ class Run < ActiveRecord::Base
   #
   #  take the passed job and build a new run
   #  this will consist of one or more run_command entries (data acquisition)
-  #  and one ore more run_views attached to the command to show text/grid/charts
+  #  and one ore more run_views attached to the run_command to show text/grid/charts
   #
   def build(job, user)
 
@@ -121,11 +121,11 @@ class Run < ActiveRecord::Base
             #
             #  build a new RunCommand that we will send to a lpar
             #
-            ctext = ctype(lpar, command, command.model)
+            ctext = ctype(lpar, command, command.model.strip)
             @rc = RunCommand.new(run: self, lpar: lpar, model: ctext, job_item: ji, command: command)
             self.run_commands << @rc
             if %w(DIFCmd MVSCmd).include? command.ctype
-              @rv = RunView.create(run: self, run_command: @rc, job_item: ji, command: command)
+              @rv = RunView.create(run: self, run_command: @rc, job_item: ji, command: command, name: command.name)
               @rc.run_views << @rv
             end
           end
@@ -134,13 +134,13 @@ class Run < ActiveRecord::Base
           #
           if !@rv && @rc
             @rv = RunView.create(run: self, run_command: @rc, job_item: ji,
-            command: command)
+            command: command, name: command.name)
             @rc.run_views << @rv
           end
         end
         if !@rv && @rc
           @rv = RunView.create(run: self, run_command: @rc, job_item: ji,
-          command: command)
+          command: command, name: command.name)
           @rc.run_views << @rv
         end
 
@@ -217,6 +217,10 @@ class Run < ActiveRecord::Base
         unless rc.done
           ckey = "#{rc.lpar.id}/#{rc.model}"
           rc.rtext = Rails.cache.read(ckey)
+
+          #
+          #  there is data in the cache.
+          #
           if rc.rtext
             self << "cache used: #{ckey}"
             rc.source = "Cache"
@@ -226,6 +230,7 @@ class Run < ActiveRecord::Base
             self << "no cache: #{ckey}"
             fin = false
           end
+
         else
           fin = false
         end
@@ -264,14 +269,14 @@ class Run < ActiveRecord::Base
     #
     #  run the tcpip requests
     #
-    self << "TCPIP started at #{Time.now}"
+    self << "TCPIP started"
     self.save
     execgroup.run(self.user)
     if execgroup.errors
       self.error = true
       execgroup.errors.each { |t| self << t}
     end
-    self << "TCPIP ended at #{Time.now}"
+    self << "TCPIP ended"
     self.save
 
     #
@@ -280,11 +285,26 @@ class Run < ActiveRecord::Base
     execgroup.execs.each do |exec|
       rc = exec.command
       execgroup.errors = true if exec.errors
-      rc.rtext = exec.rtext
+
+      #
+      #  if we downloaded a dataset then build log message and keep the first 1k for display
+      #
+      if exec.file && !exec.errors
+        self << "file downloaded (#{exec.rlength} bytes): #{exec.file.path}"
+        f = File.open(exec.file.path)
+        rc.rtext = f.read(1000)
+        f.close
+      else
+        rc.rtext = exec.rtext
+      end
+
       rc.done = true
       rc.save
 
-      if !rc.error && rc.command.cache_time && rc.command.cache_time > 0 && rc.rtext.length > 0
+      #
+      #  cache any data
+      #
+      if !rc.error && rc.command.cache_time && rc.command.cache_time > 0 && rc.rtext.present?
         ckey = "#{rc.lpar.id}/#{rc.model}"
         Rails.cache.write(ckey, rc.rtext, expires_in: rc.command.cache_time.minutes)
         self << "cache set: #{ckey}"
@@ -293,9 +313,8 @@ class Run < ActiveRecord::Base
     end
 
     #
-    #  check for any views that are external
+    #  check for any views that need to be generated from command
     #
-
     extview
 
     self.done = true
@@ -304,22 +323,63 @@ class Run < ActiveRecord::Base
 
   end
 
+
   #
-  #  process any views that are external
+  #  process any commands/views that are external
   #
   def extview
 
-    rv = self.run_views
+    #
+    #  look at each run_command
+    #
+    rv = run_views
     rv.each do |rv|
+
+      #
+      #  if external see what commands we have
+      #
       if rv.command.ctype == "External"
-        operands = rv.command.model.split(' ')
-        if operands[0].downcase == "pdf"
-          File.open(operands[1]) do |f|
-            rv.file = f
+        ecmds = rv.command.model.strip
+        ecmds.each_line do |cmd|
+          oper = cmd.split(' ')
+
+          #
+          #  run a birt report
+          #
+          if oper[0].downcase == "birt"
+            cmd = "sh " + ENV["HOMEDIR"] + "/reports/birt.sh " + oper[1]
+            crc = system(cmd)
+            if crc
+              self << "BIRT successful: #{oper[1]}"
+            else
+              self << "BIRT failed: #{oper[1]}"
+              self.error = true
+            end
           end
+
+          #
+          #  create new view and upload the pdf file
+          #
+          if oper[0].downcase == "view"
+            fn =  ENV["HOMEDIR"] + '/tmp/' + oper[1]
+            if File.exists?(fn)
+              File.open(fn) do |f|
+                rc = rv.run_command
+                newrv = RunView.create(run: self, run_command: rc, file: f,
+                  name: "PDF #{oper[1]}")
+                self << "file uploaded: #{fn}"
+                rc.run_views << rv
+                rc.save
+              end
+            else
+              self << "file does not exists: #{fn}"
+            end
+          end
+
+          self.save
+
         end
       end
-      rv.save
     end
   end
 

@@ -29,20 +29,28 @@ class ExecGroup
       lpar = e.lpar
       userid = current_user.prompt("Userid")
       password = current_user.prompt("Password")
-      userid = current_user.racf_userid if !userid
-      password = current_user.racf_password if !password
+      userid = current_user.racf_userid if userid.blank?
+      password = current_user.racf_password if password.blank?
 
       req = Typhoeus::Request.new("http://#{lpar.ip}:#{lpar.port}/#{e.cmd}".gsub(' ','+'),
           userpwd: "#{userid}:#{password}" )
       hydra.queue(req)
       @request << req
 
+      if e.filename
+        e.file = File.open(e.filename, 'w')
+      end
+
       #
       #  wait for some data
       #
       req.on_body do |chunk|
-        e.rtext = e.rtext + chunk
-        e.rlength = e.rtext.length
+        e.rlength += chunk.length
+        if e.file
+          e.file.write(chunk)
+        else
+          e.rtext = e.rtext + chunk
+        end
       end
 
     end
@@ -60,6 +68,8 @@ class ExecGroup
       exec = execs[x]
       exec.connect_time = response.connect_time
       exec.response_code = response.code
+
+      exec.file.close if exec.file
 
       if response.success?
         exec.rtext.sub!('<html><body><pre>','')

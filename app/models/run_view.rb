@@ -3,7 +3,6 @@
 # Table name: run_views
 #
 #  id             :integer          not null, primary key
-#  type           :string
 #  file           :string
 #  file_type      :string
 #  run_command_id :integer
@@ -34,6 +33,14 @@ class RunView < ActiveRecord::Base
   def attr
 
     #
+    #  check for external generated view
+    #
+    if file.present?
+      self.vtype = 'file'
+      return
+    end
+
+    #
     #  get command and job_item
     #
     rc = self.run_command
@@ -50,8 +57,6 @@ class RunView < ActiveRecord::Base
       self.vtype = 'text'
     elsif cmd.ctype == 'Grid'
       self.vtype = 'grid'
-    elsif cmd.ctype == 'External'
-      self.vtype = 'file'
     end
 
     #
@@ -240,7 +245,11 @@ class RunView < ActiveRecord::Base
   #  return text form difcmd and mvscmd
   #
   def text
-    run_command.rtext
+    if run_command.rtext.blank?
+      return ""
+    else
+      return run_command.rtext
+    end
   end
 
 end

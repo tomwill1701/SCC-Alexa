@@ -10,7 +10,7 @@
       to see the entire job output
       %br
       The job status page can be seen
-      =link_to "here", run_url(@run)  
+      =link_to "here", run_url(@run)
       %p
       Data was acquired from the following sources:
       %br
@@ -20,4 +20,4 @@
           %br and generated reports:
           - rc.run_views.each do |rv|
             %br
-            =link_to rv.command.name, run_view_url(rv)
+            =link_to rv.name, run_view_url(rv)
