@@ -37,8 +37,9 @@ class RunView < ActiveRecord::Base
     #
     puts "v", self.inspect
     puts "file", file
-    if file.present?
+    if self.file.present?
       self.vtype = 'file'
+      puts "return"
       return
     end
     return unless command
