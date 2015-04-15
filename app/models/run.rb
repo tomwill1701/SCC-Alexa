@@ -28,7 +28,7 @@
 
 class Run < ActiveRecord::Base
 
-  attr_accessor :select
+  attr_accessor :select, :attachments
 
   belongs_to :ugroup
   belongs_to :job
@@ -126,7 +126,7 @@ class Run < ActiveRecord::Base
             self.run_commands << @rc
             if %w(DIFCmd MVSCmd).include? command.ctype
               @rv = RunView.create(run: self, run_command: @rc, job_item: ji, command: command, name: command.name,
-                hide: command.hide)
+              hide: command.hide)
               @rc.run_views << @rv
             end
           end
@@ -348,7 +348,7 @@ class Run < ActiveRecord::Base
           #  run a birt report
           #
           if oper[0].downcase == "birt"
-            self << "birt started: #{oper[1]}"
+            self << "BIRT started: #{oper[1]}"
             self.save
             cmd = "sh " + ENV["HOMEDIR"] + "/reports/birt.sh " + oper[1]
             crc = system(cmd)
@@ -370,7 +370,7 @@ class Run < ActiveRecord::Base
               File.open(fn) do |f|
                 rc = rv.run_command
                 newrv = RunView.create(run: self, run_command: rc, file: f,
-                  name: "PDF #{oper[1]}")
+                name: "PDF #{oper[1]}")
                 self << "file uploaded: #{fn}"
                 rc.run_views << rv
                 rc.save
@@ -381,6 +381,20 @@ class Run < ActiveRecord::Base
           end
 
           self.save
+
+
+          #
+          #  mark a file for email attachment
+          #
+          if oper[0].downcase == "attach"
+            fn =  ENV["HOMEDIR"] + '/tmp/' + oper[1]
+            if File.exists?(fn)
+              self.attachments ||= Hash.new
+              self.attachments[oper[1]] = fn
+            else
+              self << "file does not exists: #{fn}"
+            end
+          end
 
         end
       end

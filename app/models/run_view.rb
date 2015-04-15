@@ -207,7 +207,10 @@ class RunView < ActiveRecord::Base
     rc.rows.each do |row|
       crow = Array.new
       col.each do |column|
-        crow << row[column.index]
+        puts "data", row[column.index]
+#        if chart_type != "Gauge" || row[column.index] != 0
+          crow << row[column.index]
+#        end
       end
       data_table.add_row(crow)
       puts "Data:", crow.inspect

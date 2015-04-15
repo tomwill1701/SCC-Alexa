@@ -5,7 +5,7 @@ Rails student
 
 ---
 
-Current Career
+Currently
 
 Mainframe programmer
 
@@ -14,7 +14,7 @@ Mainframe programmer
 
 I have Programming experience.
 
-But NO expereience with any Web based systems.  No html/css/javascript/backend.
+But NO experience with any Web based systems.  No html/css/javascript/backend.
 
 ---
 
@@ -26,7 +26,9 @@ SCC-Monitor (Storage Control Center)
 
 SCC-Monitor is a web interface to a product with the same name that runs on the mainframe
 
-App will take legacy mainframe text data and convert it to modern web based Grids and Charts
+App will take legacy mainframe text data and convert it into a more modern web based form.
+
+Interactive Grids and Charts
 
 
 ---
@@ -77,13 +79,4 @@ Contact Me at:
 tom@dtssoftware.com
 
 www.dtssoftware.com
-
-
-
-
-
-
-
-
-
 
