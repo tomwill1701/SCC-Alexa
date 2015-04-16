@@ -8,9 +8,11 @@ class JobMailer < ApplicationMailer
     @job = @run.job
     @user = @job.owner
 
-    run.attachments.each do |k, v|
-      attachments[k] = File.read(v)
-      run << "email attachment: #{v}"
+    if run.attachments
+      run.attachments.each do |k, v|
+        attachments[k] = File.read(v)
+        run << "email attachment: #{v}"
+      end
     end
 
     if @user.email

@@ -5,28 +5,25 @@ Rails student
 
 ---
 
-Currently
+From Raleigh, NC
 
-Mainframe programmer
+IBM Mainframe programmer
 
+temporary move to St. Pete for the last three months
 
 ---
 
-I have Programming experience.
+I have programming experience.
 
 But NO experience with any Web based systems.  No html/css/javascript/backend.
 
 ---
 
-Demo application name
-
 SCC-Monitor (Storage Control Center)
 
----
+Web interface for the mainframe
 
-SCC-Monitor is a web interface to a product with the same name that runs on the mainframe
-
-App will take legacy mainframe text data and convert it into a more modern web based form.
+Legacy mainframe text data ==> modern web format
 
 Interactive Grids and Charts
 
@@ -38,30 +35,18 @@ https://sccdemo.herokuapp.com
 
 ---
 
-Technology used:
+Process:
 
-* Rails
-* Heroku
-* ActiveAdmin
-* typhoeus (concurrent tcpip)
-* haml
-* ransack (search)
-* formtastic
-* ActiveMailer
-
----
-
-* Zlib (compress raw data)
-* cocoon (formtastic one-to-many forms)
-* delayed job (with activejob)
-* Kaminari (pagination)
-
-- Google Charts
-- dhtmlxgrid (JavaScript)
-- Eclipse/BIRT
-- Amazon S3
-
-- 20 Models/Tables
+* check for data in cache
+* start new background task
+* issue TCPIP API request (concurrent)
+* store data in cache for later use
+* convert data into columns / rows (Grid)
+* build data structure for charts (x/y axis)
+* call Google Charts
+* Large data -> Java Virtual Machine to run Eclipse/BIRT (PDF)
+* upload PDF to amazon s3 cloud storage
+* send Email to user
 
 
 ---
