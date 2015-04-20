@@ -1,41 +1,42 @@
-.page-header
-  %h2.chardin_box
-    SCC-Monitor Status
-- if @notices
+.container
   .page-header
-    %h3
-      ="#{@notices.count} Notices"
-  - @notices.in_groups_of(3) do |group|
-    .row
-      - group.each do |notice|
-        - if notice
-          .col-md-4
-            = link_to notice.run do
-              .panel.panel-default
-                .panel-heading
-                  = notice.created_at
-                  %br
-                  Job #{notice.run.name}
-                .panel-body
-                  = notice.title
-                .panel-footer
-                  = link_to home_path(notice), method: :delete do
-                    %span.glyphicon.glyphicon-remove{"aria-hidden" => "true"}
-                    remove notice
-- if @runs
-  .page-header
-    %h3
-      ="#{@runs.count} new runs"
-  - @runs.in_groups_of(3) do |group|
-    .row
-      - group.each do |run|
-        - if run
-          .col-md-4
-            = link_to run do
-              .panel.panel-default
-                .panel-heading
-                  = run.created_at
-                  %br
-                  Job #{run.name}
-                .panel-body
-                  = run.name
+    %h2.chardin_box
+      SCC-Monitor Status
+  - if @notices
+    .page-header
+      %h3
+        = "#{@notices.count} Notices"
+    - @notices.in_groups_of(3) do |group|
+      .row
+        - group.each do |notice|
+          - if notice
+            .col-md-4
+              = link_to notice.run do
+                .panel.panel-default
+                  .panel-heading
+                    = notice.created_at
+                    %br/
+                    Job \#{notice.run.name}
+                  .panel-body
+                    = notice.title
+                  .panel-footer
+                    = link_to home_path(notice), method: :delete do
+                      %span.glyphicon.glyphicon-remove{"aria-hidden" => "true"}
+                      remove notice
+  - if @runs
+    .page-header
+      %h3
+        = "#{@runs.count} New Runs"
+    - @runs.in_groups_of(3) do |group|
+      .row
+        - group.each do |run|
+          - if run
+            .col-md-4
+              = link_to run do
+                .panel.panel-default
+                  .panel-heading
+                    = run.created_at
+                    %br/
+                    Job \#{run.name}
+                  .panel-body
+                    = run.name

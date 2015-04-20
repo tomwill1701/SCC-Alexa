@@ -1,9 +1,17 @@
-- if flash[:notice]
-  .alert.alert-success= flash[:notice]
-- if flash[:error]
-  .alert.alert-danger.alert-dismissible
-    %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
-      %span{"aria-hidden" => "true"} &times;
-    = flash[:error]
-- if flash[:warning]
-  .alert.alert-warning= flash[:warning]
+.container
+  - if flash[:notice]
+    .alert.alert-success.alert-dismissible
+      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+      = flash[:notice]
+  - if flash[:error]
+    .alert.alert-danger.alert-dismissible
+      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+      = flash[:error]
+  - if flash[:warning]
+    .alert.alert-warning.alert-dismissible
+      %button.close{"aria-label" => "Close", "data-dismiss" => "alert", :type => "button"}
+        %span{"aria-hidden" => "true"} ×
+      = flash[:warning]
+  %div
