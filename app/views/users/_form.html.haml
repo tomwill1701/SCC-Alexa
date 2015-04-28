@@ -1,26 +1,27 @@
 .container
-  %h1 User Profile
-  %hr/
-  = bootstrap_form_for @user do |f|
-    .row
-      .col-md-3= f.text_field :name
-      .col-md-2= f.password_field :password
-      .col-md-2= f.text_field :department
-      .col-md-2= f.text_field :phone
-      .col-md-3= f.email_field :email
+  .well
+    %h1 User Profile
     %hr/
-    .row
-      .col-md-3= f.text_field :racf_userid, label: "RACF Userid"
-      .col-md-3= f.text_field :racf_group, label: "RACF Group"
-      .col-md-3= f.password_field :racf_password, label: "RACF Password"
-      .col-md-3= f.collection_select :lpar, Lpar.all, :id, :name
-    %hr/
-    .row
-      .col-md-6
-    .row
-      .col-md-4= f.collection_select :ugroup, current_user.ugroups, :id, :name
-      .col-md-4= f.select :background, [["Never"], ["Always"]], { label: "Background" }, { class: "selectpicker" }
-      .col-md-4= f.select :notify, [["Never"], ["Always"]], { label: "Notify" }, { class: "selectpicker" }
-    %hr
-    = f.submit "Update"
-    = f.submit "Cancel"
+    = bootstrap_form_for @user do |f|
+      .row
+        .col-md-3= f.text_field :name
+        .col-md-2= f.password_field :password
+        .col-md-2= f.text_field :department
+        .col-md-2= f.text_field :phone
+        .col-md-3= f.email_field :email
+      %hr/
+      .row
+        .col-md-3= f.text_field :racf_userid, label: "RACF Userid"
+        .col-md-3= f.text_field :racf_group, label: "RACF Group"
+        .col-md-3= f.password_field :racf_password, label: "RACF Password"
+        .col-md-3= f.collection_select :lpar, Lpar.all, :id, :name
+      %hr/
+      .row
+        .col-md-6
+      .row
+        .col-md-4= f.collection_select :ugroup, current_user.ugroups, :id, :name
+        .col-md-4= f.select :background, [["Never"], ["Always"]], { label: "Background" }, { class: "selectpicker" }
+        .col-md-4= f.select :notify, [["Never"], ["Always"]], { label: "Notify" }, { class: "selectpicker" }
+      %hr
+      = f.submit "Update", class: "btn btn-primary"
+      = f.submit "Cancel"
