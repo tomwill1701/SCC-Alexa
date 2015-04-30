@@ -32,9 +32,9 @@ class ApplicationController < ActionController::Base
     @current_user = User.find_by(name: params[:name]).try(:authenticate, params[:password])
     if @current_user
       session[:user_id] = @current_user.id
-      flash[:notice] = "Now signed in"
+      flash[:notice] = "Success"
     else
-      flash[:notice] = "Login failed"
+      flash[:error] = "Signin failed"
     end
     redirect_to root_path
   end
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
     end
     session.delete :user_id
 
-    flash[:notice] = "Now signed off"
+    flash[:notice] = "Successfully Signed Out"
     redirect_to root_path
   end
 
