@@ -7,7 +7,7 @@ Rails student
 
 From Raleigh, NC
 
-IBM Mainframe programmer
+IBM Mainframe assembler programmer
 
 temporary move to St. Pete for the last three months
 
