@@ -20,3 +20,9 @@
 //= require ext/dhtmlxgrid_export.js
 //= require loading_overlay.js
 //= require_tree .
+$(function(){
+$('.clickable').on('click',function(){
+    var effect = $(this).data('fadeOut');
+        $(this).closest('.panel')[effect]();
+	})
+})
