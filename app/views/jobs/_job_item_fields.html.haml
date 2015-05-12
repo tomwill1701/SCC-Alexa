@@ -1,15 +1,10 @@
 .nested-fields
-  = f.inputs do
-    = f.input :cgroup_id, as: :select, collection: Cgroup.all, input_html: {},
-      label: "Command", member_label: :qual
-    = f.input :lgroup_id, as: :select, collection: Lgroup.all, label: "LPAR",
-        member_label: :qual
-    = f.input :size
-    = f.input :chart_title
-    = f.input :chart_type, as: :select,
-        collection: ["Pie", "Bar", "Line", "Gauge", "Area", "Candle", "Bubble",
-          "Column", "Combo", "Scatter", "Spark"]
-    = f.input :chart_x
-    = f.input :chart_y
-    = f.input :chart_opt
-    = link_to_remove_association "remove item", f, class: "button"
+  .col-md-3= f.collection_select :cgroup_id, Cgroup.all, :id, :name
+  .col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name
+  .col-md-2= f.text_field :size
+  .col-md-2= f.text_field :chart_title, label: 'Chart Title'
+  .col-md-2= f.select :chart_type, [["Pie"], ["Bar"], ["Line"], ["Gauge"], ["Area"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Candle"], ["Bubble"], ["Column"], ["Combo"], ["Scatter"], ["Spark"]], { label: "Run Type" }, { class: "selectpicker" }
+  .col-md-4= f.text_field :chart_x, label: 'Chart X'
+  .col-md-4= f.text_field :chart_y, label: 'Chart Y'
+  .col-md-4= f.text_field :chart_opt, label: 'Chart OPT'
+  / = link_to_remove_association "remove item", f, :job_items, class: "button"
