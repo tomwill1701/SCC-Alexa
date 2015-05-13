@@ -2,7 +2,9 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %h4#modalLabel.modal-title Enter Run options
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4.modal-title Enter Run Options
       .modal-body
         = bootstrap_form_tag url: run_job_path(@job), method: :get do |f|
           = f.collection_select :ugroup_id, current_user.ugroups, :id, :name,
@@ -15,5 +17,5 @@
               = f.number_field :keep_days, hide_label: true, append: "days",
                 class: "input-sm", placeholder: "keep run"
           .modal-footer
-            = f.submit "Cancel", class: "btn btn-default", "data-dismiss": "modal"
-            = f.submit "Run", class: "button add-spinner"
+            = f.submit "Run", class: "btn btn-primary"
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
