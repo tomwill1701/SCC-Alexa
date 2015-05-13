@@ -10,7 +10,7 @@ class CreateRunCommands < ActiveRecord::Migration
       t.string :status
       t.string :source
       t.datetime :data_acquired
-      t.boolean :cloud, default: :false
+      t.boolean :cloud, default: false
       t.boolean :compressed, default: false
       t.boolean :merge_grid, default: false
       t.references :run, index: true
