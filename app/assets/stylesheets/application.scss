@@ -26,4 +26,38 @@
 
 body {
  font-family: Helvetica, sans-serif;
+ color: #333;
+}
+
+a.btn.btn-primary {
+	color: white;
+}
+
+div.panel-heading {
+	color: #51C1DB;
+  background-color: #FFF;
+}
+
+div.panel-body {
+	color: #51C1DB;
+}
+
+div.panel-footer {
+	color: #DD5152;
+}
+
+span.glyphicon.glyphicon-remove {
+  color: #DD5152;
+}
+
+a.visited.panel-footer {
+  color: #DD5152;
+}
+
+a.btn.btn-danger {
+	color: white;
+}
+
+.modal-backdrop {
+    z-index: 0;
 }

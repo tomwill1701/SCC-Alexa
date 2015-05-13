@@ -1,23 +1,26 @@
-%h4
-= semantic_form_for @job do |f|
-  = f.inputs do
-    = f.input :name
-    = f.input :jtype, label: "Tab"
-    = f.input :cclass, label: "Class"
-    = f.input :run_type, as: :select, collection: ["Real-Time", "Background", "External"]
-    = f.input :private, as: :boolean
-    = f.input :notify, as: :boolean
-    = f.input :cache, as: :boolean
-    = f.input :keep_days, as: :number
-    = f.input :tags
-  = f.inputs do
-    = f.input :description, input_html: {:class => 'autogrow', :rows => 3}
+= bootstrap_form_for @job do |f|
+  .row
+    .col-md-3= f.text_field :name
+    .col-md-3= f.text_field :jtype, label: "Tab"
+    .col-md-3= f.text_field :cclass, label: "Class"
+    .col-md-3= f.select :run_type, [["Real-Time"], ["Background"], ["External"]], { label: "Run Type" }, { class: "selectpicker" }
+    .col-md-3= f.number_field :keep_days, as: :number
+    .col-md-3= f.text_field :tags
+    .col-md-1= f.check_box :private, as: :boolean, checked: 'false'
+    .col-md-1= f.check_box :notify, as: :boolean, checked: 'false'
+    .col-md-1= f.check_box :cache, as: :boolean, checked: 'false'
+  .row
+    .col-md-12= f.text_area :description, rows: '4'
     = f.hidden_field :owner_id, value: @job.owner_id
-  = f.inputs "Command Group" do
-    = f.semantic_fields_for :job_items do | jobitem |
-      = render 'job_item_fields', f: jobitem
-    .links
-      = link_to_add_association 'add item', f, :job_items, class: "button"
-  = f.actions do
-    = f.action :submit, as: :button
-    = f.action :cancel
+  .row
+    .col-md-12
+      %h2 Command Group
+      %hr 
+  .row 
+    %br/
+    .col-md-3= link_to_add_association 'add item', f, :job_items, class: "btn btn-primary"
+    %br/
+  .row
+    .col-md-9.col-md-offset-10
+      = f.submit :submit, class: "btn btn-success"
+      = link_to 'Cancel', jobs_path, class: 'btn btn-danger'

@@ -2,43 +2,39 @@
   <div class="well">
     <h1>Runs Selection</h1>
     <hr>
-      <h4>Search options</h4>
-      <%= search_form_for @q do |f| %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group chardin_box">
-              <div class="col-md-5">
-                <%= f.label "Name" %><br>
-                <%= f.search_field :name_cont %>
-                <%= f.label "Notes" %>
-                <%= f.search_field :note_cont %>
-              </div>
-              <div class="col-md-2">
-                <%= f.label "Run on" %>
-                <%= f.text_field :start_gteq, class: 'datepicker' %>
-              </div>
-            </div>
-          </div>
+    <h4>Search options</h4>
+    <%= search_form_for @q do |f| %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group chardin_box">
+          <%= f.label :name %>
+          <%= f.search_field :name_cont %>
+          <%= f.label :note_cont %>
+          <%= f.search_field :note_cont %>
+          <%= f.label "Run on" %>
+          <%= f.text_field :start_gteq, class: 'datepicker' %>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group chardin_box">
-              <%= f.label :status %>
-              <%= f.select :status_eq, Run.order(:status).uniq.pluck(:status), include_blank: true %>
-              <%= f.label :error %>
-              <%= f.check_box :with_error %>
-              <%= f.label :done %>
-              <%= f.check_box :with_done %>
-              <%= f.label :never_viewed %>
-              <%= f.check_box :with_nv %>
-            </div>
-            <div class="form-group chardin_box">
-              <%= f.submit %>
-              <%= link_to 'Clear Filters', runs_path %>
-            </div>
-          </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group chardin_box">
+          <%= f.label :status %>
+          <%= f.select :status_eq, Run.order(:status).uniq.pluck(:status), include_blank: true %>
+          <%= f.label :error %>
+          <%= f.check_box :with_error %>
+          <%= f.label :done %>
+          <%= f.check_box :with_done %>
+          <%= f.label :never_viewed %>
+          <%= f.check_box :with_nv %>
         </div>
-      <% end %>
+        <div class="form-group chardin_box">
+          <%= f.submit %>
+          <%= link_to 'Clear Filters', runs_path %>
+        </div>
+      </div>
+    </div>
+    <% end %>
     <div id="results">
       <%= render :partial => 'runs/list', locals: { runs: @runs } %>
     </div>

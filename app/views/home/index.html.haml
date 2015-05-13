@@ -15,14 +15,12 @@
                   .panel.panel-default
                     .panel-heading
                       = notice.created_at
+                      = link_to home_path(notice), method: :delete do
+                        %span.glyphicon.glyphicon-remove.pull-right{"aria-hidden" => "true"}
                       %br/
                       = "Job: #{notice.run.name}"
                     .panel-body
                       = notice.title
-                    .panel-footer
-                      = link_to home_path(notice), method: :delete do
-                        %span.glyphicon.glyphicon-remove{"aria-hidden" => "true"}
-                        remove notice
     - if @runs
       .page-header
         %h3
@@ -37,6 +35,6 @@
                     .panel-heading
                       = run.created_at
                       %br/
-                      Job \#{run.name}
+                      = "Job: #{run.name}"
                     .panel-body
                       = run.name
