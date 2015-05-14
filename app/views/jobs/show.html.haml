@@ -1,17 +1,16 @@
 .container
   .well
-    %h1 Job Details
-    %hr
     .div.pull-right
-      = link_to 'Run', run_job_path(@job), class: "button add-spinner"
-      = link_to 'Run/options', "#modal", class: "button", "data-toggle": "modal"
-      = link_to 'Clone', clone_job_path(@job), class: "button"
+      = link_to 'Run', run_job_path(@job), class: "btn btn-primary btn-xs"
+      = link_to 'Options', "#modal", class: "btn btn-info btn-xs", "data-toggle": "modal"
+      = link_to 'Clone', clone_job_path(@job), class: "btn btn-warning btn-xs"
       - if @job.owner?(current_user)
-        = link_to 'Edit', edit_job_path(@job), class: "button"
-        = link_to 'Delete', @job, method: :delete, class: "button",
+        = link_to 'Edit', edit_job_path(@job), class: "btn btn-default btn-xs"
+        = link_to 'Delete', @job, method: :delete, class: "btn btn-danger btn-xs",
             data: { confirm: 'Are you sure?' }
     %br
-    %br
+    %h1 Job Details
+    %hr
     = bootstrap_form_for @job do |f|
       .row
         .col-md-3= f.text_field :name, disabled: 'true'
@@ -23,10 +22,11 @@
         .col-md-1= f.check_box :private, disabled: 'true'
         .col-md-1= f.check_box :notify, as: :boolean, disabled: 'true'
         .col-md-1= f.check_box :cache, as: :boolean, disabled: 'true'
-      .row
-        .col-md-12= f.text_area :description, disabled: 'true', rows: '4'
-      .row  
-        = form_for :job_items do | jobitem |
+        .col-md-8 
+          %h2 Command Group
+          %hr/  
+        .col-md-12= f.text_area :description, disabled: 'true', rows: '3'
+        = bootstrap_nested_form_for :job_items do | jobitem |
           = render 'show_item_fields', f: jobitem
-    = link_to 'Close', jobs_path, class: 'btn btn-default'
+    = link_to 'Close', jobs_path, class: 'btn btn-primary'
     = render 'runopts'

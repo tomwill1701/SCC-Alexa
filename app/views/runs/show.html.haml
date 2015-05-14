@@ -1,47 +1,49 @@
-.row
-  .col-md-6
+.container
+  .well
+    .row
+      .col-md-8
+        %h4
+          Run details for Job
+          = link_to @run.name, job_path(@run.job)
+          ran on #{@run.start}
+      .col-md-4
+        .pull-right
+          = link_to 'View', job_run_view_path(@run), class: "btn btn-primary btn-xs"
+          = link_to 'Edit', "#modal", class: "btn btn-default btn-xs", "data-toggle": "modal"
+          = link_to 'Rerun', run_path(@run), class: "btn btn-info btn-xs"
+          = link_to 'Delete', @run, method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }
     %h4
-      Run details for Job
-      = link_to @run.name, job_path(@run.job)
-      %br ran on #{@run.start}
-  .col-md-6
-    .pull-right
-      = link_to 'View', job_run_view_path(@run), class: "button"
-      = link_to 'Edit', "#modal", class: "button", "data-toggle": "modal"
-      = link_to 'Rerun', run_path(@run), class: "button"
-      = link_to 'Delete', @run, method: :delete, class: "button", data: { confirm: 'Are you sure?' }
-%h4
-  %dl.dl-horizontal
-    %dt Status
-    %dd #{@run.dstatus}
-    %dt Owner:
-    %dd #{@run.user.name}
-    %dt Group:
-    %dd #{@run.ugroup.name}
-    %dt Keep until:
-    %dd #{@run.delete_at.try(:strftime, '%b %d, %Y')}
-    %dt Notes:
-    %dd #{@run.note.gsub("\r",'<br>').html_safe}
-    %dt Log:
-    =render 'log'
-    =render partial: 'runs/commands'
-.modal.fade#modal
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %h4#modalLabel.modal-title Edit Run
-      .modal-body
-        = bootstrap_form_for @run do |f|
-          = f.collection_select :ugroup_id, current_user.ugroups, :id, :name,
-            label: "Group"
-          .row
-            .col-md-4
-              = f.number_field :keep_days, hide_label: true, append: "days",
-                class: "input-sm", placeholder: "keep run"
-          = f.text_area :note
-          .modal-footer
-            = f.submit "Cancel", class: "btn btn-default", "data-dismiss": "modal"
-            = f.submit "Save", class: "btn btn-primary"
+    %dl.dl-horizontal
+      %dt Status
+      %dd #{@run.dstatus}
+      %dt Owner:
+      %dd #{@run.user.name}
+      %dt Group:
+      %dd #{@run.ugroup.name}
+      %dt Keep until:
+      %dd #{@run.delete_at.try(:strftime, '%b %d, %Y')}
+      %dt Notes:
+      %dd #{@run.note.gsub("\r",'<br>').html_safe}
+      %dt Log:
+      =render 'log'
+  =render partial: 'runs/commands'
+  .modal.fade#modal
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %h4#modalLabel.modal-title Edit Run
+        .modal-body
+          = bootstrap_form_for @run do |f|
+            = f.collection_select :ugroup_id, current_user.ugroups, :id, :name,
+              label: "Group"
+            .row
+              .col-md-4
+                = f.number_field :keep_days, hide_label: true, append: "days",
+                  class: "input-sm", placeholder: "keep run"
+            = f.text_area :note
+            .modal-footer
+              = f.submit "Cancel", class: "btn btn-default", "data-dismiss": "modal"
+              = f.submit "Save", class: "btn btn-primary"
 
 :javascript
   function test(){ window.location.reload(true); }

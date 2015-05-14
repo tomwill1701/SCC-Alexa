@@ -1,8 +1,8 @@
 .col-md-3= f.collection_select :cgroup_id, Cgroup.all, :id, :name
-.col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name
+.col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name, prompt: ''
 .col-md-2= f.text_field :size
 .col-md-2= f.text_field :chart_title, label: 'Chart Title'
-.col-md-2= f.select :chart_type, [["Pie"], ["Bar"], ["Line"], ["Gauge"], ["Area"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Candle"], ["Bubble"], ["Column"], ["Combo"], ["Scatter"], ["Spark"]], { label: "Run Type" }, { class: "selectpicker" }
+.col-md-2= f.select :chart_type, [["Pie"], ["Bar"], ["Line"], ["Gauge"], ["Area"], ["Real-Time"], ["Real-Candle"], ["Bubble"], ["Column"], ["Combo"], ["Scatter"], ["Spark"]], { label: "Run Type" }, { class: "selectpicker" }
 .col-md-4= f.text_field :chart_x, label: 'Chart X'
 .col-md-4= f.text_field :chart_y, label: 'Chart Y'
 .col-md-4= f.text_field :chart_opt, label: 'Chart OPT'
