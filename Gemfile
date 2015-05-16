@@ -32,6 +32,7 @@ gem 'pry'
 gem "google_visualr", ">= 2.1"
 gem "delayed_job_web"
 gem 'carrierwave'
+gem "nested_form"
 #gem 'rack-mini-profiler'
 
 group :production do

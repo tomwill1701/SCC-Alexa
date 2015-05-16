@@ -1,0 +1,44 @@
+.container
+  .well
+    %h1 Job Selection
+    %hr/
+    %h4 Search options
+    = search_form_for @q do |f|
+      .row
+        .col-md-12
+          .form-group.chardin_box
+            = f.label :name
+            = f.search_field :name_cont
+            = f.label :description
+            = f.search_field :description_cont
+            = f.label :tag
+            = f.search_field :tags_cont
+          .form-group.chardin_box
+            = f.label :class
+            = f.select :cclass_eq, Job.order(:cclass).uniq.pluck(:cclass), include_blank: true
+            = f.label :type
+            = f.select :run_type_eq, Job.order(:run_type).uniq.pluck(:run_type), include_blank: true
+            = f.label :favorite
+            = f.check_box :with_favorite, {}, current_user.id
+            = f.label :private
+            = f.check_box :with_private, {}, current_user.id
+          .form-group.chardin_box
+            = f.submit class: 'btn btn-primary btn-xs'
+            = link_to 'Clear Filters', jobs_path, class: 'btn btn-default btn-xs'
+  .div.pull-right
+    = link_to 'New Job', new_job_path, class: "btn btn-primary"
+  %br/
+  %br/
+  - if @tabs
+    %ul#tabs.nav.nav-tabs{:role => "tablist"}
+      %li.active{:role => "presentation"}
+        = link_to "All", search_jobs_path(tab: "ALL"), {"aria-controls" => "home", :role => "tab", id: 'tab'}
+      - @tabs.each do |tab|
+        %li.active{:role => "presentation"}
+          = link_to tab, search_jobs_path(tab: tab), {"aria-controls" => "home", :role => "tab"}
+      :javascript
+        $(function () {
+          $('#myTab a:last').tab('show')
+        })
+  #results
+    = render partial: 'jobs/list', locals: { jobs: @jobs }

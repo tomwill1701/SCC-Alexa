@@ -1,12 +1,8 @@
-%br
-%br
 -if rc.run_views
-  %h6 View:
+  %h3 View:
 - rc.run_views.each do |rv|
   - if !rv.hide
-    %br
-    %br
     - if rv.file.present?
-      = link_to rv.name, rv.file.url
+      = link_to rv.name, rv.file.url, class: 'btn btn-primary btn-xs'
     -else
-      = link_to rv.name, run_view_path(rv)
+      = link_to rv.name, run_view_path(rv), class: 'btn btn-primary btn-xs'

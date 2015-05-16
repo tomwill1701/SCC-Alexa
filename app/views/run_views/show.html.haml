@@ -1,24 +1,26 @@
-.row
-  .col-md-8
-    %h3
-      Run view for Job
-      = link_to @run.name, job_path(@run.job)
-      %br at #{@run.start}
-  .col-md-12
-    .pull-right
-      = link_to 'Details', run_path(@run), class: "button"
-      = link_to 'Rerun', run_path(@run), class: "button"
-      = link_to 'Delete', @run, method: :delete, class: "button", data: { confirm: 'Are you sure?' }
-- @rv.each do |rv|
-  - if !rv.hide
-    - rv.attr
-    - if rv.vtype == 'chart'
-      = render :partial => 'run_views/chart', locals: { rv: rv }
-    - elsif rv.vtype == "grid"
-      = render :partial => 'run_views/grid', locals: { rv: rv }
-    - elsif rv.vtype == 'text'
-      = render :partial => 'run_views/text', locals: { rv: rv }
-    - elsif rv.vtype == 'file'
-      = render :partial => 'run_views/file', locals: { rv: rv }
-    %br
-    %br
+.container
+  .well
+    .row
+      .col-md-8
+        %h4
+          Run view for Job
+          = link_to @run.name, job_path(@run.job)
+          at #{@run.start}
+      .col-md-4
+        .pull-right
+          = link_to 'Details', run_path(@run), class: "btn btn-primary btn-xs"
+          = link_to 'Rerun', run_path(@run), class: "btn btn-default btn-xs"
+          = link_to 'Delete', @run, method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }
+    - @rv.each do |rv|
+      - if !rv.hide
+        - rv.attr
+        - if rv.vtype == 'chart'
+          = render :partial => 'run_views/chart', locals: { rv: rv }
+        - elsif rv.vtype == "grid"
+          = render :partial => 'run_views/grid', locals: { rv: rv }
+        - elsif rv.vtype == 'text'
+          = render :partial => 'run_views/text', locals: { rv: rv }
+        - elsif rv.vtype == 'file'
+          = render :partial => 'run_views/file', locals: { rv: rv }
+        %br
+        %br

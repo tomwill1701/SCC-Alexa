@@ -1,11 +1,8 @@
-%h2 Command Group
-.row
-  .col-md-3= f.collection_select :cgroup_id, Cgroup.all, :id, :name, disabled: 'true'
-  .col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name, disabled: 'true'
-  .col-md-2= f.text_field :size, disabled: 'true'
-  .col-md-2= f.text_field :chart_title, label: 'Chart Title', disabled: 'true'
-  .col-md-2= f.select :chart_type, [["Pie"], ["Bar"], ["Line"], ["Gauge"], ["Area"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Candle"], ["Bubble"], ["Column"], ["Combo"], ["Scatter"], ["Spark"]], { label: "Run Type" }, { class: "selectpicker" , disabled: 'true'}
-.row
-  .col-md-4= f.text_field :chart_x, label: 'Chart X', disabled: 'true'
-  .col-md-4= f.text_field :chart_y, label: 'Chart Y', disabled: 'true'
-  .col-md-4= f.text_field :chart_opt, label: 'Chart OPT', disabled: 'true'
+.col-md-3= f.collection_select :cgroup_id, Cgroup.all, :id, :name, :disabled => 'true' 
+.col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name, disabled: 'true'
+.col-md-2= f.text_field :size, disabled: 'true'
+.col-md-2= f.text_field :chart_title, label: 'Chart Title', disabled: 'true'
+.col-md-2= f.select :chart_type, [["Pie"], ["Bar"], ["Line"], ["Gauge"], ["Area"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Time"], ["Real-Candle"], ["Bubble"], ["Column"], ["Combo"], ["Scatter"], ["Spark"]], { label: "Run Type" }, { class: "selectpicker" , disabled: 'true'}
+.col-md-4= f.text_field :chart_x, label: 'Chart X', disabled: 'true'
+.col-md-4= f.text_field :chart_y, label: 'Chart Y', disabled: 'true'
+.col-md-4= f.text_field :chart_opt, label: 'Chart OPT', disabled: 'true'
