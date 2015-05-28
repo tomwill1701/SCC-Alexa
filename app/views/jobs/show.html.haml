@@ -11,7 +11,7 @@
     %br
     %h1 Job Details
     %hr
-    = bootstrap_form_for @job do |f|
+    = bootstrap_nested_form_for @job do |f|
       .row
         .col-md-3= f.text_field :name, disabled: 'true'
         .col-md-3= f.text_field :jtype, label: "Tab", disabled: 'true'
@@ -22,11 +22,13 @@
         .col-md-1= f.check_box :private, disabled: 'true'
         .col-md-1= f.check_box :notify, as: :boolean, disabled: 'true'
         .col-md-1= f.check_box :cache, as: :boolean, disabled: 'true'
-        .col-md-8 
-          %h2 Command Group
-          %hr/  
-        .col-md-12= f.text_area :description, disabled: 'true', rows: '3'
-        = bootstrap_nested_form_for :job_items do | jobitem |
-          = render 'show_item_fields', f: jobitem
+        .col-md-8
+          %hr/
+          .col-md-12= f.text_area :description, disabled: 'true', rows: '3'
+        .col-md-8
+          %h2 Command Groups
+          %hr/
+          = f.fields_for :job_items do | jobitem |
+            = render 'show_item_fields', f: jobitem
     = link_to 'Close', jobs_path, class: 'btn btn-primary'
     = render 'runopts'

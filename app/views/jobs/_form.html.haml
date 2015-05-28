@@ -1,4 +1,4 @@
-= bootstrap_form_for @job do |f|
+= bootstrap_nested_form_for @job do |f|
   .row
     .col-md-3= f.text_field :name
     .col-md-3= f.text_field :jtype, label: "Tab"
@@ -14,9 +14,12 @@
     = f.hidden_field :owner_id, value: @job.owner_id
   .row
     .col-md-12
-      %h2 Command Group
-      %hr 
-  .row 
+      %h2 Command Groups
+      %hr
+  .row
+    = f.fields_for :job_items do | jobitem |
+      = render 'job_item_fields', f: jobitem
+  .row
     %br/
     .col-md-3= link_to_add_association 'add item', f, :job_items, class: "btn btn-primary"
     %br/

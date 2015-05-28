@@ -1,10 +1,14 @@
-.col-md-3= f.collection_select :cgroup_id, Cgroup.all, :id, :name
-.col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name, prompt: ''
-.col-md-2= f.text_field :size
-.col-md-2= f.text_field :chart_title, label: 'Chart Title'
-.col-md-2= f.select :chart_type, [["Pie"], ["Bar"], ["Line"], ["Gauge"], ["Area"], ["Real-Time"], ["Real-Candle"], ["Bubble"], ["Column"], ["Combo"], ["Scatter"], ["Spark"]], { label: "Run Type" }, { class: "selectpicker" }
-.col-md-4= f.text_field :chart_x, label: 'Chart X'
-.col-md-4= f.text_field :chart_y, label: 'Chart Y'
-.col-md-4= f.text_field :chart_opt, label: 'Chart OPT'
-/ This for some reason breaks the app... must be a cocoon error?
-/ = link_to_remove_association "remove item", f, :job_items, class: "button"
+.nested-fields
+  .row
+    .col-md-9= f.collection_select :cgroup_id, Cgroup.all, :id, :name, { label: "Command" }
+    .col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name, { label: "LPAR", include_blank: true }
+  .row
+    .col-md-2= f.select :chart_type, %w{Pie Bar Line Gauge Area Real-Candle Bubble Column Combo Scatter Spark},
+          include_blank: true
+    .col-md-2= f.text_field :size
+    .col-md-8= f.text_field :chart_title, label: 'Chart Title'
+  .row
+    .col-md-4= f.text_field :chart_x, label: 'Chart X'
+    .col-md-4= f.text_field :chart_y, label: 'Chart Y'
+    .col-md-4= f.text_field :chart_opt, label: 'Chart OPT'
+  = link_to_remove_association "remove item", f, class: "btn"
