@@ -1,0 +1,2615 @@
+.hidden {
+	display: none;
+}
+
+.alert.alert-error > ul.error-list {
+  margin-bottom: 0px;
+}
+/*!
+ * Datepicker for Bootstrap v1.4.0 (https://github.com/eternicode/bootstrap-datepicker)
+ *
+ * Copyright 2012 Stefan Petre
+ * Improvements by Andrew Rowls
+ * Licensed under the Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+ */
+
+.datepicker {
+  padding: 4px;
+  border-radius: 4px;
+  direction: ltr;
+}
+.datepicker-inline {
+  width: 220px;
+}
+.datepicker.datepicker-rtl {
+  direction: rtl;
+}
+.datepicker.datepicker-rtl table tr td span {
+  float: right;
+}
+.datepicker-dropdown {
+  top: 0;
+  left: 0;
+}
+.datepicker-dropdown:before {
+  content: '';
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-top: 0;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+}
+.datepicker-dropdown:after {
+  content: '';
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #fff;
+  border-top: 0;
+  position: absolute;
+}
+.datepicker-dropdown.datepicker-orient-left:before {
+  left: 6px;
+}
+.datepicker-dropdown.datepicker-orient-left:after {
+  left: 7px;
+}
+.datepicker-dropdown.datepicker-orient-right:before {
+  right: 6px;
+}
+.datepicker-dropdown.datepicker-orient-right:after {
+  right: 7px;
+}
+.datepicker-dropdown.datepicker-orient-top:before {
+  top: -7px;
+}
+.datepicker-dropdown.datepicker-orient-top:after {
+  top: -6px;
+}
+.datepicker-dropdown.datepicker-orient-bottom:before {
+  bottom: -7px;
+  border-bottom: 0;
+  border-top: 7px solid #999;
+}
+.datepicker-dropdown.datepicker-orient-bottom:after {
+  bottom: -6px;
+  border-bottom: 0;
+  border-top: 6px solid #fff;
+}
+.datepicker > div {
+  display: none;
+}
+.datepicker.days .datepicker-days,
+.datepicker.months .datepicker-months,
+.datepicker.years .datepicker-years {
+  display: block;
+}
+.datepicker table {
+  margin: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.datepicker table tr td,
+.datepicker table tr th {
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  border: none;
+}
+.table-striped .datepicker table tr td,
+.table-striped .datepicker table tr th {
+  background-color: transparent;
+}
+.datepicker table tr td.day:hover,
+.datepicker table tr td.day.focused {
+  background: #eeeeee;
+  cursor: pointer;
+}
+.datepicker table tr td.old,
+.datepicker table tr td.new {
+  color: #999999;
+}
+.datepicker table tr td.disabled,
+.datepicker table tr td.disabled:hover {
+  background: none;
+  color: #999999;
+  cursor: default;
+}
+.datepicker table tr td.today,
+.datepicker table tr td.today:hover,
+.datepicker table tr td.today.disabled,
+.datepicker table tr td.today.disabled:hover {
+  color: #000000;
+  background-color: #ffdb99;
+  border-color: #ffb733;
+}
+.datepicker table tr td.today:hover,
+.datepicker table tr td.today:hover:hover,
+.datepicker table tr td.today.disabled:hover,
+.datepicker table tr td.today.disabled:hover:hover,
+.datepicker table tr td.today:focus,
+.datepicker table tr td.today:hover:focus,
+.datepicker table tr td.today.disabled:focus,
+.datepicker table tr td.today.disabled:hover:focus,
+.datepicker table tr td.today:active,
+.datepicker table tr td.today:hover:active,
+.datepicker table tr td.today.disabled:active,
+.datepicker table tr td.today.disabled:hover:active,
+.datepicker table tr td.today.active,
+.datepicker table tr td.today:hover.active,
+.datepicker table tr td.today.disabled.active,
+.datepicker table tr td.today.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.today,
+.open .dropdown-toggle.datepicker table tr td.today:hover,
+.open .dropdown-toggle.datepicker table tr td.today.disabled,
+.open .dropdown-toggle.datepicker table tr td.today.disabled:hover {
+  color: #000000;
+  background-color: #ffcd70;
+  border-color: #f59e00;
+}
+.datepicker table tr td.today:active,
+.datepicker table tr td.today:hover:active,
+.datepicker table tr td.today.disabled:active,
+.datepicker table tr td.today.disabled:hover:active,
+.datepicker table tr td.today.active,
+.datepicker table tr td.today:hover.active,
+.datepicker table tr td.today.disabled.active,
+.datepicker table tr td.today.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.today,
+.open .dropdown-toggle.datepicker table tr td.today:hover,
+.open .dropdown-toggle.datepicker table tr td.today.disabled,
+.open .dropdown-toggle.datepicker table tr td.today.disabled:hover {
+  background-image: none;
+}
+.datepicker table tr td.today.disabled,
+.datepicker table tr td.today:hover.disabled,
+.datepicker table tr td.today.disabled.disabled,
+.datepicker table tr td.today.disabled:hover.disabled,
+.datepicker table tr td.today[disabled],
+.datepicker table tr td.today:hover[disabled],
+.datepicker table tr td.today.disabled[disabled],
+.datepicker table tr td.today.disabled:hover[disabled],
+fieldset[disabled] .datepicker table tr td.today,
+fieldset[disabled] .datepicker table tr td.today:hover,
+fieldset[disabled] .datepicker table tr td.today.disabled,
+fieldset[disabled] .datepicker table tr td.today.disabled:hover,
+.datepicker table tr td.today.disabled:hover,
+.datepicker table tr td.today:hover.disabled:hover,
+.datepicker table tr td.today.disabled.disabled:hover,
+.datepicker table tr td.today.disabled:hover.disabled:hover,
+.datepicker table tr td.today[disabled]:hover,
+.datepicker table tr td.today:hover[disabled]:hover,
+.datepicker table tr td.today.disabled[disabled]:hover,
+.datepicker table tr td.today.disabled:hover[disabled]:hover,
+fieldset[disabled] .datepicker table tr td.today:hover,
+fieldset[disabled] .datepicker table tr td.today:hover:hover,
+fieldset[disabled] .datepicker table tr td.today.disabled:hover,
+fieldset[disabled] .datepicker table tr td.today.disabled:hover:hover,
+.datepicker table tr td.today.disabled:focus,
+.datepicker table tr td.today:hover.disabled:focus,
+.datepicker table tr td.today.disabled.disabled:focus,
+.datepicker table tr td.today.disabled:hover.disabled:focus,
+.datepicker table tr td.today[disabled]:focus,
+.datepicker table tr td.today:hover[disabled]:focus,
+.datepicker table tr td.today.disabled[disabled]:focus,
+.datepicker table tr td.today.disabled:hover[disabled]:focus,
+fieldset[disabled] .datepicker table tr td.today:focus,
+fieldset[disabled] .datepicker table tr td.today:hover:focus,
+fieldset[disabled] .datepicker table tr td.today.disabled:focus,
+fieldset[disabled] .datepicker table tr td.today.disabled:hover:focus,
+.datepicker table tr td.today.disabled:active,
+.datepicker table tr td.today:hover.disabled:active,
+.datepicker table tr td.today.disabled.disabled:active,
+.datepicker table tr td.today.disabled:hover.disabled:active,
+.datepicker table tr td.today[disabled]:active,
+.datepicker table tr td.today:hover[disabled]:active,
+.datepicker table tr td.today.disabled[disabled]:active,
+.datepicker table tr td.today.disabled:hover[disabled]:active,
+fieldset[disabled] .datepicker table tr td.today:active,
+fieldset[disabled] .datepicker table tr td.today:hover:active,
+fieldset[disabled] .datepicker table tr td.today.disabled:active,
+fieldset[disabled] .datepicker table tr td.today.disabled:hover:active,
+.datepicker table tr td.today.disabled.active,
+.datepicker table tr td.today:hover.disabled.active,
+.datepicker table tr td.today.disabled.disabled.active,
+.datepicker table tr td.today.disabled:hover.disabled.active,
+.datepicker table tr td.today[disabled].active,
+.datepicker table tr td.today:hover[disabled].active,
+.datepicker table tr td.today.disabled[disabled].active,
+.datepicker table tr td.today.disabled:hover[disabled].active,
+fieldset[disabled] .datepicker table tr td.today.active,
+fieldset[disabled] .datepicker table tr td.today:hover.active,
+fieldset[disabled] .datepicker table tr td.today.disabled.active,
+fieldset[disabled] .datepicker table tr td.today.disabled:hover.active {
+  background-color: #ffdb99;
+  border-color: #ffb733;
+}
+.datepicker table tr td.today:hover:hover {
+  color: #000;
+}
+.datepicker table tr td.today.active:hover {
+  color: #fff;
+}
+.datepicker table tr td.range,
+.datepicker table tr td.range:hover,
+.datepicker table tr td.range.disabled,
+.datepicker table tr td.range.disabled:hover {
+  background: #eeeeee;
+  border-radius: 0;
+}
+.datepicker table tr td.range.today,
+.datepicker table tr td.range.today:hover,
+.datepicker table tr td.range.today.disabled,
+.datepicker table tr td.range.today.disabled:hover {
+  color: #000000;
+  background-color: #f7ca77;
+  border-color: #f1a417;
+  border-radius: 0;
+}
+.datepicker table tr td.range.today:hover,
+.datepicker table tr td.range.today:hover:hover,
+.datepicker table tr td.range.today.disabled:hover,
+.datepicker table tr td.range.today.disabled:hover:hover,
+.datepicker table tr td.range.today:focus,
+.datepicker table tr td.range.today:hover:focus,
+.datepicker table tr td.range.today.disabled:focus,
+.datepicker table tr td.range.today.disabled:hover:focus,
+.datepicker table tr td.range.today:active,
+.datepicker table tr td.range.today:hover:active,
+.datepicker table tr td.range.today.disabled:active,
+.datepicker table tr td.range.today.disabled:hover:active,
+.datepicker table tr td.range.today.active,
+.datepicker table tr td.range.today:hover.active,
+.datepicker table tr td.range.today.disabled.active,
+.datepicker table tr td.range.today.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.range.today,
+.open .dropdown-toggle.datepicker table tr td.range.today:hover,
+.open .dropdown-toggle.datepicker table tr td.range.today.disabled,
+.open .dropdown-toggle.datepicker table tr td.range.today.disabled:hover {
+  color: #000000;
+  background-color: #f4bb51;
+  border-color: #bf800c;
+}
+.datepicker table tr td.range.today:active,
+.datepicker table tr td.range.today:hover:active,
+.datepicker table tr td.range.today.disabled:active,
+.datepicker table tr td.range.today.disabled:hover:active,
+.datepicker table tr td.range.today.active,
+.datepicker table tr td.range.today:hover.active,
+.datepicker table tr td.range.today.disabled.active,
+.datepicker table tr td.range.today.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.range.today,
+.open .dropdown-toggle.datepicker table tr td.range.today:hover,
+.open .dropdown-toggle.datepicker table tr td.range.today.disabled,
+.open .dropdown-toggle.datepicker table tr td.range.today.disabled:hover {
+  background-image: none;
+}
+.datepicker table tr td.range.today.disabled,
+.datepicker table tr td.range.today:hover.disabled,
+.datepicker table tr td.range.today.disabled.disabled,
+.datepicker table tr td.range.today.disabled:hover.disabled,
+.datepicker table tr td.range.today[disabled],
+.datepicker table tr td.range.today:hover[disabled],
+.datepicker table tr td.range.today.disabled[disabled],
+.datepicker table tr td.range.today.disabled:hover[disabled],
+fieldset[disabled] .datepicker table tr td.range.today,
+fieldset[disabled] .datepicker table tr td.range.today:hover,
+fieldset[disabled] .datepicker table tr td.range.today.disabled,
+fieldset[disabled] .datepicker table tr td.range.today.disabled:hover,
+.datepicker table tr td.range.today.disabled:hover,
+.datepicker table tr td.range.today:hover.disabled:hover,
+.datepicker table tr td.range.today.disabled.disabled:hover,
+.datepicker table tr td.range.today.disabled:hover.disabled:hover,
+.datepicker table tr td.range.today[disabled]:hover,
+.datepicker table tr td.range.today:hover[disabled]:hover,
+.datepicker table tr td.range.today.disabled[disabled]:hover,
+.datepicker table tr td.range.today.disabled:hover[disabled]:hover,
+fieldset[disabled] .datepicker table tr td.range.today:hover,
+fieldset[disabled] .datepicker table tr td.range.today:hover:hover,
+fieldset[disabled] .datepicker table tr td.range.today.disabled:hover,
+fieldset[disabled] .datepicker table tr td.range.today.disabled:hover:hover,
+.datepicker table tr td.range.today.disabled:focus,
+.datepicker table tr td.range.today:hover.disabled:focus,
+.datepicker table tr td.range.today.disabled.disabled:focus,
+.datepicker table tr td.range.today.disabled:hover.disabled:focus,
+.datepicker table tr td.range.today[disabled]:focus,
+.datepicker table tr td.range.today:hover[disabled]:focus,
+.datepicker table tr td.range.today.disabled[disabled]:focus,
+.datepicker table tr td.range.today.disabled:hover[disabled]:focus,
+fieldset[disabled] .datepicker table tr td.range.today:focus,
+fieldset[disabled] .datepicker table tr td.range.today:hover:focus,
+fieldset[disabled] .datepicker table tr td.range.today.disabled:focus,
+fieldset[disabled] .datepicker table tr td.range.today.disabled:hover:focus,
+.datepicker table tr td.range.today.disabled:active,
+.datepicker table tr td.range.today:hover.disabled:active,
+.datepicker table tr td.range.today.disabled.disabled:active,
+.datepicker table tr td.range.today.disabled:hover.disabled:active,
+.datepicker table tr td.range.today[disabled]:active,
+.datepicker table tr td.range.today:hover[disabled]:active,
+.datepicker table tr td.range.today.disabled[disabled]:active,
+.datepicker table tr td.range.today.disabled:hover[disabled]:active,
+fieldset[disabled] .datepicker table tr td.range.today:active,
+fieldset[disabled] .datepicker table tr td.range.today:hover:active,
+fieldset[disabled] .datepicker table tr td.range.today.disabled:active,
+fieldset[disabled] .datepicker table tr td.range.today.disabled:hover:active,
+.datepicker table tr td.range.today.disabled.active,
+.datepicker table tr td.range.today:hover.disabled.active,
+.datepicker table tr td.range.today.disabled.disabled.active,
+.datepicker table tr td.range.today.disabled:hover.disabled.active,
+.datepicker table tr td.range.today[disabled].active,
+.datepicker table tr td.range.today:hover[disabled].active,
+.datepicker table tr td.range.today.disabled[disabled].active,
+.datepicker table tr td.range.today.disabled:hover[disabled].active,
+fieldset[disabled] .datepicker table tr td.range.today.active,
+fieldset[disabled] .datepicker table tr td.range.today:hover.active,
+fieldset[disabled] .datepicker table tr td.range.today.disabled.active,
+fieldset[disabled] .datepicker table tr td.range.today.disabled:hover.active {
+  background-color: #f7ca77;
+  border-color: #f1a417;
+}
+.datepicker table tr td.selected,
+.datepicker table tr td.selected:hover,
+.datepicker table tr td.selected.disabled,
+.datepicker table tr td.selected.disabled:hover {
+  color: #ffffff;
+  background-color: #999999;
+  border-color: #555555;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.datepicker table tr td.selected:hover,
+.datepicker table tr td.selected:hover:hover,
+.datepicker table tr td.selected.disabled:hover,
+.datepicker table tr td.selected.disabled:hover:hover,
+.datepicker table tr td.selected:focus,
+.datepicker table tr td.selected:hover:focus,
+.datepicker table tr td.selected.disabled:focus,
+.datepicker table tr td.selected.disabled:hover:focus,
+.datepicker table tr td.selected:active,
+.datepicker table tr td.selected:hover:active,
+.datepicker table tr td.selected.disabled:active,
+.datepicker table tr td.selected.disabled:hover:active,
+.datepicker table tr td.selected.active,
+.datepicker table tr td.selected:hover.active,
+.datepicker table tr td.selected.disabled.active,
+.datepicker table tr td.selected.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.selected,
+.open .dropdown-toggle.datepicker table tr td.selected:hover,
+.open .dropdown-toggle.datepicker table tr td.selected.disabled,
+.open .dropdown-toggle.datepicker table tr td.selected.disabled:hover {
+  color: #ffffff;
+  background-color: #858585;
+  border-color: #373737;
+}
+.datepicker table tr td.selected:active,
+.datepicker table tr td.selected:hover:active,
+.datepicker table tr td.selected.disabled:active,
+.datepicker table tr td.selected.disabled:hover:active,
+.datepicker table tr td.selected.active,
+.datepicker table tr td.selected:hover.active,
+.datepicker table tr td.selected.disabled.active,
+.datepicker table tr td.selected.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.selected,
+.open .dropdown-toggle.datepicker table tr td.selected:hover,
+.open .dropdown-toggle.datepicker table tr td.selected.disabled,
+.open .dropdown-toggle.datepicker table tr td.selected.disabled:hover {
+  background-image: none;
+}
+.datepicker table tr td.selected.disabled,
+.datepicker table tr td.selected:hover.disabled,
+.datepicker table tr td.selected.disabled.disabled,
+.datepicker table tr td.selected.disabled:hover.disabled,
+.datepicker table tr td.selected[disabled],
+.datepicker table tr td.selected:hover[disabled],
+.datepicker table tr td.selected.disabled[disabled],
+.datepicker table tr td.selected.disabled:hover[disabled],
+fieldset[disabled] .datepicker table tr td.selected,
+fieldset[disabled] .datepicker table tr td.selected:hover,
+fieldset[disabled] .datepicker table tr td.selected.disabled,
+fieldset[disabled] .datepicker table tr td.selected.disabled:hover,
+.datepicker table tr td.selected.disabled:hover,
+.datepicker table tr td.selected:hover.disabled:hover,
+.datepicker table tr td.selected.disabled.disabled:hover,
+.datepicker table tr td.selected.disabled:hover.disabled:hover,
+.datepicker table tr td.selected[disabled]:hover,
+.datepicker table tr td.selected:hover[disabled]:hover,
+.datepicker table tr td.selected.disabled[disabled]:hover,
+.datepicker table tr td.selected.disabled:hover[disabled]:hover,
+fieldset[disabled] .datepicker table tr td.selected:hover,
+fieldset[disabled] .datepicker table tr td.selected:hover:hover,
+fieldset[disabled] .datepicker table tr td.selected.disabled:hover,
+fieldset[disabled] .datepicker table tr td.selected.disabled:hover:hover,
+.datepicker table tr td.selected.disabled:focus,
+.datepicker table tr td.selected:hover.disabled:focus,
+.datepicker table tr td.selected.disabled.disabled:focus,
+.datepicker table tr td.selected.disabled:hover.disabled:focus,
+.datepicker table tr td.selected[disabled]:focus,
+.datepicker table tr td.selected:hover[disabled]:focus,
+.datepicker table tr td.selected.disabled[disabled]:focus,
+.datepicker table tr td.selected.disabled:hover[disabled]:focus,
+fieldset[disabled] .datepicker table tr td.selected:focus,
+fieldset[disabled] .datepicker table tr td.selected:hover:focus,
+fieldset[disabled] .datepicker table tr td.selected.disabled:focus,
+fieldset[disabled] .datepicker table tr td.selected.disabled:hover:focus,
+.datepicker table tr td.selected.disabled:active,
+.datepicker table tr td.selected:hover.disabled:active,
+.datepicker table tr td.selected.disabled.disabled:active,
+.datepicker table tr td.selected.disabled:hover.disabled:active,
+.datepicker table tr td.selected[disabled]:active,
+.datepicker table tr td.selected:hover[disabled]:active,
+.datepicker table tr td.selected.disabled[disabled]:active,
+.datepicker table tr td.selected.disabled:hover[disabled]:active,
+fieldset[disabled] .datepicker table tr td.selected:active,
+fieldset[disabled] .datepicker table tr td.selected:hover:active,
+fieldset[disabled] .datepicker table tr td.selected.disabled:active,
+fieldset[disabled] .datepicker table tr td.selected.disabled:hover:active,
+.datepicker table tr td.selected.disabled.active,
+.datepicker table tr td.selected:hover.disabled.active,
+.datepicker table tr td.selected.disabled.disabled.active,
+.datepicker table tr td.selected.disabled:hover.disabled.active,
+.datepicker table tr td.selected[disabled].active,
+.datepicker table tr td.selected:hover[disabled].active,
+.datepicker table tr td.selected.disabled[disabled].active,
+.datepicker table tr td.selected.disabled:hover[disabled].active,
+fieldset[disabled] .datepicker table tr td.selected.active,
+fieldset[disabled] .datepicker table tr td.selected:hover.active,
+fieldset[disabled] .datepicker table tr td.selected.disabled.active,
+fieldset[disabled] .datepicker table tr td.selected.disabled:hover.active {
+  background-color: #999999;
+  border-color: #555555;
+}
+.datepicker table tr td.active,
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active.disabled:hover {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #357ebd;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active:hover:hover,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active.disabled:hover:hover,
+.datepicker table tr td.active:focus,
+.datepicker table tr td.active:hover:focus,
+.datepicker table tr td.active.disabled:focus,
+.datepicker table tr td.active.disabled:hover:focus,
+.datepicker table tr td.active:active,
+.datepicker table tr td.active:hover:active,
+.datepicker table tr td.active.disabled:active,
+.datepicker table tr td.active.disabled:hover:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active:hover.active,
+.datepicker table tr td.active.disabled.active,
+.datepicker table tr td.active.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.active,
+.open .dropdown-toggle.datepicker table tr td.active:hover,
+.open .dropdown-toggle.datepicker table tr td.active.disabled,
+.open .dropdown-toggle.datepicker table tr td.active.disabled:hover {
+  color: #ffffff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+.datepicker table tr td.active:active,
+.datepicker table tr td.active:hover:active,
+.datepicker table tr td.active.disabled:active,
+.datepicker table tr td.active.disabled:hover:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active:hover.active,
+.datepicker table tr td.active.disabled.active,
+.datepicker table tr td.active.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td.active,
+.open .dropdown-toggle.datepicker table tr td.active:hover,
+.open .dropdown-toggle.datepicker table tr td.active.disabled,
+.open .dropdown-toggle.datepicker table tr td.active.disabled:hover {
+  background-image: none;
+}
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active:hover.disabled,
+.datepicker table tr td.active.disabled.disabled,
+.datepicker table tr td.active.disabled:hover.disabled,
+.datepicker table tr td.active[disabled],
+.datepicker table tr td.active:hover[disabled],
+.datepicker table tr td.active.disabled[disabled],
+.datepicker table tr td.active.disabled:hover[disabled],
+fieldset[disabled] .datepicker table tr td.active,
+fieldset[disabled] .datepicker table tr td.active:hover,
+fieldset[disabled] .datepicker table tr td.active.disabled,
+fieldset[disabled] .datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active:hover.disabled:hover,
+.datepicker table tr td.active.disabled.disabled:hover,
+.datepicker table tr td.active.disabled:hover.disabled:hover,
+.datepicker table tr td.active[disabled]:hover,
+.datepicker table tr td.active:hover[disabled]:hover,
+.datepicker table tr td.active.disabled[disabled]:hover,
+.datepicker table tr td.active.disabled:hover[disabled]:hover,
+fieldset[disabled] .datepicker table tr td.active:hover,
+fieldset[disabled] .datepicker table tr td.active:hover:hover,
+fieldset[disabled] .datepicker table tr td.active.disabled:hover,
+fieldset[disabled] .datepicker table tr td.active.disabled:hover:hover,
+.datepicker table tr td.active.disabled:focus,
+.datepicker table tr td.active:hover.disabled:focus,
+.datepicker table tr td.active.disabled.disabled:focus,
+.datepicker table tr td.active.disabled:hover.disabled:focus,
+.datepicker table tr td.active[disabled]:focus,
+.datepicker table tr td.active:hover[disabled]:focus,
+.datepicker table tr td.active.disabled[disabled]:focus,
+.datepicker table tr td.active.disabled:hover[disabled]:focus,
+fieldset[disabled] .datepicker table tr td.active:focus,
+fieldset[disabled] .datepicker table tr td.active:hover:focus,
+fieldset[disabled] .datepicker table tr td.active.disabled:focus,
+fieldset[disabled] .datepicker table tr td.active.disabled:hover:focus,
+.datepicker table tr td.active.disabled:active,
+.datepicker table tr td.active:hover.disabled:active,
+.datepicker table tr td.active.disabled.disabled:active,
+.datepicker table tr td.active.disabled:hover.disabled:active,
+.datepicker table tr td.active[disabled]:active,
+.datepicker table tr td.active:hover[disabled]:active,
+.datepicker table tr td.active.disabled[disabled]:active,
+.datepicker table tr td.active.disabled:hover[disabled]:active,
+fieldset[disabled] .datepicker table tr td.active:active,
+fieldset[disabled] .datepicker table tr td.active:hover:active,
+fieldset[disabled] .datepicker table tr td.active.disabled:active,
+fieldset[disabled] .datepicker table tr td.active.disabled:hover:active,
+.datepicker table tr td.active.disabled.active,
+.datepicker table tr td.active:hover.disabled.active,
+.datepicker table tr td.active.disabled.disabled.active,
+.datepicker table tr td.active.disabled:hover.disabled.active,
+.datepicker table tr td.active[disabled].active,
+.datepicker table tr td.active:hover[disabled].active,
+.datepicker table tr td.active.disabled[disabled].active,
+.datepicker table tr td.active.disabled:hover[disabled].active,
+fieldset[disabled] .datepicker table tr td.active.active,
+fieldset[disabled] .datepicker table tr td.active:hover.active,
+fieldset[disabled] .datepicker table tr td.active.disabled.active,
+fieldset[disabled] .datepicker table tr td.active.disabled:hover.active {
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.datepicker table tr td span {
+  display: block;
+  width: 23%;
+  height: 54px;
+  line-height: 54px;
+  float: left;
+  margin: 1%;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.datepicker table tr td span:hover {
+  background: #eeeeee;
+}
+.datepicker table tr td span.disabled,
+.datepicker table tr td span.disabled:hover {
+  background: none;
+  color: #999999;
+  cursor: default;
+}
+.datepicker table tr td span.active,
+.datepicker table tr td span.active:hover,
+.datepicker table tr td span.active.disabled,
+.datepicker table tr td span.active.disabled:hover {
+  color: #ffffff;
+  background-color: #428bca;
+  border-color: #357ebd;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.datepicker table tr td span.active:hover,
+.datepicker table tr td span.active:hover:hover,
+.datepicker table tr td span.active.disabled:hover,
+.datepicker table tr td span.active.disabled:hover:hover,
+.datepicker table tr td span.active:focus,
+.datepicker table tr td span.active:hover:focus,
+.datepicker table tr td span.active.disabled:focus,
+.datepicker table tr td span.active.disabled:hover:focus,
+.datepicker table tr td span.active:active,
+.datepicker table tr td span.active:hover:active,
+.datepicker table tr td span.active.disabled:active,
+.datepicker table tr td span.active.disabled:hover:active,
+.datepicker table tr td span.active.active,
+.datepicker table tr td span.active:hover.active,
+.datepicker table tr td span.active.disabled.active,
+.datepicker table tr td span.active.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td span.active,
+.open .dropdown-toggle.datepicker table tr td span.active:hover,
+.open .dropdown-toggle.datepicker table tr td span.active.disabled,
+.open .dropdown-toggle.datepicker table tr td span.active.disabled:hover {
+  color: #ffffff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+.datepicker table tr td span.active:active,
+.datepicker table tr td span.active:hover:active,
+.datepicker table tr td span.active.disabled:active,
+.datepicker table tr td span.active.disabled:hover:active,
+.datepicker table tr td span.active.active,
+.datepicker table tr td span.active:hover.active,
+.datepicker table tr td span.active.disabled.active,
+.datepicker table tr td span.active.disabled:hover.active,
+.open .dropdown-toggle.datepicker table tr td span.active,
+.open .dropdown-toggle.datepicker table tr td span.active:hover,
+.open .dropdown-toggle.datepicker table tr td span.active.disabled,
+.open .dropdown-toggle.datepicker table tr td span.active.disabled:hover {
+  background-image: none;
+}
+.datepicker table tr td span.active.disabled,
+.datepicker table tr td span.active:hover.disabled,
+.datepicker table tr td span.active.disabled.disabled,
+.datepicker table tr td span.active.disabled:hover.disabled,
+.datepicker table tr td span.active[disabled],
+.datepicker table tr td span.active:hover[disabled],
+.datepicker table tr td span.active.disabled[disabled],
+.datepicker table tr td span.active.disabled:hover[disabled],
+fieldset[disabled] .datepicker table tr td span.active,
+fieldset[disabled] .datepicker table tr td span.active:hover,
+fieldset[disabled] .datepicker table tr td span.active.disabled,
+fieldset[disabled] .datepicker table tr td span.active.disabled:hover,
+.datepicker table tr td span.active.disabled:hover,
+.datepicker table tr td span.active:hover.disabled:hover,
+.datepicker table tr td span.active.disabled.disabled:hover,
+.datepicker table tr td span.active.disabled:hover.disabled:hover,
+.datepicker table tr td span.active[disabled]:hover,
+.datepicker table tr td span.active:hover[disabled]:hover,
+.datepicker table tr td span.active.disabled[disabled]:hover,
+.datepicker table tr td span.active.disabled:hover[disabled]:hover,
+fieldset[disabled] .datepicker table tr td span.active:hover,
+fieldset[disabled] .datepicker table tr td span.active:hover:hover,
+fieldset[disabled] .datepicker table tr td span.active.disabled:hover,
+fieldset[disabled] .datepicker table tr td span.active.disabled:hover:hover,
+.datepicker table tr td span.active.disabled:focus,
+.datepicker table tr td span.active:hover.disabled:focus,
+.datepicker table tr td span.active.disabled.disabled:focus,
+.datepicker table tr td span.active.disabled:hover.disabled:focus,
+.datepicker table tr td span.active[disabled]:focus,
+.datepicker table tr td span.active:hover[disabled]:focus,
+.datepicker table tr td span.active.disabled[disabled]:focus,
+.datepicker table tr td span.active.disabled:hover[disabled]:focus,
+fieldset[disabled] .datepicker table tr td span.active:focus,
+fieldset[disabled] .datepicker table tr td span.active:hover:focus,
+fieldset[disabled] .datepicker table tr td span.active.disabled:focus,
+fieldset[disabled] .datepicker table tr td span.active.disabled:hover:focus,
+.datepicker table tr td span.active.disabled:active,
+.datepicker table tr td span.active:hover.disabled:active,
+.datepicker table tr td span.active.disabled.disabled:active,
+.datepicker table tr td span.active.disabled:hover.disabled:active,
+.datepicker table tr td span.active[disabled]:active,
+.datepicker table tr td span.active:hover[disabled]:active,
+.datepicker table tr td span.active.disabled[disabled]:active,
+.datepicker table tr td span.active.disabled:hover[disabled]:active,
+fieldset[disabled] .datepicker table tr td span.active:active,
+fieldset[disabled] .datepicker table tr td span.active:hover:active,
+fieldset[disabled] .datepicker table tr td span.active.disabled:active,
+fieldset[disabled] .datepicker table tr td span.active.disabled:hover:active,
+.datepicker table tr td span.active.disabled.active,
+.datepicker table tr td span.active:hover.disabled.active,
+.datepicker table tr td span.active.disabled.disabled.active,
+.datepicker table tr td span.active.disabled:hover.disabled.active,
+.datepicker table tr td span.active[disabled].active,
+.datepicker table tr td span.active:hover[disabled].active,
+.datepicker table tr td span.active.disabled[disabled].active,
+.datepicker table tr td span.active.disabled:hover[disabled].active,
+fieldset[disabled] .datepicker table tr td span.active.active,
+fieldset[disabled] .datepicker table tr td span.active:hover.active,
+fieldset[disabled] .datepicker table tr td span.active.disabled.active,
+fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.datepicker table tr td span.old,
+.datepicker table tr td span.new {
+  color: #999999;
+}
+.datepicker .datepicker-switch {
+  width: 145px;
+}
+.datepicker thead tr:first-child th,
+.datepicker tfoot tr th {
+  cursor: pointer;
+}
+.datepicker thead tr:first-child th:hover,
+.datepicker tfoot tr th:hover {
+  background: #eeeeee;
+}
+.datepicker .cw {
+  font-size: 10px;
+  width: 12px;
+  padding: 0 2px 0 5px;
+  vertical-align: middle;
+}
+.datepicker thead tr:first-child .cw {
+  cursor: default;
+  background-color: transparent;
+}
+.input-group.date .input-group-addon {
+  cursor: pointer;
+}
+.input-daterange {
+  width: 100%;
+}
+.input-daterange input {
+  text-align: center;
+}
+.input-daterange input:first-child {
+  border-radius: 3px 0 0 3px;
+}
+.input-daterange input:last-child {
+  border-radius: 0 3px 3px 0;
+}
+.input-daterange .input-group-addon {
+  width: auto;
+  min-width: 16px;
+  padding: 4px 5px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  text-shadow: 0 1px 0 #fff;
+  vertical-align: middle;
+  background-color: #eeeeee;
+  border: solid #cccccc;
+  border-width: 1px 0;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+/*
+Product Name: dhtmlxGrid
+Version: 4.1.3
+Edition: Standard
+License: content of this file is covered by GPL. Usage outside GPL terms is prohibited. To obtain Commercial or Enterprise license contact sales@dhtmlx.com
+Copyright UAB Dinamenta http://www.dhtmlx.com
+*/
+
+
+.dhtmlxcalendar_ifr{position:absolute;overflow:hidden;background-color:white;}.dhtmlxcalendar_dhx_skyblue{position:absolute;display:block;background-color:white;font-family:Tahoma,Helvetica;font-size:11px;color:black;}.dhtmlxcalendar_dhx_skyblue ul.dhtmlxcalendar_line{position:relative;display:block;clear:both;margin:0;padding:0;overflow:hidden;width:211px;}.dhtmlxcalendar_dhx_skyblue ul.dhtmlxcalendar_line li{float:left;position:relative;list-style-type:none;list-style-image:none;text-align:center;vertical-align:middle;cursor:default;overflow:hidden;margin:0;padding:0;}.dhtmlxcalendar_dhx_skyblue.dhtmlxcalendar_in_input{box-shadow:0 0 6px rgba(0,0,0,0.25);}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_month_cont{position:relative;display:block;width:211px;height:25px;margin:0;background-color:#e2efff;background:linear-gradient(#e2efff,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);border:1px solid #a4bed4;overflow:hidden;color:black;-webkit-user-select:text;-khtml-user-select:text;-moz-user-select:text;-ms-user-select:text;-o-user-select:text;user-select:text;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr{width:211px;height:25px;line-height:25px;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr div.dhtmlxcalendar_month_arrow{position:absolute;top:0;width:18px;height:25px;text-align:center;color:inherit;background-position:center center;background-repeat:no-repeat;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr div.dhtmlxcalendar_month_arrow.dhtmlxcalendar_month_arrow_left{left:4px;background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_arrow_left.gif");opacity:.8;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr div.dhtmlxcalendar_month_arrow.dhtmlxcalendar_month_arrow_left_hover{left:4px;background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_arrow_left.gif");opacity:1;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr div.dhtmlxcalendar_month_arrow.dhtmlxcalendar_month_arrow_right{right:4px;background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_arrow_right.gif");opacity:.8;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=80);}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr div.dhtmlxcalendar_month_arrow.dhtmlxcalendar_month_arrow_right_hover{right:4px;background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_arrow_right.gif");opacity:1;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr span.dhtmlxcalendar_month_label_month,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_month_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_month_hdr span.dhtmlxcalendar_month_label_year{position:relative;font-weight:bold;color:#34404b;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_days_cont{position:relative;display:block;width:211px;margin:0;padding-bottom:1px;border-left:1px solid #a4bed4;border-right:1px solid #a4bed4;border-bottom:1px solid #cbd9e4;-webkit-user-select:text;-khtml-user-select:text;-moz-user-select:text;-ms-user-select:text;-o-user-select:text;user-select:text;overflow:hidden;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line{border-top:1px solid white;padding-left:1px;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li{width:29px;height:19px;line-height:19px;margin-right:1px;font-size:9px;background-color:#ecf4ff;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_day_weekday_cell,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_day_weekday_cell_first{color:#c66200;background-color:#ffe6ae;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont{position:relative;display:block;width:211px;margin:0;padding-bottom:1px;border-left:1px solid #a4bed4;border-right:1px solid #a4bed4;border-bottom:1px solid #a4bed4;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;overflow:hidden;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line{border-top:1px solid white;padding-left:1px;height:26px;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li{color:#909090;background-color:white;border:1px solid white;width:27px;height:24px;line-height:23px;margin-right:1px;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li div.dhtmlxcalendar_label{width:100%;height:100%;text-align:center;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_weekend{border-color:#ccc;background-color:#f7f7f7;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_weekend_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_weekend_dis{color:#b2b2b2;background-color:#f0f0f0;border-color:#f0f0f0;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_holiday,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_weekend_holiday{color:red;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_holiday,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_weekend_holiday{color:red;border-color:#ccc;background-color:#f7f7f7;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_holiday_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_weekend_holiday_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_holiday_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_weekend_holiday_dis{color:red;background-color:#f0f0f0;border-color:#f0f0f0;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_hover,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_weekend_hover,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_hover,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_weekend_hover{border-color:#ccc;background-color:#f7f7f7;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_holiday_hover,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_weekend_holiday_hover,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_holiday_hover,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_date_weekend_holiday_hover{color:red;border-color:#ccc;background-color:#f7f7f7;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month{color:black;background-color:#ecf4ff;border-color:#ecf4ff;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_weekend{color:#c66200;background-color:#fff0d2;border-color:#fff0d2;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date{color:black;background-color:#b5deff;border-color:#a1ceed;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_weekend{color:#c66200;background-color:#ffdc90;border-color:#ffce65;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_weekend_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_weekend_dis{color:#b2b2b2;background-color:#f0f0f0;border-color:#f0f0f0;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_holiday{color:red;background-color:#ecf4ff;border-color:#ecf4ff;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_weekend_holiday{color:red;background-color:#fff0d2;border-color:#fff0d2;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_holiday{color:red;background-color:#b5deff;border-color:#a1ceed;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_weekend_holiday{color:red;background-color:#ffdc90;border-color:#ffce65;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_holiday_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_weekend_holiday_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_holiday_dis,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_weekend_holiday_dis{color:red;background-color:#f0f0f0;border-color:#f0f0f0;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_hover{color:black;background-color:#d9eeff;border-color:#a1ceed;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_weekend_hover{color:#c66200;background-color:#ffe9bb;border-color:#ffce65;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_hover{color:black;background-color:#b5deff;border-color:#a1ceed;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_weekend_hover{color:#c66200;background-color:#ffdc90;border-color:#ffce65;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_holiday_hover{color:red;background-color:#d9eeff;border-color:#a1ceed;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_weekend_holiday_hover{color:red;background-color:#ffe9bb;border-color:#ffce65;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_holiday_hover{color:red;background-color:#b5deff;border-color:#a1ceed;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell.dhtmlxcalendar_cell_month_date_weekend_holiday_hover{color:red;background-color:#ffdc90;border-color:#ffce65;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line div.dhtmlxcalendar_label.dhtmlxcalendar_label_title{background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_mark.gif");background-position:top right;background-repeat:no-repeat;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_time_cont{position:relative;display:block;width:211px;height:25px;margin:0;border-left:1px solid #a4bed4;border-right:1px solid #a4bed4;border-bottom:1px solid #a4bed4;background-color:#e2efff;background:linear-gradient(#e2efff,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;overflow:hidden;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_time_cont ul.dhtmlxcalendar_line li{width:211px;height:25px;line-height:24px;color:#34404b;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_time_cont ul.dhtmlxcalendar_line li div.dhtmlxcalendar_time_img{position:absolute;left:66px;top:6px;width:13px;height:13px;background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_clock.gif");background-position:center center;background-repeat:no-repeat;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_cover{position:absolute;left:1px;background-color:white;opacity:.5;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj{position:absolute;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj div.dhtmlxcalendar_selector_obj_arrow{position:absolute;bottom:auto;top:0;left:0;width:100%;height:9px;overflow:hidden;background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_selector_top.gif");background-position:top center;background-repeat:no-repeat;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table{border:1px solid #a4bed4;background-color:white;border-top:none;margin-top:9px;box-shadow:0 0 3px rgba(0,0,0,0.35);}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_left{width:17px;text-align:center;border-top:1px solid white;padding:0;margin:0;background-color:#ecf4ff;background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_arrow_left.gif");background-position:center center;background-repeat:no-repeat;cursor:default;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_left.dhtmlxcalendar_selector_cell_left_hover{background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_arrow_left.gif");}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle{border-top:white 1px solid;border-width:1px 0 0 0;cursor:default;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_right{width:17px;text-align:center;border-top:1px solid white;border-width:1px 0 0 0;background-color:#ecf4ff;background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_arrow_right.gif");background-position:center center;background-repeat:no-repeat;cursor:default;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_right.dhtmlxcalendar_selector_cell_right_hover{background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_arrow_right.gif");}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul{display:block;clear:both;margin:0 0 0 1px;padding:0;overflow:hidden;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul li{float:left;font-family:Tahoma,Helvetica;font-size:10px;color:black;list-style-type:none;list-style-image:none;text-align:center;vertical-align:middle;margin:0 1px 0 0;padding:0;background-color:#e9f3ff;border:1px solid #e9f3ff;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;cursor:default;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul li.dhtmlxcalendar_selector_cell_active{background-color:#b5deff;border-color:#a1ceed;color:black;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul li.dhtmlxcalendar_selector_cell_hover{background-color:#d9eeff;border-color:#a1ceed;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_month table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_left,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_month table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_right{display:none;width:0;border:0 solid white;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul.dhtmlxcalendar_selector_line{height:22px;border-top:none;border-bottom:1px solid white;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul.dhtmlxcalendar_selector_line li.dhtmlxcalendar_selector_cell{width:33px;height:20px;line-height:19px;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_hours div.dhtmlxcalendar_selector_obj_arrow,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_minutes div.dhtmlxcalendar_selector_obj_arrow{top:auto;bottom:0;background-image:url("imgs/dhxcalendar_skyblue/dhxcalendar_selector_bottom.gif");}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_hours table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul.dhtmlxcalendar_selector_line,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_minutes table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul.dhtmlxcalendar_selector_line{height:19px;border-top:none;border-bottom:1px solid white;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_hours table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul.dhtmlxcalendar_selector_line li.dhtmlxcalendar_selector_cell,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_minutes table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_middle ul.dhtmlxcalendar_selector_line li.dhtmlxcalendar_selector_cell{width:21px;height:17px;line-height:16px;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_hours table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_left,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_hours table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_right,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_minutes table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_left,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_minutes table.dhtmlxcalendar_selector_table td.dhtmlxcalendar_selector_cell_right{display:none;width:0;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_hours table.dhtmlxcalendar_selector_table,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_minutes table.dhtmlxcalendar_selector_table{margin-top:0;margin-bottom:9px;border-top:1px solid #a4bed4;border-bottom:none;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj div.dhtmlxcalendar_area_selector_month,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj div.dhtmlxcalendar_area_selector_year,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj div.dhtmlxcalendar_area_selector_hours,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj div.dhtmlxcalendar_area_selector_minutes,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj div.dhtmlxcalendar_area_selector_minutes4,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj div.dhtmlxcalendar_area_selector_minutes5{display:none;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_month div.dhtmlxcalendar_area_selector_month,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_year div.dhtmlxcalendar_area_selector_year,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_hours div.dhtmlxcalendar_area_selector_hours,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_minutes div.dhtmlxcalendar_area_selector_minutes,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_minutes div.dhtmlxcalendar_area_selector_minutes4,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_selector_obj.dhtmlxcalendar_selector_minutes div.dhtmlxcalendar_area_selector_minutes5{display:block;}.dhtmlxcalendar_dhx_skyblue span.dhtmlxcalendar_label_minutes span.dhtmlxcalendar_selected_date{border-bottom:2px solid red;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell_wn,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell_wn{display:none;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_wn div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell{width:26px;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_wn div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell{width:24px;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_wn div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell_first,.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_wn div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell{width:26px;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_wn div.dhtmlxcalendar_days_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell_wn{display:block;width:21px;color:#638eb1;background-color:#d9eaff;}.dhtmlxcalendar_dhx_skyblue div.dhtmlxcalendar_wn div.dhtmlxcalendar_dates_cont ul.dhtmlxcalendar_line li.dhtmlxcalendar_cell_wn{display:block;width:19px;color:#638eb1;background-color:#d9eaff;border-color:#d9eaff;font-size:10px;}div.dhtmlxcalendar_skin_detect{position:absolute;display:block;visibility:hidden;left:-100px;top:0;width:10px;height:10px;margin:0;padding:0;border:none;overflow:hidden;}div.dhxcombo_dhx_skyblue{position:relative;border:1px solid #a4bed4;overflow:hidden;vertical-align:middle;background-color:white;font-size:1px;height:22px;-webkit-tap-highlight-color:rgba(0,0,0,0);}div.dhxcombo_dhx_skyblue input.dhxcombo_input{position:relative;top:0;left:1px;height:22px;line-height:21px;*height:20px;*line-height:19px;border:0 solid white;outline:0 solid white;padding:0;margin:0 0 0 2px;background-color:white;font-family:Tahoma,Helvetica;font-size:12px;color:black;vertical-align:middle;}div.dhxcombo_dhx_skyblue div.dhxcombo_select_button{position:absolute;width:18px;height:18px;top:1px;right:1px;font-size:1px;border:1px solid #a4bed4;background-color:#e2efff;background:linear-gradient(#e2efff,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);border-radius:2px;cursor:pointer;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;overflow:hidden;}div.dhxcombo_dhx_skyblue div.dhxcombo_select_button div.dhxcombo_select_img{position:relative;width:100%;height:100%;background-image:url("imgs/dhxcombo_skyblue/dhxcombo_arrow_down.gif");background-repeat:no-repeat;background-position:center center;}div.dhxcombo_dhx_skyblue div.dhxcombo_top_image{position:absolute;left:0;top:0;width:26px;height:22px;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;overflow:hidden;cursor:default;}div.dhxcombolist_dhx_skyblue{position:absolute;font-family:Tahoma,Helvetica;font-size:12px;color:black;border:1px solid #a4bed4;box-shadow:0 2px 3px #ccc;background-color:#e7f1ff;border-bottom-left-radius:2px;border-bottom-right-radius:2px;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;overflow-x:none;overflow-y:auto;-moz-transition:height .15s ease 0s;-webkit-tap-highlight-color:rgba(0,0,0,0);}div.dhxcombolist_dhx_skyblue div.dhxcombo_option{position:relative;font-size:inherit;height:20px;line-height:19px;border-top:1px solid #e7f1ff;border-bottom:1px solid #e7f1ff;vertical-align:middle;overflow:hidden;cursor:default;}div.dhxcombolist_dhx_skyblue div.dhxcombo_option.dhxcombo_option_selected{background-color:#b5deff!important;border-top:1px solid #a1ceed!important;border-bottom:1px solid #a1ceed!important;color:black;}div.dhxcombolist_dhx_skyblue div.dhxcombo_option div.dhxcombo_option_text{position:relative;padding:0 4px;white-space:nowrap;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}div.dhxcombolist_dhx_skyblue div.dhxcombo_option div.dhxcombo_option_text.dhxcombo_option_text_chbx{position:relative;padding:0 4px 0 4px;margin-left:20px;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;white-space:nowrap;}div.dhxcombolist_dhx_skyblue div.dhxcombo_option div.dhxcombo_checkbox{position:absolute;left:1px;top:1px;width:20px;height:20px;background-image:url("imgs/dhxcombo_skyblue/dhxcombo_chbx.gif");background-repeat:no-repeat;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;overflow:hidden;cursor:default;}div.dhxcombolist_dhx_skyblue div.dhxcombo_option div.dhxcombo_checkbox.dhxcombo_chbx_0{background-position:0 0;}div.dhxcombolist_dhx_skyblue .dhxcombo_option div.dhxcombo_checkbox.dhxcombo_chbx_1{background-position:-18px 0;}div.dhxcombolist_dhx_skyblue div.dhxcombo_option div.dhxcombo_option_text.dhxcombo_option_text_image{position:relative;padding:0 4px 0 4px;margin-left:20px;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;white-space:nowrap;}div.dhxcombo_dhx_skyblue div.dhxcombo_top_image div.dhxcombo_image,div.dhxcombolist_dhx_skyblue div.dhxcombo_option div.dhxcombo_image{position:absolute;left:3px;top:1px;width:20px;height:20px;background-repeat:no-repeat;background-position:center center;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;overflow:hidden;cursor:default;}div.dhxcombo_dhx_skyblue.dhxcombo_disabled{border:1px solid #ccc;background-color:#fafafa;}div.dhxcombo_dhx_skyblue.dhxcombo_disabled input.dhxcombo_input{color:#b2b2b2;background-color:#fafafa;}div.dhxcombo_dhx_skyblue.dhxcombo_disabled div.dhxcombo_select_button{border-color:#ccc;background-color:#fefefe;background:linear-gradient(#fefefe,#f4f4f4);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#fefefe,endColorStr=#f4f4f4) progid:DXImageTransform.Microsoft.Alpha(opacity=100);cursor:default;}div.dhxcombo_dhx_skyblue.dhxcombo_disabled div.dhxcombo_select_button div.dhxcombo_select_img{background-image:url("imgs/dhxcombo_skyblue/dhxcombo_arrow_down_dis.gif");}.dhxgrid_combo_icon{position:absolute;top:0;right:0;z-index:1;}div.dhxcombo_in_grid_parent{position:relative;height:100%;top:0;}div.dhxcombo_in_grid_parent div.dhxcombo_dhx_skyblue{position:absolute;top:0;left:-4px;*top:-2px;*height:23px;}div.dhxcombo_in_grid_parent input.dhxcombo_input{border-left:2px solid white;font-family:Arial;font-size:12px;*margin-top:-3px;*height:18px;*line-height:17px;}div.dhxcombolist_dhx_skyblue.dhxcombolist_hdr{border-bottom-width:0;height:27px;line-height:27px;box-shadow:none;border-bottom-left-radius:0;border-bottom-right-radius:0;background-color:#e2efff;background:linear-gradient(#e2efff,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);}div.dhxcombolist_dhx_skyblue.dhxcombolist_hdr div.dhxcombo_hdrtext{position:relative;padding:0;white-space:nowrap;cursor:default;font-family:Tahoma,Helvetica;font-size:11px;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}div.dhxcombolist_dhx_skyblue.dhxcombolist_hdr div.dhxcombo_hdrtext div.dhxcombo_hdrcell,div.dhxcombolist_dhx_skyblue.dhxcombolist_hdr div.dhxcombo_hdrtext div.dhxcombo_hdrcell_first{float:left;white-space:nowrap;overflow:hidden;position:relative;z-index:2;border-left:1px solid #a4bed4;padding:0;margin:0;}div.dhxcombolist_dhx_skyblue.dhxcombolist_hdr div.dhxcombo_hdrtext div.dhxcombo_hdrcell_first,div.dhxcombolist_dhx_skyblue.dhxcombolist_hdr div.dhxcombo_hdrtext div.dhxcombo_hdrcell:first-child{border-left-width:0;}div.dhxcombolist_dhx_skyblue.dhxcombolist_multicolumn div.dhxcombo_option{height:24px;line-height:24px;margin-top:-1px;z-index:0;border-top:1px solid #d3e7ff;border-bottom:1px solid #d3e7ff;background-color:white;}div.dhxcombolist_dhx_skyblue.dhxcombolist_multicolumn div.dhxcombo_option div.dhxcombo_option_text{padding:0;}div.dhxcombolist_dhx_skyblue.dhxcombolist_multicolumn div.dhxcombo_option div.dhxcombo_cell,div.dhxcombolist_dhx_skyblue.dhxcombolist_multicolumn div.dhxcombo_option div.dhxcombo_cell_first{float:left;white-space:nowrap;overflow:hidden;position:relative;border-left:1px solid #d3e7ff;padding:0;margin:0;}div.dhxcombolist_dhx_skyblue.dhxcombolist_multicolumn div.dhxcombo_option div.dhxcombo_cell_first,div.dhxcombolist_dhx_skyblue.dhxcombolist_multicolumn div.dhxcombo_option div.dhxcombo_cell:first-child{border-left-width:0;}div.dhxcombolist_dhx_skyblue.dhxcombolist_multicolumn div.dhxcombo_option.dhxcombo_option_selected{z-index:1;}div.dhxcombolist_dhx_skyblue.dhxcombolist_multicolumn div.dhxcombo_option.dhxcombo_option_selected div.dhxcombo_cell{border-left-color:#b5deff;}div.dhxcombolist_dhx_skyblue.dhxcombolist_multicolumn div.dhxcombo_option div.dhxcombo_cell_text,div.dhxcombolist_dhx_skyblue.dhxcombolist_hdr div.dhxcombo_hdrtext div.dhxcombo_hdrcell_text{position:relative;margin:0 10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:auto;}.dhxcombo_skin_detect{position:absolute;left:0;top:-100px;margin:0;padding:0;border:0 solid white;width:10px;height:10px;overflow:hidden;}.dhxmenu_skin_detect{position:absolute;left:0;top:-100px;margin:0;padding:0;border:0 solid white;width:10px;height:10px;overflow:hidden;}.dhtmlxMenu_dhx_skyblue_Middle{position:relative;height:30px;border:none;overflow:hidden;background-color:#ebebeb;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}.dhtmlxMenu_dhx_skyblue_Middle div.top_sep{float:left;position:relative;height:22px;width:0;border-left:1px solid #ddd;margin:4px 2px 0 0;line-height:1px;font-size:1px;overflow:hidden;cursor:default;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}.dhtmlxMenu_dhx_skyblue_Middle img.dhtmlxMenu_TopLevel_Item_Icon{float:left;margin:2px 3px 0 3px;width:18px;height:18px;}.dhtmlxMenu_dhx_skyblue_Middle div.dhtmlxMenu_TopLevel_Text_right{position:absolute;top:8px;left:none;right:8px;font-family:Tahoma,Helvetica;font-size:11px;color:black;cursor:default;}.dhtmlxMenu_dhx_skyblue_Middle div.dhtmlxMenu_TopLevel_Text_left{position:absolute;top:8px;right:none;left:8px;font-family:Tahoma,Helvetica;font-size:11px;color:black;cursor:default;}.dhtmlxMenu_dhx_skyblue_Middle.dir_left div.align_left{float:left;}.dhtmlxMenu_dhx_skyblue_Middle.dir_left div.align_right{float:right;}div.dhtmlxMenu_dhx_skyblue_TopLevel_Item_Normal,div.dhtmlxMenu_dhx_skyblue_TopLevel_Item_Disabled,div.dhtmlxMenu_dhx_skyblue_TopLevel_Item_Selected{position:relative;float:left;font-family:Tahoma,Helvetica;font-size:11px;color:black;cursor:default;white-space:nowrap;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;height:22px;line-height:22px;vertical-align:middle;margin:3px 2px 0 0;padding:0 3px;}div.dhtmlxMenu_dhx_skyblue_TopLevel_Item_Normal div.top_level_text,div.dhtmlxMenu_dhx_skyblue_TopLevel_Item_Disabled div.top_level_text,div.dhtmlxMenu_dhx_skyblue_TopLevel_Item_Selected div.top_level_text{float:left;margin:0 3px;}div.dhtmlxMenu_dhx_skyblue_TopLevel_Item_Normal,div.dhtmlxMenu_dhx_skyblue_TopLevel_Item_Disabled{border:1px solid #ebebeb;}div.dhtmlxMenu_dhx_skyblue_TopLevel_Item_Disabled{color:#999!important;}div.dhtmlxMenu_dhx_skyblue_TopLevel_Item_Selected{border:1px solid #a1ceed;background-color:#b5deff;color:black;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon{position:absolute;border:1px solid #a4bed4;box-shadow:0 0 3px #ccc;padding:3px 0;border-bottom-left-radius:2px;border-bottom-right-radius:2px;border-top-right-radius:2px;background-color:#e7f1ff;overflow:hidden;cursor:default;line-height:normal;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl td{font-family:Tahoma,Helvetica;font-size:11px;color:black;line-height:normal;padding:0 3px;border-top:1px solid #e7f1ff;border-bottom:1px solid #e7f1ff;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl tr.sub_item_selected td{background-color:#b5deff;border-top:1px solid #a1ceed;border-bottom:1px solid #a1ceed;color:black;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl tr.sub_item_selected div.sub_item_hk{color:#333!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl td.sub_item_icon{width:18px;text-align:center;vertical-align:middle;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl td.sub_item_icon img.sub_icon{float:left;margin:0;width:18px;height:18px;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl div.sub_item_text{padding:0 12px 0 1px;height:22px;line-height:21px;white-space:nowrap;text-align:left;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl tr.sub_item_dis div.sub_item_text{color:#999!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl td.sub_item_hk{padding-left:8px;padding-right:8px;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl td.sub_item_hk div.sub_item_hk{font-family:Tahoma,Helvetica;font-size:10px;color:#4d4d4d;text-align:right;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl tr.sub_item_dis td.sub_item_hk div.sub_item_hk{color:#9b9b9b!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl div.complex_arrow{width:4px;margin:0 2px 0 5px;height:22px;background-image:url("imgs/dhxmenu_skyblue/dhxmenu_subar.gif");background-repeat:no-repeat;background-position:0 0;overflow:hidden;font-size:1px;float:right;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl tr.sub_item_selected div.complex_arrow{background-position:-4px 0!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl tr.sub_item_dis div.complex_arrow{background-position:-8px 0!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl div.complex_arrow_loading{width:11px;height:22px;background-position:center center;background-repeat:no-repeat;background-image:url("imgs/dhxmenu_skyblue/dhxmenu_loader.gif");float:right;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl div.sub_icon{float:left;margin:0;width:18px;height:18px;background-position:top right;background-repeat:no-repeat;background-image:url("imgs/dhxmenu_skyblue/dhxmenu_chrd.gif");}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl div.sub_icon.chbx_0{background-position:0 0!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl div.sub_icon.chbx_1{background-position:-18px 0!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl tr.sub_item_dis div.sub_icon.chbx_0{background-position:-36px 0!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl tr.sub_item_dis div.sub_icon.chbx_1{background-position:-54px 0!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl div.sub_icon.rdbt_0{background-position:-72px 0!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl div.sub_icon.rdbt_1{background-position:-90px 0!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl tr.sub_item_dis div.sub_icon.rdbt_0{background-position:-108px 0!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon table.dhtmlxMebu_SubLevelArea_Tbl tr.sub_item_dis div.sub_icon.rdbt_1{background-position:-126px 0!important;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon tr.sub_sep td{padding:2px 0;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_Polygon div.sub_sep{position:static;font-size:1px;line-height:1px;height:1px;width:100%;border-top:1px solid #a4bed4;}iframe.dhtmlxMenu_IE6CoverFix_dhx_skyblue{position:absolute;border:none;background:#000;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_ArrowUp,div.dhtmlxMenu_dhx_skyblue_SubLevelArea_ArrowUp_Over,div.dhtmlxMenu_dhx_skyblue_SubLevelArea_ArrowUp_Disabled{position:relative;font-size:1px;border-bottom:1px solid #a4bed4;background-image:url("imgs/dhxmenu_skyblue/dhxmenu_arrow_up.gif");background-repeat:no-repeat;background-position:center center;padding:8px 0;margin-bottom:3px;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_ArrowUp_Disabled{background-image:url("imgs/dhxmenu_skyblue/dhxmenu_arrow_up_dis.gif");}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_ArrowDown,div.dhtmlxMenu_dhx_skyblue_SubLevelArea_ArrowDown_Over,div.dhtmlxMenu_dhx_skyblue_SubLevelArea_ArrowDown_Disabled{position:relative;font-size:1px;border-top:1px solid #a4bed4;background-image:url("imgs/dhxmenu_skyblue/dhxmenu_arrow_down.gif");background-repeat:no-repeat;background-position:center center;padding:8px 0;margin-top:3px;}div.dhtmlxMenu_dhx_skyblue_SubLevelArea_ArrowDown_Disabled{background-image:url("imgs/dhxmenu_skyblue/dhxmenu_arrow_down_dis.gif");}.dhxtoolbar_skin_detect{position:absolute;left:0;top:-100px;margin:0;padding:0;border:0 solid white;width:10px;height:10px;overflow:hidden;}.dhx_toolbar_dhx_skyblue{border:1px solid #a4bed4;background-color:#e2efff;background:linear-gradient(#e2efff,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);position:relative;padding:0 5px;height:30px;line-height:normal;cursor:default;overflow:hidden;font-family:Tahoma,Helvetica;font-size:11px;color:black;}.dhx_toolbar_dhx_skyblue div.dhxtoolbar_float_left{float:left;}.dhx_toolbar_dhx_skyblue div.dhxtoolbar_float_right{float:right;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn,.dhx_toolbar_dhx_skyblue div.dhx_toolbar_arw{position:relative;float:left;margin-top:2px;padding:2px 3px;*padding-bottom:4px;margin-right:1px;line-height:normal;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;cursor:default;height:22px;*height:20px;overflow:hidden;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=100);}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn.dhxtoolbar_btn_dis,.dhx_toolbar_dhx_skyblue div.dhx_toolbar_arw.dhxtoolbar_btn_dis{color:#999;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn.dhxtoolbar_btn_over,.dhx_toolbar_dhx_skyblue div.dhx_toolbar_arw.dhxtoolbar_btn_over{border:1px solid #a4bed4;border-radius:2px;padding:1px 2px;*padding-bottom:3px;background-color:#f1f7ff;background:linear-gradient(#f1f7ff,#e2efff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#f1f7ff,endColorStr=#e2efff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn.dhxtoolbar_btn_pres,.dhx_toolbar_dhx_skyblue div.dhx_toolbar_arw.dhxtoolbar_btn_pres{border:1px solid #a4bed4;border-radius:2px;padding:1px 2px;*padding-bottom:3px;background-color:#d2e7fe;background:linear-gradient(#d2e7fe,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#d2e7fe,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);box-shadow:0 0 5px rgba(127,127,127,0.15) inset;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn.dhxtoolbar_btn_pres_dis{color:#999;border:1px solid #c9c9c9;border-radius:2px;padding:1px 2px;*padding-bottom:3px;background-color:#d2e7fe;background:linear-gradient(#d2e7fe,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#d2e7fe,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);box-shadow:0 0 5px rgba(127,127,127,0.15) inset;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn img{float:left;margin:2px;width:18px;height:18px;cursor:default;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn .dhxtoolbar_input{position:relative;float:left;border:1px solid #a4bed4;background-color:white;margin:1px;padding:2px 4px 3px 4px;font-family:Tahoma,Helvetica;font-size:11px;color:black;line-height:normal;direction:ltr;outline:none;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn .dhxtoolbar_input:disabled{background-color:#e7eef8;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn div.dhxtoolbar_text,.dhx_toolbar_dhx_skyblue div.dhx_toolbar_arw div.arwimg{float:left;font:inherit;height:18px;line-height:17px;margin:2px 4px;padding:0;cursor:default;overflow:hidden;white-space:nowrap;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_arw{margin-left:-3px;z-index:1;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_arw div.arwimg{margin:2px 0;padding:0 3px;background-image:url("imgs/dhxtoolbar_skyblue/dhxtoolbar_arrow.gif");background-position:center center;background-repeat:no-repeat;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_arw.dhxtoolbar_btn_dis div.arwimg{background-image:url("imgs/dhxtoolbar_skyblue/dhxtoolbar_arrow_dis.gif");}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_sep{float:left;border-left:1px solid #c0d9ec;height:20px;margin:5px 6px 0 5px;overflow:hidden;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_text{float:left;vertical-align:middle;margin-top:3px;padding:3px 5px;line-height:17px;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}.dhx_toolbar_dhx_skyblue div.dhxtoolbar_sl_bg_l,.dhx_toolbar_dhx_skyblue div.dhxtoolbar_sl_bg_m,.dhx_toolbar_dhx_skyblue div.dhxtoolbar_sl_bg_r{float:left;height:5px;line-height:1px;margin:8px 0 6px 0;padding:0;width:2px;font-size:1px;border-top:1px solid #a4bed5;border-bottom:1px solid #a4bed5;background-color:#e7f1ff;overflow:hidden;}.dhx_toolbar_dhx_skyblue div.dhxtoolbar_sl_bg_l{margin-left:4px;border-left:1px solid #a4bed5;border-top-left-radius:2px;border-bottom-left-radius:2px;}.dhx_toolbar_dhx_skyblue div.dhxtoolbar_sl_bg_r{margin-right:4px;border-right:1px solid #a4bed5;border-top-right-radius:2px;border-bottom-right-radius:2px;}.dhx_toolbar_dhx_skyblue div.dhxtoolbar_sl_pen,.dhx_toolbar_dhx_skyblue div.dhxtoolbar_sl_pen.dhxtoolbar_over{position:absolute;top:5px;width:7px;height:14px;border:1px solid #a4bed4;background-color:#e1eeff;background:linear-gradient(#e1eeff,#d4e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e1eeff,endColorStr=#d4e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);border-radius:1px;cursor:default;font-size:1px;line-height:1px;overflow:hidden;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn.dhxtoolbar_btn_dis div.dhxtoolbar_sl_pen{border-color:#c9c9c9;background-color:#e5e5e5;background:linear-gradient(#e5e5e5,#e0e0e0);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e5e5e5,endColorStr=#e0e0e0) progid:DXImageTransform.Microsoft.Alpha(opacity=100);}.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn.dhxtoolbar_btn_dis div.dhxtoolbar_sl_bg_l,.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn.dhxtoolbar_btn_dis div.dhxtoolbar_sl_bg_m,.dhx_toolbar_dhx_skyblue div.dhx_toolbar_btn.dhxtoolbar_btn_dis div.dhxtoolbar_sl_bg_r{border-color:#c9c9c9;background-color:#e9e9e9;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24{height:36px!important;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhx_toolbar_btn,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhx_toolbar_arw{height:28px;*height:26px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhx_toolbar_btn img{width:24px;height:24px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhx_toolbar_btn div.dhxtoolbar_text,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhx_toolbar_arw div.arwimg{height:24px;line-height:23px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhx_toolbar_text{padding-top:6px;padding-bottom:6px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhx_toolbar_sep{height:26px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhxtoolbar_sl_bg_l,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhxtoolbar_sl_bg_m,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhxtoolbar_sl_bg_r{margin-top:11px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhxtoolbar_sl_pen{top:8px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_24 div.dhx_toolbar_btn .dhxtoolbar_input{margin-top:4px;margin-bottom:4px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32{height:44px!important;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhx_toolbar_btn,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhx_toolbar_arw{height:36px;*height:34px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhx_toolbar_btn img{width:32px;height:32px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhx_toolbar_btn div.dhxtoolbar_text,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhx_toolbar_arw div.arwimg{height:32px;line-height:31px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhx_toolbar_text{padding-top:10px;padding-bottom:10px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhx_toolbar_sep{height:34px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhxtoolbar_sl_bg_l,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhxtoolbar_sl_bg_m,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhxtoolbar_sl_bg_r{margin-top:15px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhxtoolbar_sl_pen{top:12px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_32 div.dhx_toolbar_btn .dhxtoolbar_input{margin-top:8px;margin-bottom:8px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48{height:60px!important;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhx_toolbar_btn,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhx_toolbar_arw{height:52px;*height:50px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhx_toolbar_btn img{width:48px;height:48px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhx_toolbar_btn div.dhxtoolbar_text,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhx_toolbar_arw div.arwimg{height:48px;line-height:47px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhx_toolbar_text{padding-top:18px;padding-bottom:18px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhx_toolbar_sep{height:50px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhxtoolbar_sl_bg_l,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhxtoolbar_sl_bg_m,.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhxtoolbar_sl_bg_r{margin-top:23px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhxtoolbar_sl_pen{top:20px;}.dhx_toolbar_dhx_skyblue.dhxtoolbar_icons_48 div.dhx_toolbar_btn .dhxtoolbar_input{margin-top:16px;margin-bottom:16px;}div.dhx_toolbar_poly_dhx_skyblue{position:absolute;border:1px solid #a4bed4;box-shadow:0 0 3px #ccc;padding:3px 0;border-bottom-left-radius:2px;border-bottom-right-radius:2px;border-top-right-radius:2px;background-color:#e7f1ff;overflow:hidden;cursor:default;line-height:normal;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}div.dhx_toolbar_poly_dhx_skyblue td{font-family:Tahoma,Helvetica;font-size:11px;color:black;line-height:normal;padding:0 3px;border-top:1px solid #e7f1ff;border-bottom:1px solid #e7f1ff;}div.dhx_toolbar_poly_dhx_skyblue .tr_btn_over td,div.dhx_toolbar_poly_dhx_skyblue .tr_btn_selected td{background-color:#b5deff;border-top:1px solid #a1cef4;border-bottom:1px solid #a1cef4;}div.dhx_toolbar_poly_dhx_skyblue .tr_btn_disabled td{color:#999;}div.dhx_toolbar_poly_dhx_skyblue td.td_btn_img{width:18px;text-align:center;}div.dhx_toolbar_poly_dhx_skyblue td.td_btn_img img.btn_sel_img{width:18px;height:18px;}div.dhx_toolbar_poly_dhx_skyblue td.td_btn_txt div.btn_sel_text{padding:0 12px 0 1px;height:22px;line-height:21px;}div.dhx_toolbar_poly_dhx_skyblue tr.tr_sep td{padding:2px 0;}div.dhx_toolbar_poly_dhx_skyblue div.btn_sep{position:relative;font-size:1px;line-height:1px;height:0;width:100%;border-top:1px solid #a4bed5;}div.dhx_toolbar_slider_label_dhx_skyblue{position:absolute;border:1px solid #a4bed4;box-shadow:0 0 3px #ccc;background-color:#e7f1ff;padding:5px 8px;border-radius:2px;overflow:hidden;cursor:default;line-height:normal;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;font-family:Tahoma,Helvetica;font-size:11px;color:black;}.dhxtoolbar_maxopen_test{position:absolute;width:200px;height:50px;overflow-x:none;overflow-y:auto;left:-300px;top:100px;border:1px solid white;visibility:hidden;}.dhxtoolbar_maxopen_test2{height:200px;}.dhxacc_base_dhx_skyblue div.dhx_cell_acc div.dhx_cell_statusbar_def div.dhx_cell_statusbar_paging,.dhxlayout_base_dhx_skyblue div.dhx_cell_layout div.dhx_cell_statusbar_def div.dhx_cell_statusbar_paging,.dhxtabbar_base_dhx_skyblue div.dhx_cell_tabbar div.dhx_cell_statusbar_def div.dhx_cell_statusbar_paging{position:relative;height:32px;line-height:31px;margin-top:-1px;overflow:hidden;white-space:nowrap;}.dhxtabbar_base_dhx_skyblue div.dhx_cell_tabbar div.dhx_cell_statusbar_def div.dhx_cell_statusbar_paging{margin-top:0;height:31px;}.dhxwins_vp_dhx_skyblue div.dhxwin_active div.dhx_cell_wins div.dhx_cell_statusbar_def div.dhx_cell_statusbar_paging,.dhxwins_vp_dhx_skyblue div.dhxwin_inactive div.dhx_cell_wins div.dhx_cell_statusbar_def div.dhx_cell_statusbar_paging{position:relative;height:32px;line-height:31px;margin-top:3px;overflow:hidden;white-space:nowrap;}.dhxwins_vp_dhx_skyblue div.dhxwin_active div.dhx_cell_wins div.dhx_cell_statusbar_def div.dhx_cell_statusbar_paging .dhx_toolbar_dhx_skyblue,.dhxwins_vp_dhx_skyblue div.dhxwin_inactive div.dhx_cell_wins div.dhx_cell_statusbar_def div.dhx_cell_statusbar_paging .dhx_toolbar_dhx_skyblue{border-width:0;background-image:none;}div.gridbox{overflow:hidden;text-align:left;}.dhx_sub_row{background-color:#fff;}div.gridbox table.obj{height:1px;}div.gridbox table.hdr td{line-height:normal;border:1px solid;border-color:#fff Gray Gray #fff;text-align:center;margin:0;padding:7px 0 7px 0;font-weight:normal;overflow:hidden;empty-cells:show;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}div.gridbox table.hdr td div.hdrcell{overflow:hidden;}div.gridbox table.obj td{border:1px solid;border-color:#fff Gray Gray #fff;overflow:hidden;padding-top:0;padding-bottom:0;empty-cells:show;white-space:normal;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;}div.gridbox table.obj th,div.gridbox table.hdr th{padding:0;margin:0;}div.gridbox table.row20px tr td{height:20px;white-space:nowrap;padding:0;}div.gridbox .objbox{background-color:#fff;position:relative;-webkit-overflow-scrolling:touch;}div.gridbox table.obj td span.space,div.gridbox table.obj td img.space{width:18px;}div.gridbox table.obj td.editable{-webkit-user-select:text;-khtml-user-select:text;-moz-user-select:text;-ms-user-select:text;-o-user-select:text;user-select:text;}div.gridbox table.obj td.group_row{vertical-align:middle;font-family:Tahoma;font-size:10pt;font-weight:bold;height:30px;border:0;border-bottom:2px solid navy;}.dragSpanDiv{font-size:12px;border:1px gray solid;background-color:#fff;z-index:999;}.dhx_combo_select{border:1px solid;border-color:black silver silver black;background-color:#fff;overflow:auto;cursor:default;position:absolute;height:auto;z-index:600;}.dhx_combo_edit{width:100%;border:0;padding:0;padding-right:1px;margin:0;overflow:hidden;}.gridbox_dhx_skyblue textarea.dhx_combo_edit{margin-bottom:-6px;}.dhx_textarea{border:1px solid;border-color:black silver silver black;position:absolute;height:100px;z-index:600;}.dhx_clist{background-color:#fff;border:1px solid black;padding:2px 2px 2px 2px;z-index:300;}.gridDragLine{position:absolute;top:10px;left:0;width:100%;height:2px;background-color:black;overflow:hidden;}div.pagingBlock .pagingCurrentPage{font-weight:bold;cursor:default;}div.pagingBlock .pagingPage{cursor:pointer;text-decoration:underline;}div.pagingBlock a{text-decoration:none;padding-right:2px;color:black;cursor:pointer;}div.pagingBlock a.dhx_not_active{text-decoration:none;cursor:default;}.toolbar_select{font-size:10px;}.dhtmlxGrid_selection{opacity:.5;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50);background-color:yellow;border:1px dotted black;}div.gridbox div.ftr{position:absolute;left:0;bottom:1px;width:100%;overflow:hidden;}div.gridbox div.ftr td{padding:0;padding-left:10px;padding-right:5px;border-top:1px solid gray;border-right:1px solid gray;background-color:#ffc;font-style:italic;overflow:hidden;}div.gridbox table.hdr td.columnTargetR div.hdrcell{border-right:3px double #F60;border-left:3px solid #D4D0C8;}div.gridbox table.hdr td.columnTargetL div.hdrcell{border-right:3px solid #D4D0C8;border-left:3px double #F60;}.dhx_dragColDiv{background-color:#D4D0C8;border:1px solid;border-color:#fff Gray Gray #fff;text-align:center;margin:0;padding:5px 20px 5px 20px;font-weight:normal;opacity:.75;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=75);}.dhtmlx_live_validation_error{background-color:#FFE0E0!important;}.dhtmlx_validation_error{border-bottom:2px solid red!important;}.dhx_header_cmenu{background-color:#fff;border:2px outset silver;z-index:2;}.dhx_header_cmenu_item{white-space:nowrap;}div.gridboxgridbox_dhx_skyblue div.ftr td{text-align:right;color:black;background-color:#e2efff;background:linear-gradient(#e2efff,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);border-color:#a4bed4;}div.gridbox td.filter input,div.gridbox td.filter select{width:90%;font-size:8pt;font-family:Tahoma;-webkit-user-select:text;-khtml-user-select:text;-moz-user-select:text;-ms-user-select:text;-o-user-select:text;user-select:text;}div.gridbox_dhx_skyblue.gridbox .ftr,div.gridbox_dhx_skyblue.gridbox .xhdr{color:black;background-color:#e2efff;background:linear-gradient(#e2efff,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);}div.gridbox_dhx_skyblue.isModern table.hdr tr td{color:black;background-color:#e2efff;background:linear-gradient(#e2efff,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);}div.gridbox_dhx_skyblue.isIE table.hdr tr{color:black;background-color:#e2efff;background:linear-gradient(#e2efff,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);}div.gridbox_dhx_skyblue.gridbox table.obj tr td{border-width:0;padding-right:4px;padding-left:4px;}div.gridbox_dhx_skyblue.gridbox table.hdr td div.hdrcell{padding-left:10px;width:auto;}div.gridbox_dhx_skyblue.gridbox table.hdr td{border-width:1px 1px 1px 1px;border-color:#e7f1ff #a4bed4 #a4bed4 #e7f1ff;background-color:transparent;font-family:Tahoma,Helvetica;font-size:12px;color:black;vertical-align:top;text-align:left;}div.gridbox_dhx_skyblue.gridbox{border:1px solid #a4bed4;}div.gridbox_dhx_skyblue.gridbox table.obj{font-family:Tahoma,Helvetica;font-size:12px;color:black;}div.gridbox_dhx_skyblue.gridbox table.obj tr td{padding-top:3px;padding-bottom:3.2px;}* html .gridbox_dhx_skyblue.gridbox .obj td{height:auto;padding-top:3px;padding-bottom:3px;}div.gridbox_dhx_skyblue.gridbox table.obj.row20px tr td{height:23px;}div.gridbox_dhx_skyblue.gridbox table.obj tr td{padding-top:1px;padding-bottom:1px;border-right:1px solid #fff;border-top:1px solid #fff;border-bottom:1px solid #fff;}div.gridbox_dhx_skyblue.isModern table.obj.row20px tr td{line-height:23px;}div.gridbox_dhx_skyblue table.obj.row20px tr td.editable{height:21px;line-height:21px;}div.gridbox_dhx_skyblue table.obj.row20px tr td.editable .treegrid_cell{margin-top:-2px;height:21px;}div.gridbox_dhx_skyblue.gridbox table.obj tr td.editable div.treegrid_cell{padding:1px 4px!important;}div.gridbox_dhx_skyblue.gridbox table.obj tr.rowselected{background-color:#b5deff;}div.gridbox_dhx_skyblue.gridbox table.obj tr.rowselected td{background-color:#b5deff;color:black;}div.gridbox_dhx_skyblue.gridbox table.obj tr.rowselected td,div.gridbox_dhx_skyblue.gridbox table.obj tr.odd_dhx_skyblue.rowselected td{background-color:#b5deff;border-top:1px solid #a1ceed;border-bottom:1px solid #a1ceed;border-right:1px solid #b5deff;}div.gridbox_dhx_skyblue.gridbox table.obj tr td.cellselected{background-color:#b5deff;}div.gridbox_dhx_skyblue.gridbox table.obj tr.odd_dhx_skyblue{background:#ebf3ff;border-top:1px solid #ebf3ff;border-bottom:1px solid #ebf3ff;}div.gridbox_dhx_skyblue.gridbox table.obj tr.odd_dhx_skyblue{background:#ebf3ff;}.dhx_combo_select,.gridbox_dhx_skyblue.gridbox .dhx_combo_edit,.gridbox_dhx_skyblue.gridbox .dhx_textarea,dhx_dragColDiv,div.gridbox div.ftr td,div.pagingBlock,span.recordsInfoBlock{font-family:Tahoma,Helvetica;font-size:12px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;}.gridbox_dhx_skyblue .dhx_combo_edit{padding:1px 0 1px 1px;}.gridbox_dhx_skyblue.isIE .dhx_combo_edit{padding:0 0 0 1px;}.gridbox_dhx_skyblue.gridbox .dhx_sub_row{background-color:transparent;}.dhx_header_cmenu{background-color:#fff;border:2px outset silver;z-index:2;}.dhx_header_cmenu_item{white-space:nowrap;}.dhx_pbox{margin-top:3px;border:1px solid #D4D0C8;border-top:0;font-size:10px;}.dhx_pline{background-color:white;margin:-15px 10px 10px 10px;padding:0 5px 0 5px;float:left;}.dhx_page,.dhx_pager_info{margin:3px;text-align:center;font-family:tahoma;font-size:12px;float:left;cursor:pointer;color:black;background-color:gray;padding:1px;}.dhx_pager_info{white-space:nowrap;background-color:white;margin:-8px 10px 10px 10px;padding:0 5px 0 5px;cursor:default;}.dhx_page div{background-color:white;width:16px;height:17px;vertical-align:middle;}div.dhx_page_active{font-weight:bold;background-color:lightgrey;cursor:default;color:white;}.dhx_pbox_modern{margin-top:3px;border:1px solid #D6D6D6;border-top:0;font-size:10px;}.dhx_pline_modern{background-color:white;margin:-15px 10px 10px 10px;padding:0 5px 0 5px;float:left;}.dhx_page_modern,.dhx_pager_info_modern{margin:3px;text-align:center;font-family:tahoma;font-size:12px;float:left;cursor:pointer;color:#055A78;background-color:#D6D6D6;padding:1px;}.dhx_pager_info_modern{white-space:nowrap;background-color:white;margin:-8px 10px 10px 10px;padding:0 5px 0 5px;cursor:default;}.dhx_page_modern div{background-color:white;width:16px;height:17px;vertical-align:middle;}div.dhx_page_active_modern{font-weight:bold;background-color:#055A78;cursor:default;color:white;}.dhx_pbox_light{margin-top:3px;border:1px solid #C2D5DC;border-top:0;font-size:10px;}.dhx_pline_light{background-color:white;margin:-15px 10px 10px 10px;padding:0 5px 0 5px;float:left;}.dhx_page_light,.dhx_pager_info_light{margin:3px;text-align:center;font-family:tahoma;font-size:12px;float:left;cursor:pointer;color:#055A78;background-color:#93AFBA;padding:1px;}.dhx_pager_info_light{white-space:nowrap;background-color:white;margin:-8px 10px 10px 10px;padding:0 5px 0 5px;cursor:default;}.dhx_page_light div{background-color:white;width:16px;height:17px;vertical-align:middle;}div.dhx_page_active_light{font-weight:bold;background-color:#D1DFE3;cursor:default;color:white;}.dhx_pbox_skyblue{margin-top:3px;border:1px solid #C2D5DC;border-top:0;font-size:10px;}.dhx_pline_skyblue{background-color:white;margin:-15px 10px 10px 10px;padding:0 5px 0 5px;float:left;}.dhx_page_skyblue,.dhx_pager_info_skyblue{margin:3px;text-align:center;font-family:tahoma;font-size:12px;float:left;cursor:pointer;color:#055A78;background-color:#93AFBA;padding:1px;}.dhx_pager_info_skyblue{white-space:nowrap;background-color:white;margin:-8px 10px 10px 10px;padding:0 5px 0 5px;cursor:default;}.dhx_page_skyblue div{background-color:white;width:16px;height:17px;vertical-align:middle;}div.dhx_page_active_skyblue{font-weight:bold;color:black;background-color:#e2efff;background:linear-gradient(#e2efff,#d3e7ff);filter:progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);border:1px solid #a4bed4;padding:0;cursor:default;}div.dhx_page_active_skyblue div.dhx_page_active_skyblue{border:0 solid #a4bed4;}.calcTable{width:100px;background-color:silver;border:1px black solid;}.calcButton{height:20px;cursor:pointer;text-align:center;background-color:gray;color:white;font-size:10px;font-weight:bold;border-top:1px solid silver;border-right:1px solid silver;}.calcPressed{height:20px;cursor:pointer;text-align:center;background-color:gray;color:white;font-size:10px;font-weight:bold;border-top:1px solid black;border-right:1px solid black;}.calcInput{background-color:white;font-size:10px;font-weight:bold;font-family:Tahoma,Helvetica;}.calkSubmit{padding:2px;cursor:pointer;text-align:center;background-color:silver;color:white;font-size:10px;font-weight:bold;border-top:1px solid white;border-right:1px solid white;}.dhxgrid_sort_desc,.dhxgrid_sort_asc{width:9px;height:8px;background-image:url("imgs/dhxgrid_skyblue/sort_desc.gif");background-repeat:no-repeat;}.dhxgrid_sort_asc{background-image:url("imgs/dhxgrid_skyblue/sort_asc.gif");background-repeat:no-repeat;}.dhxgrid_rh_dhx_skyblue{position:absolute;top:-20px;left:-24px;width:23px;height:10px;margin:0;padding:0;border-width:0;font-size:1px;overflow:hidden;}.dhxgrid_skin_detect{position:absolute;left:0;top:-100px;margin:0;padding:0;border:0 solid white;width:10px;height:10px;overflow:hidden;}div.gridbox_dhx_skyblue.gridbox table.obj.row20px tr td img{display:block;}div.gridbox_dhx_skyblue.gridbox table.obj.row20px tr td.group_row img,div.gridbox_dhx_skyblue.gridbox table.obj.row20px tr td .treegrid_cell img{display:inline;}.dhtmlx_message_area{position:fixed;right:5px;width:250px;z-index:1000;padding:0;}.dhtmlx-info{color:#444;border-radius:4px;min-width:120px;padding:10px 10px 10px 20px;background-color:#FFC;font-size:12px;font-family:Tahoma;z-index:10000;margin:0 5px 5px 5px;border:1px solid #d3d3d3;box-shadow:0 0 5px #ccc;-webkit-transition:all .5s ease;-moz-transition:all .5s ease;-o-transition:all .5s ease;transition:all .5s ease;}.dhtmlx-info.hidden{height:0;padding-bottom:0;padding-top:0;border-width:0;margin-top:0;margin-bottom:0;overflow:hidden;}.dhtmlx-error{background-color:#f17373;color:#fff;}.dhtmlx_modal_box{overflow:hidden;display:inline-block;min-width:300px;width:300px!important;text-align:center;position:fixed;background-color:#fff;z-index:20000;-moz-box-shadow:0 0 5px #AAA;-webkit-box-shadow:0 0 0 #AAA;box-shadow:0 0 5px #AAA;border:1px solid #a4bed4;border-radius:6px;}.dhtmlx_popup_title{padding:5px 0;font-size:12px;-webkit-border-top-right-radius:6px;-webkit-border-top-left-radius:6px;border-radius-top-right:6px;line-height:16px;font-family:Tahoma;font-weight:bold;}.dhtmlx-info,.dhtmlx_popup_title,.dhtmlx_popup_button{-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-o-user-select:none;user-select:none;-moz-user-select:-moz-none;cursor:pointer;}.dhtmlx_popup_text{font-size:13px;font-family:Tahoma;color:#444;min-height:30px;padding:20px 10px 10px 10px!important;overflow:hidden;}.dhtmlx_popup_controls{font-family:Tahoma;font-weight:bold;padding:10px 10px 17px 10px!important;}.dhtmlx_popup_button{font-size:12px;font-family:Tahoma;font-weight:bold;min-width:120px;width:120px;height:20px;display:inline-block;margin:0 5px;border-radius:4px;}.dhtmlx_popup_button div{line-height:20px;}div.dhx_modal_cover{background-color:#000;cursor:default;opacity:.2;filter:progid:DXImageTransform.Microsoft.Alpha(opacity=20);position:fixed;z-index:19999;left:0;top:0;width:100%;height:100%;border:none;zoom:1;}.dhtmlx_popup_button{color:#2e3947;text-shadow:0 1px 0 #fff;border:1px solid #a4bed4;background-color:#d5e6fc;background-image:-moz-linear-gradient(center bottom,#e1eeff 0,#cce2fe 12%,#ecf2f7 100%);background-image:-webkit-gradient(linear,left top,left bottom,color-stop(0.00,#ecf2f7),color-stop(0.88,#cce2fe),color-stop(1.00,#e1eeff));background:-o-linear-gradient(top,#e1eeff,#cce2fe 12%,#ecf2f7);background:linear-gradient(top,#e1eeff,#cce2fe 12%,#ecf2f7);background:-ms-linear-gradient(top,#e1eeff 0,#cce2fe 12%,#ecf2f7 100%);}.dhtmlx_popup_button:active,.dhtmlx_popup_button:focus{box-shadow:inset 0 0 2px #aaa;background:#bdd9fc;background:-moz-linear-gradient(top,#C4DDFF 0,#bdd9fc 88%,#deeaf4 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#C4DDFF),color-stop(88%,#bdd9fc),color-stop(100%,#deeaf4));background:-o-linear-gradient(top,#C4DDFF 0,#bdd9fc 88%,#deeaf4 100%);background:-ms-linear-gradient(top,#C4DDFF 0,#bdd9fc 88%,#deeaf4 100%);background:linear-gradient(top,#C4DDFF 0,#bdd9fc 88%,#deeaf4 100%);}.dhtmlx_popup_title{box-shadow:inset 0 0 2px #fff;display:block;}.dhtmlx-alert-error .dhtmlx_popup_title,.dhtmlx-confirm-error .dhtmlx_popup_title{color:white;border:1px solid #f17373;background:#f17373;background:-webkit-linear-gradient(top,#ff7c7c,#f17373 88%,#ff7361);background:-moz-linear-gradient(top,#ff7c7c,#f17373 88%,#ff7361);background:-o-linear-gradient(top,#ff7c7c,#f17373 88%,#ff7361);background:linear-gradient(top,#ff7c7c,#f17373 88%,#ff7361);background:-ms-linear-gradient(top,#ff7c7c 0,#f17373 88%,#ffbc75 100%);}.dhtmlx-alert-error.dhtmlx_modal_box,.dhtmlx-confirm-error.dhtmlx_modal_box{border:1px solid #f17373;}.dhtmlx-alert-warning .dhtmlx_popup_title,.dhtmlx-confirm-warning .dhtmlx_popup_title{color:#000;border:1px solid #d2b07f;background:#ff9f37;background:-webkit-linear-gradient(top,#ffc786,#ff9523 88%,#ffbc75);background:-moz-linear-gradient(top,#ffc786,#ff9523 88%,#ffbc75);background:-o-linear-gradient(top,#ffc786,#ff9523 88%,#ffbc75);background:linear-gradient(top,#ffc786,#ff9523 88%,#ffbc75);background:-ms-linear-gradient(top,#ffc786 0,#ff9523 88%,#ffbc75 100%);}.dhtmlx-alert-warning .dhtmlx_popup_controls,.dhtmlx-confirm-warning .dhtmlx_popup_controls{border:1px solid #d5d5d5;border-width:0 1px 1px 1px;}.dhtmlx-alert-warning .dhtmlx_popup_text,.dhtmlx-confirm-warning .dhtmlx_popup_text{border:1px solid #d5d5d5;border-width:0 1px 0 1px;}.dhtmlx-alert .dhtmlx_popup_title,.dhtmlx-confirm .dhtmlx_popup_title{color:#000;border:1px solid #a4bed4;background:#d5e6fc;background:-moz-linear-gradient(center bottom,#e1eeff 0,#cce2fe 12%,#ecf2f7 100%);background:-webkit-gradient(linear,left top,left bottom,color-stop(0.00,#ecf2f7),color-stop(0.88,#cce2fe),color-stop(1.00,#e1eeff));background:-o-linear-gradient(top,#e1eeff,#cce2fe 12%,#ecf2f7);background:linear-gradient(top,#e1eeff,#cce2fe 12%,#ecf2f7);background:-ms-linear-gradient(top,#e1eeff 0,#cce2fe 12%,#ecf2f7 100%);}.dhtmlx-alert .dhtmlx_popup_controls,.dhtmlx-confirm .dhtmlx_popup_controls{border:1px solid #d5d5d5;border-width:0 1px 1px 1px;}.dhtmlx-alert .dhtmlx_popup_text,.dhtmlx-confirm .dhtmlx_popup_text{border:1px solid #d5d5d5;border-width:0 1px 0 1px;}
+/*
+Product Name: dhtmlxGrid
+Version: 4.1.3
+Edition: Standard
+License: content of this file is covered by GPL. Usage outside GPL terms is prohibited. To obtain Commercial or Enterprise license contact sales@dhtmlx.com
+Copyright UAB Dinamenta http://www.dhtmlx.com
+*/
+
+/* skin detected, extra file: skins/dhx_skyblue.less */
+
+
+div.gridbox {
+	overflow: hidden;
+	text-align: left;
+}
+.dhx_sub_row {
+	background-color: #ffffff;
+}
+div.gridbox table.obj {
+	height: 1px;
+}
+div.gridbox table.hdr td {
+	line-height: normal;
+	border: 1px solid;
+	border-color: #ffffff Gray Gray #ffffff;
+	text-align: center;
+	margin: 0px;
+	padding: 7px 0px 7px 0px;
+	font-weight: normal;
+	overflow: hidden;
+	empty-cells: show;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+div.gridbox table.hdr td div.hdrcell {
+	overflow: hidden;
+}
+div.gridbox table.obj td {
+	border: 1px solid;
+	border-color: #ffffff Gray Gray #ffffff;
+	overflow: hidden;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	empty-cells: show;
+	white-space: normal;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+div.gridbox table.obj th,
+div.gridbox table.hdr th {
+	padding: 0px;
+	margin: 0px;
+}
+div.gridbox table.row20px tr td {
+	height: 20px;
+	white-space: nowrap;
+	padding: 0px;
+}
+div.gridbox .objbox {
+	background-color: #ffffff;
+	position: relative;
+	-webkit-overflow-scrolling: touch;
+}
+div.gridbox table.obj td span.space,
+div.gridbox table.obj td img.space {
+	width: 18px;
+}
+div.gridbox table.obj td.editable {
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	-o-user-select: text;
+	user-select: text;
+}
+div.gridbox table.obj td.group_row {
+	vertical-align: middle;
+	font-family: Tahoma;
+	font-size: 10pt;
+	font-weight: bold;
+	height: 30px;
+	border: 0px;
+	border-bottom: 2px solid navy;
+}
+.dragSpanDiv {
+	font-size: 12px;
+	border: 1px gray solid;
+	background-color: #ffffff;
+	z-index: 999;
+}
+.dhx_combo_select {
+	border: 1px solid;
+	border-color: black silver silver black;
+	background-color: #ffffff;
+	overflow: auto;
+	cursor: default;
+	position: absolute;
+	height: auto;
+	z-index: 600;
+}
+.dhx_combo_edit {
+	width: 100%;
+	border: 0px;
+	padding: 0px;
+	padding-right: 1px;
+	margin: 0px;
+	overflow: hidden;
+}
+.gridbox_dhx_skyblue textarea.dhx_combo_edit {
+	margin-bottom: -6px;
+}
+.dhx_textarea {
+	border: 1px solid;
+	border-color: black silver silver black;
+	position: absolute;
+	height: 100px;
+	z-index: 600;
+}
+.dhx_clist {
+	background-color: #ffffff;
+	border: 1px solid black;
+	padding: 2px 2px 2px 2px;
+	z-index: 300;
+}
+.gridDragLine {
+	position: absolute;
+	top: 10px;
+	left: 0px;
+	width: 100%;
+	height: 2px;
+	background-color: black;
+	overflow: hidden;
+}
+div.pagingBlock .pagingCurrentPage {
+	font-weight: bold;
+	cursor: default;
+}
+div.pagingBlock .pagingPage {
+	cursor: pointer;
+	text-decoration: underline;
+}
+div.pagingBlock a {
+	text-decoration: none;
+	padding-right: 2px;
+	color: black;
+	cursor: pointer;
+}
+div.pagingBlock a.dhx_not_active {
+	text-decoration: none;
+	cursor: default;
+}
+.toolbar_select {
+	font-size: 10px;
+}
+.dhtmlxGrid_selection {
+	opacity: 0.5;
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+	background-color: yellow;
+	border: 1px dotted black;
+}
+div.gridbox div.ftr {
+	position: absolute;
+	left: 0px;
+	bottom: 1px;
+	width: 100%;
+	overflow: hidden;
+}
+div.gridbox div.ftr td {
+	padding: 0px;
+	padding-left: 10px;
+	padding-right: 5px;
+	border-top: 1px solid gray;
+	border-right: 1px solid gray;
+	background-color: #ffffcc;
+	font-style: italic;
+	overflow: hidden;
+}
+div.gridbox table.hdr td.columnTargetR div.hdrcell {
+	border-right: 3px double #FF6600;
+	border-left: 3px solid #D4D0C8;
+}
+div.gridbox table.hdr td.columnTargetL div.hdrcell {
+	border-right: 3px solid #D4D0C8;
+	border-left: 3px double #FF6600;
+}
+.dhx_dragColDiv {
+	background-color: #D4D0C8;
+	border: 1px solid;
+	border-color: #ffffff Gray Gray #ffffff;
+	text-align: center;
+	margin: 0px;
+	padding: 5px 20px 5px 20px;
+	font-weight: normal;
+	opacity: 0.75;
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=75);
+}
+.dhtmlx_live_validation_error {
+	background-color: #FFE0E0 !important;
+}
+.dhtmlx_validation_error {
+	border-bottom: 2px solid red !important;
+}
+.dhx_header_cmenu {
+	background-color: #ffffff;
+	border: 2px outset silver;
+	z-index: 2;
+}
+.dhx_header_cmenu_item {
+	white-space: nowrap;
+}
+div.gridboxgridbox_dhx_skyblue div.ftr td {
+	text-align: right;
+	color: black;
+	background-color: #e2efff;
+	background: linear-gradient(#e2efff,#d3e7ff);
+	filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+	border-color: #a4bed4;
+}
+div.gridbox td.filter input,
+div.gridbox td.filter select {
+	width: 90%;
+	font-size: 8pt;
+	font-family: Tahoma;
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-moz-user-select: text;
+	-ms-user-select: text;
+	-o-user-select: text;
+	user-select: text;
+}
+div.gridbox_dhx_skyblue.gridbox .ftr,
+div.gridbox_dhx_skyblue.gridbox .xhdr {
+	color: black;
+	background-color: #e2efff;
+	background: linear-gradient(#e2efff,#d3e7ff);
+	filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+}
+div.gridbox_dhx_skyblue.isModern table.hdr tr td {
+	color: black;
+	background-color: #e2efff;
+	background: linear-gradient(#e2efff,#d3e7ff);
+	filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+}
+div.gridbox_dhx_skyblue.isIE table.hdr tr {
+	color: black;
+	background-color: #e2efff;
+	background: linear-gradient(#e2efff,#d3e7ff);
+	filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+}
+div.gridbox_dhx_skyblue.gridbox table.obj tr td {
+	border-width: 0px 0px 0px 0px;
+	padding-right: 4px;
+	padding-left: 4px;
+}
+div.gridbox_dhx_skyblue.gridbox table.hdr td div.hdrcell {
+	padding-left: 10px;
+	width: auto;
+}
+div.gridbox_dhx_skyblue.gridbox table.hdr td {
+	border-width: 1px 1px 1px 1px;
+	border-color: #e7f1ff #a4bed4 #a4bed4 #e7f1ff;
+	background-color: transparent;
+	font-family: Tahoma, Helvetica;
+	font-size: 12px;
+	color: black;
+	vertical-align: top;
+	text-align: left;
+}
+div.gridbox_dhx_skyblue.gridbox {
+	border: 1px solid #a4bed4;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj {
+	font-family: Tahoma, Helvetica;
+	font-size: 12px;
+	color: black;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj tr td {
+	padding-top: 3px;
+	padding-bottom: 3.2px;
+}
+* html .gridbox_dhx_skyblue.gridbox .obj td {
+	height: auto;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj.row20px tr td {
+	height: 23px;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj tr td {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-right: 1px solid #ffffff;
+	border-top: 1px solid #ffffff;
+	border-bottom: 1px solid #ffffff;
+}
+div.gridbox_dhx_skyblue.isModern table.obj.row20px tr td {
+	line-height: 23px;
+}
+div.gridbox_dhx_skyblue table.obj.row20px tr td.editable {
+	height: 21px;
+	line-height: 21px;
+}
+div.gridbox_dhx_skyblue table.obj.row20px tr td.editable .treegrid_cell {
+	margin-top: -2px;
+	height: 21px;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj tr td.editable div.treegrid_cell {
+	padding: 1px 4px !important;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj tr.rowselected {
+	background-color: #b5deff;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj tr.rowselected td {
+	background-color: #b5deff;
+	color: black;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj tr.rowselected td,
+div.gridbox_dhx_skyblue.gridbox table.obj tr.odd_dhx_skyblue.rowselected td {
+	background-color: #b5deff;
+	border-top: 1px solid #a1ceed;
+	border-bottom: 1px solid #a1ceed;
+	border-right: 1px solid #b5deff;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj tr td.cellselected {
+	background-color: #b5deff;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj tr.odd_dhx_skyblue {
+	background: #ebf3ff;
+	border-top: 1px solid #ebf3ff;
+	border-bottom: 1px solid #ebf3ff;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj tr.odd_dhx_skyblue {
+	background: #ebf3ff;
+}
+.dhx_combo_select,
+.gridbox_dhx_skyblue.gridbox .dhx_combo_edit,
+.gridbox_dhx_skyblue.gridbox .dhx_textarea,
+dhx_dragColDiv,
+div.gridbox div.ftr td,
+div.pagingBlock,
+span.recordsInfoBlock {
+	font-family: Tahoma, Helvetica;
+	font-size: 12px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+.gridbox_dhx_skyblue .dhx_combo_edit {
+	padding: 1px 0px 1px 1px;
+}
+.gridbox_dhx_skyblue.isIE .dhx_combo_edit {
+	padding: 0px 0px 0px 1px;
+}
+.gridbox_dhx_skyblue.gridbox .dhx_sub_row {
+	background-color: transparent;
+}
+.dhx_header_cmenu {
+	background-color: #ffffff;
+	border: 2px outset silver;
+	z-index: 2;
+}
+.dhx_header_cmenu_item {
+	white-space: nowrap;
+}
+.dhx_pbox {
+	margin-top: 3px;
+	border: 1px solid #D4D0C8;
+	border-top: 0px;
+	font-size: 10px;
+}
+.dhx_pline {
+	background-color: white;
+	margin: -15px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	float: left;
+}
+.dhx_page,
+.dhx_pager_info {
+	margin: 3px;
+	text-align: center;
+	font-family: tahoma;
+	font-size: 12px;
+	float: left;
+	cursor: pointer;
+	color: black;
+	background-color: gray;
+	padding: 1px;
+}
+.dhx_pager_info {
+	white-space: nowrap;
+	background-color: white;
+	margin: -8px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	cursor: default;
+}
+.dhx_page div {
+	background-color: white;
+	width: 16px;
+	height: 17px;
+	vertical-align: middle;
+}
+div.dhx_page_active {
+	font-weight: bold;
+	background-color: lightgrey;
+	cursor: default;
+	color: white;
+}
+.dhx_pbox_modern {
+	margin-top: 3px;
+	border: 1px solid #D6D6D6;
+	border-top: 0px;
+	font-size: 10px;
+}
+.dhx_pline_modern {
+	background-color: white;
+	margin: -15px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	float: left;
+}
+.dhx_page_modern,
+.dhx_pager_info_modern {
+	margin: 3px;
+	text-align: center;
+	font-family: tahoma;
+	font-size: 12px;
+	float: left;
+	cursor: pointer;
+	color: #055A78;
+	background-color: #D6D6D6;
+	padding: 1px;
+}
+.dhx_pager_info_modern {
+	white-space: nowrap;
+	background-color: white;
+	margin: -8px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	cursor: default;
+}
+.dhx_page_modern div {
+	background-color: white;
+	width: 16px;
+	height: 17px;
+	vertical-align: middle;
+}
+div.dhx_page_active_modern {
+	font-weight: bold;
+	background-color: #055A78;
+	cursor: default;
+	color: white;
+}
+.dhx_pbox_light {
+	margin-top: 3px;
+	border: 1px solid #C2D5DC;
+	border-top: 0px;
+	font-size: 10px;
+}
+.dhx_pline_light {
+	background-color: white;
+	margin: -15px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	float: left;
+}
+.dhx_page_light,
+.dhx_pager_info_light {
+	margin: 3px;
+	text-align: center;
+	font-family: tahoma;
+	font-size: 12px;
+	float: left;
+	cursor: pointer;
+	color: #055A78;
+	background-color: #93AFBA;
+	padding: 1px;
+}
+.dhx_pager_info_light {
+	white-space: nowrap;
+	background-color: white;
+	margin: -8px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	cursor: default;
+}
+.dhx_page_light div {
+	background-color: white;
+	width: 16px;
+	height: 17px;
+	vertical-align: middle;
+}
+div.dhx_page_active_light {
+	font-weight: bold;
+	background-color: #D1DFE3;
+	cursor: default;
+	color: white;
+}
+.dhx_pbox_skyblue {
+	margin-top: 3px;
+	border: 1px solid #C2D5DC;
+	border-top: 0px;
+	font-size: 10px;
+}
+.dhx_pline_skyblue {
+	background-color: white;
+	margin: -15px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	float: left;
+}
+.dhx_page_skyblue,
+.dhx_pager_info_skyblue {
+	margin: 3px;
+	text-align: center;
+	font-family: tahoma;
+	font-size: 12px;
+	float: left;
+	cursor: pointer;
+	color: #055A78;
+	background-color: #93AFBA;
+	padding: 1px;
+}
+.dhx_pager_info_skyblue {
+	white-space: nowrap;
+	background-color: white;
+	margin: -8px 10px 10px 10px;
+	padding: 0px 5px 0px 5px;
+	cursor: default;
+}
+.dhx_page_skyblue div {
+	background-color: white;
+	width: 16px;
+	height: 17px;
+	vertical-align: middle;
+}
+div.dhx_page_active_skyblue {
+	font-weight: bold;
+	color: black;
+	background-color: #e2efff;
+	background: linear-gradient(#e2efff,#d3e7ff);
+	filter: progid:DXImageTransform.Microsoft.Gradient(gradientType=0,startColorStr=#e2efff,endColorStr=#d3e7ff) progid:DXImageTransform.Microsoft.Alpha(opacity=100);
+	border: 1px solid #a4bed4;
+	padding: 0px;
+	cursor: default;
+}
+div.dhx_page_active_skyblue div.dhx_page_active_skyblue {
+	border: 0px solid #a4bed4;
+}
+.calcTable {
+	width: 100px;
+	background-color: silver;
+	border: 1px black solid;
+}
+.calcButton {
+	height: 20px;
+	cursor: pointer;
+	text-align: center;
+	background-color: gray;
+	color: white;
+	font-size: 10px;
+	font-weight: bold;
+	border-top: 1px solid silver;
+	border-right: 1px solid silver;
+}
+.calcPressed {
+	height: 20px;
+	cursor: pointer;
+	text-align: center;
+	background-color: gray;
+	color: white;
+	font-size: 10px;
+	font-weight: bold;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+}
+.calcInput {
+	background-color: white;
+	font-size: 10px;
+	font-weight: bold;
+	font-family: Tahoma, Helvetica;
+}
+.calkSubmit {
+	padding: 2px;
+	cursor: pointer;
+	text-align: center;
+	background-color: silver;
+	color: white;
+	font-size: 10px;
+	font-weight: bold;
+	border-top: 1px solid white;
+	border-right: 1px solid white;
+}
+.dhxgrid_sort_desc,
+.dhxgrid_sort_asc {
+	width: 9px;
+	height: 8px;
+	background-image: url("../imgs/dhxgrid_skyblue/sort_desc.gif");
+	background-repeat: no-repeat;
+}
+.dhxgrid_sort_asc {
+	background-image: url("../imgs/dhxgrid_skyblue/sort_asc.gif");
+	background-repeat: no-repeat;
+}
+.dhxgrid_rh_dhx_skyblue {
+	position: absolute;
+	top: -20px;
+	left: -24px;
+	width: 23px;
+	height: 10px;
+	margin: 0px;
+	padding: 0px;
+	border-width: 0px;
+	font-size: 1px;
+	overflow: hidden;
+}
+.dhxgrid_skin_detect {
+	position: absolute;
+	left: 0px;
+	top: -100px;
+	margin: 0;
+	padding: 0;
+	border: 0px solid white;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj.row20px tr td img {
+	display: block;
+}
+div.gridbox_dhx_skyblue.gridbox table.obj.row20px tr td.group_row img,
+div.gridbox_dhx_skyblue.gridbox table.obj.row20px tr td .treegrid_cell img {
+	display: inline;
+}
+@-moz-keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes loading {
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loading {
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* line 87, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading {
+  position: relative;
+}
+
+/* line 90, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  -webkit-animation: loadingStart 3s 300ms linear 1 both;
+  -moz-animation: loadingStart 3s 300ms linear 1 both;
+  -o-animation: loadingStart 3s 300ms linear 1 both;
+  animation: loadingStart 3s 300ms linear 1 both;
+  background: rgba(255, 255, 255, 0.25);
+  text-align: center;
+}
+
+/* line 103, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-text {
+  font-size: 0.875rem;
+  line-height: 1.3125rem;
+  text-shadow: white 0 0 1em, white 0 0 0.5em, white 0 0 0.25em;
+  position: relative;
+  display: block;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* line 112, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-text:after {
+  content: "...";
+}
+
+/* line 115, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-spinner {
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: -3.9375rem auto 0;
+  color: #1a1d1d;
+  text-align: center;
+}
+
+/* line 125, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-icon {
+  font-size: 4.8125rem;
+  line-height: 5.25rem;
+  text-shadow: rgba(255, 255, 255, 0.75) 0 0 0.5em;
+  -webkit-animation: loading 1s steps(4) infinite;
+  -moz-animation: loading 1s steps(4) infinite;
+  -o-animation: loading 1s steps(4) infinite;
+  animation: loading 1s steps(4) infinite;
+  display: block;
+  vertical-align: middle;
+}
+
+/* line 136, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-icon:before {
+  vertical-align: middle;
+  content: "\e000";
+  font-family: "demo";
+}
+/*
+* This is a manifest file that'll be compiled into application.css, which will include all the files
+* listed below.
+*
+* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+* or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+*
+* You're free to add application-wide styles to this file and they'll appear at the bottom of the
+* compiled file so the styles you add here take precedence over styles defined in any styles
+* defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+* file per style scope.
+*
+
+
+
+
+
+
+*/
+/*!
+Chosen, a Select Box Enhancer for jQuery and Prototype
+by Patrick Filler for Harvest, http://getharvest.com
+
+Version 1.4.1
+Full source at https://github.com/harvesthq/chosen
+Copyright (c) 2011-2015 Harvest http://getharvest.com
+
+MIT License, https://github.com/harvesthq/chosen/blob/master/LICENSE.md
+This file is generated by `grunt build`, do not edit it by hand.
+*/
+/* @group Base */
+/* line 14, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 13px;
+  zoom: 1;
+  *display: inline;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+/* line 25, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 30, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .chosen-drop {
+  position: absolute;
+  top: 100%;
+  left: -9999px;
+  z-index: 1010;
+  width: 100%;
+  border: 1px solid #aaa;
+  border-top: 0;
+  background: #fff;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+}
+
+/* line 41, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container.chosen-with-drop .chosen-drop {
+  left: 0;
+}
+
+/* line 44, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container a {
+  cursor: pointer;
+}
+
+/* line 47, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .search-choice .group-name, .chosen-container .chosen-single .group-name {
+  margin-right: 4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: normal;
+  color: #999999;
+}
+
+/* line 55, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .search-choice .group-name:after, .chosen-container .chosen-single .group-name:after {
+  content: ":";
+  padding-left: 2px;
+  vertical-align: top;
+}
+
+/* @end */
+/* @group Single Chosen */
+/* line 63, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-single {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0 0 0 8px;
+  height: 25px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  background-color: #fff;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #ffffff), color-stop(50%, #f6f6f6), color-stop(52%, #eeeeee), color-stop(100%, #f4f4f4));
+  background: -webkit-linear-gradient(top, #ffffff 20%, #f6f6f6 50%, #eeeeee 52%, #f4f4f4 100%);
+  background: -moz-linear-gradient(top, #ffffff 20%, #f6f6f6 50%, #eeeeee 52%, #f4f4f4 100%);
+  background: -o-linear-gradient(top, #ffffff 20%, #f6f6f6 50%, #eeeeee 52%, #f4f4f4 100%);
+  background: linear-gradient(top, #ffffff 20%, #f6f6f6 50%, #eeeeee 52%, #f4f4f4 100%);
+  background-clip: padding-box;
+  box-shadow: 0 0 3px white inset, 0 1px 1px rgba(0, 0, 0, 0.1);
+  color: #444;
+  text-decoration: none;
+  white-space: nowrap;
+  line-height: 24px;
+}
+
+/* line 84, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-default {
+  color: #999;
+}
+
+/* line 87, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-single span {
+  display: block;
+  overflow: hidden;
+  margin-right: 26px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* line 94, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-single-with-deselect span {
+  margin-right: 38px;
+}
+
+/* line 97, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-single abbr {
+  position: absolute;
+  top: 6px;
+  right: 26px;
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: url("chosen-sprite.png") -42px 1px no-repeat;
+  font-size: 1px;
+}
+
+/* line 107, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-single abbr:hover {
+  background-position: -42px -10px;
+}
+
+/* line 110, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single.chosen-disabled .chosen-single abbr:hover {
+  background-position: -42px -10px;
+}
+
+/* line 113, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-single div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 18px;
+  height: 100%;
+}
+
+/* line 121, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-single div b {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: url("chosen-sprite.png") no-repeat 0px 2px;
+}
+
+/* line 127, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-search {
+  position: relative;
+  z-index: 1010;
+  margin: 0;
+  padding: 3px 4px;
+  white-space: nowrap;
+}
+
+/* line 134, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-search input[type="text"] {
+  margin: 1px 0;
+  padding: 4px 20px 4px 5px;
+  width: 100%;
+  height: auto;
+  outline: 0;
+  border: 1px solid #aaa;
+  background: white url("chosen-sprite.png") no-repeat 100% -20px;
+  background: url("chosen-sprite.png") no-repeat 100% -20px;
+  font-size: 1em;
+  font-family: sans-serif;
+  line-height: normal;
+  border-radius: 0;
+}
+
+/* line 148, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single .chosen-drop {
+  margin-top: -1px;
+  border-radius: 0 0 4px 4px;
+  background-clip: padding-box;
+}
+
+/* line 153, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-single.chosen-container-single-nosearch .chosen-search {
+  position: absolute;
+  left: -9999px;
+}
+
+/* @end */
+/* @group Results */
+/* line 160, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .chosen-results {
+  color: #444;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0 4px 4px 0;
+  padding: 0 0 0 4px;
+  max-height: 240px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* line 170, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .chosen-results li {
+  display: none;
+  margin: 0;
+  padding: 5px 6px;
+  list-style: none;
+  line-height: 15px;
+  word-wrap: break-word;
+  -webkit-touch-callout: none;
+}
+
+/* line 179, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .chosen-results li.active-result {
+  display: list-item;
+  cursor: pointer;
+}
+
+/* line 183, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .chosen-results li.disabled-result {
+  display: list-item;
+  color: #ccc;
+  cursor: default;
+}
+
+/* line 188, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .chosen-results li.highlighted {
+  background-color: #3875d7;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #3875d7), color-stop(90%, #2a62bc));
+  background-image: -webkit-linear-gradient(#3875d7 20%, #2a62bc 90%);
+  background-image: -moz-linear-gradient(#3875d7 20%, #2a62bc 90%);
+  background-image: -o-linear-gradient(#3875d7 20%, #2a62bc 90%);
+  background-image: linear-gradient(#3875d7 20%, #2a62bc 90%);
+  color: #fff;
+}
+
+/* line 197, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .chosen-results li.no-results {
+  color: #777;
+  display: list-item;
+  background: #f4f4f4;
+}
+
+/* line 202, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .chosen-results li.group-result {
+  display: list-item;
+  font-weight: bold;
+  cursor: default;
+}
+
+/* line 207, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .chosen-results li.group-option {
+  padding-left: 15px;
+}
+
+/* line 210, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container .chosen-results li em {
+  font-style: normal;
+  text-decoration: underline;
+}
+
+/* @end */
+/* @group Multi Chosen */
+/* line 217, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  padding: 0 5px;
+  width: 100%;
+  height: auto !important;
+  height: 1%;
+  border: 1px solid #aaa;
+  background-color: #fff;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(1%, #eeeeee), color-stop(15%, #ffffff));
+  background-image: -webkit-linear-gradient(#eeeeee 1%, #ffffff 15%);
+  background-image: -moz-linear-gradient(#eeeeee 1%, #ffffff 15%);
+  background-image: -o-linear-gradient(#eeeeee 1%, #ffffff 15%);
+  background-image: linear-gradient(#eeeeee 1%, #ffffff 15%);
+  cursor: text;
+}
+
+/* line 234, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices li {
+  float: left;
+  list-style: none;
+}
+
+/* line 238, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices li.search-field {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+/* line 243, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices li.search-field input[type="text"] {
+  margin: 1px 0;
+  padding: 0;
+  height: 25px;
+  outline: 0;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none;
+  color: #999;
+  font-size: 100%;
+  font-family: sans-serif;
+  line-height: normal;
+  border-radius: 0;
+}
+
+/* line 257, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices li.search-choice {
+  position: relative;
+  margin: 3px 5px 3px 0;
+  padding: 3px 20px 3px 5px;
+  border: 1px solid #aaa;
+  max-width: 100%;
+  border-radius: 3px;
+  background-color: #eeeeee;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eeeeee));
+  background-image: -webkit-linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+  background-image: -moz-linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+  background-image: -o-linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+  background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+  background-size: 100% 19px;
+  background-repeat: repeat-x;
+  background-clip: padding-box;
+  box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
+  color: #333;
+  line-height: 13px;
+  cursor: default;
+}
+
+/* line 278, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices li.search-choice span {
+  word-wrap: break-word;
+}
+
+/* line 281, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close {
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: url("chosen-sprite.png") -42px 1px no-repeat;
+  font-size: 1px;
+}
+
+/* line 291, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices li.search-choice .search-choice-close:hover {
+  background-position: -42px -10px;
+}
+
+/* line 294, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices li.search-choice-disabled {
+  padding-right: 5px;
+  border: 1px solid #ccc;
+  background-color: #e4e4e4;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eeeeee));
+  background-image: -webkit-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+  background-image: -moz-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+  background-image: -o-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+  background-image: linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
+  color: #666;
+}
+
+/* line 305, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices li.search-choice-focus {
+  background: #d4d4d4;
+}
+
+/* line 308, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-choices li.search-choice-focus .search-choice-close {
+  background-position: -42px -10px;
+}
+
+/* line 311, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-results {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 315, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-multi .chosen-drop .result-selected {
+  display: list-item;
+  color: #ccc;
+  cursor: default;
+}
+
+/* @end */
+/* @group Active  */
+/* line 323, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-active .chosen-single {
+  border: 1px solid #5897fb;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* line 327, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-active.chosen-with-drop .chosen-single {
+  border: 1px solid #aaa;
+  -moz-border-radius-bottomright: 0;
+  border-bottom-right-radius: 0;
+  -moz-border-radius-bottomleft: 0;
+  border-bottom-left-radius: 0;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #eeeeee), color-stop(80%, #ffffff));
+  background-image: -webkit-linear-gradient(#eeeeee 20%, #ffffff 80%);
+  background-image: -moz-linear-gradient(#eeeeee 20%, #ffffff 80%);
+  background-image: -o-linear-gradient(#eeeeee 20%, #ffffff 80%);
+  background-image: linear-gradient(#eeeeee 20%, #ffffff 80%);
+  box-shadow: 0 1px 0 #fff inset;
+}
+
+/* line 340, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-active.chosen-with-drop .chosen-single div {
+  border-left: none;
+  background: transparent;
+}
+
+/* line 344, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-active.chosen-with-drop .chosen-single div b {
+  background-position: -18px 2px;
+}
+
+/* line 347, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-active .chosen-choices {
+  border: 1px solid #5897fb;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* line 351, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-container-active .chosen-choices li.search-field input[type="text"] {
+  color: #222 !important;
+}
+
+/* @end */
+/* @group Disabled Support */
+/* line 357, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-disabled {
+  opacity: 0.5 !important;
+  cursor: default;
+}
+
+/* line 361, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-disabled .chosen-single {
+  cursor: default;
+}
+
+/* line 364, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-disabled .chosen-choices .search-choice .search-choice-close {
+  cursor: default;
+}
+
+/* @end */
+/* @group Right to Left */
+/* line 370, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl {
+  text-align: right;
+}
+
+/* line 373, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-single {
+  overflow: visible;
+  padding: 0 8px 0 0;
+}
+
+/* line 377, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-single span {
+  margin-right: 0;
+  margin-left: 26px;
+  direction: rtl;
+}
+
+/* line 382, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-single-with-deselect span {
+  margin-left: 38px;
+}
+
+/* line 385, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-single div {
+  right: auto;
+  left: 3px;
+}
+
+/* line 389, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-single abbr {
+  right: auto;
+  left: 26px;
+}
+
+/* line 393, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-choices li {
+  float: right;
+}
+
+/* line 396, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-choices li.search-field input[type="text"] {
+  direction: rtl;
+}
+
+/* line 399, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-choices li.search-choice {
+  margin: 3px 5px 3px 0;
+  padding: 3px 5px 3px 19px;
+}
+
+/* line 403, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-choices li.search-choice .search-choice-close {
+  right: auto;
+  left: 4px;
+}
+
+/* line 407, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl.chosen-container-single-nosearch .chosen-search,
+.chosen-rtl .chosen-drop {
+  left: 9999px;
+}
+
+/* line 411, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl.chosen-container-single .chosen-results {
+  margin: 0 0 4px 4px;
+  padding: 0 4px 0 0;
+}
+
+/* line 415, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-results li.group-option {
+  padding-right: 15px;
+  padding-left: 0;
+}
+
+/* line 419, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl.chosen-container-active.chosen-with-drop .chosen-single div {
+  border-right: none;
+}
+
+/* line 422, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl .chosen-search input[type="text"] {
+  padding: 4px 5px 4px 20px;
+  background: white url("chosen-sprite.png") no-repeat -30px -20px;
+  background: url("chosen-sprite.png") no-repeat -30px -20px;
+  direction: rtl;
+}
+
+/* line 428, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl.chosen-container-single .chosen-single div b {
+  background-position: 6px 2px;
+}
+
+/* line 431, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+.chosen-rtl.chosen-container-single.chosen-with-drop .chosen-single div b {
+  background-position: -12px 2px;
+}
+
+/* @end */
+/* @group Retina compatibility */
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi), only screen and (min-resolution: 1.5dppx) {
+  /* line 438, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/chosen.scss */
+  .chosen-rtl .chosen-search input[type="text"],
+  .chosen-container-single .chosen-single abbr,
+  .chosen-container-single .chosen-single div b,
+  .chosen-container-single .chosen-search input[type="text"],
+  .chosen-container-multi .chosen-choices .search-choice .search-choice-close,
+  .chosen-container .chosen-results-scroll-down span,
+  .chosen-container .chosen-results-scroll-up span {
+    background-image: url("chosen-sprite@2x.png") !important;
+    background-size: 52px 37px !important;
+    background-repeat: no-repeat !important;
+  }
+}
+/* @end */
+/* line 1, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/runs.scss */
+.scroll {
+  width: 900px;
+  height: 300px;
+  background-color: #DCDCDC;
+  overflow: scroll;
+  font-family: 'Courier', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+}
+
+/* line 9, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/runs.scss */
+.label {
+  display: block;
+  width: 20%;
+  float: left;
+  font-size: 1.0em;
+  font-weight: bold;
+  color: #5E6469;
+  text-align: left;
+}
+
+/* line 19, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/runs.scss */
+a, a:link, a:visited {
+  color: #38678b;
+  text-decoration: none;
+}
+
+@-moz-keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes loadingStart {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes loading {
+  0% {
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loading {
+  0% {
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+/* line 87, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading {
+  position: relative;
+}
+
+/* line 90, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  -webkit-animation: loadingStart 3s 300ms linear 1 both;
+  -moz-animation: loadingStart 3s 300ms linear 1 both;
+  -o-animation: loadingStart 3s 300ms linear 1 both;
+  animation: loadingStart 3s 300ms linear 1 both;
+  background: rgba(255, 255, 255, 0.25);
+  text-align: center;
+}
+
+/* line 103, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-text {
+  font-size: 0.875rem;
+  line-height: 1.3125rem;
+  text-shadow: white 0 0 1em, white 0 0 0.5em, white 0 0 0.25em;
+  position: relative;
+  display: block;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* line 112, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-text:after {
+  content: "...";
+}
+
+/* line 115, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-spinner {
+  position: absolute;
+  top: 50%;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: -3.9375rem auto 0;
+  color: #1a1d1d;
+  text-align: center;
+}
+
+/* line 125, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-icon {
+  font-size: 4.8125rem;
+  line-height: 5.25rem;
+  text-shadow: rgba(255, 255, 255, 0.75) 0 0 0.5em;
+  -webkit-animation: loading 1s steps(4) infinite;
+  -moz-animation: loading 1s steps(4) infinite;
+  -o-animation: loading 1s steps(4) infinite;
+  animation: loading 1s steps(4) infinite;
+  display: block;
+  vertical-align: middle;
+}
+
+/* line 136, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/spinner.scss */
+.loading .loading-icon:before {
+  vertical-align: middle;
+  content: "\e000";
+  font-family: "demo";
+}
+
+/* line 1, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+body.mbody {
+  padding-bottom: 100px;
+}
+
+/* line 4, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.head {
+  text-align: center;
+  margin-top: 18px;
+  font-weight: bold;
+  font-size: 32px;
+}
+
+/* line 10, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.main-top #title {
+  font-weight: bold;
+  position: relative;
+  left: 25px;
+  top: -43px;
+  font-size: 22px;
+}
+
+/* line 17, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.main-top #links {
+  padding-bottom: 7px;
+  padding-top: 6px;
+  background-color: #C9C4C4;
+  margin-right: 421px;
+  margin-bottom: 21px;
+}
+
+/* line 25, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+#nav {
+  font-size: 18px;
+}
+
+/* line 29, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.glyphicon.glyphicon-remove {
+  font-size: 25px;
+}
+
+/* line 32, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.comment {
+  border-bottom: 1px solid rgba(51, 51, 51, 0.1);
+  display: table;
+  margin-bottom: 1.5em;
+  padding-bottom: 1em;
+  width: 100%;
+}
+/* line 52, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.comment .comment-image,
+.comment .comment-content {
+  display: table-cell;
+  vertical-align: top;
+}
+/* line 58, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.comment .comment-image {
+  padding-right: 1.4em;
+}
+/* line 61, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.comment .comment-image > img {
+  background: #82a7db;
+  border-radius: 3px;
+  display: block;
+  height: auto;
+  max-width: none;
+  padding: 0.7em;
+  width: 4em;
+}
+/* line 71, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.comment-reverse-order .comment .comment-image {
+  padding-right: 0;
+  padding-left: 10px;
+}
+/* line 77, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.comment .comment-content {
+  width: 100%;
+}
+/* line 80, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.comment .comment-content h1 {
+  font-size: 1em;
+  margin: 0 0 0.5em 0;
+}
+/* line 85, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.comment .comment-content p {
+  line-height: 1.5em;
+  margin-bottom: 0.5em;
+}
+/* line 90, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.comment .comment-content p.comment-detail {
+  color: rgba(51, 51, 51, 0.5);
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+/* line 123, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 {
+  background: #40526b;
+  padding: 1.5em;
+  width: 100%;
+  display: inline-block;
+}
+/* line 136, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 .footer-logo {
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+/* line 141, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 .footer-logo img {
+  height: 1.6em;
+}
+/* line 145, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 ul {
+  line-height: 1.5em;
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+/* line 152, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 ul li {
+  font-weight: 800;
+  list-style: none;
+  padding-right: 1em;
+}
+/* line 158, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 ul li a {
+  color: rgba(255, 255, 255, 0.4);
+  text-decoration: none;
+}
+/* line 162, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 ul li a:focus, .footer-2 ul li a:hover {
+  color: white;
+}
+/* line 170, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 .footer-secondary-links li {
+  font-size: 0.8em;
+  font-weight: 400;
+}
+/* line 175, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 .footer-secondary-links ul.footer-social {
+  margin: 1em 0 0 0;
+}
+/* line 179, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 .footer-secondary-links ul.footer-social li {
+  font-size: 1em;
+  float: left;
+  line-height: 0;
+  margin: 0;
+  padding-right: 0.7em;
+}
+/* line 186, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 .footer-secondary-links ul.footer-social li:last-child {
+  padding-right: 0;
+}
+/* line 191, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 .footer-secondary-links ul.footer-social img {
+  height: 1.6em;
+  opacity: 0.7;
+  padding: 1px;
+}
+/* line 196, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.footer-2 .footer-secondary-links ul.footer-social img:focus, .footer-2 .footer-secondary-links ul.footer-social img:hover {
+  opacity: 1;
+}
+
+/* line 204, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.device-background {
+  background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png"), -webkit-linear-gradient(10deg, #0A120D, #162C4C), no-repeat #162C4C scroll;
+  background: url("https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png"), linear-gradient(10deg, #0A120D, #162C4C), no-repeat #162C4C scroll;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 20em;
+  width: 100%;
+}
+/* line 227, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.device-background .device-text {
+  color: white;
+  padding: 2em;
+}
+/* line 237, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.device-background .device-text h4 {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  font-size: 1.5em;
+  margin: 0 0 0.5em 0;
+  padding-bottom: 0.5em;
+}
+/* line 244, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.device-background .device-text p {
+  line-height: 1.5em;
+  margin-bottom: 1.5em;
+}
+/* line 249, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.device-background .device-text button {
+  background-color: #477DCA;
+  border-radius: 3px;
+  border: 0;
+  color: white;
+  display: inline-block;
+  font-size: inherit;
+  font-weight: bold;
+  padding: 7px 18px;
+  text-decoration: none;
+  background-clip: padding-box;
+  padding: 0.7em 1em;
+}
+/* line 354, /Users/tomwilliamson/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/bourbon-4.2.1/app/assets/stylesheets/_bourbon-deprecated-upcoming.scss */
+.device-background .device-text button:hover:not(:disabled) {
+  background-color: #578ad4;
+  cursor: pointer;
+}
+/* line 365, /Users/tomwilliamson/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/bourbon-4.2.1/app/assets/stylesheets/_bourbon-deprecated-upcoming.scss */
+.device-background .device-text button:active:not(:disabled), .device-background .device-text button:focus:not(:disabled) {
+  background-color: #3c71bb;
+  cursor: pointer;
+}
+/* line 59, /Users/tomwilliamson/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/bourbon-4.2.1/app/assets/stylesheets/_bourbon-deprecated-upcoming.scss */
+.device-background .device-text button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+/* line 255, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/welcome.scss */
+.device-background .device {
+  display: none;
+  position: relative;
+}
+
+/* line 28, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+body {
+  font-family: Helvetica, sans-serif;
+  color: #333;
+}
+
+/* line 33, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+a.btn.btn-primary {
+  color: white;
+}
+
+/* line 37, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+div.panel-heading {
+  color: #51C1DB;
+  background-color: #FFF;
+}
+
+/* line 42, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+div.panel-body {
+  color: #51C1DB;
+}
+
+/* line 46, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+div.panel-footer {
+  color: #DD5152;
+}
+
+/* line 50, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+span.glyphicon.glyphicon-remove {
+  color: #DD5152;
+}
+
+/* line 54, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+a.visited.panel-footer {
+  color: #DD5152;
+}
+
+/* line 58, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+a.btn.btn-danger {
+  color: white;
+}
+
+/* line 62, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+a.btn.btn-warning {
+  color: white;
+}
+
+/* line 66, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+a.btn.btn-info {
+  color: white;
+}
+
+/* line 70, /Users/tomwilliamson/theironyard/scc/app/assets/stylesheets/application.scss */
+.modal-backdrop {
+  z-index: 0;
+}
