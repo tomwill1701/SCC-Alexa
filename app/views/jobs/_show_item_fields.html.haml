@@ -1,6 +1,6 @@
 .row
   .col-md-9= f.collection_select :cgroup_id, Cgroup.all, :id, :name, {}, disabled: 'true'
-  .col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name, {}, disabled: 'true'
+  .col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name, {include_blank: true}, disabled: 'true'
 .row
   .col-md-2= f.text_field :chart_type, disabled: 'true'
   .col-md-2= f.text_field :size, disabled: 'true'
