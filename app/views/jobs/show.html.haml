@@ -22,13 +22,12 @@
         .col-md-1= f.check_box :private, disabled: 'true'
         .col-md-1= f.check_box :notify, as: :boolean, disabled: 'true'
         .col-md-1= f.check_box :cache, as: :boolean, disabled: 'true'
-        .col-md-8
-          %hr/
-          .col-md-12= f.text_area :description, disabled: 'true', rows: '3'
-        .col-md-8
-          %h2 Command Groups
-          %hr/
-          = f.fields_for :job_items do | jobitem |
-            = render 'show_item_fields', f: jobitem
+      .row
+        .col-md-12= f.text_area :description, disabled: 'true', rows: '3'
+      .row
+        %h2 Command Groups
+        %hr/
+        = f.fields_for :job_items do | jobitem |
+          = render 'show_item_fields', f: jobitem
     = link_to 'Close', jobs_path, class: 'btn btn-primary'
     = render 'runopts'
