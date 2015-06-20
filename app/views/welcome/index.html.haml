@@ -3,8 +3,11 @@
   .device-background
     .device-text
       %h4 Storage Control Center
-      %p Login to get started or click 'DTS' to go to our homepage.
-      = link_to 'DTS', "http://www.dtssoftware.com/", class: "btn btn-primary"
+      - if current_user
+        %p Click 'DTS' to go to our homepage.
+      - else
+        %p Login to get started or click 'DTS' to go to our homepage.
+      = link_to image_tag('dts2.png'), "http://www.dtssoftware.com/", class: "btn btn-primary"
     .device
       .screen
   %br/

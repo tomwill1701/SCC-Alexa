@@ -140,13 +140,13 @@ body.mbody {
 
   .footer-logo img {
     height: 1.6em;
-  } 
+  }
 
   ul {
     line-height: 1.5em;
     margin: 0 0 1em 0;
     padding: 0;
-    
+
   }
 
   ul li {
@@ -174,7 +174,7 @@ body.mbody {
 
     ul.footer-social {
       margin: 1em 0 0 0;
-      
+
 
       li {
         font-size: 1em;
@@ -212,10 +212,10 @@ body.mbody {
   $device-background: darken(gray, 40%);
   $device-backside-background: darken($device-background, 10%);
   $device-text-color: white;
-  $device-background-top: #162C4C; 
+  $device-background-top: #162C4C;
   $device-background-bottom: #0A120D;
   $gradient-angle: 10deg;
-  $device-image: "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png";
+  $device-image: "http://www.amts.com/wp-content/uploads/2015/04/Home-rotator-data-centers.jpg";
   $device-screen-image: "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/cosmin_capitanu_screen.jpg";
 
   @include background(url($device-image), linear-gradient($gradient-angle, $device-background-bottom, $device-background-top), no-repeat $device-background-top scroll);
@@ -258,17 +258,17 @@ body.mbody {
 
     @mixin media($large-screen) {
       @include transform(
-        perspective(800px) 
-        translateX(0px) 
-        translateY(-100px) 
-        translateZ(50px) 
-        rotateX(0deg) 
-        rotateY(-20deg) 
+        perspective(800px)
+        translateX(0px)
+        translateY(-100px)
+        translateZ(50px)
+        rotateX(0deg)
+        rotateY(-20deg)
         rotateZ(-0deg));
       background: $device-background;
       border-radius: 2em;
-      box-shadow: 
-        1px 0px lighten($device-backside-background, 20%), 
+      box-shadow:
+        1px 0px lighten($device-backside-background, 20%),
         4px 0px lighten($device-backside-background, 2%),
         7px 0px $device-backside-background,
         10px 0px $device-backside-background,
