@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
     else
       flash[:error] = "Signin failed"
     end
-    redirect_to root_path
+    redirect_to home_index_path
   end
 
   #
