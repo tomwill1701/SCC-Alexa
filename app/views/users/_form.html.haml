@@ -24,4 +24,4 @@
         .col-md-4= f.select :notify, [["Never"], ["Always"]], { label: "Notify" }, { class: "selectpicker" }
       %hr
       = f.submit "Update", class: "btn btn-primary"
-      = f.submit "Cancel"
+      = link_to 'Cancel', root_path, class: "btn btn-danger"
