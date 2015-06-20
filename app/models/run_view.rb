@@ -219,12 +219,14 @@ class RunView < ActiveRecord::Base
     #
     #  build chart
     #
-    option = { width: size[0], height: size[1], title: title }
+    option = { width: size[0], height: size[1], title: title}
     case chart_type
     when "Pie"
       GoogleVisualr::Interactive::PieChart.new(data_table, option)
     when "Bar"
       GoogleVisualr::Interactive::BarChart.new(data_table, option)
+    when "StackedBar"
+      GoogleVisualr::Interactive::BarChart.new(data_table, option + {isStacked: true} )
     when "Line"
       GoogleVisualr::Interactive::LineChart.new(data_table, option)
     when "Gauge"

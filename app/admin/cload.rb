@@ -57,10 +57,10 @@ ActiveAdmin.register Cload do
 
     cload = Cload.find(params[:id])
     eg = ExecGroup.new
-    eg.run_one("download+dsn(#{cload.dsname}", cload.lpar, current_user)
+    eg.run_one("download+dsn(#{cload.dsname}) pds control", cload.lpar, current_user)
 
     #
-    #  see if we have any prompts 
+    #  see if we have any prompts
     #
     if eg.prompts
       current_user.prompt_control(eg.prompts, load_admin_cload_path(cload), admin_cload_path(cload))

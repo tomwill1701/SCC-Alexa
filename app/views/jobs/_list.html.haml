@@ -17,7 +17,7 @@
         %td= link_to 'Fav', favorite_job_path(job), method: :post, class: 'btn btn-info btn-xs'
       - if job.owner?(current_user)
         %td= link_to 'Edit', edit_job_path(job), class: 'btn btn-default btn-xs'
-        %td= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' 
+        %td= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs'
 
 .chardin_box{ :'data-position' => 'top' }
   = paginate jobs

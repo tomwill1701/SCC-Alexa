@@ -3,7 +3,7 @@
     .col-md-9= f.collection_select :cgroup_id, Cgroup.all, :id, :name, { label: "Command" }
     .col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name, { label: "LPAR", include_blank: true }
   .row
-    .col-md-2= f.select :chart_type, %w{Pie Bar Line Gauge Area Real-Candle Bubble Column Combo Scatter Spark},
+    .col-md-2= f.select :chart_type, %w{Pie Bar StackedBar Line Gauge Area Real-Candle Bubble Column Combo Scatter Spark},
           include_blank: true
     .col-md-2= f.text_field :size
     .col-md-8= f.text_field :chart_title, label: 'Chart Title'
