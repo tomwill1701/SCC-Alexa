@@ -4,7 +4,7 @@
     %meta{:charset => "utf-8"}/
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
-    %title SCC
+    %title Storage Control Center
     %link{:href => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css", :rel => "stylesheet"}/
     %link{:href => "https://maxcdn.bootstrapcdn.com/bootswatch/3.3.0/readable/bootstrap.min.css", :rel => "stylesheet"}/
     / Latest compiled and minified JavaScript
@@ -13,6 +13,7 @@
     %script{:src => "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"}
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    = favicon_link_tag 'favicon.ico'
 
   %body.mbody
     %h2.head SCC
