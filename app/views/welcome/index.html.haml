@@ -1,0 +1,19 @@
+.container
+  %br/
+  .device-background
+    .device-text
+      %h4 Storage Control Center
+      - if current_user
+        %p Click 'DTS' to go to our homepage.
+      - else
+        %p Login to get started or click 'DTS' to go to our homepage.
+      = link_to image_tag('dts2.png'), "http://www.dtssoftware.com/", class: "btn btn-primary"
+    .device
+      .screen
+  %br/
+  .comment
+    .comment-image
+      %img{:alt => "Logo image", :src => "https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/placeholder_logo_2.png"}/
+    .comment-content
+      %h1 Announcement
+      %p IBM z/OS 2.1 has substantial changes to internal SMS control blocks that required source changes to ACC, SRS and SMSDEBUG. The updates affect all SMS controlled data sets - both VSAM and non-VSAM. If you are upgrading to z/OS 2.1, you must install the latest release of SCC 6.1
