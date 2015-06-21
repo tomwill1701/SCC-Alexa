@@ -20,8 +20,8 @@
         .col-md-6
       .row
         .col-md-4= f.collection_select :ugroup, current_user.ugroups, :id, :name
-        .col-md-4= f.select :background, [["Never"], ["Always"]], { label: "Background" }, { class: "selectpicker" }
-        .col-md-4= f.select :notify, [["Never"], ["Always"]], { label: "Notify" }, { class: "selectpicker" }
+        .col-md-4= f.select :background, [["Never"], ["Always"]], { label: "Background", include_blank: true }, { class: "selectpicker" }
+        .col-md-4= f.select :notify, [["Never"], ["Always"]], { label: "Notify", include_blank: true }, { class: "selectpicker" }
       %hr
       = f.submit "Update", class: "btn btn-primary"
       = link_to 'Cancel', root_path, class: "btn btn-danger"
