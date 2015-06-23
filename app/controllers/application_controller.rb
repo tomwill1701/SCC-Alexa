@@ -32,11 +32,12 @@ class ApplicationController < ActionController::Base
     @current_user = User.find_by(name: params[:name]).try(:authenticate, params[:password])
     if @current_user
       session[:user_id] = @current_user.id
+      redirect_to home_index_path
       flash[:notice] = "Success"
     else
+      redirect_to root_path
       flash[:error] = "Signin failed"
     end
-    redirect_to home_index_path
   end
 
   #
