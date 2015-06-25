@@ -1,22 +1,3 @@
-/*
-* This is a manifest file that'll be compiled into application.css, which will include all the files
-* listed below.
-*
-* Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
-* or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
-*
-* You're free to add application-wide styles to this file and they'll appear at the bottom of the
-* compiled file so the styles you add here take precedence over styles defined in any styles
-* defined in the other CSS/SCSS files in this directory. It is generally better to create a new
-* file per style scope.
-*
-*= require formtastic-bootstrap
-*= require bootstrap-datepicker3
-*= require dhtmlxgrid.css
-*= require skins/dhtmlxgrid_dhx_skyblue.css
-*= require spinner
-*= require_self
-*/
 @import 'bourbon';
 @import 'chosen';
 @import 'runs';
@@ -25,47 +6,42 @@
 @import 'welcome';
 
 body {
- font-family: Helvetica, sans-serif;
- color: #333;
+  font-family: Helvetica, sans-serif;
+  color: #333;
 }
 
 a.btn.btn-primary {
-	color: white;
+  color: white;
 }
 
-div.panel-heading {
-	color: #51C1DB;
-  background-color: #FFF;
-}
-
-div.panel-body {
-	color: #51C1DB;
-}
-
-div.panel-footer {
-	color: #DD5152;
+div {
+  &.panel-heading {
+    color: #51C1DB;
+    background-color: #FFF;
+  }
+  &.panel-body {
+    color: #51C1DB;
+  }
+  &.panel-footer {
+    color: #DD5152;
+  }
 }
 
 span.glyphicon.glyphicon-remove {
   color: #DD5152;
 }
 
-a.visited.panel-footer {
-  color: #DD5152;
-}
-
-a.btn.btn-danger {
-	color: white;
-}
-
-a.btn.btn-warning {
-	color: white;
-}
-
-a.btn.btn-info {
-	color: white;
+a {
+  &.visited.panel-footer {
+    color: #DD5152;
+  }
+  &.btn {
+    &.btn-danger, &.btn-warning, &.btn-info {
+      color: white;
+    }
+  }
 }
 
 .modal-backdrop {
-    z-index: 0;
+  z-index: 0;
 }

@@ -29,16 +29,18 @@
     = link_to 'New Job', new_job_path, class: "btn btn-primary"
   %br/
   %br/
-  - if @tabs
-    %ul#tabs.nav.nav-tabs{:role => "tablist"}
-      %li.active{:role => "presentation"}
-        = link_to "All", search_jobs_path(tab: "ALL"), {"aria-controls" => "home", :role => "tab", id: 'tab'}
-      - @tabs.each do |tab|
-        %li.active{:role => "presentation"}
-          = link_to tab, search_jobs_path(tab: tab), {"aria-controls" => "home", :role => "tab"}
-      :javascript
-        $(function () {
-          $('#myTab a:last').tab('show')
-        })
-  #results
-    = render partial: 'jobs/list', locals: { jobs: @jobs }
+  %ul.accordion-tabs
+    %li.tab-header-and-content
+      %a.tab-link.is-active{:href => "/jobs/search?tab=ALL"} All
+      .tab-content{:data => { :url => "/jobs/search?tab=ALL&inline=true" }}
+        = render partial: 'jobs/list', locals: { jobs: @jobs }
+        .loading{style: 'display:none;'}
+          = image_tag "spinner.gif"
+          %p Loading
+    - @tabs.each do |tab|
+      %li.tab-header-and-content
+        %a.tab-link{:href => "/jobs/search?tab=#{tab}"} #{tab.capitalize}
+        .tab-content{:data => { :url => "/jobs/search?tab=#{tab}&inline=true" }}
+          .loading
+            = image_tag "spinner.gif"
+            %p Loading

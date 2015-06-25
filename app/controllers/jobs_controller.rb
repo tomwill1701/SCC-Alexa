@@ -123,7 +123,11 @@ class JobsController < ApplicationController
   def search
     session[:tab_name] = params[:tab]
     index
-    render :index
+    if params[:inline]
+      render partial: 'jobs/list', locals: { jobs: @jobs }, layout: false
+    else
+      render :index
+    end
   end
 
   #
