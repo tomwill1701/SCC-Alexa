@@ -4,13 +4,13 @@
       .col-md-8
         %h4
           Run view for Job
-          = link_to @run.name, job_path(@run.job)
+          = link_to @run.name, job_path(@run.job), class: "btn btn-default btn-xs"
           at #{@run.start}
       .col-md-4
         .pull-right
-          = link_to 'Details', run_path(@run), class: "btn btn-primary btn-xs"
-          = link_to 'Rerun', run_path(@run), class: "btn btn-default btn-xs"
-          = link_to 'Delete', @run, method: :delete, class: "btn btn-danger btn-xs", data: { confirm: 'Are you sure?' }
+          = link_to 'Details', run_path(@run), class: "btn btn-info btn-xs"
+          = link_to 'Rerun', run_path(@run), class: "btn btn-success btn-xs"
+          = link_to 'Delete', @run, method: :delete, class: "btn btn-primary btn-xs", data: { confirm: 'Are you sure?' }
     - @rv.each do |rv|
       - if !rv.hide
         - rv.attr

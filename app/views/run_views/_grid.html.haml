@@ -1,7 +1,7 @@
 Grid #{rv.name}
 %br
 %input{:onclick => "grid.toPDF('http://dhtmlxgrid.appspot.com/export/pdf');",
-  :type => "linkx", :value => "Export to PDF"}/
+  :type => "linkx", :value => "Export to PDF", class: 'btn btn-info btn-xs'}/
 .grid{:id => "grid#{rv.id}", :style => "width: #{rv.size[0]}; height: #{rv.size[1]};"}
 %script{:charset => "UTF-8", :type => "text/javascript"}
   var grid = new dhtmlXGridObject("grid#{rv.id}");

@@ -21,9 +21,9 @@
       = render 'job_item_fields', f: jobitem
   .row
     %br/
-    .col-md-3= link_to_add_association 'add item', f, :job_items, class: "btn btn-primary"
-    %br/
-  .row
-    .col-md-9.col-md-offset-10
-      = f.submit :submit, class: "btn btn-success"
-      = link_to 'Cancel', jobs_path, class: 'btn btn-danger'
+    .col-md-3= link_to_add_association 'add item', f, :job_items, class: "btn btn-success btn-xs pull-left"
+    %br
+    %br
+    %br
+  = f.submit :Submit, class: "btn btn-info"
+  = link_to 'Cancel', jobs_path, class: 'btn btn-default'

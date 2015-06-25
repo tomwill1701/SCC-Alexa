@@ -32,6 +32,10 @@ span.glyphicon.glyphicon-remove {
 }
 
 a {
+  link {
+    color: white;
+    text-decoration: none;
+  }
   &.visited.panel-footer {
     color: #DD5152;
   }

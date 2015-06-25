@@ -1,14 +1,20 @@
-.nested-fields
-  .row
-    .col-md-9= f.collection_select :cgroup_id, Cgroup.all, :id, :name, { label: "Command" }
-    .col-md-3= f.collection_select :lgroup_id, Lgroup.all, :id, :name, { label: "LPAR", include_blank: true }
-  .row
-    .col-md-2= f.select :chart_type, %w{Pie Bar StackedBar Line Gauge Area Real-Candle Bubble Column Combo Scatter Spark},
-          include_blank: true
-    .col-md-2= f.text_field :size
-    .col-md-8= f.text_field :chart_title, label: 'Chart Title'
-  .row
-    .col-md-4= f.text_field :chart_x, label: 'Chart X'
-    .col-md-4= f.text_field :chart_y, label: 'Chart Y'
-    .col-md-4= f.text_field :chart_opt, label: 'Chart OPT'
-  = link_to_remove_association "remove item", f, class: "btn"
+.container
+  .nested-fields
+    .row
+      .col-md-8= f.collection_select :cgroup_id, Cgroup.all, :id, :name, { label: "Command" }
+      .col-md-1= f.collection_select :lgroup_id, Lgroup.all, :id, :name, { label: "LPAR", include_blank: true }
+      .col-md-2= f.select :chart_type, %w{Pie Bar StackedBar Line Gauge Area Real-Candle Bubble Column Combo Scatter Spark},
+            include_blank: true
+    .row
+      .col-md-2= f.text_field :size
+      .col-md-4= f.text_field :chart_title, label: 'Chart Title'
+      .col-md-1= f.text_field :chart_x, label: 'Chart X'
+      .col-md-1= f.text_field :chart_y, label: 'Chart Y'
+      .col-md-2= f.text_field :chart_opt, label: 'Chart OPT'
+    .row
+      .col-md-2
+        = link_to_remove_association "remove item", f, class: "btn btn-primary btn-xs"
+      %br
+      %br
+      %br
+      %br
