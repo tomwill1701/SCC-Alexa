@@ -6,18 +6,18 @@
     %th= sort_link @q, :updated_at, 'Last Changed'
   - jobs.each do |job|
     %tr
-      %td= link_to job.name, job, {"data-toggle" => "tooltip", title: job.description}
+      %td= link_to job.name, job, {"data-toggle" => "tooltip", title: job.description, class: 'btn btn-default btn-xs'}
       %td= job.cclass
       %td= job.run_type
       %td= job.updated_at
-      %td= link_to 'Run', run_job_path(job), class: 'btn btn-primary btn-xs'
+      %td= link_to 'Run', run_job_path(job), class: 'btn btn-success btn-xs'
       - if job.favorite_job?(current_user)
         %td= link_to 'Unfav', unfavorite_job_path(job), method: :delete, class: 'btn btn-warning btn-xs'
       -else
-        %td= link_to 'Fav', favorite_job_path(job), method: :post, class: 'btn btn-info btn-xs'
+        %td= link_to 'Fav', favorite_job_path(job), method: :post, class: 'btn btn-danger btn-xs'
       - if job.owner?(current_user)
         %td= link_to 'Edit', edit_job_path(job), class: 'btn btn-default btn-xs'
-        %td= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs'
+        %td= link_to 'Delete', job, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-primary btn-xs'
 
 .chardin_box{ :'data-position' => 'top' }
   = paginate jobs

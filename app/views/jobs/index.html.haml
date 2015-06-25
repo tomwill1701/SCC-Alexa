@@ -23,10 +23,8 @@
             = f.label :private
             = f.check_box :with_private, {}, current_user.id
           .form-group.chardin_box
-            = f.submit class: 'btn btn-primary btn-xs'
+            = f.submit class: 'btn btn-info btn-xs'
             = link_to 'Clear Filters', jobs_path, class: 'btn btn-default btn-xs'
-  .div.pull-right
-    = link_to 'New Job', new_job_path, class: "btn btn-primary"
   %br/
   %br/
   %ul.accordion-tabs
@@ -44,3 +42,5 @@
           .loading
             = image_tag "spinner.gif"
             %p Loading
+  .div.pull-left
+    = link_to 'New Job', new_job_path, class: "btn btn-info"

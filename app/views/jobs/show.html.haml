@@ -1,12 +1,12 @@
 .container
   .well
     .div.pull-right
-      = link_to 'Run', run_job_path(@job), class: "btn btn-primary btn-xs"
+      = link_to 'Run', run_job_path(@job), class: "btn btn-success btn-xs"
       = link_to 'Options', "#modal", class: "btn btn-info btn-xs", "data-toggle": "modal"
-      = link_to 'Clone', clone_job_path(@job), class: "btn btn-warning btn-xs"
+      = link_to 'Clone', clone_job_path(@job), class: "btn btn-danger btn-xs"
       - if @job.owner?(current_user)
         = link_to 'Edit', edit_job_path(@job), class: "btn btn-default btn-xs"
-        = link_to 'Delete', @job, method: :delete, class: "btn btn-danger btn-xs",
+        = link_to 'Delete', @job, method: :delete, class: "btn btn-primary btn-xs",
             data: { confirm: 'Are you sure?' }
     %br
     %h1 Job Details
@@ -29,5 +29,5 @@
         %hr/
         = f.fields_for :job_items do | jobitem |
           = render 'show_item_fields', f: jobitem
-    = link_to 'Close', jobs_path, class: 'btn btn-primary'
-    = render 'runopts'
+        = link_to 'Close', jobs_path, class: 'btn btn-default pull-right'
+        = render 'runopts'
