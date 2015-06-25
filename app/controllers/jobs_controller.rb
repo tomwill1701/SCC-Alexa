@@ -8,6 +8,9 @@ class JobsController < ApplicationController
       @q = Job.for_user(current_user).with_jtype(session[:tab_name]).includes(:user_jobs).ransack(params[:q])
       @jobs = @q.result(distinct: true).page(params[:page]).per(15)
       @tabs = Job.for_user(current_user).uniq.pluck(:jtype).compact
+    else
+      flash[:warning] = "You must be signed-in to view this page."
+      redirect_to root_path
     end
   end
 

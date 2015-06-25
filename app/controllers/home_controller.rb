@@ -9,6 +9,9 @@ class HomeController < ApplicationController
     if current_user
       @notices = current_user.notices.includes(:ugroup)
       @runs = current_user.runs.includes(:job, :ugroup).where("viewed is NULL")
+    else
+      flash[:warning] = "You must be signed-in to view this page."
+      redirect_to root_path
     end
   end
 

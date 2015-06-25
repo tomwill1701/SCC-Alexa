@@ -3,8 +3,13 @@ class RunsController < ApplicationController
   before_action :set_run, only: [:execute, :show, :destroy, :update]
 
   def index
-    @q = current_user.runs.ransack(params[:q])
-    @runs = @q.result.includes(:ugroup, :job).page(params[:page])
+    if current_user
+      @q = current_user.runs.ransack(params[:q])
+      @runs = @q.result.includes(:ugroup, :job).page(params[:page])
+    else
+      flash[:warning] = "You must be signed-in to view this page."
+      redirect_to root_path
+    end
   end
 
   #
@@ -108,7 +113,3 @@ class RunsController < ApplicationController
   end
 
 end
-
-
-
-
