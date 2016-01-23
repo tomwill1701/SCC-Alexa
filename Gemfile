@@ -8,7 +8,6 @@ gem 'faker'
 gem 'fog'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
-gem 'pg'
 gem 'rails', '4.2.0'
 gem 'sass-rails', '~> 5.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
@@ -37,6 +36,7 @@ gem "nested_form"
 
 group :production do
   gem 'rails_12factor'
+  gem 'pg'
 end
 
 group :development, :test do
@@ -50,4 +50,5 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'letter_opener'
+  gem 'pg'
 end

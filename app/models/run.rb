@@ -17,18 +17,21 @@
 #  end         :datetime
 #  viewed      :datetime
 #  delete_at   :datetime
+#  delete_when :string
+#  note        :string
+#  auto_run    :boolean          default("false")
 #  ugroup_id   :integer
 #  job_id      :integer
 #  user_id     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  note        :string
-#  delete_when :string
 #
 
 class Run < ActiveRecord::Base
 
   attr_accessor :select, :attachments
+  attr_accessor :keep_days
+  attr_accessor :xmlfile
 
   belongs_to :ugroup
   belongs_to :job
@@ -42,8 +45,6 @@ class Run < ActiveRecord::Base
   scope :with_error, -> { where("error = true")  }
   scope :with_done, -> { where("done = true")  }
   scope :with_nv, -> { where("viewed IS NULL")  }
-
-  attr_accessor :keep_days
 
   #
   #  ransack filters
@@ -200,10 +201,14 @@ class Run < ActiveRecord::Base
       return "REXX #{ctext}"
     elsif command.ctype == "External"
       return ctext
-    elsif %w(Grid Chart).include?(command.ctype)
+    elsif %w(Grid Chart XML).include?(command.ctype)
       mon = lpar.monproc
       mon = "MONRUNM" unless mon
-      return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext}"
+      if command.ctype == "XML"
+        return "ENABLE OSJOB #{mon} TCPIP *P='REPORT=#{ctext} XML' "
+      else
+        return "ENABLE OSJOB #{mon} TCPIP *P='REPORT=#{ctext}' "
+      end
     end
   end
 
@@ -255,6 +260,7 @@ class Run < ActiveRecord::Base
     #
     #  build tcpip call for each run_command
     #
+    self.xmlfile = Array.new
     execgroup = ExecGroup.new
     self.run_commands.each do | rc |
       unless rc.done
@@ -263,6 +269,10 @@ class Run < ActiveRecord::Base
         exec.lpar = rc.lpar
         exec.cmd = rc.model
         exec.command = rc
+        if exec.command.command.ctype == "XML"
+          exec.filename = ENV["HOMEDIR"] + "/tmp/" + exec.lpar.name + "-" + exec.command.command.file
+          exec.xmlfile = ENV["HOMEDIR"] + "/tmp/" + exec.command.command.file
+        end
         execgroup.execs << exec
       end
     end
@@ -295,6 +305,9 @@ class Run < ActiveRecord::Base
         f = File.open(exec.file.path)
         rc.rtext = f.read(1000)
         f.close
+        if exec.xmlfile
+          procxml(exec)
+        end
       else
         rc.rtext = exec.rtext
       end
@@ -311,6 +324,12 @@ class Run < ActiveRecord::Base
         self << "cache set: #{ckey}"
       end
 
+    end
+
+    xmlfile.each do |f|
+      f << '</root>'
+      self << "File #{f.path} merged"
+      f.close
     end
 
     #
@@ -399,6 +418,43 @@ class Run < ActiveRecord::Base
         end
       end
     end
+  end
+
+  #
+  #  process xml data
+  #
+  def procxml(exec)
+
+    #
+    #  create merge file if this is the first time he have seen it
+    #
+    fo = nil
+    xmlfile.each do |f|
+      if f.path == exec.xmlfile
+        fo = f
+        break
+      end
+    end
+
+    if fo == nil
+      fo = File.open(exec.xmlfile, 'w')
+      fo << '<?xml version="1.0" encoding="ISO-8859-1"?>'
+      fo << "\n"
+      fo << "<root>\n"
+      xmlfile << fo
+    end
+
+    #
+    #  read data from input file and write xml records to merge file
+    #
+    fi = File.open(exec.file, 'r')
+    while(line=fi.gets("\r"))
+      if line[0..0] == "<" && !["<html>", "<?xml ", "<root>", "</root"].include?(line[0..5])
+        fo << line + "\n"
+      end
+    end
+    fi.close
+
   end
 
 

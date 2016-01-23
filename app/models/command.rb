@@ -7,7 +7,9 @@
 #  description :text
 #  ctype       :string
 #  model       :text
+#  file        :string
 #  prompts     :string
+#  variables   :string
 #  source      :string
 #  member      :string
 #  keys        :string
@@ -22,9 +24,10 @@
 #  cache_time  :integer          default("0")
 #  rscript     :text
 #  vscript     :text
+#  hide        :boolean          default("false")
+#  data_type   :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  hide        :boolean
 #
 
 class Command < ActiveRecord::Base

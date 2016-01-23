@@ -1,6 +1,6 @@
 ActiveAdmin.register Job do
 
-  permit_params :id, :name, :jtype, :description,
+  permit_params :id, :name, :jtype, :description, :jgroup,
         :background, :notify_email, :notify_dash, :keep_days, ugroup_ids:[],
         job_items_attributes: [:id, :job_id, :lgroup_id, :cgroup_id,
         :cache, :chart_type, :chart_x, :chart_y, :chart_opt, :_destroy]
@@ -13,6 +13,7 @@ ActiveAdmin.register Job do
 
   filter :name
   filter :description
+  filter :jgroup, label: "Group"
   filter :jtype, label: "Tab"
   filter :cclass, label: "Class", as: :select
   filter :users, label: "User/favorite", as: :select
@@ -28,6 +29,7 @@ ActiveAdmin.register Job do
   show do "Jobs"
     attributes_table do
       row :name
+      row "Group", :jgroup
       row "Tab", :jtype
       row "Class", :cclass
       row :runtype
@@ -58,6 +60,7 @@ ActiveAdmin.register Job do
   index do
     selectable_column
     column :name
+    column "Group", :jgroup
     column "Type", :jtype
     column "Class", :cclass
     column :owner
@@ -71,6 +74,7 @@ ActiveAdmin.register Job do
     f.semantic_errors *f.object.errors.keys
     inputs "Details" do
       input :name
+      input :jgroup, label: "Group"
       input :jtype, label: "Tab"
       input :cclass, label: "Class"
       input :run_type, as: :select, collection: ["Real-Time", "Background", "External"]

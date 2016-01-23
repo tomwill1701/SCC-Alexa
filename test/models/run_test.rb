@@ -17,13 +17,14 @@
 #  end         :datetime
 #  viewed      :datetime
 #  delete_at   :datetime
+#  delete_when :string
+#  note        :string
+#  auto_run    :boolean          default("false")
 #  ugroup_id   :integer
 #  job_id      :integer
 #  user_id     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  note        :string
-#  delete_when :string
 #
 
 require 'test_helper'

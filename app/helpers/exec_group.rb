@@ -91,6 +91,9 @@ class ExecGroup
       end
     end
 
+    #
+    #  add error to run
+    #
     def add_error(text)
       self.errors ||= Array.new
       self.errors << text

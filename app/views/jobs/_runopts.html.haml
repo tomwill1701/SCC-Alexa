@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
-          %span{"aria-hidden" => "true"} ×
+          %span{"aria-hidden" => "true"}
         %h4.modal-title Enter Run Options
       .modal-body
         = bootstrap_form_tag url: run_job_path(@job), method: :get do |f|

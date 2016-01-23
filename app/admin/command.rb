@@ -1,7 +1,7 @@
 ActiveAdmin.register Command do
 
   permit_params :id, :name, :description, :source,
-        :ctype, :model, :prompts, :keys, :tags, :cclass, :preload,
+        :ctype, :model, :prompts, :keys, :tags, :cclass, :preload, :file,
         :chart_type, :chart_x, :chart_y, :chart_opt, :cache_time, :size, :hide,
         command_cgroups_attributes: [:id, :name, :command_id, :cgroup_id, :_destroy]
 
@@ -38,6 +38,7 @@ ActiveAdmin.register Command do
       row :source
       row :tags
       row :model
+      row :file
       row :hide
       row :prompts
       row :keys
@@ -82,10 +83,11 @@ ActiveAdmin.register Command do
         member_label: lambda {|g| "#{g.qual("LOCKED-","")}" }
       end
       input :ctype, label: "Type", as: :select,
-        collection:  ["DIFCmd", "MVSCmd", "Grid", "Chart", "External"]
+        collection:  ["DIFCmd", "MVSCmd", "Grid", "Chart", "External", "XML"]
       input :cclass, label: "Class"
       input :tags
       input :model, input_html: {rows: 6}
+      input :file
       input :hide
       input :prompts
       input :keys

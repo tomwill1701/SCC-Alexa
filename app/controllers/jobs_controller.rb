@@ -5,9 +5,14 @@ class JobsController < ApplicationController
 
   def index
     if current_user
-      @q = Job.for_user(current_user).with_jtype(session[:tab_name]).includes(:user_jobs).ransack(params[:q])
+      if !session[:group_name]
+        session[:group_name] = "Job"
+      end
+      @title = session[:group_name]
+      @q = Job.for_user(current_user).with_jgroup(@title).with_jtype(session[:tab_name]).includes(:user_jobs).ransack(params[:q])
       @jobs = @q.result(distinct: true).page(params[:page]).per(15)
-      @tabs = Job.for_user(current_user).uniq.pluck(:jtype).compact
+      @tabs = Job.for_user(current_user).with_jgroup(@title).uniq.pluck(:jtype).compact
+
     else
       flash[:warning] = "You must be signed-in to view this page."
       redirect_to root_path
@@ -21,6 +26,8 @@ class JobsController < ApplicationController
     @job = Job.new
     @job.private = true
     @job.owner = current_user
+    @job.jgroup = session[:group_name]
+    binding.pry 
   end
 
   #
@@ -124,7 +131,13 @@ class JobsController < ApplicationController
   #  set tab name in session data
   #
   def search
-    session[:tab_name] = params[:tab]
+    if params[:tab]
+      session[:tab_name] = params[:tab]
+    end
+    if params[:group]
+      session[:group_name] = params[:group]
+    end
+
     index
     if params[:inline]
       render partial: 'jobs/list', locals: { jobs: @jobs }, layout: false
@@ -148,8 +161,10 @@ class JobsController < ApplicationController
   #
   def job_params
     params.require(:job).permit(:name, :description, :menu, :cclass, :tags, :jtype,
-    :when, :when_time, :private, :notify, :user_ids, :owner_id,
+    :jgroup, :private, :notify, :user_ids, :owner_id, :jgroup,
     :run_type, :keep_days, :cache, :delete_when,
+    :ar_start_date, :ar_start_time, :ar_type, :ar_repeat, :ar_hour,
+    :ar_wday, :ar_day, :ar_month, :ar_wdayt,
     job_items_attributes: [:id, :cgroup_id, :lgroup_id, :cache, :chart_type,
       :chart_title, :chart_x, :chart_y, :chart_opt, :size, :_destroy])
   end

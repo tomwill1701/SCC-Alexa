@@ -1,9 +1,10 @@
 class CreateRunViews < ActiveRecord::Migration
   def change
     create_table :run_views do |t|
-      t.string     :type
+      t.string     :name
       t.string     :file
       t.string     :file_type
+      t.boolean    :hide, default: false
       t.references :run_command, index: true
       t.references :run, index: true
       t.references :job_item, index: true

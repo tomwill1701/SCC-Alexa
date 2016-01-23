@@ -13,6 +13,8 @@ class CreateRunCommands < ActiveRecord::Migration
       t.boolean :cloud, default: false
       t.boolean :compressed, default: false
       t.boolean :merge_grid, default: false
+      t.boolean :download, default: false
+      t.boolean :hide, default: false
       t.references :run, index: true
       t.references :lpar, index: true
       t.references :job_item, index: true

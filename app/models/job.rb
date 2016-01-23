@@ -2,25 +2,34 @@
 #
 # Table name: jobs
 #
-#  id           :integer          not null, primary key
-#  name         :string
-#  jtype        :string
-#  description  :text
-#  menu         :string
-#  cclass       :string
-#  tags         :string
-#  when         :string
-#  when_time    :string
-#  run_type     :string
-#  keep_days    :integer
-#  private      :boolean          default("false")
-#  notify       :boolean          default("true")
-#  notify_group :boolean          default("true")
-#  cache        :boolean          default("true")
-#  debug        :boolean          default("true")
-#  owner_id     :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id            :integer          not null, primary key
+#  name          :string
+#  jgroup        :string           default("Job")
+#  jtype         :string
+#  description   :text
+#  menu          :string
+#  cclass        :string
+#  tags          :string
+#  run_type      :string
+#  keep_days     :integer
+#  private       :boolean          default("false")
+#  notify        :boolean          default("true")
+#  notify_group  :boolean          default("true")
+#  cache         :boolean          default("true")
+#  debug         :boolean          default("true")
+#  owner_id      :integer
+#  ar_start      :datetime
+#  ar_start_date :date
+#  ar_start_time :time
+#  ar_type       :string
+#  ar_repeat     :string
+#  ar_hour       :string
+#  ar_wday       :string
+#  ar_day        :string
+#  ar_month      :string
+#  ar_wdayt      :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 
 class Job < ActiveRecord::Base
@@ -53,6 +62,8 @@ class Job < ActiveRecord::Base
   scope :for_user, lambda { |id| where('private =  false OR owner_id = ?', id) }
 
   scope :with_jtype, -> type { where("jtype = ?", type) unless !type || type == "ALL"}
+
+  scope :with_jgroup, -> type { where("jgroup = ?", type) unless !type || type == "ALL"}
 
   def self.ransackable_scopes(auth_object = nil)
     [:with_favorite, :with_private]

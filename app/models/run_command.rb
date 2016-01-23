@@ -15,14 +15,14 @@
 #  cloud         :boolean          default("false")
 #  compressed    :boolean          default("false")
 #  merge_grid    :boolean          default("false")
+#  download      :boolean          default("false")
+#  hide          :boolean          default("false")
 #  run_id        :integer
 #  lpar_id       :integer
 #  job_item_id   :integer
 #  command_id    :integer
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  download      :boolean
-#  hide          :boolean
 #
 
 class RunCommand < ActiveRecord::Base

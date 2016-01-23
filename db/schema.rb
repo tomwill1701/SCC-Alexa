@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412220737) do
+ActiveRecord::Schema.define(version: 20150325211513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,7 +100,9 @@ ActiveRecord::Schema.define(version: 20150412220737) do
     t.text     "description"
     t.string   "ctype"
     t.text     "model"
+    t.string   "file"
     t.string   "prompts"
+    t.string   "variables"
     t.string   "source"
     t.string   "member"
     t.string   "keys"
@@ -115,9 +117,10 @@ ActiveRecord::Schema.define(version: 20150412220737) do
     t.integer  "cache_time",  default: 0
     t.text     "rscript"
     t.text     "vscript"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.boolean  "hide"
+    t.boolean  "hide",        default: false
+    t.string   "data_type"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -150,29 +153,40 @@ ActiveRecord::Schema.define(version: 20150412220737) do
     t.string   "chart_opt"
     t.string   "chart_title"
     t.string   "racf_password"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.string   "command_prefix"
+    t.string   "command_suffix"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "jobs", force: :cascade do |t|
     t.string   "name"
+    t.string   "jgroup",        default: "Job"
     t.string   "jtype"
     t.text     "description"
     t.string   "menu"
     t.string   "cclass"
     t.string   "tags"
-    t.string   "when"
-    t.string   "when_time"
     t.string   "run_type"
     t.integer  "keep_days"
-    t.boolean  "private",      default: false
-    t.boolean  "notify",       default: true
-    t.boolean  "notify_group", default: true
-    t.boolean  "cache",        default: true
-    t.boolean  "debug",        default: true
+    t.boolean  "private",       default: false
+    t.boolean  "notify",        default: true
+    t.boolean  "notify_group",  default: true
+    t.boolean  "cache",         default: true
+    t.boolean  "debug",         default: true
     t.integer  "owner_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "ar_start"
+    t.date     "ar_start_date"
+    t.time     "ar_start_time"
+    t.string   "ar_type"
+    t.string   "ar_repeat"
+    t.string   "ar_hour"
+    t.string   "ar_wday"
+    t.string   "ar_day"
+    t.string   "ar_month"
+    t.string   "ar_wdayt"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "lgroups", force: :cascade do |t|
@@ -241,14 +255,14 @@ ActiveRecord::Schema.define(version: 20150412220737) do
     t.boolean  "cloud",         default: false
     t.boolean  "compressed",    default: false
     t.boolean  "merge_grid",    default: false
+    t.boolean  "download",      default: false
+    t.boolean  "hide",          default: false
     t.integer  "run_id"
     t.integer  "lpar_id"
     t.integer  "job_item_id"
     t.integer  "command_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.boolean  "download"
-    t.boolean  "hide"
   end
 
   add_index "run_commands", ["command_id"], name: "index_run_commands_on_command_id", using: :btree
@@ -257,16 +271,16 @@ ActiveRecord::Schema.define(version: 20150412220737) do
   add_index "run_commands", ["run_id"], name: "index_run_commands_on_run_id", using: :btree
 
   create_table "run_views", force: :cascade do |t|
+    t.string   "name"
     t.string   "file"
     t.string   "file_type"
+    t.boolean  "hide",           default: false
     t.integer  "run_command_id"
     t.integer  "run_id"
     t.integer  "job_item_id"
     t.integer  "command_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.string   "name"
-    t.boolean  "hide"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   add_index "run_views", ["command_id"], name: "index_run_views_on_command_id", using: :btree
@@ -291,6 +305,7 @@ ActiveRecord::Schema.define(version: 20150412220737) do
     t.datetime "delete_at"
     t.string   "delete_when"
     t.string   "note"
+    t.boolean  "auto_run",    default: false
     t.integer  "ugroup_id"
     t.integer  "job_id"
     t.integer  "user_id"

@@ -18,9 +18,7 @@
   Lpar.where(name: "DTS-MP3000", ip: "mail1.dtssoftware.com", port: 10, monproc: "MONRUNM").first_or_create
   Lpar.where(name: "DTS-zPdt", ip: "mail1.dtssoftware.com", port: 20).first_or_create
 
-  Cload.where(dsname: "TOM.SCC.CLOAD", lpar_id: 2).first_or_create
-  Cload.where(dsname: "TOM.DCC.CLOAD", lpar_id: 2).first_or_create
-  Cload.where(dsname: "TOM.MVS.CLOAD", lpar_id: 2).first_or_create
+  Cload.where(dsname: "TOM.RCC.CLOAD", lpar_id: 2).first_or_create
 
   jtype = ["Text", "Grid", "Chart"]
   cclass = ["class1", "class2", "class3", "class4"]

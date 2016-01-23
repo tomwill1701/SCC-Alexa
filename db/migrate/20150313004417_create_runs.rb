@@ -18,6 +18,7 @@ class CreateRuns < ActiveRecord::Migration
       t.datetime :delete_at
       t.string   :delete_when
       t.string   :note
+      t.boolean :auto_run, default: false
       t.references :ugroup, index: true
       t.references :job, index: true
       t.references :user, index: true

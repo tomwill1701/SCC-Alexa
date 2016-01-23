@@ -5,7 +5,9 @@ class CreateCommands < ActiveRecord::Migration
       t.text   :description
       t.string :ctype
       t.text   :model
+      t.string :file
       t.string :prompts
+      t.string :variables
       t.string :source
       t.string :member
       t.string :keys
@@ -20,6 +22,8 @@ class CreateCommands < ActiveRecord::Migration
       t.integer :cache_time, default: 0
       t.text   :rscript
       t.text   :vscript
+      t.boolean :hide, default: false
+      t.string :data_type
 
       t.timestamps null: false
     end

@@ -2,19 +2,21 @@
 #
 # Table name: job_items
 #
-#  id            :integer          not null, primary key
-#  job_id        :integer
-#  lgroup_id     :integer
-#  cgroup_id     :integer
-#  size          :string
-#  chart_type    :string
-#  chart_x       :string
-#  chart_y       :string
-#  chart_opt     :string
-#  racf_password :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  chart_title   :string
+#  id             :integer          not null, primary key
+#  job_id         :integer
+#  lgroup_id      :integer
+#  cgroup_id      :integer
+#  size           :string
+#  chart_type     :string
+#  chart_x        :string
+#  chart_y        :string
+#  chart_opt      :string
+#  chart_title    :string
+#  racf_password  :string
+#  command_prefix :string
+#  command_suffix :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 
 class JobItem < ActiveRecord::Base

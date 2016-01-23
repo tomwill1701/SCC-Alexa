@@ -1,6 +1,8 @@
 .container
   .well
-    %h1 Job Selection
+    %h1
+      = @title
+      Selection
     %hr/
     %h4 Search options
     = search_form_for @q do |f|

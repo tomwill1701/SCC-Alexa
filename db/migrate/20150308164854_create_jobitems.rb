@@ -11,6 +11,8 @@ class CreateJobitems < ActiveRecord::Migration
       t.string     :chart_opt
       t.string     :chart_title
       t.string     :racf_password
+      t.string     :command_prefix
+      t.string     :command_suffix
 
       t.timestamps null: false
     end

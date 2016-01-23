@@ -3,15 +3,27 @@
     .col-md-3= f.text_field :name
     .col-md-3= f.text_field :jtype, label: "Tab"
     .col-md-3= f.text_field :cclass, label: "Class"
-    .col-md-3= f.select :run_type, [["Real-Time"], ["Background"], ["External"]], { label: "Run Type" }, { class: "selectpicker" }
+    .col-md-3= f.select :run_type, %w{Real-Time Background External}, { label: "Run Type" }, { class: "selectpicker" }
     .col-md-3= f.number_field :keep_days, as: :number
     .col-md-3= f.text_field :tags
     .col-md-1= f.check_box :private, as: :boolean, checked: 'false'
     .col-md-1= f.check_box :notify, as: :boolean, checked: 'false'
     .col-md-1= f.check_box :cache, as: :boolean, checked: 'false'
   .row
+    .col-md-2= f.select :ar_type, %w{Hour Day Days Once}, { label: "Auto Run", include_blank: true },
+        { class: "selectpicker" }
+    .col-md-2= f.text_field  :ar_start_date, label: "Start Date", class: 'datepicker'
+    .col-md-2= f.time_field :ar_start_time, label: "Start Time"
+    .col-md-3= f.text_field :ar_hour, label: "Hours (0-23)"
+  .row
+    .col-md-3= f.text_field :ar_day, label: "Days (1-31)"
+    .col-md-3= f.text_field :ar_wday, label: "Week Days (M-S)"
+    .col-md-3= f.text_field :ar_month, label: "Months (1-12)"
+    .col-md-3= f.text_field :ar_wdayt, label: "Week Numbers (1-4)"
+  .row
     .col-md-12= f.text_area :description, rows: '4'
     = f.hidden_field :owner_id, value: @job.owner_id
+    = f.hidden_field :jgroup, value: @job.jgroup
   .row
     .col-md-12
       %h2 Command Groups
