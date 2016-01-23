@@ -27,7 +27,6 @@ class JobsController < ApplicationController
     @job.private = true
     @job.owner = current_user
     @job.jgroup = session[:group_name]
-    binding.pry 
   end
 
   #

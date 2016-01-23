@@ -205,9 +205,9 @@ class Run < ActiveRecord::Base
       mon = lpar.monproc
       mon = "MONRUNM" unless mon
       if command.ctype == "XML"
-        return "ENABLE OSJOB #{mon} TCPIP *P='REPORT=#{ctext} XML' "
+        return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext},P2='XML' "
       else
-        return "ENABLE OSJOB #{mon} TCPIP *P='REPORT=#{ctext}' "
+        return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext}"
       end
     end
   end
