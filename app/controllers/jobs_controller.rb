@@ -27,7 +27,6 @@ class JobsController < ApplicationController
     @job.private = true
     @job.owner = current_user
     @job.jgroup = session[:group_name]
-    binding.pry 
   end
 
   #
@@ -87,9 +86,13 @@ class JobsController < ApplicationController
   #  delete function
   #
   def destroy
-    @job.destroy
-    respond_to do |format|
-      format.html { redirect_to jobs_path, notice: 'Job was successfully deleted.' }
+    if @job.runs.any?
+      flash[:error] = "The job you tried to remove has #{@job.runs.count} runs listed below. You must first delete the runs and then remove the job."
+      redirect_to runs_path
+    else
+      @job.destroy!
+      flash[:success] = 'Job was successfully deleted'
+      redirect_to jobs_path
     end
   end
 
