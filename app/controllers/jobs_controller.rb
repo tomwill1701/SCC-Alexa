@@ -87,7 +87,12 @@ class JobsController < ApplicationController
   #
   def destroy
     if @job.runs.any?
-      flash[:error] = "The job you tried to remove has #{@job.runs.count} runs listed below. You must first delete the runs and then remove the job."
+      if @job.runs.count == 1
+        run_count = '1 run'
+      else
+        run_count = "#{@job.runs.count} runs"
+      end
+      flash[:error] = "#{@job.name.upcase} has #{run_count} listed below. To delete #{@job.name.upcase}, you must first remove all of it's runs."
       redirect_to runs_path
     else
       @job.destroy!
