@@ -15,6 +15,7 @@ git status
 git add .
 git commit -m "xxx"
 git push origin master
+git push origin auto-rake-task
 git push heroku master
 git remote -v
 

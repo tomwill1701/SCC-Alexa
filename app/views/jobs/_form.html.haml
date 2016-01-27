@@ -6,13 +6,13 @@
     .col-md-3= f.select :run_type, %w{Real-Time Background External}, { label: "Run Type" }, { class: "selectpicker" }
     .col-md-3= f.number_field :keep_days, as: :number
     .col-md-3= f.text_field :tags
-    .col-md-1= f.check_box :private, as: :boolean, checked: 'false'
-    .col-md-1= f.check_box :notify, as: :boolean, checked: 'false'
-    .col-md-1= f.check_box :cache, as: :boolean, checked: 'false'
+    .col-md-1= f.check_box :private, as: :boolean
+    .col-md-1= f.check_box :notify, as: :boolean
+    .col-md-1= f.check_box :cache, as: :boolean
   .row
-    .col-md-2= f.select :ar_type, %w{Hour Day Days Once}, { label: "Auto Run", include_blank: true },
+    .col-md-2= f.select :ar_type, %w{Hour Day Month Once}, { label: "Auto Run", include_blank: true },
         { class: "selectpicker" }
-    .col-md-2= f.text_field  :ar_start_date, label: "Start Date", class: 'datepicker'
+    .col-md-2= f.text_field :ar_start_date, label: "Start Date", class: 'datepicker'
     .col-md-2= f.time_field :ar_start_time, label: "Start Time"
     .col-md-3= f.text_field :ar_hour, label: "Hours (0-23)"
   .row
@@ -39,3 +39,7 @@
     %br
   = f.submit :Submit, class: "btn btn-info"
   = link_to 'Cancel', jobs_path, class: 'btn btn-default'
+
+<script>
+$('.datepicker').datepicker({format: 'yyyy-mm-dd'});
+</script>

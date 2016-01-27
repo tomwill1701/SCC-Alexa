@@ -25,9 +25,10 @@ class JobsController < ApplicationController
   def new
     @job = Job.new
     @job.private = true
+    @job.notify = false
+    @job.cache = false
     @job.owner = current_user
     @job.jgroup = session[:group_name]
-    binding.pry 
   end
 
   #

@@ -125,7 +125,7 @@ class Run < ActiveRecord::Base
             ctext = ctype(lpar, command, command.model.strip)
             @rc = RunCommand.new(run: self, lpar: lpar, model: ctext, job_item: ji, command: command)
             self.run_commands << @rc
-            if %w(DIFCmd MVSCmd).include? command.ctype
+            if %w(difcmd mvscmd).include? command.ctype.downcase
               @rv = RunView.create(run: self, run_command: @rc, job_item: ji, command: command, name: command.name,
               hide: command.hide)
               @rc.run_views << @rv
@@ -139,8 +139,8 @@ class Run < ActiveRecord::Base
             command: command, name: command.name, hide: command.hide)
             @rc.run_views << @rv
           end
-        end
-        if !@rv && @rc
+        else
+          @rc = RunCommand.new(run: self, model: "", job_item: ji, command: command)
           @rv = RunView.create(run: self, run_command: @rc, job_item: ji,
           command: command, name: command.name, hide: command.hide)
           @rc.run_views << @rv
@@ -193,21 +193,23 @@ class Run < ActiveRecord::Base
   #  build the command that will be sent to dif
   #
   def ctype(lpar, command, ctext)
-    if command.ctype == "DIFCmd"
+    if command.ctype.downcase == "difcmd"
       return ctext
-    elsif command.ctype == "MVSCmd"
+    elsif command.ctype.downcase == "mvscmd"
       return "OPERCMD #{ctext}"
-    elsif command.ctype == "REXXCmd"
+    elsif command.ctype.downcase == "rexxcmd"
       return "REXX #{ctext}"
-    elsif command.ctype == "External"
+    elsif command.ctype.downcase == "external"
       return ctext
-    elsif %w(Grid Chart XML).include?(command.ctype)
+    elsif %w(grid chart xml csv).include?(command.ctype.downcase)
       mon = lpar.monproc
       mon = "MONRUNM" unless mon
-      if command.ctype == "XML"
-        return "ENABLE OSJOB #{mon} TCPIP *P='REPORT=#{ctext} XML' "
+      if command.ctype.downcase == "xml"
+        return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext},P2='XML' "
+      elsif command.ctype.downcase == "csv"
+        return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext},P2='WREC(CSV)' "
       else
-        return "ENABLE OSJOB #{mon} TCPIP *P='REPORT=#{ctext}' "
+        return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext}"
       end
     end
   end
@@ -263,13 +265,13 @@ class Run < ActiveRecord::Base
     self.xmlfile = Array.new
     execgroup = ExecGroup.new
     self.run_commands.each do | rc |
-      unless rc.done
+      unless rc.done or rc.lpar == nil
         rc.source = "TCPIP"
         exec = Exec.new
         exec.lpar = rc.lpar
         exec.cmd = rc.model
         exec.command = rc
-        if exec.command.command.ctype == "XML"
+        if exec.command.command.ctype.downcase == "xml"
           exec.filename = ENV["HOMEDIR"] + "/tmp/" + exec.lpar.name + "-" + exec.command.command.file
           exec.xmlfile = ENV["HOMEDIR"] + "/tmp/" + exec.command.command.file
         end
@@ -280,15 +282,17 @@ class Run < ActiveRecord::Base
     #
     #  run the tcpip requests
     #
-    self << "TCPIP started"
-    self.save
-    execgroup.run(self.user)
-    if execgroup.errors
-      self.error = true
-      execgroup.errors.each { |t| self << t}
+    if execgroup.execs.count > 0
+      self << "TCPIP started"
+      self.save
+      execgroup.run(self.user)
+      if execgroup.errors
+        self.error = true
+        execgroup.errors.each { |t| self << t}
+      end
+      self << "TCPIP ended"
+      self.save
     end
-    self << "TCPIP ended"
-    self.save
 
     #
     #  look at each request
@@ -358,10 +362,11 @@ class Run < ActiveRecord::Base
       #
       #  if external see what commands we have
       #
-      if rv.command.ctype == "External"
-        ecmds = rv.command.model.strip
+      if rv.command.ctype.downcase == "external"
+        ecmds = rv.command.model.gsub(";","\n").strip
         ecmds.each_line do |cmd|
           oper = cmd.split(' ')
+          oper[0] = "" if oper.count == 0
 
           #
           #  run a birt report
