@@ -88,9 +88,18 @@ class JobsController < ApplicationController
   #  delete function
   #
   def destroy
-    @job.destroy
-    respond_to do |format|
-      format.html { redirect_to jobs_path, notice: 'Job was successfully deleted.' }
+    if @job.runs.any?
+      if @job.runs.count == 1
+        run_count = '1 run'
+      else
+        run_count = "#{@job.runs.count} runs"
+      end
+      flash[:error] = "#{@job.name.upcase} has #{run_count} listed below. To delete #{@job.name.upcase}, you must first remove all of it's runs."
+      redirect_to runs_path
+    else
+      @job.destroy!
+      flash[:success] = 'Job was successfully deleted'
+      redirect_to jobs_path
     end
   end
 
