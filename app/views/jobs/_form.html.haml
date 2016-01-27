@@ -10,11 +10,12 @@
     .col-md-1= f.check_box :notify, as: :boolean
     .col-md-1= f.check_box :cache, as: :boolean
   .row
-    .col-md-2= f.select :ar_type, %w{Hour Day Month Once}, { label: "Auto Run", include_blank: true },
+    .col-md-2= f.select :ar_type, %w{Minute Hour Day Month Once}, { label: "Auto Run", include_blank: true },
         { class: "selectpicker" }
     .col-md-2= f.text_field :ar_start_date, label: "Start Date", class: 'datepicker'
     .col-md-2= f.time_field :ar_start_time, label: "Start Time"
     .col-md-3= f.text_field :ar_hour, label: "Hours (0-23)"
+    .col-md-3= f.text_field :ar_file, label: "Filename"
   .row
     .col-md-3= f.text_field :ar_day, label: "Days (1-31)"
     .col-md-3= f.text_field :ar_wday, label: "Week Days (M-S)"

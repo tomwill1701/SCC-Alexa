@@ -23,6 +23,20 @@ class RunJob < ActiveJob::Base
     Notice.create(title: "Background job finished", ugroup: run.ugroup, run: run)
     run.save
 
+    #
+    #  delete trigger file name
+    #
+    if !run.job.ar_file.blank?
+      fn = run.job.ar_file
+      if fn[0..0] != '/'
+        fn = ENV["HOMEDIR"] + "/tmp/" + run.job.ar_file
+      end
+      File.delete(fn)
+    end
+
+    run.job.ar_active = true
+    run.job.save
+
   end
 
 end

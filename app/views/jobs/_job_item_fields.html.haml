@@ -1,7 +1,7 @@
 .container
   .nested-fields
     .row
-      .col-md-11= f.collection_select :cgroup_id, Cgroup.all, :id, :name, { label: "Command" }
+      .col-md-9= f.collection_select :cgroup_id, Cgroup.all, :id, :qual, { label: "Command" }
     .row
       .col-md-9= f.collection_select :lgroup_id, Lgroup.all, :id, :name, { label: "LPAR", include_blank: true }
       .col-md-2= f.text_field :size

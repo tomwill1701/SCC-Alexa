@@ -42,7 +42,6 @@ namespace :scc do
         (ar_start_date is null OR ar_start_date <= ?) AND
         (ar_start_time is null OR ar_start_time <= ?)", Date.today, Time.now)
     jobs.each do |job|
-      binding.pry
 
       #
       #  hour of the day
@@ -78,8 +77,20 @@ namespace :scc do
       end
 
       #
+      #  trigger file name
+      #
+      if !job.ar_file.blank?
+        fn = job.ar_file
+        if fn[0..0] != '/'
+          fn = ENV["HOMEDIR"] + "/tmp/" + job.ar_file
+        end
+        break if !File.exist?(fn)
+      end
+
+      #
       #  start a new run
       #
+
       run = Run.new
       run.start = DateTime.now
       run.build(job, job.owner)
@@ -93,7 +104,9 @@ namespace :scc do
       #
       #  calc new start time
       #
-      if job.ar_type == "Hour"
+      if job.ar_type == "Minute"
+        newstart = Time.now + 1.minute
+      elsif job.ar_type == "Hour"
         newstart = Time.now + 1.hour
       elsif job.ar_type == "Day"
         newstart = Time.now + 1.day
@@ -110,6 +123,8 @@ namespace :scc do
         job.ar_start_date = newstart.to_date
         job.ar_start_time = newstart.to_time
       end
+
+      job.ar_active = true
       job.save
 
     end

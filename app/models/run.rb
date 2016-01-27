@@ -386,6 +386,23 @@ class Run < ActiveRecord::Base
           end
 
           #
+          #  run a linux command
+          #
+          if oper[0].downcase == "sh"
+            self << "sh started: #{oper[1]}"
+            self.save
+            cmd = "sh " + oper[1]
+            crc = system(cmd)
+            if crc
+              self << "sh successful: #{oper[1]}"
+            else
+              self << "sh failed: #{oper[1]}"
+              self.error = true
+            end
+            self.save
+          end
+
+          #
           #  create new view and upload the pdf file
           #
           if oper[0].downcase == "view"

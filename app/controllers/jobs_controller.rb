@@ -174,7 +174,7 @@ class JobsController < ApplicationController
     :jgroup, :private, :notify, :user_ids, :owner_id, :jgroup,
     :run_type, :keep_days, :cache, :delete_when,
     :ar_start_date, :ar_start_time, :ar_type, :ar_repeat, :ar_hour,
-    :ar_wday, :ar_day, :ar_month, :ar_wdayt,
+    :ar_wday, :ar_day, :ar_month, :ar_wdayt, :ar_file,
     job_items_attributes: [:id, :cgroup_id, :lgroup_id, :cache, :chart_type,
       :chart_title, :chart_x, :chart_y, :chart_opt, :size, :_destroy])
   end
