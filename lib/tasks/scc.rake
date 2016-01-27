@@ -4,8 +4,12 @@ namespace :scc do
 
   task arstart: :environment do
 
-    delete
-    autorun
+    while true
+      delete
+      autorun
+      sleep 60
+    end
+
 
   end
 
@@ -22,9 +26,9 @@ namespace :scc do
   def delete
 
     runs = Run.where("delete_at <= ?", Date.today)
-    runs.each do |r|
-      r.destroy
-      puts "Run #{r.id} deleted : ran: #{r.start} / user: #{r.user.username} / name: #{r.job.name}"
+    runs.each do |run|
+      run.destroy
+      puts "Run #{run.id} deleted : ran: #{run.start} / user: #{run.user.username} / name: #{run.job.name}"
     end
 
   end
@@ -34,11 +38,80 @@ namespace :scc do
   #
   def autorun
 
-    jobs = Job.where("ar_type is not NULL AND ar_start_date <= ? AND
-        (ar_start_time is NULL OR ar_start_time <= ?)", Date.today, Time.now)
-
-    jobs.each do |j|
+    jobs = Job.where("length(ar_type) > 0 AND
+        (ar_start_date is null OR ar_start_date <= ?) AND
+        (ar_start_time is null OR ar_start_time <= ?)", Date.today, Time.now)
+    jobs.each do |job|
       binding.pry
+
+      #
+      #  hour of the day
+      #
+      if !job.ar_hour.blank?
+        a = job.ar_hour.split(",").map { |s| s.to_i }
+        break if !a.include?(Time.now.hour)
+      end
+
+      #
+      #  day of the month
+      #
+      if !job.ar_day.blank?
+        a = job.ar_day.split(",").map { |s| s.to_i }
+        break if !a.include?(Time.now.day)
+      end
+
+      #
+      #  month of the year
+      #
+      if !job.ar_month.blank?
+        a = job.ar_month.split(",").map { |s| s.to_i }
+        break if !a.include?(Time.now.month)
+      end
+
+      #
+      #  day of the week
+      #
+      if !job.ar_wday.blank?
+        a = job.ar_wday.split(",")
+        break if !a.include?(Time.now.strftime("%A")) and
+                !a.include?(Time.now.strftime("%a"))
+      end
+
+      #
+      #  start a new run
+      #
+      run = Run.new
+      run.start = DateTime.now
+      run.build(job, job.owner)
+      run.status = "Autorun job queued"
+      run << "Autorun job queued"
+      run.save
+      RunJob.perform_later run
+
+      puts "Run #{run.id} started : ran: #{run.start} / user: #{run.user.username} / name: #{run.job.name}"
+
+      #
+      #  calc new start time
+      #
+      if job.ar_type == "Hour"
+        newstart = Time.now + 1.hour
+      elsif job.ar_type == "Day"
+        newstart = Time.now + 1.day
+      elsif job.ar_type == "Month"
+        newstart = Time.now + 1.month
+      elsif job.ar_type == "Once"
+        newstart = nil
+      end
+
+      if newstart == nil
+        job.ar_start_date = nil
+        job.ar_start_time = nil
+      else
+        job.ar_start_date = newstart.to_date
+        job.ar_start_time = newstart.to_time
+      end
+      job.save
+
     end
 
   end

@@ -15,7 +15,8 @@
       Data was acquired from the following sources:
       %br
       - @run.run_commands.each do |rc|
-        %p LPAR: #{rc.lpar.name} / Command: #{rc.command.name}
+        - if rc.lpar
+          %p LPAR: #{rc.lpar.name} / Command: #{rc.command.name}
         - if rc.run_views
           %br and generated reports:
           - rc.run_views.each do |rv|

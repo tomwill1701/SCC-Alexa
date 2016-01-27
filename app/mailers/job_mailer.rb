@@ -10,14 +10,15 @@ class JobMailer < ApplicationMailer
 
     if run.attachments
       run.attachments.each do |k, v|
-        attachments[k] = File.read(v)
         run << "email attachment: #{v}"
+        run.save
+        attachments[k] = File.read(v)
       end
     end
 
     if @user.email
       subject = "SCC job #{@run.name} has completed"
-      subject =+ " but with errors" if @run.error
+      subject = "SCC job #{@run.name} has completed but with errors" if @run.error
       mail(to: @user.email, subject: subject)
     end
 

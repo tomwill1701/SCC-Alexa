@@ -70,7 +70,7 @@ class RunCommand < ActiveRecord::Base
     self.columns = Array.new
     self.rows = Array.new
 
-    if self.command.ctype == "Grid" && rtext && done && !error
+    if self.command.ctype.downcase == "grid" && rtext && done && !error
 
       line = rtext.split("\r")
 

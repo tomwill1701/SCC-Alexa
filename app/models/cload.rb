@@ -71,7 +71,6 @@ class Cload < ActiveRecord::Base
       last = ""
 
       line.each do |line|
-        puts line
         if line[0..2] == "*$ "
           s = line[3..71].split(/= */,2)
           key = s[0].downcase.strip
