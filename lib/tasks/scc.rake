@@ -84,7 +84,7 @@ namespace :scc do
         if fn[0..0] != '/'
           fn = ENV["HOMEDIR"] + "/tmp/" + job.ar_file
         end
-        break if !File.exist?(fn)
+        break if !File.exist?(fn) or File.zero?(fn) or !File.readable(fn)
       end
 
       #

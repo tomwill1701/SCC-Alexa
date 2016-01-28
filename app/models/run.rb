@@ -205,7 +205,7 @@ class Run < ActiveRecord::Base
       mon = lpar.monproc
       mon = "MONRUNM" unless mon
       if command.ctype.downcase == "xml"
-        return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext},P2='XML' "
+        return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext},P2='XML(START)' "
       elsif command.ctype.downcase == "csv"
         return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext},P2='WREC(CSV)' "
       else
@@ -271,7 +271,7 @@ class Run < ActiveRecord::Base
         exec.lpar = rc.lpar
         exec.cmd = rc.model
         exec.command = rc
-        if exec.command.command.ctype.downcase == "xml"
+        if %w(xml csv).include?(exec.command.command.ctype.downcase)
           exec.filename = ENV["HOMEDIR"] + "/tmp/" + exec.lpar.name + "-" + exec.command.command.file
           exec.xmlfile = ENV["HOMEDIR"] + "/tmp/" + exec.command.command.file
         end
@@ -331,9 +331,15 @@ class Run < ActiveRecord::Base
     end
 
     xmlfile.each do |f|
-      f << '</root>'
-      self << "File #{f.path} merged"
+      path = f.path
       f.close
+      fr = open(path).gets
+      if fr[0..0] == "<"
+        f = File.open(path, "a")
+        f << '</root>'
+        f.close
+      end
+      self << "File #{path} merged"
     end
 
     #
@@ -443,7 +449,7 @@ class Run < ActiveRecord::Base
   end
 
   #
-  #  process xml data
+  #  process xml and csv data
   #
   def procxml(exec)
 
@@ -460,10 +466,12 @@ class Run < ActiveRecord::Base
 
     if fo == nil
       fo = File.open(exec.xmlfile, 'w')
-      fo << '<?xml version="1.0" encoding="ISO-8859-1"?>'
-      fo << "\n"
-      fo << "<root>\n"
       xmlfile << fo
+      if exec.command.command.ctype.downcase == "xml"
+        fo << '<?xml version="1.0" encoding="ISO-8859-1"?>'
+        fo << "\n"
+        fo << "<root>\n"
+      end
     end
 
     #
@@ -471,7 +479,9 @@ class Run < ActiveRecord::Base
     #
     fi = File.open(exec.file, 'r')
     while(line=fi.gets("\r"))
-      if line[0..0] == "<" && !["<html>", "<?xml ", "<root>", "</root"].include?(line[0..5])
+      if exec.command.command.ctype.downcase == "csv" && line[0..9] == "MON10103-I"
+          fo << line[11..-1] + "\n"
+      elsif line[0..0] == "<" && !["<html>", "<?xml ", "<root>", "</root"].include?(line[0..5])
         fo << line + "\n"
       end
     end

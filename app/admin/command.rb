@@ -83,7 +83,7 @@ ActiveAdmin.register Command do
         member_label: lambda {|g| "#{g.qual("LOCKED-","")}" }
       end
       input :ctype, label: "Type", as: :select,
-        collection:  ["DIFCmd", "MVSCmd", "Grid", "Chart", "External", "XML"]
+        collection:  ["DIFCmd", "MVSCmd", "Grid", "Chart", "External", "XML", "CSV"]
       input :cclass, label: "Class"
       input :tags
       input :model, input_html: {rows: 6}
