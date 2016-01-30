@@ -14,6 +14,7 @@ ActiveAdmin.register Command do
   filter :ctype, as: :select, label: "Type"
   filter :cclass, as: :select, label: "Class"
   filter :cgroups, as: :select, label: "Group", collection: proc { Cgroup.is_group }
+  filter :file
   filter :source, as: :select
   filter :hide
   filter :tags

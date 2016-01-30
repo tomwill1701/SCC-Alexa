@@ -7,6 +7,7 @@ class RunJob < ActiveJob::Base
   #
   def perform(run)
 
+    return if run.status == "Background run started"
     run.status = "Background run started"
     run << "Background job started"
     run.save
@@ -33,9 +34,6 @@ class RunJob < ActiveJob::Base
       end
       File.delete(fn)
     end
-
-    run.job.ar_active = true
-    run.job.save
 
   end
 

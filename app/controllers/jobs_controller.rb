@@ -113,6 +113,7 @@ class JobsController < ApplicationController
       run.background = params[:background]
       run.cache = params[:cache]
       run.notify = params[:notify]
+      run.debug = params[:debug]
       run.delete_at = Date.today + 2000 if params[:keep]
       run.ugroup_id = params[:ugroup_id]
       run.delete_when = params[:delete_when]

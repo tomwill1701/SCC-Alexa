@@ -7,7 +7,5 @@
        :endpoint               => 'http://s3.amazonaws.com'
      }
      config.fog_directory  = ENV["S3_BUCKET"]
-   else
-     config.fog_directory  = "extfiles"
    end
  end

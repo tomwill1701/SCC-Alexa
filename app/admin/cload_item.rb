@@ -47,6 +47,7 @@ ActiveAdmin.register CloadItem do
       row :name
       row :member
       row :model
+      row :file
       row :keys
       row "Type", :ctype
       row "Class", :cclass
@@ -72,6 +73,7 @@ ActiveAdmin.register CloadItem do
       input :name
       input :member
       input :model, input_html: {rows: 4}
+      input :file
       input :keys
       input :ctype, label: "Type", as: :select,
         collection: ["DIFCmd", "MVSCmd", "Grid", "Chart", "External"]

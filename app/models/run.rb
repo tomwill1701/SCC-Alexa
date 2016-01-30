@@ -204,7 +204,9 @@ class Run < ActiveRecord::Base
     elsif %w(grid chart xml csv).include?(command.ctype.downcase)
       mon = lpar.monproc
       mon = "MONRUNM" unless mon
-      if command.ctype.downcase == "xml"
+      if ctext.downcase[0..3] == "dif "
+        return ctext[4..-1]
+      elsif command.ctype.downcase == "xml"
         return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext},P2='XML(START)' "
       elsif command.ctype.downcase == "csv"
         return "ENABLE OSJOB #{mon} TCPIP *NAME=#{ctext},P2='WREC(CSV)' "
@@ -222,7 +224,7 @@ class Run < ActiveRecord::Base
     if self.cache
       fin = true
       self.run_commands.each do | rc |
-        unless rc.done
+        unless rc.done or !rc.lpar
           ckey = "#{rc.lpar.id}/#{rc.model}"
           rc.rtext = Rails.cache.read(ckey)
 
@@ -330,6 +332,9 @@ class Run < ActiveRecord::Base
 
     end
 
+    #
+    #  see if we are writting data to a local file
+    #
     xmlfile.each do |f|
       path = f.path
       f.close
@@ -369,6 +374,10 @@ class Run < ActiveRecord::Base
       #  if external see what commands we have
       #
       if rv.command.ctype.downcase == "external"
+
+        rv.hide = true
+        rv.save
+
         ecmds = rv.command.model.gsub(";","\n").strip
         ecmds.each_line do |cmd|
           oper = cmd.split(' ')
@@ -412,41 +421,58 @@ class Run < ActiveRecord::Base
           #  create new view and upload the pdf file
           #
           if oper[0].downcase == "view"
-            fn =  ENV["HOMEDIR"] + '/tmp/' + oper[1]
-            if File.exists?(fn)
-              File.open(fn) do |f|
-                rc = rv.run_command
-                newrv = RunView.create(run: self, run_command: rc, file: f,
-                name: "PDF #{oper[1]}")
-                self << "file uploaded: #{fn}"
-                rc.run_views << rv
-                rc.save
-              end
-            else
-              self << "file does not exists: #{fn}"
-            end
+            upload(rv, oper[1], "PDF #{oper[1]}")
           end
-
-          self.save
-
 
           #
           #  mark a file for email attachment
           #
           if oper[0].downcase == "attach"
-            fn =  ENV["HOMEDIR"] + '/tmp/' + oper[1]
-            if File.exists?(fn)
-              self.attachments ||= Hash.new
-              self.attachments[oper[1]] = fn
-            else
-              self << "file does not exists: #{fn}"
-            end
+            attach(oper[1])
           end
 
         end
       end
     end
   end
+
+  #
+  #  upload file and create view
+  #
+  def upload(rv, fn, title)
+
+    fn =  ENV["HOMEDIR"] + '/tmp/' + fn if fn[0..0] != "/"
+    if File.exists?(fn)
+      File.open(fn) do |f|
+        rc = rv.run_command
+        newrv = RunView.create(run: self, run_command: rc, file: f,
+        name: title)
+        self << "file uploaded: #{fn}"
+        rc.run_views << rv
+        rc.save
+      end
+    else
+      self << "file does not exists: #{fn}"
+    end
+    self.save
+
+  end
+
+  #
+  #  attach a file
+  #
+  def attach(pfn)
+    fn = pfn
+    fn =  ENV["HOMEDIR"] + '/tmp/' + pfn if fn[0..0] != "/"
+    if File.exists?(fn)
+      self.attachments ||= Hash.new
+      self.attachments[pfn] = fn
+    else
+      self << "file does not exists: #{fn}"
+    end
+    self.save
+  end
+
 
   #
   #  process xml and csv data
@@ -486,6 +512,10 @@ class Run < ActiveRecord::Base
       end
     end
     fi.close
+
+    if self.debug
+      attach(exec.file.path)
+    end
 
   end
 

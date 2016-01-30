@@ -1,16 +1,17 @@
 #accordion.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
   - @rc.each do |rc|
-    %h3 Commands:
-    .panel.panel-default
-      #headingOne.panel-heading{:role => "tab"}
-        %h4.panel-title
-          %a{"aria-controls" => "collapse#{rc.id}", "aria-expanded" => "true",
-                "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse#{rc.id}"}
-            %small
-              - if rc.lpar
-                %br #{rc.lpar.name}
-              = rc.source
-              = rc.model
+    - if !rc.model.blank?
+      %h3 Commands:
+      .panel.panel-default
+        #headingOne.panel-heading{:role => "tab"}
+          %h4.panel-title
+            %a{"aria-controls" => "collapse#{rc.id}", "aria-expanded" => "true",
+                  "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse#{rc.id}"}
+              %small
+                - if rc.lpar
+                  %br #{rc.lpar.name}
+                = rc.source
+                = rc.model
       .panel-collapse.collapse{id: "collapse#{rc.id}", "aria-labelledby" => "headingOne", :role => "tabpanel"}
         .panel-body
           - if rc.rtext

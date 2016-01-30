@@ -96,6 +96,7 @@ namespace :scc do
       run.build(job, job.owner)
       run.status = "Autorun job queued"
       run << "Autorun job queued"
+      run.auto_run = true
       run.save
       RunJob.perform_later run
 
