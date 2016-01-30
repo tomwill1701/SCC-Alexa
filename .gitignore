@@ -18,5 +18,5 @@
 .env
 .idea
 /public/pdf
-/public/scc
-/public/uploads
+/public/scc/*
+/public/uploads/*
