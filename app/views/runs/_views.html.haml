@@ -1,4 +1,4 @@
--if rc.run_views
+-if rc.run_views.count > 0
   %h3 View:
 - rc.run_views.each do |rv|
   - if !rv.hide and !rv.name.blank?

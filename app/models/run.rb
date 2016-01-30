@@ -140,7 +140,9 @@ class Run < ActiveRecord::Base
             @rc.run_views << @rv
           end
         else
-          @rc = RunCommand.new(run: self, model: "", job_item: ji, command: command)
+          if @rc == nil
+            @rc = RunCommand.new(run: self, model: "", job_item: ji, command: command)
+          end
           @rv = RunView.create(run: self, run_command: @rc, job_item: ji,
           command: command, name: command.name, hide: command.hide)
           @rc.run_views << @rv
@@ -149,7 +151,6 @@ class Run < ActiveRecord::Base
       end
 
     end
-
 
     #
     #  set background/notify/cache options
