@@ -16,7 +16,7 @@ class Exec
     @cmd = str.strip
     if str[0..3] == "FILE"
       oper = str.split(' ',3)
-      self.filename = ENV["HOMEDIR"] + "/tmp/" + oper[1]
+      self.filename = Rails.root.to_s + "/tmp/" + oper[1]
       @cmd = oper[2]
     end
   end

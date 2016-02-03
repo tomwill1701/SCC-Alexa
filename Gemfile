@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 #ruby '2.2.0'
 
 #gem 'activeadmin', github: 'activeadmin'
+gem 'pg'
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'faker'
@@ -37,7 +38,6 @@ gem "nested_form"
 
 group :production do
   gem 'rails_12factor'
-  gem 'pg'
 end
 
 group :development, :test do
@@ -51,5 +51,4 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'quiet_assets'
   gem 'letter_opener'
-  gem 'pg'
 end

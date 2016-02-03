@@ -82,7 +82,7 @@ namespace :scc do
       if !job.ar_file.blank?
         fn = job.ar_file
         if fn[0..0] != '/'
-          fn = ENV["HOMEDIR"] + "/tmp/" + job.ar_file
+          fn = Rails.root.to_s + "/tmp/" + job.ar_file
         end
         break if !File.exist?(fn) or File.zero?(fn) or !File.readable(fn)
       end

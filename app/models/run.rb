@@ -276,8 +276,8 @@ class Run < ActiveRecord::Base
         exec.cmd = rc.model
         exec.command = rc
         if %w(xml csv).include?(exec.command.command.ctype.downcase)
-          exec.filename = ENV["HOMEDIR"] + "/tmp/" + exec.lpar.name + "-" + exec.command.command.file
-          exec.xmlfile = ENV["HOMEDIR"] + "/tmp/" + exec.command.command.file
+          exec.filename = Rails.root.to_s + "/tmp/" + exec.lpar.name + "-" + exec.command.command.file
+          exec.xmlfile = Rails.root.to_s + "/tmp/" + exec.command.command.file
         end
         execgroup.execs << exec
       end
@@ -391,7 +391,7 @@ class Run < ActiveRecord::Base
           if oper[0].downcase == "birt"
             self << "BIRT started: #{oper[1]}"
             self.save
-            cmd = "sh " + ENV["HOMEDIR"] + "/reports/birt.sh " + oper[1]
+            cmd = "sh " + Rails.root.to_s + "/reports/birt.sh " + Rails.root.to_s + " " + oper[1]
             crc = system(cmd)
             if crc
               self << "BIRT successful: #{oper[1]}"
@@ -443,7 +443,7 @@ class Run < ActiveRecord::Base
   #
   def upload(rv, fn, title)
 
-    fn =  ENV["HOMEDIR"] + '/tmp/' + fn if fn[0..0] != "/"
+    fn =  Rails.root.to_s + '/tmp/' + fn if fn[0..0] != "/"
     if File.exists?(fn)
       File.open(fn) do |f|
         rc = rv.run_command
@@ -465,7 +465,7 @@ class Run < ActiveRecord::Base
   #
   def attach(pfn)
     fn = pfn
-    fn =  ENV["HOMEDIR"] + '/tmp/' + pfn if fn[0..0] != "/"
+    fn =  Rails.root.to_s + '/tmp/' + pfn if fn[0..0] != "/"
     if File.exists?(fn)
       self.attachments ||= Hash.new
       self.attachments[pfn] = fn

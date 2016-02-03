@@ -30,7 +30,7 @@ class RunJob < ActiveJob::Base
     if !run.job.ar_file.blank?
       fn = run.job.ar_file
       if fn[0..0] != '/'
-        fn = ENV["HOMEDIR"] + "/tmp/" + run.job.ar_file
+        fn = Rails.root.to_s + "/tmp/" + run.job.ar_file
       end
       File.delete(fn)
     end
