@@ -26,6 +26,8 @@ class CreateJobs < ActiveRecord::Migration
       t.string :ar_day
       t.string :ar_month
       t.string :ar_wdayt
+      t.string :ar_file
+      t.boolean :ar_active, default: false
 
 
       t.timestamps null: false

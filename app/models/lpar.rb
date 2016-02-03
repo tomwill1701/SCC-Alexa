@@ -22,6 +22,7 @@ class Lpar < ActiveRecord::Base
   has_many :lpar_lgroups, dependent: :destroy
   has_many :lgroups, through: :lpar_lgroups
   has_many :cloads, dependent: :destroy
+  has_many :run_commands, dependent: :destroy
 
   validates :name, :ip, :port, presence: true
 

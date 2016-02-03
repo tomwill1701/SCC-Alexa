@@ -20,6 +20,8 @@ class CreateCloaditems < ActiveRecord::Migration
       t.string :group
       t.string :preload
       t.integer :cache_time
+      t.string :file
+      t.boolean :hide, default: false
       t.references :cload
       t.references :command
 

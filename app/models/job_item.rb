@@ -26,6 +26,9 @@ class JobItem < ActiveRecord::Base
   belongs_to :cgroup
   belongs_to :lgroup
 
+  has_many :run_views, dependent: :destroy
+  has_many :run_commands, dependent: :destroy
+
   default_scope {order('id ASC')}
 
 end

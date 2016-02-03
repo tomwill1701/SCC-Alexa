@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160130013139) do
+ActiveRecord::Schema.define(version: 20150325211513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,11 +59,12 @@ ActiveRecord::Schema.define(version: 20160130013139) do
     t.string   "group"
     t.string   "preload"
     t.integer  "cache_time"
+    t.string   "file"
+    t.boolean  "hide",        default: false
     t.integer  "cload_id"
     t.integer  "command_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "file"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "cloads", force: :cascade do |t|
@@ -186,10 +187,10 @@ ActiveRecord::Schema.define(version: 20160130013139) do
     t.string   "ar_day"
     t.string   "ar_month"
     t.string   "ar_wdayt"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
     t.string   "ar_file"
     t.boolean  "ar_active",     default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "lgroups", force: :cascade do |t|
@@ -297,6 +298,7 @@ ActiveRecord::Schema.define(version: 20160130013139) do
     t.boolean  "error",       default: false
     t.boolean  "done",        default: false
     t.boolean  "notify",      default: false
+    t.boolean  "debug",       default: false
     t.string   "name"
     t.string   "status"
     t.string   "error_text"
@@ -314,7 +316,6 @@ ActiveRecord::Schema.define(version: 20160130013139) do
     t.integer  "user_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.boolean  "debug"
   end
 
   add_index "runs", ["job_id"], name: "index_runs_on_job_id", using: :btree

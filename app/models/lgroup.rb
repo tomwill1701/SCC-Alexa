@@ -14,12 +14,12 @@
 class Lgroup < ActiveRecord::Base
 
   has_many :lpar_lgroups, dependent: :destroy
-  has_many :lpars, through: :lpar_lgroups
+  has_many :lpars, through: :lpar_lgroups, dependent: :destroy
 
   has_many :lpar_restricts, dependent: :destroy
 
   has_many :job_items, dependent: :destroy
-  has_many :jobs, through: :jobitems
+  has_many :jobs, through: :jobitems, dependent: :destroy
 
   scope :is_group, lambda {|name =  nil| where("private = false or name = '#{name}'") }
   scope :is_private, -> { where(private: true) }

@@ -22,6 +22,8 @@
 #  group       :string
 #  preload     :string
 #  cache_time  :integer
+#  file        :string
+#  hide        :boolean          default("false")
 #  cload_id    :integer
 #  command_id  :integer
 #  created_at  :datetime         not null

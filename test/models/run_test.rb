@@ -8,6 +8,7 @@
 #  error       :boolean          default("false")
 #  done        :boolean          default("false")
 #  notify      :boolean          default("false")
+#  debug       :boolean          default("false")
 #  name        :string
 #  status      :string
 #  error_text  :string

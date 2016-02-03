@@ -28,6 +28,8 @@
 #  ar_day        :string
 #  ar_month      :string
 #  ar_wdayt      :string
+#  ar_file       :string
+#  ar_active     :boolean          default("false")
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #

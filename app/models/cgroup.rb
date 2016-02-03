@@ -13,7 +13,7 @@
 class Cgroup < ActiveRecord::Base
 
   has_many :command_cgroups, dependent: :destroy
-  has_many :commands, through: :command_cgroups
+  has_many :commands, through: :command_cgroups, dependent: :destroy
 
   has_many :command_restricts, dependent: :destroy
 

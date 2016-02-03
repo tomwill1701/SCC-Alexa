@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       delete 'unfavorite'
       get 'clone'
       get 'run'
+      get 'ecmd'
     end
     collection do
       get 'search'

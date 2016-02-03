@@ -7,6 +7,7 @@ class CreateRuns < ActiveRecord::Migration
       t.boolean :done, default: false
       t.boolean :notify, default: false
       t.boolean :cache, default: true
+      t.boolean :debug, default: false
       t.string  :name
       t.string  :status
       t.string  :error_text

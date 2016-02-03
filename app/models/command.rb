@@ -33,7 +33,9 @@
 class Command < ActiveRecord::Base
 
   has_many :command_cgroups, dependent: :destroy
-  has_many :cgroups, through: :command_cgroups
+  has_many :cgroups, through: :command_cgroups, dependent: :destroy
+  has_many :run_views, dependent: :destroy
+  has_many :run_commands, dependent: :destroy
 
   validates :name, :ctype, presence: true
   validates :name, :uniqueness => {:scope => [:ctype, :chart_type]}
