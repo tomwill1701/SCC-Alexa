@@ -275,7 +275,7 @@ class Run < ActiveRecord::Base
         exec.lpar = rc.lpar
         exec.cmd = rc.model
         exec.command = rc
-        if %w(xml csv).include?(exec.command.command.ctype.downcase)
+        if %w(xml csv).include?(exec.command.command.ctype.downcase) & !exec.command.command.file.blank?
           exec.filename = Rails.root.to_s + "/tmp/" + exec.lpar.name + "-" + exec.command.command.file
           exec.xmlfile = Rails.root.to_s + "/tmp/" + exec.command.command.file
         end

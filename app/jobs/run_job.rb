@@ -7,7 +7,13 @@ class RunJob < ActiveJob::Base
   #
   def perform(run)
 
-    return if run.status == "Background run started"
+    if run.status == "Background run started"
+      run.status = "Background run failed"
+      run << "Background job failed"
+      run.save
+      return
+    end
+
     run.status = "Background run started"
     run << "Background job started"
     run.save

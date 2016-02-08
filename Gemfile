@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
 
-#ruby '2.2.0'
-
-#gem 'activeadmin', github: 'activeadmin'
 gem 'pg'
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'coffee-rails', '~> 4.1.0'
