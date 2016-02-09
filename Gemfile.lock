@@ -88,6 +88,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.0)
+    daemon-spawn (0.4.2)
     daemons (1.2.3)
     debug_inspector (0.0.2)
     delayed_job (4.1.1)
@@ -404,6 +405,7 @@ DEPENDENCIES
   carrierwave
   cocoon
   coffee-rails (~> 4.1.0)
+  daemon-spawn (= 0.4.2)
   delayed_job_active_record
   delayed_job_web
   dotenv-rails

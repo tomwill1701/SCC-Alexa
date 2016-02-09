@@ -2,7 +2,10 @@ namespace :scc do
 
   desc "SCC Autorun"
 
-  task arstart: :environment do
+  task ar: :environment do
+
+    pid = "#{Rails.root}/tmp/pids/ar.pid"
+    File.open(pid, 'w'){|f| f.puts Process.pid}
 
     while true
       delete
@@ -13,7 +16,7 @@ namespace :scc do
 
   end
 
-  task ar: :environment do
+  task ar1: :environment do
 
     delete
     autorun
