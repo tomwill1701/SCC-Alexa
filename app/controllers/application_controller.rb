@@ -5,6 +5,14 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :names_comma, :name_qual
 
+  before_filter :set_mailer_host
+
+  def set_mailer_host
+    ActionMailer::Base.default_url_options[:protocol] = request.protocol
+    ActionMailer::Base.default_url_options[:host] = request.host_with_port
+  end
+
+
   #
   #  get the current user
   #
