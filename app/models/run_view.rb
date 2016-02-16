@@ -25,9 +25,20 @@ class RunView < ActiveRecord::Base
   default_scope {order('id ASC')}
 
   attr_accessor :vtype, :chart_type, :x_fields, :y_fields,
-                :options, :size, :title
+                :options, :size, :title, :file_url
 
   mount_uploader :file, ExtUploader
+
+  #
+  #  return url or extended url
+  #
+  def file_url
+    if file_type
+      return file_type
+    else
+      return file.url
+    end
+  end
 
   #
   #  get attributes of this view

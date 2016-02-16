@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.4.0.v201405191524 Build &lt;4.4.0.v20140606-1451></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.datatools.enablement.oda.xml" name="ts7700" id="7">
+            <property name="FILELIST">TS7700.XML</property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.datatools.enablement.oda.xml.dataSet" name="config" id="8">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">ve_code</property>
+                    <expression name="expression">BirtStr.trim(row["VE_CODE_1"])+"."+BirtStr.trim(row["VE_CODE_2"])+"."+BirtStr.trim(row["VE_CODE_3"])+"."+BirtStr.trim(row["VE_CODE_4"])</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">TIME_STAMP</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">TIME_STAMP</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">NODE_ID</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">NODE_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CLUSTER_ID</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">CLUSTER_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">INT_DURATION</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">INT_DURATION</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MACHINE_TYPE</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">MACHINE_TYPE</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MACHINE_MODEL</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">MACHINE_MODEL</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">MACHINE_SERIAL</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">MACHINE_SERIAL</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">VE_CODE_1</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">VE_CODE_1</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">VE_CODE_2</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">VE_CODE_2</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">VE_CODE_3</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">VE_CODE_3</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">VE_CODE_4</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">VE_CODE_4</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">GRID_ID</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">GRID_ID</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">LIB_ID</property>
+                    <property name="analysis">dimension</property>
+                    <property name="onColumnLayout">false</property>
+                    <text-property name="heading">LIB_ID</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters"/>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">TIME_STAMP</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">NODE_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">CLUSTER_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">INT_DURATION</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">MACHINE_TYPE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">MACHINE_MODEL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">MACHINE_SERIAL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">VE_CODE_1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">VE_CODE_2</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">VE_CODE_3</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">VE_CODE_4</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">GRID_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">LIB_ID</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">ve_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">ts7700</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">TIME_STAMP</property>
+                    <property name="nativeName">TIME_STAMP</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">NODE_ID</property>
+                    <property name="nativeName">NODE_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">CLUSTER_ID</property>
+                    <property name="nativeName">CLUSTER_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">INT_DURATION</property>
+                    <property name="nativeName">INT_DURATION</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">MACHINE_TYPE</property>
+                    <property name="nativeName">MACHINE_TYPE</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">MACHINE_MODEL</property>
+                    <property name="nativeName">MACHINE_MODEL</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">MACHINE_SERIAL</property>
+                    <property name="nativeName">MACHINE_SERIAL</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">VE_CODE_1</property>
+                    <property name="nativeName">VE_CODE_1</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">VE_CODE_2</property>
+                    <property name="nativeName">VE_CODE_2</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">VE_CODE_3</property>
+                    <property name="nativeName">VE_CODE_3</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">VE_CODE_4</property>
+                    <property name="nativeName">VE_CODE_4</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">GRID_ID</property>
+                    <property name="nativeName">GRID_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">LIB_ID</property>
+                    <property name="nativeName">LIB_ID</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[table0#-TNAME-#table0#:#[//T77HG0]#:#{TIME_STAMP;TIMESTAMP;TIME_STAMP},{NODE_ID;STRING;NODE_ID},{CLUSTER_ID;STRING;CLUSTER_ID},{INT_DURATION;STRING;INT_DURATION},{MACHINE_TYPE;STRING;MACHINE_TYPE},{MACHINE_MODEL;STRING;MACHINE_MODEL},{MACHINE_SERIAL;STRING;MACHINE_SERIAL},{VE_CODE_1;STRING;VE_CODE_1},{VE_CODE_2;STRING;VE_CODE_2},{VE_CODE_3;STRING;VE_CODE_3},{VE_CODE_4;STRING;VE_CODE_4},{GRID_ID;STRING;GRID_ID},{LIB_ID;STRING;LIB_ID}]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>NODE_ID</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>NODE_ID</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>CLUSTER_ID</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>CLUSTER_ID</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>INT_DURATION</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>INT_DURATION</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>MACHINE_TYPE</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>MACHINE_TYPE</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>MACHINE_MODEL</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>MACHINE_MODEL</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>MACHINE_SERIAL</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>MACHINE_SERIAL</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>VE_CODE_1</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>VE_CODE_1</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>VE_CODE_2</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>VE_CODE_2</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>VE_CODE_3</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>VE_CODE_3</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>VE_CODE_4</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>VE_CODE_4</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>GRID_ID</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>GRID_ID</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>LIB_ID</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>-1</design:precision>
+            <design:scale>-1</design:scale>
+            <design:nullability>Unknown</design:nullability>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>LIB_ID</design:label>
+            <design:formattingHints/>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>MAX_ROW</name>
+                    <value>-1</value>
+                </ex-property>
+                <ex-property>
+                    <name>XML_FILE</name>
+                </ex-property>
+            </list-property>
+        </oda-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="11">
+            <property name="width">7.916666666666667in</property>
+            <property name="dataSet">config</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">CLUSTER_ID</property>
+                    <text-property name="displayName">CLUSTER_ID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["CLUSTER_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MACHINE_TYPE</property>
+                    <text-property name="displayName">MACHINE_TYPE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MACHINE_TYPE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MACHINE_MODEL</property>
+                    <text-property name="displayName">MACHINE_MODEL</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MACHINE_MODEL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MACHINE_SERIAL</property>
+                    <text-property name="displayName">MACHINE_SERIAL</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MACHINE_SERIAL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">GRID_ID</property>
+                    <text-property name="displayName">GRID_ID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["GRID_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LIB_ID</property>
+                    <text-property name="displayName">LIB_ID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["LIB_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">TIME_STAMP</property>
+                    <text-property name="displayName">TIME_STAMP</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["TIME_STAMP"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">NODE_ID</property>
+                    <text-property name="displayName">NODE_ID</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["NODE_ID"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">INT_DURATION</property>
+                    <text-property name="displayName">INT_DURATION</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["INT_DURATION"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">VE_CODE_1</property>
+                    <text-property name="displayName">VE_CODE_1</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["VE_CODE_1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">VE_CODE_2</property>
+                    <text-property name="displayName">VE_CODE_2</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["VE_CODE_2"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">VE_CODE_3</property>
+                    <text-property name="displayName">VE_CODE_3</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["VE_CODE_3"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">VE_CODE_4</property>
+                    <text-property name="displayName">VE_CODE_4</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["VE_CODE_4"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ve_code</property>
+                    <text-property name="displayName">ve_code</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ve_code"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">date-time</property>
+                    <property name="aggregateFunction">MIN</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["TIME_STAMP"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">date-time</property>
+                    <property name="aggregateFunction">MIN</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["TIME_STAMP"]</expression>
+                        </structure>
+                    </list-property>
+                    <property name="allowExport">true</property>
+                </structure>
+            </list-property>
+            <list-property name="sort">
+                <structure>
+                    <expression name="key" type="javascript">row["GRID_ID"]</expression>
+                    <property name="direction">asc</property>
+                    <property name="strength">-1</property>
+                </structure>
+                <structure>
+                    <expression name="key" type="javascript">row["CLUSTER_ID"]</expression>
+                    <property name="direction">asc</property>
+                    <property name="strength">-1</property>
+                </structure>
+            </list-property>
+            <column id="74">
+                <property name="width">1.1770833333333333in</property>
+            </column>
+            <column id="45">
+                <property name="width">1.1041666666666667in</property>
+            </column>
+            <column id="46">
+                <property name="width">1.09375in</property>
+            </column>
+            <column id="47">
+                <property name="width">1.2291666666666667in</property>
+            </column>
+            <column id="48">
+                <property name="width">1.1145833333333333in</property>
+            </column>
+            <column id="50">
+                <property name="width">0.9791666666666666in</property>
+            </column>
+            <column id="449">
+                <property name="width">1.21875in</property>
+            </column>
+            <header>
+                <row id="102">
+                    <property name="height">1.1354166666666667in</property>
+                    <cell id="103">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <image id="434">
+                            <property name="height">1in</property>
+                            <property name="width">7.5625in</property>
+                            <property name="source">file</property>
+                            <expression name="uri" type="constant">DTS-logo.jpg</expression>
+                        </image>
+                    </cell>
+                    <cell id="442"/>
+                </row>
+                <row id="95">
+                    <property name="height">0.46875in</property>
+                    <cell id="96">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <label id="369">
+                            <property name="fontSize">16pt</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Configuration</text-property>
+                        </label>
+                    </cell>
+                    <cell id="443"/>
+                </row>
+                <row id="83">
+                    <property name="height">0.3020833333333333in</property>
+                    <cell id="84">
+                        <label id="90">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Date:</text-property>
+                        </label>
+                    </cell>
+                    <cell id="85">
+                        <property name="colSpan">5</property>
+                        <property name="rowSpan">1</property>
+                        <data id="94">
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">Aggregation_1</property>
+                        </data>
+                    </cell>
+                    <cell id="444"/>
+                </row>
+                <row id="12">
+                    <cell id="71">
+                        <label id="75">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">GRID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="13">
+                        <label id="14">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">CLUSTER ID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="15">
+                        <label id="16">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">TYPE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="17">
+                        <label id="18">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">MODEL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="19">
+                        <label id="20">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">SERIAL</text-property>
+                        </label>
+                    </cell>
+                    <cell id="23">
+                        <label id="24">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">LIBRARY ID</text-property>
+                        </label>
+                    </cell>
+                    <cell id="445">
+                        <label id="452">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">VE CODE</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <group id="51">
+                <property name="groupName">Grid</property>
+                <expression name="keyExpr" type="javascript">row["GRID_ID"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["GRID_ID"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <header>
+                    <row id="52">
+                        <property name="height">0.2604166666666667in</property>
+                        <cell id="72"/>
+                        <cell id="53"/>
+                        <cell id="54"/>
+                        <cell id="55"/>
+                        <cell id="56"/>
+                        <cell id="58"/>
+                        <cell id="446"/>
+                    </row>
+                </header>
+                <footer>
+                    <row id="435">
+                        <property name="height">0.25in</property>
+                        <cell id="436"/>
+                        <cell id="437"/>
+                        <cell id="438"/>
+                        <cell id="439"/>
+                        <cell id="440"/>
+                        <cell id="441"/>
+                        <cell id="448"/>
+                    </row>
+                </footer>
+            </group>
+            <detail>
+                <row id="25">
+                    <cell id="73">
+                        <data id="66">
+                            <property name="resultSetColumn">GRID_ID</property>
+                        </data>
+                    </cell>
+                    <cell id="26">
+                        <data id="27">
+                            <property name="resultSetColumn">CLUSTER_ID</property>
+                        </data>
+                    </cell>
+                    <cell id="28">
+                        <data id="29">
+                            <property name="resultSetColumn">MACHINE_TYPE</property>
+                        </data>
+                    </cell>
+                    <cell id="30">
+                        <data id="31">
+                            <property name="resultSetColumn">MACHINE_MODEL</property>
+                        </data>
+                    </cell>
+                    <cell id="32">
+                        <data id="33">
+                            <property name="resultSetColumn">MACHINE_SERIAL</property>
+                        </data>
+                    </cell>
+                    <cell id="36">
+                        <data id="37">
+                            <property name="resultSetColumn">LIB_ID</property>
+                        </data>
+                    </cell>
+                    <cell id="447">
+                        <data id="451">
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">ve_code</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>

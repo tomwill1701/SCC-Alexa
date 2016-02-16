@@ -17,8 +17,8 @@ class JobMailer < ApplicationMailer
     end
 
     if @user.email
-      subject = "SCC job #{@run.name} has completed"
-      subject = "SCC job #{@run.name} has completed but with errors" if @run.error
+      subject = "RCC Job #{@run.name} has completed"
+      subject = "RCC Job #{@run.name} has completed but with errors" if @run.error
       mail(to: @user.email, subject: subject)
     end
 

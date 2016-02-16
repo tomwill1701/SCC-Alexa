@@ -380,40 +380,74 @@ class Run < ActiveRecord::Base
         rv.hide = true
         rv.save
 
-        ecmds = rv.command.model.gsub(";","\n").strip
-        ecmds.each_line do |cmd|
+        ecmds = rv.command.model.gsub(";","\n").strip.split('\n')
+        ecmds.each do |cmd|
           oper = cmd.split(' ')
           oper[0] = "" if oper.count == 0
+          func = oper[0].downcase
+          fn = oper[1] if oper[1]
 
           #
           #  run a birt report
           #
-          if oper[0].downcase == "birt"
-            self << "BIRT started: #{oper[1]}"
-            self.save
-            cmd = "sh " + Rails.root.to_s + "/reports/birt.sh " + Rails.root.to_s + " " + oper[1]
-            crc = system(cmd)
-            if crc
-              self << "BIRT successful: #{oper[1]}"
+          if func[0..3] == "birt"
+
+            #
+            #  see if we have a generic file name
+            #
+            if fn.last == "*"
+              ffn =  Rails.root.to_s + '/reports/' + fn + ".rptdesign"
+              newfns = Dir.glob(ffn).select{ |e| File.file? e }
+              newfns.each do |dfn|
+                af = func + " " + File.dirname(fn) + "/" + File.basename(dfn,"rptdesign").chop
+                ecmds.push(af)
+              end
+
             else
-              self << "BIRT failed: #{oper[1]}"
-              self.error = true
+
+              #
+              #  build birt command
+              #
+              self << "BIRT started: #{oper[1]}"
+              self.save
+              cmd = "sh " + Rails.root.to_s + "/reports/birt.sh " + Rails.root.to_s + " " +
+                    fn + " " + File.basename(fn)
+              crc = system(cmd)
+
+              #
+              #  see if birt worked
+              #
+              if crc
+                self << "BIRT successful: #{fn}"
+                if func.downcase.include?("view")
+                  ecmds.push("view #{File.basename(fn)}.pdf")
+                end
+                if func.downcase.include?("attach")
+                  ecmds.push("attach #{File.basename(fn)}.pdf")
+                end
+              else
+                self << "BIRT failed: #{fn}"
+                self.error = true
+              end
+
+              self.save
+
             end
-            self.save
+
           end
 
           #
           #  run a linux command
           #
-          if oper[0].downcase == "sh"
-            self << "sh started: #{oper[1]}"
+          if func == "sh"
+            self << "sh started: #{fn}"
             self.save
-            cmd = "sh " + oper[1]
+            cmd = "sh " + fn
             crc = system(cmd)
             if crc
-              self << "sh successful: #{oper[1]}"
+              self << "sh successful: #{fn}"
             else
-              self << "sh failed: #{oper[1]}"
+              self << "sh failed: #{fn}"
               self.error = true
             end
             self.save
@@ -422,15 +456,15 @@ class Run < ActiveRecord::Base
           #
           #  create new view and upload the pdf file
           #
-          if oper[0].downcase == "view"
-            upload(rv, oper[1], "PDF #{oper[1]}")
+          if func == "view"
+            upload(rv.run_command, fn, "PDF #{fn}")
           end
 
           #
           #  mark a file for email attachment
           #
-          if oper[0].downcase == "attach"
-            attach(oper[1])
+          if func == "attach"
+            attach(fn)
           end
 
         end
@@ -441,14 +475,16 @@ class Run < ActiveRecord::Base
   #
   #  upload file and create view
   #
-  def upload(rv, fn, title)
+  def upload(rc, fn, title)
 
     fn =  Rails.root.to_s + '/tmp/' + fn if fn[0..0] != "/"
     if File.exists?(fn)
       File.open(fn) do |f|
-        rc = rv.run_command
-        newrv = RunView.create(run: self, run_command: rc, file: f,
-        name: title)
+        rv = RunView.create(run: self, run_command: rc, file: f,
+                            name: title)
+        if rv.file.mounted_as == :file
+          rv.file_type = ENV["SERVER_IP"] + rv.file.url
+        end
         self << "file uploaded: #{fn}"
         rc.run_views << rv
         rc.save

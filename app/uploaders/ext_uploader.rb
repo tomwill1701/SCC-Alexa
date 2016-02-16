@@ -6,7 +6,7 @@ class ExtUploader < CarrierWave::Uploader::Base
     storage :fog
   else
     storage :file
-    assets_host = ActionMailer::Base.default_url_options[:host]
+  # assets_host = ENV['SERVER_IP']
   end
 
   def store_dir

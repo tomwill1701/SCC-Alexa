@@ -23,6 +23,6 @@
             - if !rv.hide
               %br
               - if rv.file.present?
-                = link_to rv.name, rv.file.url
+                = link_to rv.name, rv.file_url 
               -else
                 = link_to rv.name, run_view_path(rv)
