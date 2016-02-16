@@ -66,7 +66,7 @@ class RunView < ActiveRecord::Base
     #  set type of view
     #
     if cmd.chart_type.present? || ji.chart_type.present?
-      self.vtype.downcase = 'chart'
+      self.vtype = 'chart'
     elsif cmd.ctype.downcase == 'difcmd' || cmd.ctype.downcase == 'mvscmd'
       self.vtype = 'text'
     elsif cmd.ctype.downcase == 'grid'
