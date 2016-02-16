@@ -25,6 +25,7 @@ module Scc
     config.active_job.queue_adapter = :delayed_job
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.assets.precompile += %w(.svg .eot .woff .ttf)
+    config.assets.precompile += %w(public/assets/imgs/*)
   end
 
 end
