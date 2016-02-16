@@ -41,7 +41,7 @@ heroku ps:scale worker=1
 
 Heroku
 
-rake assets:precompile
+heroku run rake assets:precompile
 heroku pg:reset DATABASE
 heroku run rake db:migrate
 heroku run rake db:seed
