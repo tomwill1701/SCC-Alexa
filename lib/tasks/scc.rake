@@ -90,16 +90,17 @@ namespace :scc do
         cfn = fns[1]
         if fn[0..0] != '/'
           fn = Rails.root.to_s + "/tmp/" + fn
-          cfn = Rails.root.to_s + "/tmp/" + cfn
+          cfn = Rails.root.to_s + "/tmp/" + cfn if cfn
         end
 
         #
         #  see if the file exists and has changed since we last used it
         #
+	 last_mod = File.mtime(fn).to_s
         if File.exist?(fn) and !File.zero?(fn) and File.readable?(fn) and
-           (job.ar_file_modified == nil or job.ar_file_modified != File.mtime(fn) )
+           (job.ar_file_modified == nil or job.ar_file_modified != last_mod )
 
-           job.ar_file_modified = File.mtime(fn)
+           job.ar_file_modified = last_mod
 
            #
            #  see if we need to copy to a new file
