@@ -5,18 +5,18 @@
 #  id            :integer          not null, primary key
 #  model         :text
 #  rtext         :text
-#  done          :boolean          default("false")
-#  error         :boolean          default("false")
-#  add_lpar      :boolean          default("false")
+#  done          :boolean          default(FALSE)
+#  error         :boolean          default(FALSE)
+#  add_lpar      :boolean          default(FALSE)
 #  error_text    :string
 #  status        :string
 #  source        :string
 #  data_acquired :datetime
-#  cloud         :boolean          default("false")
-#  compressed    :boolean          default("false")
-#  merge_grid    :boolean          default("false")
-#  download      :boolean          default("false")
-#  hide          :boolean          default("false")
+#  cloud         :boolean          default(FALSE)
+#  compressed    :boolean          default(FALSE)
+#  merge_grid    :boolean          default(FALSE)
+#  download      :boolean          default(FALSE)
+#  hide          :boolean          default(FALSE)
 #  run_id        :integer
 #  lpar_id       :integer
 #  job_item_id   :integer

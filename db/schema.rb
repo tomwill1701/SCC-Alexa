@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325211513) do
+ActiveRecord::Schema.define(version: 20160217033006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 20150325211513) do
 
   create_table "jobs", force: :cascade do |t|
     t.string   "name"
-    t.string   "jgroup",        default: "Job"
+    t.string   "jgroup",           default: "Job"
     t.string   "jtype"
     t.text     "description"
     t.string   "menu"
@@ -171,11 +171,11 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.string   "tags"
     t.string   "run_type"
     t.integer  "keep_days"
-    t.boolean  "private",       default: false
-    t.boolean  "notify",        default: true
-    t.boolean  "notify_group",  default: true
-    t.boolean  "cache",         default: true
-    t.boolean  "debug",         default: true
+    t.boolean  "private",          default: false
+    t.boolean  "notify",           default: true
+    t.boolean  "notify_group",     default: true
+    t.boolean  "cache",            default: true
+    t.boolean  "debug",            default: true
     t.integer  "owner_id"
     t.datetime "ar_start"
     t.date     "ar_start_date"
@@ -188,9 +188,10 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.string   "ar_month"
     t.string   "ar_wdayt"
     t.string   "ar_file"
-    t.boolean  "ar_active",     default: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.boolean  "ar_active",        default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.datetime "ar_file_modified"
   end
 
   create_table "lgroups", force: :cascade do |t|
@@ -316,6 +317,7 @@ ActiveRecord::Schema.define(version: 20150325211513) do
     t.integer  "user_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "file_delete"
   end
 
   add_index "runs", ["job_id"], name: "index_runs_on_job_id", using: :btree

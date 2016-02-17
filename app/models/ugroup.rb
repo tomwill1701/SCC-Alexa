@@ -6,7 +6,7 @@
 #  name        :string
 #  description :text
 #  racf_group  :string
-#  private     :boolean          default("false")
+#  private     :boolean          default(FALSE)
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #

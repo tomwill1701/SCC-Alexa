@@ -6,7 +6,7 @@
 #  name           :string
 #  file           :string
 #  file_type      :string
-#  hide           :boolean          default("false")
+#  hide           :boolean          default(FALSE)
 #  run_command_id :integer
 #  run_id         :integer
 #  job_item_id    :integer

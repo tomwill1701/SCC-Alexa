@@ -21,10 +21,10 @@
 #  cclass      :string
 #  tags        :string
 #  preload     :string
-#  cache_time  :integer          default("0")
+#  cache_time  :integer          default(0)
 #  rscript     :text
 #  vscript     :text
-#  hide        :boolean          default("false")
+#  hide        :boolean          default(FALSE)
 #  data_type   :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

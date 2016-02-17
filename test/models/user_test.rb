@@ -11,10 +11,10 @@
 #  racf_userid     :string
 #  racf_group      :string
 #  racf_password   :string
-#  admin           :boolean          default("false")
+#  admin           :boolean          default(FALSE)
 #  password_digest :string
 #  last_login      :datetime
-#  login_count     :integer          default("0")
+#  login_count     :integer          default(0)
 #  background      :string
 #  notify          :string
 #  cache           :string

@@ -33,12 +33,8 @@ class RunJob < ActiveJob::Base
     #
     #  delete trigger file name
     #
-    if !run.job.ar_file.blank?
-      fn = run.job.ar_file
-      if fn[0..0] != '/'
-        fn = Rails.root.to_s + "/tmp/" + run.job.ar_file
-      end
-      File.delete(fn)
+    if !run.file_delete.blank?
+      File.delete(run.file_delete)
     end
 
   end
