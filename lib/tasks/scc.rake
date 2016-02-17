@@ -87,7 +87,7 @@ namespace :scc do
         if fn[0..0] != '/'
           fn = Rails.root.to_s + "/tmp/" + job.ar_file
         end
-        break if !File.exist?(fn) or File.zero?(fn) or !File.readable(fn)
+        break if !File.exist?(fn) or File.zero?(fn) or !File.readable?(fn)
       end
 
       #
