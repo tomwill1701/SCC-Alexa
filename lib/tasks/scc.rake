@@ -43,6 +43,7 @@ namespace :scc do
 
     jobs = Job.where("length(ar_type) > 0 AND ar_start <= now() ")
     jobs.each do |job|
+  binding.pry
 
       file_delete = nil
 
@@ -51,7 +52,7 @@ namespace :scc do
       #
       if !job.ar_hour.blank?
         a = job.ar_hour.split(",").map { |s| s.to_i }
-        break if !a.include?(Time.now.hour)
+        next if !a.include?(Time.now.hour)
       end
 
       #
@@ -59,7 +60,7 @@ namespace :scc do
       #
       if !job.ar_day.blank?
         a = job.ar_day.split(",").map { |s| s.to_i }
-        break if !a.include?(Time.now.day)
+        next if !a.include?(Time.now.day)
       end
 
       #
@@ -67,7 +68,7 @@ namespace :scc do
       #
       if !job.ar_month.blank?
         a = job.ar_month.split(",").map { |s| s.to_i }
-        break if !a.include?(Time.now.month)
+        next if !a.include?(Time.now.month)
       end
 
       #
@@ -75,7 +76,7 @@ namespace :scc do
       #
       if !job.ar_wday.blank?
         a = job.ar_wday.split(",")
-        break if !a.include?(Time.now.strftime("%A")) and
+        next if !a.include?(Time.now.strftime("%A")) and
                 !a.include?(Time.now.strftime("%a"))
       end
 
@@ -108,7 +109,7 @@ namespace :scc do
              FileUtils.cp(fn, cfn)
            end
         else
-          break
+          next
         end
       end
 

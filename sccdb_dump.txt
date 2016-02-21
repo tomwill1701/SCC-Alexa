@@ -1,0 +1,2359 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: active_admin_comments; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE active_admin_comments (
+    id integer NOT NULL,
+    namespace character varying,
+    body text,
+    resource_id character varying NOT NULL,
+    resource_type character varying NOT NULL,
+    author_id integer,
+    author_type character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.active_admin_comments OWNER TO rcc;
+
+--
+-- Name: active_admin_comments_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE active_admin_comments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.active_admin_comments_id_seq OWNER TO rcc;
+
+--
+-- Name: active_admin_comments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE active_admin_comments_id_seq OWNED BY active_admin_comments.id;
+
+
+--
+-- Name: cgroups; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE cgroups (
+    id integer NOT NULL,
+    name character varying,
+    description text,
+    private boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.cgroups OWNER TO rcc;
+
+--
+-- Name: cgroups_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE cgroups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cgroups_id_seq OWNER TO rcc;
+
+--
+-- Name: cgroups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE cgroups_id_seq OWNED BY cgroups.id;
+
+
+--
+-- Name: cload_items; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE cload_items (
+    id integer NOT NULL,
+    name character varying,
+    description text,
+    source character varying,
+    member character varying,
+    model text,
+    keys character varying,
+    ctype character varying,
+    cclass character varying,
+    tags character varying,
+    prompts character varying,
+    size character varying,
+    chart_type character varying,
+    chart_x character varying,
+    chart_y character varying,
+    chart_opt text,
+    status character varying,
+    "group" character varying,
+    preload character varying,
+    cache_time integer,
+    file character varying,
+    hide boolean DEFAULT false,
+    cload_id integer,
+    command_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.cload_items OWNER TO rcc;
+
+--
+-- Name: cload_items_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE cload_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cload_items_id_seq OWNER TO rcc;
+
+--
+-- Name: cload_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE cload_items_id_seq OWNED BY cload_items.id;
+
+
+--
+-- Name: cloads; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE cloads (
+    id integer NOT NULL,
+    dsname character varying,
+    volser character varying,
+    lpar_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.cloads OWNER TO rcc;
+
+--
+-- Name: cloads_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE cloads_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cloads_id_seq OWNER TO rcc;
+
+--
+-- Name: cloads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE cloads_id_seq OWNED BY cloads.id;
+
+
+--
+-- Name: command_cgroups; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE command_cgroups (
+    id integer NOT NULL,
+    command_id integer,
+    cgroup_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.command_cgroups OWNER TO rcc;
+
+--
+-- Name: command_cgroups_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE command_cgroups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.command_cgroups_id_seq OWNER TO rcc;
+
+--
+-- Name: command_cgroups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE command_cgroups_id_seq OWNED BY command_cgroups.id;
+
+
+--
+-- Name: command_restricts; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE command_restricts (
+    id integer NOT NULL,
+    cgroup_id integer,
+    ugroup_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.command_restricts OWNER TO rcc;
+
+--
+-- Name: command_restricts_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE command_restricts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.command_restricts_id_seq OWNER TO rcc;
+
+--
+-- Name: command_restricts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE command_restricts_id_seq OWNED BY command_restricts.id;
+
+
+--
+-- Name: commands; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE commands (
+    id integer NOT NULL,
+    name character varying,
+    description text,
+    ctype character varying,
+    model text,
+    file character varying,
+    prompts character varying,
+    variables character varying,
+    source character varying,
+    member character varying,
+    keys character varying,
+    size character varying,
+    chart_type character varying,
+    chart_x character varying,
+    chart_y character varying,
+    chart_opt text,
+    cclass character varying,
+    tags character varying,
+    preload character varying,
+    cache_time integer DEFAULT 0,
+    rscript text,
+    vscript text,
+    hide boolean DEFAULT false,
+    data_type character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.commands OWNER TO rcc;
+
+--
+-- Name: commands_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE commands_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.commands_id_seq OWNER TO rcc;
+
+--
+-- Name: commands_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE commands_id_seq OWNED BY commands.id;
+
+
+--
+-- Name: delayed_jobs; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE delayed_jobs (
+    id integer NOT NULL,
+    priority integer DEFAULT 0 NOT NULL,
+    attempts integer DEFAULT 0 NOT NULL,
+    handler text NOT NULL,
+    last_error text,
+    run_at timestamp without time zone,
+    locked_at timestamp without time zone,
+    failed_at timestamp without time zone,
+    locked_by character varying,
+    queue character varying,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    progress_stage character varying,
+    progress_current integer DEFAULT 0,
+    progress_max integer DEFAULT 0
+);
+
+
+ALTER TABLE public.delayed_jobs OWNER TO rcc;
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE delayed_jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.delayed_jobs_id_seq OWNER TO rcc;
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE delayed_jobs_id_seq OWNED BY delayed_jobs.id;
+
+
+--
+-- Name: job_items; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE job_items (
+    id integer NOT NULL,
+    job_id integer,
+    lgroup_id integer,
+    cgroup_id integer,
+    size character varying,
+    chart_type character varying,
+    chart_x character varying,
+    chart_y character varying,
+    chart_opt character varying,
+    chart_title character varying,
+    racf_password character varying,
+    command_prefix character varying,
+    command_suffix character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.job_items OWNER TO rcc;
+
+--
+-- Name: job_items_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE job_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.job_items_id_seq OWNER TO rcc;
+
+--
+-- Name: job_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE job_items_id_seq OWNED BY job_items.id;
+
+
+--
+-- Name: jobs; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE jobs (
+    id integer NOT NULL,
+    name character varying,
+    jgroup character varying DEFAULT 'Job'::character varying,
+    jtype character varying,
+    description text,
+    menu character varying,
+    cclass character varying,
+    tags character varying,
+    run_type character varying,
+    keep_days integer,
+    private boolean DEFAULT false,
+    notify boolean DEFAULT true,
+    notify_group boolean DEFAULT true,
+    cache boolean DEFAULT true,
+    debug boolean DEFAULT true,
+    owner_id integer,
+    ar_start timestamp without time zone,
+    ar_start_date date,
+    ar_start_time time without time zone,
+    ar_type character varying,
+    ar_repeat character varying,
+    ar_hour character varying,
+    ar_wday character varying,
+    ar_day character varying,
+    ar_month character varying,
+    ar_wdayt character varying,
+    ar_file character varying,
+    ar_active boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    ar_file_modified character varying
+);
+
+
+ALTER TABLE public.jobs OWNER TO rcc;
+
+--
+-- Name: jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.jobs_id_seq OWNER TO rcc;
+
+--
+-- Name: jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE jobs_id_seq OWNED BY jobs.id;
+
+
+--
+-- Name: lgroups; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE lgroups (
+    id integer NOT NULL,
+    name character varying,
+    description text,
+    sysplex boolean DEFAULT false,
+    private boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.lgroups OWNER TO rcc;
+
+--
+-- Name: lgroups_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE lgroups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.lgroups_id_seq OWNER TO rcc;
+
+--
+-- Name: lgroups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE lgroups_id_seq OWNED BY lgroups.id;
+
+
+--
+-- Name: lpar_lgroups; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE lpar_lgroups (
+    id integer NOT NULL,
+    lpar_id integer,
+    lgroup_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.lpar_lgroups OWNER TO rcc;
+
+--
+-- Name: lpar_lgroups_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE lpar_lgroups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.lpar_lgroups_id_seq OWNER TO rcc;
+
+--
+-- Name: lpar_lgroups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE lpar_lgroups_id_seq OWNED BY lpar_lgroups.id;
+
+
+--
+-- Name: lpar_restricts; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE lpar_restricts (
+    id integer NOT NULL,
+    lgroup_id integer,
+    ugroup_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.lpar_restricts OWNER TO rcc;
+
+--
+-- Name: lpar_restricts_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE lpar_restricts_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.lpar_restricts_id_seq OWNER TO rcc;
+
+--
+-- Name: lpar_restricts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE lpar_restricts_id_seq OWNED BY lpar_restricts.id;
+
+
+--
+-- Name: lpars; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE lpars (
+    id integer NOT NULL,
+    name character varying,
+    description text,
+    ip character varying,
+    port integer,
+    location character varying,
+    zos_release character varying,
+    subsystems character varying,
+    monproc character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.lpars OWNER TO rcc;
+
+--
+-- Name: lpars_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE lpars_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.lpars_id_seq OWNER TO rcc;
+
+--
+-- Name: lpars_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE lpars_id_seq OWNED BY lpars.id;
+
+
+--
+-- Name: notices; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE notices (
+    id integer NOT NULL,
+    title text,
+    ugroup_id integer,
+    run_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.notices OWNER TO rcc;
+
+--
+-- Name: notices_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE notices_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.notices_id_seq OWNER TO rcc;
+
+--
+-- Name: notices_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE notices_id_seq OWNED BY notices.id;
+
+
+--
+-- Name: run_commands; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE run_commands (
+    id integer NOT NULL,
+    model text,
+    rtext text,
+    done boolean DEFAULT false,
+    error boolean DEFAULT false,
+    add_lpar boolean DEFAULT false,
+    error_text character varying,
+    status character varying,
+    source character varying,
+    data_acquired timestamp without time zone,
+    cloud boolean DEFAULT false,
+    compressed boolean DEFAULT false,
+    merge_grid boolean DEFAULT false,
+    download boolean DEFAULT false,
+    hide boolean DEFAULT false,
+    run_id integer,
+    lpar_id integer,
+    job_item_id integer,
+    command_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.run_commands OWNER TO rcc;
+
+--
+-- Name: run_commands_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE run_commands_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.run_commands_id_seq OWNER TO rcc;
+
+--
+-- Name: run_commands_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE run_commands_id_seq OWNED BY run_commands.id;
+
+
+--
+-- Name: run_views; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE run_views (
+    id integer NOT NULL,
+    name character varying,
+    file character varying,
+    file_type character varying,
+    hide boolean DEFAULT false,
+    run_command_id integer,
+    run_id integer,
+    job_item_id integer,
+    command_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.run_views OWNER TO rcc;
+
+--
+-- Name: run_views_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE run_views_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.run_views_id_seq OWNER TO rcc;
+
+--
+-- Name: run_views_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE run_views_id_seq OWNED BY run_views.id;
+
+
+--
+-- Name: runs; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE runs (
+    id integer NOT NULL,
+    background boolean DEFAULT true,
+    cache boolean DEFAULT true,
+    error boolean DEFAULT false,
+    done boolean DEFAULT false,
+    notify boolean DEFAULT false,
+    debug boolean DEFAULT false,
+    name character varying,
+    status character varying,
+    error_text character varying,
+    log text,
+    total_data integer,
+    start timestamp without time zone,
+    "end" timestamp without time zone,
+    viewed timestamp without time zone,
+    delete_at timestamp without time zone,
+    delete_when character varying,
+    note character varying,
+    auto_run boolean DEFAULT false,
+    ugroup_id integer,
+    job_id integer,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    file_delete character varying
+);
+
+
+ALTER TABLE public.runs OWNER TO rcc;
+
+--
+-- Name: runs_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE runs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.runs_id_seq OWNER TO rcc;
+
+--
+-- Name: runs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE runs_id_seq OWNED BY runs.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO rcc;
+
+--
+-- Name: ugroups; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE ugroups (
+    id integer NOT NULL,
+    name character varying,
+    description text,
+    racf_group character varying,
+    private boolean DEFAULT false,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.ugroups OWNER TO rcc;
+
+--
+-- Name: ugroups_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE ugroups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ugroups_id_seq OWNER TO rcc;
+
+--
+-- Name: ugroups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE ugroups_id_seq OWNED BY ugroups.id;
+
+
+--
+-- Name: user_jobs; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE user_jobs (
+    id integer NOT NULL,
+    user_id integer,
+    job_id integer
+);
+
+
+ALTER TABLE public.user_jobs OWNER TO rcc;
+
+--
+-- Name: user_jobs_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE user_jobs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_jobs_id_seq OWNER TO rcc;
+
+--
+-- Name: user_jobs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE user_jobs_id_seq OWNED BY user_jobs.id;
+
+
+--
+-- Name: user_ugroups; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE user_ugroups (
+    id integer NOT NULL,
+    user_id integer,
+    ugroup_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.user_ugroups OWNER TO rcc;
+
+--
+-- Name: user_ugroups_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE user_ugroups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_ugroups_id_seq OWNER TO rcc;
+
+--
+-- Name: user_ugroups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE user_ugroups_id_seq OWNED BY user_ugroups.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    username character varying,
+    name character varying,
+    department character varying,
+    phone character varying,
+    email character varying,
+    racf_userid character varying,
+    racf_group character varying,
+    racf_password character varying,
+    admin boolean DEFAULT false,
+    password_digest character varying,
+    last_login timestamp without time zone,
+    login_count integer DEFAULT 0,
+    background character varying,
+    notify character varying,
+    cache character varying,
+    prompt_ok character varying,
+    prompt_cancel character varying,
+    prompt_values character varying,
+    prompt_fields character varying,
+    lpar_id integer,
+    command_id integer,
+    job_id integer,
+    ugroup_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO rcc;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: rcc
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO rcc;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: rcc
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY active_admin_comments ALTER COLUMN id SET DEFAULT nextval('active_admin_comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY cgroups ALTER COLUMN id SET DEFAULT nextval('cgroups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY cload_items ALTER COLUMN id SET DEFAULT nextval('cload_items_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY cloads ALTER COLUMN id SET DEFAULT nextval('cloads_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY command_cgroups ALTER COLUMN id SET DEFAULT nextval('command_cgroups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY command_restricts ALTER COLUMN id SET DEFAULT nextval('command_restricts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY commands ALTER COLUMN id SET DEFAULT nextval('commands_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY delayed_jobs ALTER COLUMN id SET DEFAULT nextval('delayed_jobs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY job_items ALTER COLUMN id SET DEFAULT nextval('job_items_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY jobs ALTER COLUMN id SET DEFAULT nextval('jobs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY lgroups ALTER COLUMN id SET DEFAULT nextval('lgroups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY lpar_lgroups ALTER COLUMN id SET DEFAULT nextval('lpar_lgroups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY lpar_restricts ALTER COLUMN id SET DEFAULT nextval('lpar_restricts_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY lpars ALTER COLUMN id SET DEFAULT nextval('lpars_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY notices ALTER COLUMN id SET DEFAULT nextval('notices_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY run_commands ALTER COLUMN id SET DEFAULT nextval('run_commands_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY run_views ALTER COLUMN id SET DEFAULT nextval('run_views_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY runs ALTER COLUMN id SET DEFAULT nextval('runs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY ugroups ALTER COLUMN id SET DEFAULT nextval('ugroups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY user_jobs ALTER COLUMN id SET DEFAULT nextval('user_jobs_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY user_ugroups ALTER COLUMN id SET DEFAULT nextval('user_ugroups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: active_admin_comments; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY active_admin_comments (id, namespace, body, resource_id, resource_type, author_id, author_type, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: active_admin_comments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('active_admin_comments_id_seq', 1, false);
+
+
+--
+-- Data for Name: cgroups; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY cgroups (id, name, description, private, created_at, updated_at) FROM stdin;
+25	Volume Information-CSV	\N	t	2016-02-17 02:56:58.254227	2016-02-17 02:56:58.254227
+26	Volume Information	\N	t	2016-02-17 02:56:58.279213	2016-02-17 02:56:58.279213
+27	DISK VOLUME DATASET	\N	t	2016-02-17 02:56:58.298963	2016-02-17 02:56:58.298963
+28	DISK POOL VOLUME SPACE	\N	t	2016-02-17 02:56:58.3142	2016-02-17 02:56:58.3142
+29	GAGE CHART OF POOL FREE SPACE	\N	t	2016-02-17 02:56:58.336959	2016-02-17 02:56:58.336959
+30	BAR CHART OF POOL FREE SPACE	\N	t	2016-02-17 02:56:58.357571	2016-02-17 02:56:58.357571
+31	DISK POOL SPACE USAGE	\N	t	2016-02-17 02:56:58.375378	2016-02-17 02:56:58.375378
+33	Ken	\N	f	2016-02-17 02:56:58.405987	2016-02-17 02:56:58.405987
+35	Ken Volume Data	\N	t	2016-02-17 02:56:58.448305	2016-02-17 02:56:58.448305
+36	Run Ken DCC Reports	\N	t	2016-02-17 02:56:58.470189	2016-02-17 02:56:58.470189
+37	DLM	\N	f	2016-02-17 02:56:58.484172	2016-02-17 02:56:58.484172
+38	DLM FREE SPACE	\N	t	2016-02-17 02:56:58.497798	2016-02-17 02:56:58.497798
+39	DLM DATA DOMAIN	\N	f	2016-02-17 02:56:58.514796	2016-02-17 02:56:58.514796
+40	DLM LIBRARY SPACE	\N	t	2016-02-17 02:56:58.52862	2016-02-17 02:56:58.52862
+41	DLM LIBRARY LIST	\N	t	2016-02-17 02:56:58.554943	2016-02-17 02:56:58.554943
+42	CP603 - DATA DOMAIN REPLICATION	\N	t	2016-02-17 02:56:58.587415	2016-02-17 02:56:58.587415
+43	CP602 - DATA DOMAIN COMPRESSION	\N	t	2016-02-17 02:56:58.61698	2016-02-17 02:56:58.61698
+44	CP601 - DATA DOMAIN STATISTICS	\N	t	2016-02-17 02:56:58.647988	2016-02-17 02:56:58.647988
+45	CP504 - VNX REPLICATION-SUMMARY	\N	t	2016-02-17 02:56:58.670265	2016-02-17 02:56:58.670265
+46	DLM VNX	\N	f	2016-02-17 02:56:58.678842	2016-02-17 02:56:58.678842
+47	CP504 - VNX REPLICATION-QUICK	\N	t	2016-02-17 02:56:58.694061	2016-02-17 02:56:58.694061
+48	CP502 - LOG COLLECT	\N	t	2016-02-17 02:56:58.716265	2016-02-17 02:56:58.716265
+49	DCC BIRT Repoets	\N	t	2016-02-17 03:00:26.964934	2016-02-17 03:00:26.964934
+50	Run Ken SMS Reports	\N	t	2016-02-20 04:35:47.258278	2016-02-20 04:35:47.258278
+51	Run Ken HSM Reports	\N	t	2016-02-20 04:35:47.31674	2016-02-20 04:35:47.31674
+54	KEN Volume Report	\N	t	2016-02-21 17:39:27.531504	2016-02-21 17:39:27.531504
+55	KEN Volume Data	\N	t	2016-02-21 17:39:27.615203	2016-02-21 17:39:27.615203
+\.
+
+
+--
+-- Name: cgroups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('cgroups_id_seq', 55, true);
+
+
+--
+-- Data for Name: cload_items; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY cload_items (id, name, description, source, member, model, keys, ctype, cclass, tags, prompts, size, chart_type, chart_x, chart_y, chart_opt, status, "group", preload, cache_time, file, hide, cload_id, command_id, created_at, updated_at) FROM stdin;
+22	Run Ken HSM Reports	\N	KEN.PDS	#RCCHSM	birt-attach-view RCC/HSM/*	\N	External	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM	\N	\N	\N	f	2	\N	2016-02-20 04:35:38.71332	2016-02-21 17:39:27.68148
+9	DLM FREE SPACE	\N	TOM.RCC.CLOAD	@DCC	RDLMNSPC,PPARM=(&DLMVTE)	\N	Chart	TAPE	TAPE DLM	\N	\N	Bar	POOL_NAME	FREE_%	\N	Replaced	DLM DATA DOMAIN	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.215274	2016-02-20 04:34:02.829022
+8	DLM LIBRARY SPACE	\N	TOM.RCC.CLOAD	@DCC	RDLMNSPC,PPARM=(&DLMVTE)	\N	Grid	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM DATA DOMAIN	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.209142	2016-02-20 04:34:02.847079
+7	DLM LIBRARY LIST	\N	TOM.RCC.CLOAD	@DCC	RDLMLIBL	\N	Grid	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM DATA DOMAIN	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.203986	2016-02-20 04:34:02.86498
+6	CP603 - DATA DOMAIN REPLICATION	\N	TOM.RCC.CLOAD	@DCC	DLMCMD VTE(&DLMVTE) O(VTE) S(603 O(N)) $PATH "%VOLSE.FLAT" "ALL"	\N	MVSCmd	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM DATA DOMAIN	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.198487	2016-02-20 04:34:02.884518
+5	CP602 - DATA DOMAIN COMPRESSION	\N	TOM.RCC.CLOAD	@DCC	DLMCMD VTE(&DLMVTE) O(VTE) S(602 O(N)) $PATH "%VOLSE.FLAT"	\N	MVSCmd	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM DATA DOMAIN	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.192535	2016-02-20 04:34:02.914738
+21	DCC BIRT Repoets	\N	TOM.RCC.CLOAD	@DCC	birt-attach-view /DCC/*	\N	External	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM VNX	\N	\N	\N	f	1	\N	2016-02-17 03:00:22.193977	2016-02-20 04:34:02.59002
+10	Run Ken DCC Reports	\N	KEN.PDS	#RCCDLM	birt-attach-view RCC/DLM/*	\N	External	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM	\N	\N	\N	f	2	\N	2016-02-16 05:42:09.222013	2016-02-21 17:39:27.710036
+4	CP601 - DATA DOMAIN STATISTICS	\N	TOM.RCC.CLOAD	@DCC	DLMCMD VTE(&DLMVTE) O(VTE) S(601 O(N)) $PATH "%VOLSE.FLAT"	\N	MVSCmd	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM DATA DOMAIN	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.180477	2016-02-20 04:34:02.942046
+3	CP504 - VNX REPLICATION-SUMMARY	\N	TOM.RCC.CLOAD	@DCC	DLMCMD VTE(&DLMVTE) O(VTE) S(504 O(N)) "SUMMARY" $PATH "%VOLSE.FLAT"	\N	MVSCmd	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM VNX	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.166789	2016-02-20 04:34:02.978613
+20	Volume Information-CSV	\N	TOM.RCC.CLOAD	RVOL1	RVOL1	\N	CSV	DASD	DASD VOLUME	\N	\N	\N	\N	\N	\N	Replaced	\N	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.334465	2016-02-20 04:34:02.613873
+2	CP504 - VNX REPLICATION-QUICK	\N	TOM.RCC.CLOAD	@DCC	DLMCMD VTE(&DLMVTE) O(VTE) S(504 O(N)) "QUICK" $PATH "%VOLSE.FLAT"	\N	MVSCmd	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM VNX	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.154893	2016-02-20 04:34:02.997137
+1	CP502 - LOG COLLECT	\N	TOM.RCC.CLOAD	@DCC	DLMCMD VTE(&DLMVTE) O(VTE) S(502 O(N)) "L1" "2" $PATH "%VOLSE.FLAT"	\N	MVSCmd	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM VNX	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.135476	2016-02-20 04:34:03.03272
+19	Volume Information	\N	TOM.RCC.CLOAD	RVOL1	RVOL1	\N	XML	DASD	DASD VOLUME	\N	\N	\N	\N	\N	\N	Replaced	\N	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.321856	2016-02-20 04:34:02.631062
+18	DISK VOLUME DATASET	SHOW DISK USAGE FOR A POOL BY VOLSER	TOM.RCC.CLOAD	@SCC	P=(,&VOLSER,&DSNAME)	\N	Grid	DISK	DISK POOL DSNAME	\N	\N	Gage	POOL	POOL %	\N	Replaced	\N	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.310999	2016-02-20 04:34:02.654621
+17	DISK POOL VOLUME SPACE	SHOW DISK USAGE FOR A POOL BY VOLSER	TOM.RCC.CLOAD	@SCC	P=(&POOL,&VOLSER)	\N	Grid	DISK	DISK POOL VOLUME	\N	\N	Gage	POOL	POOL %	\N	Replaced	\N	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.304178	2016-02-20 04:34:02.673221
+16	GAGE CHART OF POOL FREE SPACE	SHOW DISK POOL INFORMATION FOR ALL VOLUMES	TOM.RCC.CLOAD	@SCC	@IMPOOL	\N	Grid	DISK	DISK POOL	\N	\N	Gage	POOL	POOL %	\N	Replaced	\N	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.292442	2016-02-20 04:34:02.691156
+15	BAR CHART OF POOL FREE SPACE	SHOW DISK POOL INFORMATION FOR ALL VOLUMES	TOM.RCC.CLOAD	@SCC	@IMPOOL	\N	Grid	DISK	DISK POOL	\N	\N	Bar	POOL	POOL CYL	\N	Replaced	\N	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.27473	2016-02-20 04:34:02.708991
+14	DISK POOL SPACE USAGE	SHOW DISK POOL INFORMATION FOR ALL VOLUMES	TOM.RCC.CLOAD	@SCC	@IMPOOL	\N	Grid	DISK	DISK POOL	\N	\N	\N	\N	\N	\N	Replaced	\N	\N	\N	\N	f	1	\N	2016-02-16 05:42:09.267507	2016-02-20 04:34:02.727446
+13	Ken SMSINFO Report	\N	TOM.RCC.CLOAD	@KEN2	birt RCC_SMSINFO_SG; attach RCC_SMSINFO_SG.pdf	\N	External	DASD	DASD	\N	\N	\N	\N	\N	\N	Replaced	Ken	\N	\N	RCC_VOL.CSV	f	1	\N	2016-02-16 05:42:09.257197	2016-02-20 04:34:02.750687
+12	Ken Volume Report	\N	TOM.RCC.CLOAD	@KEN2	birt RCC_Capacity_DevType; attach RCC_Capacity_DevType.pdf; view RCC_Capacity_DevType.pdf	\N	External	DASD	DASD	\N	\N	\N	\N	\N	\N	Replaced	Ken	\N	\N	RCC_VOL.CSV	f	1	\N	2016-02-16 05:42:09.244531	2016-02-20 04:34:02.76883
+11	Ken Volume Data	\N	TOM.RCC.CLOAD	@KEN2	@KEN2	\N	CSV	DASD	DASD	\N	\N	\N	\N	\N	\N	Replaced	Ken	\N	\N	RCC_VOL.CSV	f	1	\N	2016-02-16 05:42:09.237832	2016-02-20 04:34:02.787316
+25	KEN Volume Report	\N	KEN.PDS	RCCVOL	RCCVOL; BIRT-ATTACH-VIEW RCC/Disk/RCC_Capacity_DevType	\N	CSV	DISK	DISK	\N	\N	\N	\N	\N	\N	Added	\N	\N	\N	'RCC_VOL.CSV'	t	2	\N	2016-02-21 04:56:42.314107	2016-02-21 17:39:27.60167
+24	KEN Volume Data	\N	KEN.PDS	RCCVOL	RCCVOL	\N	CSV	DISK	DISK	\N	\N	\N	\N	\N	\N	Added	\N	\N	\N	'RCC_VOL.CSV'	t	2	\N	2016-02-21 04:56:42.296088	2016-02-21 17:39:27.624215
+23	Run Ken SMS Reports	\N	KEN.PDS	#RCCSMS	birt-attach-view RCC/SMS/*	\N	External	TAPE	TAPE DLM	\N	\N	\N	\N	\N	\N	Replaced	DLM	\N	\N	\N	f	2	\N	2016-02-20 04:35:38.740851	2016-02-21 17:39:27.655643
+\.
+
+
+--
+-- Name: cload_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('cload_items_id_seq', 25, true);
+
+
+--
+-- Data for Name: cloads; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY cloads (id, dsname, volser, lpar_id, created_at, updated_at) FROM stdin;
+1	TOM.RCC.CLOAD	\N	2	2016-02-12 23:22:52.062413	2016-02-12 23:22:52.062413
+2	KEN.PDS	\N	2	2016-02-20 04:35:10.244916	2016-02-20 04:35:36.307146
+\.
+
+
+--
+-- Name: cloads_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('cloads_id_seq', 2, true);
+
+
+--
+-- Data for Name: command_cgroups; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY command_cgroups (id, command_id, cgroup_id, created_at, updated_at) FROM stdin;
+34	21	25	2016-02-17 02:56:58.260027	2016-02-17 02:56:58.260027
+35	22	26	2016-02-17 02:56:58.281931	2016-02-17 02:56:58.281931
+36	23	27	2016-02-17 02:56:58.301541	2016-02-17 02:56:58.301541
+37	24	28	2016-02-17 02:56:58.316659	2016-02-17 02:56:58.316659
+38	25	29	2016-02-17 02:56:58.339626	2016-02-17 02:56:58.339626
+39	26	30	2016-02-17 02:56:58.360634	2016-02-17 02:56:58.360634
+40	27	31	2016-02-17 02:56:58.377819	2016-02-17 02:56:58.377819
+45	30	35	2016-02-17 02:56:58.451628	2016-02-17 02:56:58.451628
+46	30	33	2016-02-17 02:56:58.461101	2016-02-17 02:56:58.461101
+47	31	36	2016-02-17 02:56:58.472715	2016-02-17 02:56:58.472715
+48	31	37	2016-02-17 02:56:58.488447	2016-02-17 02:56:58.488447
+49	32	38	2016-02-17 02:56:58.500388	2016-02-17 02:56:58.500388
+50	32	39	2016-02-17 02:56:58.519412	2016-02-17 02:56:58.519412
+51	33	40	2016-02-17 02:56:58.531015	2016-02-17 02:56:58.531015
+52	33	39	2016-02-17 02:56:58.545627	2016-02-17 02:56:58.545627
+53	34	41	2016-02-17 02:56:58.557531	2016-02-17 02:56:58.557531
+54	34	39	2016-02-17 02:56:58.571129	2016-02-17 02:56:58.571129
+55	35	42	2016-02-17 02:56:58.589771	2016-02-17 02:56:58.589771
+56	35	39	2016-02-17 02:56:58.600347	2016-02-17 02:56:58.600347
+57	36	43	2016-02-17 02:56:58.619239	2016-02-17 02:56:58.619239
+58	36	39	2016-02-17 02:56:58.631091	2016-02-17 02:56:58.631091
+59	37	44	2016-02-17 02:56:58.650567	2016-02-17 02:56:58.650567
+60	37	39	2016-02-17 02:56:58.660942	2016-02-17 02:56:58.660942
+61	38	45	2016-02-17 02:56:58.672814	2016-02-17 02:56:58.672814
+62	38	46	2016-02-17 02:56:58.683208	2016-02-17 02:56:58.683208
+63	39	47	2016-02-17 02:56:58.697284	2016-02-17 02:56:58.697284
+64	39	46	2016-02-17 02:56:58.707182	2016-02-17 02:56:58.707182
+65	40	48	2016-02-17 02:56:58.718859	2016-02-17 02:56:58.718859
+66	40	46	2016-02-17 02:56:58.731519	2016-02-17 02:56:58.731519
+67	41	49	2016-02-17 03:00:26.967537	2016-02-17 03:00:26.967537
+68	41	46	2016-02-17 03:00:26.984485	2016-02-17 03:00:26.984485
+69	42	50	2016-02-20 04:35:47.270052	2016-02-20 04:35:47.270052
+70	42	37	2016-02-20 04:35:47.286819	2016-02-20 04:35:47.286819
+71	43	51	2016-02-20 04:35:47.31947	2016-02-20 04:35:47.31947
+72	43	37	2016-02-20 04:35:47.328197	2016-02-20 04:35:47.328197
+75	46	54	2016-02-21 17:39:27.537861	2016-02-21 17:39:27.537861
+76	47	55	2016-02-21 17:39:27.619393	2016-02-21 17:39:27.619393
+\.
+
+
+--
+-- Name: command_cgroups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('command_cgroups_id_seq', 76, true);
+
+
+--
+-- Data for Name: command_restricts; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY command_restricts (id, cgroup_id, ugroup_id, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: command_restricts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('command_restricts_id_seq', 1, false);
+
+
+--
+-- Data for Name: commands; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY commands (id, name, description, ctype, model, file, prompts, variables, source, member, keys, size, chart_type, chart_x, chart_y, chart_opt, cclass, tags, preload, cache_time, rscript, vscript, hide, data_type, created_at, updated_at) FROM stdin;
+37	CP601 - DATA DOMAIN STATISTICS	\N	MVSCmd	DLMCMD VTE(&DLMVTE) O(VTE) S(601 O(N)) $PATH "%VOLSE.FLAT"	\N	\N	\N	TOM.RCC.CLOAD	@DCC	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.180477	2016-02-17 03:00:22.225761
+38	CP504 - VNX REPLICATION-SUMMARY	\N	MVSCmd	DLMCMD VTE(&DLMVTE) O(VTE) S(504 O(N)) "SUMMARY" $PATH "%VOLSE.FLAT"	\N	\N	\N	TOM.RCC.CLOAD	@DCC	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.166789	2016-02-17 03:00:22.219299
+41	DCC BIRT Repoets	\N	External	birt-attach-view /DCC/*	\N	\N	\N	TOM.RCC.CLOAD	@DCC	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-17 03:00:22.193977	2016-02-20 04:33:53.172841
+21	Volume Information-CSV	\N	CSV	RVOL1	\N	\N	\N	TOM.RCC.CLOAD	RVOL1	\N	\N	\N	\N	\N	\N	DASD	DASD VOLUME	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.334465	2016-02-17 03:00:22.376555
+22	Volume Information	\N	XML	RVOL1	\N	\N	\N	TOM.RCC.CLOAD	RVOL1	\N	\N	\N	\N	\N	\N	DASD	DASD VOLUME	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.321856	2016-02-17 03:00:22.370629
+23	DISK VOLUME DATASET	SHOW DISK USAGE FOR A POOL BY VOLSER	Grid	P=(,&VOLSER,&DSNAME)	\N	\N	\N	TOM.RCC.CLOAD	@SCC	\N	\N	Gage	POOL	POOL %	\N	DISK	DISK POOL DSNAME	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.310999	2016-02-17 03:00:22.360036
+24	DISK POOL VOLUME SPACE	SHOW DISK USAGE FOR A POOL BY VOLSER	Grid	P=(&POOL,&VOLSER)	\N	\N	\N	TOM.RCC.CLOAD	@SCC	\N	\N	Gage	POOL	POOL %	\N	DISK	DISK POOL VOLUME	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.304178	2016-02-17 03:00:22.347417
+25	GAGE CHART OF POOL FREE SPACE	SHOW DISK POOL INFORMATION FOR ALL VOLUMES	Grid	@IMPOOL	\N	\N	\N	TOM.RCC.CLOAD	@SCC	\N	\N	Gage	POOL	POOL %	\N	DISK	DISK POOL	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.292442	2016-02-17 03:00:22.335945
+26	BAR CHART OF POOL FREE SPACE	SHOW DISK POOL INFORMATION FOR ALL VOLUMES	Grid	@IMPOOL	\N	\N	\N	TOM.RCC.CLOAD	@SCC	\N	\N	Bar	POOL	POOL CYL	\N	DISK	DISK POOL	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.27473	2016-02-20 04:33:53.259637
+27	DISK POOL SPACE USAGE	SHOW DISK POOL INFORMATION FOR ALL VOLUMES	Grid	@IMPOOL	\N	\N	\N	TOM.RCC.CLOAD	@SCC	\N	\N	\N	\N	\N	\N	DISK	DISK POOL	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.267507	2016-02-17 03:00:22.305398
+30	Ken Volume Data	\N	CSV	@KEN2	RCC_VOL.CSV	\N	\N	TOM.RCC.CLOAD	@KEN2	\N	\N	\N	\N	\N	\N	DASD	DASD	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.237832	2016-02-17 03:00:22.280314
+32	DLM FREE SPACE	\N	Chart	RDLMNSPC,PPARM=(&DLMVTE)	\N	\N	\N	TOM.RCC.CLOAD	@DCC	\N	\N	Bar	POOL_NAME	FREE_%	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.215274	2016-02-17 03:00:22.264026
+33	DLM LIBRARY SPACE	\N	Grid	RDLMNSPC,PPARM=(&DLMVTE)	\N	\N	\N	TOM.RCC.CLOAD	@DCC	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.209142	2016-02-17 03:00:22.250386
+34	DLM LIBRARY LIST	\N	Grid	RDLMLIBL	\N	\N	\N	TOM.RCC.CLOAD	@DCC	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.203986	2016-02-17 03:00:22.243863
+35	CP603 - DATA DOMAIN REPLICATION	\N	MVSCmd	DLMCMD VTE(&DLMVTE) O(VTE) S(603 O(N)) $PATH "%VOLSE.FLAT" "ALL"	\N	\N	\N	TOM.RCC.CLOAD	@DCC	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.198487	2016-02-17 03:00:22.23726
+36	CP602 - DATA DOMAIN COMPRESSION	\N	MVSCmd	DLMCMD VTE(&DLMVTE) O(VTE) S(602 O(N)) $PATH "%VOLSE.FLAT"	\N	\N	\N	TOM.RCC.CLOAD	@DCC	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.192535	2016-02-17 03:00:22.232002
+39	CP504 - VNX REPLICATION-QUICK	\N	MVSCmd	DLMCMD VTE(&DLMVTE) O(VTE) S(504 O(N)) "QUICK" $PATH "%VOLSE.FLAT"	\N	\N	\N	TOM.RCC.CLOAD	@DCC	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.154893	2016-02-17 03:00:22.213552
+40	CP502 - LOG COLLECT	\N	MVSCmd	DLMCMD VTE(&DLMVTE) O(VTE) S(502 O(N)) "L1" "2" $PATH "%VOLSE.FLAT"	\N	\N	\N	TOM.RCC.CLOAD	@DCC	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.135476	2016-02-17 03:00:22.207905
+46	KEN Volume Report	\N	CSV	RCCVOL; BIRT-ATTACH-VIEW RCC/Disk/RCC_Capacity_DevType	'RCC_VOL.CSV'	\N	\N	KEN.PDS	RCCVOL	\N	\N	\N	\N	\N	\N	DISK	DISK	\N	\N	\N	\N	t	\N	2016-02-21 04:56:42.314107	2016-02-21 17:39:20.769194
+47	KEN Volume Data	\N	CSV	RCCVOL	'RCC_VOL.CSV'	\N	\N	KEN.PDS	RCCVOL	\N	\N	\N	\N	\N	\N	DISK	DISK	\N	\N	\N	\N	t	\N	2016-02-21 04:56:42.296088	2016-02-21 07:34:01.870774
+42	Run Ken SMS Reports	\N	External	birt-attach-view RCC/SMS/*	\N	\N	\N	KEN.PDS	#RCCSMS	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-20 04:35:38.740851	2016-02-21 17:39:20.755606
+43	Run Ken HSM Reports	\N	External	birt-attach-view RCC/HSM/*	\N	\N	\N	KEN.PDS	#RCCHSM	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-20 04:35:38.71332	2016-02-21 17:39:20.746061
+31	Run Ken DCC Reports	\N	External	birt-attach-view RCC/DLM/*	\N	\N	\N	KEN.PDS	#RCCDLM	\N	\N	\N	\N	\N	\N	TAPE	TAPE DLM	\N	\N	\N	\N	f	\N	2016-02-16 05:42:09.222013	2016-02-21 17:39:20.727583
+\.
+
+
+--
+-- Name: commands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('commands_id_seq', 47, true);
+
+
+--
+-- Data for Name: delayed_jobs; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY delayed_jobs (id, priority, attempts, handler, last_error, run_at, locked_at, failed_at, locked_by, queue, created_at, updated_at, progress_stage, progress_current, progress_max) FROM stdin;
+28	0	12	--- !ruby/object:ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper\njob_data:\n  job_class: RunJob\n  job_id: 04d70d1e-0202-491e-8ff0-2c952cf3c2ee\n  queue_name: run\n  arguments:\n  - _aj_globalid: gid://scc/Run/43\n	Error while trying to deserialize arguments: Couldn't find Run with 'id'=43\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/core.rb:154:in `find'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:132:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `block in locate'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `block in unscoped'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/relation.rb:302:in `scoping'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `unscoped'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:17:in `locate'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:88:in `deserialize_global_id'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:74:in `deserialize_argument'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `block in deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `map'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:85:in `deserialize_arguments'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:75:in `deserialize_arguments_if_needed'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:30:in `perform_now'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:21:in `execute'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/queue_adapters/delayed_job_adapter.rb:34:in `perform'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:100:in `block in invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:97:in `invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block (2 levels) in run'\n/usr/lib/ruby/2.2.0/timeout.rb:88:in `block in timeout'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `call'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `timeout'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block in run'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:223:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `block in reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:207:in `block in work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:169:in `block (4 levels) in start'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:168:in `block (3 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:167:in `block (2 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `loop'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `block in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `block (2 levels) in <class:ClearLocks>'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block (2 levels) in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:165:in `start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:131:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:119:in `block in run_process'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:117:in `run_process'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:98:in `block in daemonize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `daemonize'\nbin/delayed_job:5:in `<main>'	2016-02-21 20:49:56.50007	\N	\N	\N	run	2016-02-20 05:14:35.341385	2016-02-21 15:04:15.501664	\N	0	0
+29	0	12	--- !ruby/object:ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper\njob_data:\n  job_class: RunJob\n  job_id: 4b336193-e324-4117-90d0-f749bea5349f\n  queue_name: run\n  arguments:\n  - _aj_globalid: gid://scc/Run/44\n	Error while trying to deserialize arguments: Couldn't find Run with 'id'=44\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/core.rb:154:in `find'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:132:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `block in locate'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `block in unscoped'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/relation.rb:302:in `scoping'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `unscoped'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:17:in `locate'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:88:in `deserialize_global_id'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:74:in `deserialize_argument'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `block in deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `map'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:85:in `deserialize_arguments'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:75:in `deserialize_arguments_if_needed'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:30:in `perform_now'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:21:in `execute'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/queue_adapters/delayed_job_adapter.rb:34:in `perform'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:100:in `block in invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:97:in `invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block (2 levels) in run'\n/usr/lib/ruby/2.2.0/timeout.rb:88:in `block in timeout'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `call'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `timeout'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block in run'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:223:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `block in reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:207:in `block in work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:169:in `block (4 levels) in start'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:168:in `block (3 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:167:in `block (2 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `loop'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `block in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `block (2 levels) in <class:ClearLocks>'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block (2 levels) in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:165:in `start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:131:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:119:in `block in run_process'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:117:in `run_process'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:98:in `block in daemonize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `daemonize'\nbin/delayed_job:5:in `<main>'	2016-02-21 20:49:56.519792	\N	\N	\N	run	2016-02-20 05:21:35.437533	2016-02-21 15:04:15.52137	\N	0	0
+32	0	12	--- !ruby/object:ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper\njob_data:\n  job_class: RunJob\n  job_id: f486aadb-b042-4713-ae94-2d4bc323ba69\n  queue_name: run\n  arguments:\n  - _aj_globalid: gid://scc/Run/47\n	Error while trying to deserialize arguments: Couldn't find Run with 'id'=47\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/core.rb:154:in `find'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:132:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `block in locate'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `block in unscoped'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/relation.rb:302:in `scoping'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `unscoped'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:17:in `locate'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:88:in `deserialize_global_id'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:74:in `deserialize_argument'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `block in deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `map'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:85:in `deserialize_arguments'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:75:in `deserialize_arguments_if_needed'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:30:in `perform_now'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:21:in `execute'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/queue_adapters/delayed_job_adapter.rb:34:in `perform'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:100:in `block in invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:97:in `invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block (2 levels) in run'\n/usr/lib/ruby/2.2.0/timeout.rb:88:in `block in timeout'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `call'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `timeout'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block in run'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:223:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `block in reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:207:in `block in work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:169:in `block (4 levels) in start'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:168:in `block (3 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:167:in `block (2 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `loop'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `block in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `block (2 levels) in <class:ClearLocks>'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block (2 levels) in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:165:in `start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:131:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:119:in `block in run_process'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:117:in `run_process'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:98:in `block in daemonize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `daemonize'\nbin/delayed_job:5:in `<main>'	2016-02-21 20:49:56.572736	\N	\N	\N	run	2016-02-20 05:22:39.45065	2016-02-21 15:04:15.574369	\N	0	0
+30	0	12	--- !ruby/object:ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper\njob_data:\n  job_class: RunJob\n  job_id: 50b25e37-4315-451d-963c-e96c40f75e95\n  queue_name: run\n  arguments:\n  - _aj_globalid: gid://scc/Run/45\n	Error while trying to deserialize arguments: Couldn't find Run with 'id'=45\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/core.rb:154:in `find'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:132:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `block in locate'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `block in unscoped'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/relation.rb:302:in `scoping'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `unscoped'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:17:in `locate'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:88:in `deserialize_global_id'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:74:in `deserialize_argument'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `block in deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `map'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:85:in `deserialize_arguments'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:75:in `deserialize_arguments_if_needed'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:30:in `perform_now'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:21:in `execute'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/queue_adapters/delayed_job_adapter.rb:34:in `perform'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:100:in `block in invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:97:in `invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block (2 levels) in run'\n/usr/lib/ruby/2.2.0/timeout.rb:88:in `block in timeout'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `call'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `timeout'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block in run'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:223:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `block in reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:207:in `block in work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:169:in `block (4 levels) in start'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:168:in `block (3 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:167:in `block (2 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `loop'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `block in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `block (2 levels) in <class:ClearLocks>'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block (2 levels) in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:165:in `start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:131:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:119:in `block in run_process'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:117:in `run_process'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:98:in `block in daemonize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `daemonize'\nbin/delayed_job:5:in `<main>'	2016-02-21 20:49:56.537125	\N	\N	\N	run	2016-02-20 05:21:35.480887	2016-02-21 15:04:15.538753	\N	0	0
+18	0	13	--- !ruby/object:ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper\njob_data:\n  job_class: RunJob\n  job_id: 12f35a09-c548-4076-ac2a-425476a1adf9\n  queue_name: run\n  arguments:\n  - _aj_globalid: gid://scc/Run/21\n	Error while trying to deserialize arguments: Couldn't find Run with 'id'=21\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/core.rb:154:in `find'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:132:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `block in locate'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `block in unscoped'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/relation.rb:302:in `scoping'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `unscoped'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:17:in `locate'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:88:in `deserialize_global_id'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:74:in `deserialize_argument'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `block in deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `map'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:85:in `deserialize_arguments'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:75:in `deserialize_arguments_if_needed'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:30:in `perform_now'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:21:in `execute'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/queue_adapters/delayed_job_adapter.rb:34:in `perform'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:100:in `block in invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:97:in `invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block (2 levels) in run'\n/usr/lib/ruby/2.2.0/timeout.rb:88:in `block in timeout'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `call'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `timeout'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block in run'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:223:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `block in reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:207:in `block in work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:169:in `block (4 levels) in start'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:168:in `block (3 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:167:in `block (2 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `loop'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `block in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `block (2 levels) in <class:ClearLocks>'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block (2 levels) in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:165:in `start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:131:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:119:in `block in run_process'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:117:in `run_process'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:98:in `block in daemonize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `daemonize'\nbin/delayed_job:5:in `<main>'	2016-02-21 21:41:09.809184	\N	\N	\N	run	2016-02-17 17:11:35.346102	2016-02-21 13:45:03.810914	\N	0	0
+7	0	15	--- !ruby/object:ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper\njob_data:\n  job_class: RunJob\n  job_id: fde61aa0-4006-470f-a743-f8c3ffbc2e17\n  queue_name: run\n  arguments:\n  - _aj_globalid: gid://scc/Run/10\n	Error while trying to deserialize arguments: Couldn't find Run with 'id'=10\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/core.rb:154:in `find'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:132:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `block in locate'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `block in unscoped'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/relation.rb:302:in `scoping'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `unscoped'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:17:in `locate'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:88:in `deserialize_global_id'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:74:in `deserialize_argument'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `block in deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `map'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:85:in `deserialize_arguments'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:75:in `deserialize_arguments_if_needed'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:30:in `perform_now'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:21:in `execute'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/queue_adapters/delayed_job_adapter.rb:34:in `perform'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:100:in `block in invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:97:in `invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block (2 levels) in run'\n/usr/lib/ruby/2.2.0/timeout.rb:88:in `block in timeout'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `call'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `timeout'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block in run'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:223:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `block in reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:207:in `block in work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:169:in `block (4 levels) in start'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:168:in `block (3 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:167:in `block (2 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `loop'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `block in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `block (2 levels) in <class:ClearLocks>'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block (2 levels) in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:165:in `start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:131:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:119:in `block in run_process'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:117:in `run_process'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:98:in `block in daemonize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `daemonize'\nbin/delayed_job:5:in `<main>'	2016-02-22 04:38:45.586882	\N	\N	\N	run	2016-02-17 03:14:11.286878	2016-02-21 14:34:55.588465	\N	0	0
+27	0	12	--- !ruby/object:ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper\njob_data:\n  job_class: RunJob\n  job_id: 5c6cdc0a-2b52-4d53-968a-7d3be21a05e3\n  queue_name: run\n  arguments:\n  - _aj_globalid: gid://scc/Run/42\n	Error while trying to deserialize arguments: Couldn't find Run with 'id'=42\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/core.rb:154:in `find'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:132:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `block in locate'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `block in unscoped'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/relation.rb:302:in `scoping'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `unscoped'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:17:in `locate'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:88:in `deserialize_global_id'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:74:in `deserialize_argument'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `block in deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `map'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:85:in `deserialize_arguments'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:75:in `deserialize_arguments_if_needed'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:30:in `perform_now'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:21:in `execute'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/queue_adapters/delayed_job_adapter.rb:34:in `perform'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:100:in `block in invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:97:in `invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block (2 levels) in run'\n/usr/lib/ruby/2.2.0/timeout.rb:88:in `block in timeout'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `call'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `timeout'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block in run'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:223:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `block in reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:207:in `block in work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:169:in `block (4 levels) in start'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:168:in `block (3 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:167:in `block (2 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `loop'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `block in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `block (2 levels) in <class:ClearLocks>'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block (2 levels) in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:165:in `start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:131:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:119:in `block in run_process'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:117:in `run_process'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:98:in `block in daemonize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `daemonize'\nbin/delayed_job:5:in `<main>'	2016-02-21 20:49:56.489229	\N	\N	\N	run	2016-02-20 05:14:35.301701	2016-02-21 15:04:15.490947	\N	0	0
+31	0	12	--- !ruby/object:ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper\njob_data:\n  job_class: RunJob\n  job_id: a83e36e1-05b7-40dd-aeed-0c7ff5451bfe\n  queue_name: run\n  arguments:\n  - _aj_globalid: gid://scc/Run/46\n	Error while trying to deserialize arguments: Couldn't find Run with 'id'=46\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/core.rb:154:in `find'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:132:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `block in locate'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `block in unscoped'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/relation.rb:302:in `scoping'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `unscoped'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:17:in `locate'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:88:in `deserialize_global_id'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:74:in `deserialize_argument'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `block in deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `map'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:85:in `deserialize_arguments'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:75:in `deserialize_arguments_if_needed'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:30:in `perform_now'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:21:in `execute'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/queue_adapters/delayed_job_adapter.rb:34:in `perform'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:100:in `block in invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:97:in `invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block (2 levels) in run'\n/usr/lib/ruby/2.2.0/timeout.rb:88:in `block in timeout'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `call'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `timeout'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block in run'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:223:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `block in reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:207:in `block in work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:169:in `block (4 levels) in start'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:168:in `block (3 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:167:in `block (2 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `loop'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `block in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `block (2 levels) in <class:ClearLocks>'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block (2 levels) in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:165:in `start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:131:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:119:in `block in run_process'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:117:in `run_process'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:98:in `block in daemonize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `daemonize'\nbin/delayed_job:5:in `<main>'	2016-02-21 20:49:56.55584	\N	\N	\N	run	2016-02-20 05:22:02.300196	2016-02-21 15:04:15.557442	\N	0	0
+5	0	15	--- !ruby/object:ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper\njob_data:\n  job_class: RunJob\n  job_id: 8f9174ca-48cb-4dc8-9005-84c7eac66e18\n  queue_name: run\n  arguments:\n  - _aj_globalid: gid://scc/Run/8\n	Error while trying to deserialize arguments: Couldn't find Run with 'id'=8\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/core.rb:154:in `find'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:132:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `block in locate'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `block in unscoped'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/relation.rb:302:in `scoping'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `unscoped'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:17:in `locate'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:88:in `deserialize_global_id'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:74:in `deserialize_argument'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `block in deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `map'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:85:in `deserialize_arguments'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:75:in `deserialize_arguments_if_needed'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:30:in `perform_now'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:21:in `execute'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/queue_adapters/delayed_job_adapter.rb:34:in `perform'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:100:in `block in invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:97:in `invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block (2 levels) in run'\n/usr/lib/ruby/2.2.0/timeout.rb:88:in `block in timeout'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `call'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `timeout'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block in run'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:223:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `block in reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:207:in `block in work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:169:in `block (4 levels) in start'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:168:in `block (3 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:167:in `block (2 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `loop'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `block in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `block (2 levels) in <class:ClearLocks>'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block (2 levels) in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:165:in `start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:131:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:119:in `block in run_process'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:117:in `run_process'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:98:in `block in daemonize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `daemonize'\nbin/delayed_job:5:in `<main>'	2016-02-22 04:38:45.564494	\N	\N	\N	run	2016-02-17 03:12:11.152368	2016-02-21 14:34:55.566183	\N	0	0
+6	0	15	--- !ruby/object:ActiveJob::QueueAdapters::DelayedJobAdapter::JobWrapper\njob_data:\n  job_class: RunJob\n  job_id: 1a130df3-9c16-4368-9b68-18ba34e3fa53\n  queue_name: run\n  arguments:\n  - _aj_globalid: gid://scc/Run/9\n	Error while trying to deserialize arguments: Couldn't find Run with 'id'=9\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/core.rb:154:in `find'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:132:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `block in locate'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `block in unscoped'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/relation.rb:302:in `scoping'\n/var/lib/gems/2.2.0/gems/activerecord-4.2.0/lib/active_record/scoping/default.rb:33:in `unscoped'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:158:in `locate'\n/var/lib/gems/2.2.0/gems/globalid-0.3.6/lib/global_id/locator.rb:17:in `locate'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:88:in `deserialize_global_id'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:74:in `deserialize_argument'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `block in deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `map'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/arguments.rb:38:in `deserialize'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:85:in `deserialize_arguments'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/core.rb:75:in `deserialize_arguments_if_needed'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:30:in `perform_now'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/execution.rb:21:in `execute'\n/var/lib/gems/2.2.0/gems/activejob-4.2.0/lib/active_job/queue_adapters/delayed_job_adapter.rb:34:in `perform'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:100:in `block in invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/backend/base.rb:97:in `invoke_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block (2 levels) in run'\n/usr/lib/ruby/2.2.0/timeout.rb:88:in `block in timeout'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `call'\n/usr/lib/ruby/2.2.0/timeout.rb:98:in `timeout'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:224:in `block in run'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:223:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `block in reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:300:in `reserve_and_run_one_job'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:207:in `block in work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:206:in `work_off'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:169:in `block (4 levels) in start'\n/usr/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:168:in `block (3 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:167:in `block (2 levels) in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `loop'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:166:in `block in start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/plugins/clear_locks.rb:7:in `block (2 levels) in <class:ClearLocks>'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block (2 levels) in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:61:in `block in initialize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:79:in `block in add'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `call'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:66:in `execute'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/lifecycle.rb:40:in `run_callbacks'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/worker.rb:165:in `start'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:131:in `run'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:119:in `block in run_process'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:265:in `block in start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/daemonize.rb:84:in `call_as_daemon'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:269:in `start_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/application.rb:295:in `start'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/controller.rb:56:in `run'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:193:in `block in run_proc'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `call'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons/cmdline.rb:88:in `catch_exceptions'\n/var/lib/gems/2.2.0/gems/daemons-1.2.3/lib/daemons.rb:192:in `run_proc'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:117:in `run_process'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:98:in `block in daemonize'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `times'\n/var/lib/gems/2.2.0/gems/delayed_job-4.1.1/lib/delayed/command.rb:96:in `daemonize'\nbin/delayed_job:5:in `<main>'	2016-02-22 04:38:45.575221	\N	\N	\N	run	2016-02-17 03:13:11.213641	2016-02-21 14:34:55.576839	\N	0	0
+\.
+
+
+--
+-- Name: delayed_jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('delayed_jobs_id_seq', 57, true);
+
+
+--
+-- Data for Name: job_items; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY job_items (id, job_id, lgroup_id, cgroup_id, size, chart_type, chart_x, chart_y, chart_opt, chart_title, racf_password, command_prefix, command_suffix, created_at, updated_at) FROM stdin;
+3	3	\N	49							\N	\N	\N	2016-02-17 03:00:59.542763	2016-02-17 03:00:59.542763
+4	4	3	31							\N	\N	\N	2016-02-19 04:09:52.515323	2016-02-19 04:10:48.405229
+6	6	\N	36							\N	\N	\N	2016-02-20 04:32:37.316019	2016-02-20 04:32:37.316019
+8	7	\N	50							\N	\N	\N	2016-02-21 04:20:00.609065	2016-02-21 04:20:00.609065
+12	8	3	54							\N	\N	\N	2016-02-21 17:56:33.268023	2016-02-21 17:56:33.268023
+\.
+
+
+--
+-- Name: job_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('job_items_id_seq', 12, true);
+
+
+--
+-- Data for Name: jobs; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY jobs (id, name, jgroup, jtype, description, menu, cclass, tags, run_type, keep_days, private, notify, notify_group, cache, debug, owner_id, ar_start, ar_start_date, ar_start_time, ar_type, ar_repeat, ar_hour, ar_wday, ar_day, ar_month, ar_wdayt, ar_file, ar_active, created_at, updated_at, ar_file_modified) FROM stdin;
+8	Ken Volume Report	Job			\N			Background	\N	t	f	t	f	t	2	\N	\N	\N		\N							f	2016-02-21 04:57:48.960835	2016-02-21 18:04:31.656848	\N
+7	Ken SMS Reports	Job			\N			Background	\N	t	t	t	f	t	2	2016-02-21 13:17:00	2016-02-21	18:17:20.457884	Minute	\N						kensms;RCCSMS.XML	t	2016-02-20 05:04:46.219609	2016-02-21 18:16:20.459387	21/02/2016 13:13:49
+6	Ken DLM Reports	Job			\N			Background	\N	t	t	t	f	t	2	2016-02-21 13:17:00	2016-02-21	18:17:20.508883	Minute	\N						kendcc;LDATA.XML	t	2016-02-20 04:25:26.863599	2016-02-21 18:16:20.510136	21/02/2016 13:13:41
+3	DCC DLM Reports	Job			\N			Background	\N	t	t	t	f	t	2	2016-02-21 13:30:00	2016-02-21	18:30:07.193368	Minute	\N						ldata.xml;dccdata.xml	t	2016-02-17 02:56:42.296086	2016-02-21 18:29:07.194936	21/02/2016 13:18:05
+4	Grid	Job			\N			Real-Time	\N	t	f	t	f	t	2	\N	\N	\N		\N							f	2016-02-19 04:09:52.496203	2016-02-21 03:48:23.470582	\N
+\.
+
+
+--
+-- Name: jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('jobs_id_seq', 11, true);
+
+
+--
+-- Data for Name: lgroups; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY lgroups (id, name, description, sysplex, private, created_at, updated_at) FROM stdin;
+1	Iron	\N	f	t	2016-02-12 23:22:51.997448	2016-02-12 23:22:51.997448
+2	All	\N	f	f	2016-02-12 23:22:52.013053	2016-02-12 23:22:52.013053
+3	DTS-MP3000	\N	f	t	2016-02-12 23:22:52.025422	2016-02-12 23:22:52.025422
+4	DTS-zPdt	\N	f	t	2016-02-12 23:22:52.042179	2016-02-12 23:22:52.042179
+\.
+
+
+--
+-- Name: lgroups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('lgroups_id_seq', 4, true);
+
+
+--
+-- Data for Name: lpar_lgroups; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY lpar_lgroups (id, lpar_id, lgroup_id, created_at, updated_at) FROM stdin;
+1	1	1	2016-02-12 23:22:52.010061	2016-02-12 23:22:52.010061
+2	1	2	2016-02-12 23:22:52.018437	2016-02-12 23:22:52.018437
+3	2	3	2016-02-12 23:22:52.028015	2016-02-12 23:22:52.028015
+4	2	2	2016-02-12 23:22:52.03347	2016-02-12 23:22:52.03347
+5	3	4	2016-02-12 23:22:52.044635	2016-02-12 23:22:52.044635
+6	3	2	2016-02-12 23:22:52.049961	2016-02-12 23:22:52.049961
+\.
+
+
+--
+-- Name: lpar_lgroups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('lpar_lgroups_id_seq', 6, true);
+
+
+--
+-- Data for Name: lpar_restricts; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY lpar_restricts (id, lgroup_id, ugroup_id, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: lpar_restricts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('lpar_restricts_id_seq', 1, false);
+
+
+--
+-- Data for Name: lpars; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY lpars (id, name, description, ip, port, location, zos_release, subsystems, monproc, created_at, updated_at) FROM stdin;
+1	Iron	\N	192.168.128.110	10	\N	\N	\N	\N	2016-02-12 23:22:51.989539	2016-02-12 23:22:51.989539
+3	DTS-zPdt	\N	mail1.dtssoftware.com	20	\N	\N	\N	\N	2016-02-12 23:22:52.039944	2016-02-12 23:22:52.039944
+2	DTS-MP3000		192.168.0.226	12			\N	MONRUNM	2016-02-12 23:22:52.023088	2016-02-16 05:37:00.064595
+\.
+
+
+--
+-- Name: lpars_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('lpars_id_seq', 3, true);
+
+
+--
+-- Data for Name: notices; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY notices (id, title, ugroup_id, run_id, created_at, updated_at) FROM stdin;
+43	Background job finished	2	77	2016-02-21 18:16:51.421944	2016-02-21 18:16:51.421944
+44	Background job finished	2	78	2016-02-21 18:17:30.292815	2016-02-21 18:17:30.292815
+45	Background job finished	2	80	2016-02-21 18:18:57.192735	2016-02-21 18:18:57.192735
+46	Background job finished	2	81	2016-02-21 18:31:16.818214	2016-02-21 18:31:16.818214
+\.
+
+
+--
+-- Name: notices_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('notices_id_seq', 46, true);
+
+
+--
+-- Data for Name: run_commands; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY run_commands (id, model, rtext, done, error, add_lpar, error_text, status, source, data_acquired, cloud, compressed, merge_grid, download, hide, run_id, lpar_id, job_item_id, command_id, created_at, updated_at) FROM stdin;
+76		\N	f	f	f	\N	\N	\N	\N	f	f	f	f	f	77	\N	8	42	2016-02-21 18:16:20.341441	2016-02-21 18:16:20.341441
+77		\N	f	f	f	\N	\N	\N	\N	f	f	f	f	f	78	\N	6	31	2016-02-21 18:16:20.487904	2016-02-21 18:16:20.487904
+80		\N	f	f	f	\N	\N	\N	\N	f	f	f	f	f	81	\N	3	41	2016-02-21 18:29:07.124995	2016-02-21 18:29:07.124995
+78	ENABLE OSJOB MONRUNM TCPIP *NAME=@IMPOOL	eJytmFuToygUgN+nyv9AZXamkt65AF6iXZuqJYrRbRUXsLvzNP//XyxgVLCT\nnmw1PEQ9nPN5OBc0Bp+KuoQ4yuD3B/APO4KWdXzoWtCRlh7+rtuesQYISbik\nRfBJ5LnWqCXjIPmBpgnAOiCGriBnAPFPjH5iiBJAJEDRI0oeIQqC3gZ++xY8\n/KFABW0mkRYYlaIWT2C8a09yCgZBTlTPFlTkB1GxF7Co1F3JeEtkzTqtosdB\nSQBpGvDMmqGlQsvluaeHE68Lc0FOy020IG+IEEY0O3EkHOSVWhtg5XinklM6\nemRM9Nwvg1Wqi+T1MEPN9flg7PJz82H02aAd1ElF5l7W6RJFB/YlCPjQULFt\naiF3gZZtVXpBz1kx5ErCac54sRV5RVuyC+oub4aCbmn3LNRPoQ12i1hFXFC+\nfbBEBqmugz/NjYJAlVsGMYLfa50sBIxYnT2uZvAyA1TqS/rvAHLWqNwewNdB\n8LIpcrSyCW/SohVNXwFBpUJ2su4Guu3oq9TS3coyti1Hi9GJzWalmdiadQm+\n6rX/0gkRfQ7+AggCWdHOgXDVVC5l/xtKeIVypk3DXlag9GYwsmvB6HndSVdR\nOWz7IsRAwQuvJVVVseVoFSl0M5donUtlDzgyXWkKBOjWBCXRNehahrZlWdOm\nuARE1z+YR0VJoQpvo6c2OyV4omdDXvOiW7wpwC7PdNMXRWyNr0W15sW3eFzR\nZD35OPG0FGjxZg1KboEkk6RRTe+CjFTvBW9A+3dBkj9dAynxG1D6Xqhmh9xQ\nXXMoe48z++NyrviD4RXO2ADOmDifzdyculxtQWpnQxDtkeKZqjMDpamuxbdD\nP8J+wBhPzzA82WPHfhlo7Lq8UgfzFLD0x0Jy9bOxxYrKFuomtOzmgrFuc7HL\n37Ob68Naz/12S1bUCO+xm7JvaUR32zm3A/E9dp/fZj7J9E6j7C56MDTraR0l\nAP//md6jLSQ5rpL/cWRxNK8gPpFVKVymB6Ro3ZV/HNnKJowzSPwjjx6RjLTF\nES/r9oEUJ+AML8jj09D7ROp0h8u0L2TkHxn7RfLWe48LeVKl+eofaT27fCGt\nWveFDP0jI89I5yUgScdjCOFstL+cIbiUW5RMkwivePaO4clFK4q+kFYU1SvJ\nJQY4zkbvURjGZoUYwvDSt0i9ksXmJMVxul/xYs8uPnfeW/GV+Efu/SNT78iO\ndaIV/QzF0XRM9+YkxXuTWoQjGO/HVKIsjkwz4CxJUrj819RfjfDqq5H6b9jW\nHTHfiv4Do7+CAw==\n	t	f	f	\N	\N	TCPIP	\N	f	t	f	f	f	79	2	4	27	2016-02-21 18:18:27.371831	2016-02-21 18:18:30.366594
+79	ENABLE OSJOB MONRUNM TCPIP *NAME=RCCVOL,P2='WREC(CSV)' 	eJx1091v2jAQAPD3Sv4f7mEapCslTikbjCC59kG9Oh+ynSCeULdFWrVWoJZN\n4r+vne6DeWmezr6f7xw7mX3bP9zPZ5+3Xw/z2e6xmZMTIRdxMprEg1P4VFxB\nVuS6yjPIWYap5rwu1FmZpL2VRt7npo56YCzTFgU5MZx7L22hYXxOfyegyMFU\nuWBriJNhQodJTMfALNDRlI6ndEJIeVz+7E9tcvrmpfEN5lBv7388NKCb3fZx\n7zNZIVD9WvTRT7RPeiW1HTBrGb8e1BJX4MRQ3D19H7pgw293t1/u9oeNaH7a\nw67x6xZSYdrzWVfp3DXu+Vm7LjF1gzZmy1RIc+NjrpgxLyOiK4Wmr6SxEZE5\nV5XAPua16bev7qpFESHvWkWIO9lJnNB4IP0+KbTTLpoGmeRvBkDgwo8gQ2PY\nEgN6cUwBpDEVwkpLi/4INY0CP3q16WXYFDloGqDxMVpIVALelkWhNv6SAvu+\nw/JKC2ZD+aFbWvlfzUmHNGsjxb+Oxh2uct8lE4IHlHZQd28GdQCTrt6ZCdRF\nl3L/w1KXgRy9skeBdSAvO6QtLFMbvlaB7bohq9kzy9jqxA==\n	t	f	f	\N	\N	TCPIP	\N	f	t	f	f	f	80	2	12	46	2016-02-21 18:18:41.177906	2016-02-21 18:18:48.978388
+\.
+
+
+--
+-- Name: run_commands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('run_commands_id_seq', 80, true);
+
+
+--
+-- Data for Name: run_views; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY run_views (id, name, file, file_type, hide, run_command_id, run_id, job_item_id, command_id, created_at, updated_at) FROM stdin;
+149	Run Ken SMS Reports	\N	\N	t	76	77	8	42	2016-02-21 18:16:20.349364	2016-02-21 18:16:22.575081
+151	PDF RCC_SMSINFO_MC.pdf	RCC_SMSINFO_MC.pdf	http://192.168.0.44/scc/run_view/file/151/RCC_SMSINFO_MC.pdf	f	76	77	\N	\N	2016-02-21 18:16:43.628551	2016-02-21 18:16:43.639243
+152	PDF RCC_SMSINFO_SC.pdf	RCC_SMSINFO_SC.pdf	http://192.168.0.44/scc/run_view/file/152/RCC_SMSINFO_SC.pdf	f	76	77	\N	\N	2016-02-21 18:16:43.649724	2016-02-21 18:16:43.655073
+153	PDF RCC_SMSINFO_DC.pdf	RCC_SMSINFO_DC.pdf	http://192.168.0.44/scc/run_view/file/153/RCC_SMSINFO_DC.pdf	f	76	77	\N	\N	2016-02-21 18:16:43.665188	2016-02-21 18:16:43.672
+154	PDF RCC_SMSINFO_SG.pdf	RCC_SMSINFO_SG.pdf	http://192.168.0.44/scc/run_view/file/154/RCC_SMSINFO_SG.pdf	f	76	77	\N	\N	2016-02-21 18:16:43.682659	2016-02-21 18:16:43.687799
+150	Run Ken DCC Reports	\N	\N	t	77	78	6	31	2016-02-21 18:16:20.489835	2016-02-21 18:16:51.478837
+155	PDF RCC_DLm_Configuration.pdf	RCC_DLm_Configuration.pdf	http://192.168.0.44/scc/run_view/file/155/RCC_DLm_Configuration.pdf	f	77	78	\N	\N	2016-02-21 18:17:27.637699	2016-02-21 18:17:27.643162
+156	PDF RCC_DLm_Throughput.pdf	RCC_DLm_Throughput.pdf	http://192.168.0.44/scc/run_view/file/156/RCC_DLm_Throughput.pdf	f	77	78	\N	\N	2016-02-21 18:17:27.652483	2016-02-21 18:17:27.662415
+157	PDF RCC_DLm_Filesystem.pdf	RCC_DLm_Filesystem.pdf	http://192.168.0.44/scc/run_view/file/157/RCC_DLm_Filesystem.pdf	f	77	78	\N	\N	2016-02-21 18:17:27.672405	2016-02-21 18:17:27.687947
+158	PDF RCC_DLm_Mounts.pdf	RCC_DLm_Mounts.pdf	http://192.168.0.44/scc/run_view/file/158/RCC_DLm_Mounts.pdf	f	77	78	\N	\N	2016-02-21 18:17:27.696939	2016-02-21 18:17:27.701809
+159	PDF RCC_DLm_Dashboard.pdf	RCC_DLm_Dashboard.pdf	http://192.168.0.44/scc/run_view/file/159/RCC_DLm_Dashboard.pdf	f	77	78	\N	\N	2016-02-21 18:17:27.710662	2016-02-21 18:17:27.71539
+160	DISK POOL SPACE USAGE	\N	\N	f	78	79	4	27	2016-02-21 18:18:27.374877	2016-02-21 18:18:27.374877
+161	KEN Volume Report	\N	\N	t	79	80	12	46	2016-02-21 18:18:41.180537	2016-02-21 18:18:41.180537
+162	PDF RCC_Capacity_DevType.pdf	RCC_Capacity_DevType.pdf	http://192.168.0.44/scc/run_view/file/162/RCC_Capacity_DevType.pdf	f	79	80	\N	\N	2016-02-21 18:18:57.153944	2016-02-21 18:18:57.164194
+163	DCC BIRT Repoets	\N	\N	t	80	81	3	41	2016-02-21 18:29:07.127871	2016-02-21 18:29:56.000247
+164	PDF performance.pdf	performance.pdf	http://192.168.0.44/scc/run_view/file/164/performance.pdf	f	80	81	\N	\N	2016-02-21 18:31:13.353071	2016-02-21 18:31:13.363407
+165	PDF status.pdf	status.pdf	http://192.168.0.44/scc/run_view/file/165/status.pdf	f	80	81	\N	\N	2016-02-21 18:31:13.373877	2016-02-21 18:31:13.379075
+166	PDF config.pdf	config.pdf	http://192.168.0.44/scc/run_view/file/166/config.pdf	f	80	81	\N	\N	2016-02-21 18:31:13.388666	2016-02-21 18:31:13.393604
+167	PDF linux.pdf	linux.pdf	http://192.168.0.44/scc/run_view/file/167/linux.pdf	f	80	81	\N	\N	2016-02-21 18:31:13.403287	2016-02-21 18:31:13.408604
+168	PDF capacity.pdf	capacity.pdf	http://192.168.0.44/scc/run_view/file/168/capacity.pdf	f	80	81	\N	\N	2016-02-21 18:31:13.418389	2016-02-21 18:31:13.426992
+169	PDF performance-h.pdf	performance-h.pdf	http://192.168.0.44/scc/run_view/file/169/performance-h.pdf	f	80	81	\N	\N	2016-02-21 18:31:13.43677	2016-02-21 18:31:13.445148
+170	PDF replication.pdf	replication.pdf	http://192.168.0.44/scc/run_view/file/170/replication.pdf	f	80	81	\N	\N	2016-02-21 18:31:13.455463	2016-02-21 18:31:13.4666
+\.
+
+
+--
+-- Name: run_views_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('run_views_id_seq', 170, true);
+
+
+--
+-- Data for Name: runs; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY runs (id, background, cache, error, done, notify, debug, name, status, error_text, log, total_data, start, "end", viewed, delete_at, delete_when, note, auto_run, ugroup_id, job_id, user_id, created_at, updated_at, file_delete) FROM stdin;
+77	t	f	f	t	t	f	Ken SMS Reports	Background run finished	\N	21/02/2016 13:16:20: Autorun job queued\r21/02/2016 13:16:22: Background job started\r21/02/2016 13:16:22: BIRT started: RCC/SMS/RCC_SMSINFO_MC\r21/02/2016 13:16:29: BIRT successful: RCC/SMS/RCC_SMSINFO_MC\r21/02/2016 13:16:29: BIRT started: RCC/SMS/RCC_SMSINFO_SC\r21/02/2016 13:16:34: BIRT successful: RCC/SMS/RCC_SMSINFO_SC\r21/02/2016 13:16:34: BIRT started: RCC/SMS/RCC_SMSINFO_DC\r21/02/2016 13:16:39: BIRT successful: RCC/SMS/RCC_SMSINFO_DC\r21/02/2016 13:16:39: BIRT started: RCC/SMS/RCC_SMSINFO_SG\r21/02/2016 13:16:43: BIRT successful: RCC/SMS/RCC_SMSINFO_SG\r21/02/2016 13:16:43: file uploaded: /dts/SCC/tmp/RCC_SMSINFO_MC.pdf\r21/02/2016 13:16:43: file uploaded: /dts/SCC/tmp/RCC_SMSINFO_SC.pdf\r21/02/2016 13:16:43: file uploaded: /dts/SCC/tmp/RCC_SMSINFO_DC.pdf\r21/02/2016 13:16:43: file uploaded: /dts/SCC/tmp/RCC_SMSINFO_SG.pdf\r21/02/2016 13:16:43: email attachment: /dts/SCC/tmp/RCC_SMSINFO_MC.pdf\r21/02/2016 13:16:44: email attachment: /dts/SCC/tmp/RCC_SMSINFO_SC.pdf\r21/02/2016 13:16:44: email attachment: /dts/SCC/tmp/RCC_SMSINFO_DC.pdf\r21/02/2016 13:16:44: email attachment: /dts/SCC/tmp/RCC_SMSINFO_SG.pdf\r21/02/2016 13:16:51: Email sent\r21/02/2016 13:16:51: Background job ended\r	\N	2016-02-21 18:16:20.17085	2016-02-21 18:16:43.695991	\N	\N	\N		t	2	7	2	2016-02-21 18:16:20.334174	2016-02-21 18:16:51.459215	\N
+79	f	f	f	t	f	f	Grid	Real-time run finished	\N	21/02/2016 13:18:27: TCPIP started\r21/02/2016 13:18:30: TCPIP ended\r	\N	2016-02-21 18:18:27.401899	2016-02-21 18:18:30.389685	2016-02-21 18:18:30.427138	\N	\N		f	2	4	2	2016-02-21 18:18:27.368606	2016-02-21 18:18:30.495257	\N
+80	t	f	f	t	f	f	Ken Volume Report	Background run finished	\N	21/02/2016 13:18:41: Background job queued\r21/02/2016 13:18:45: Background job started\r21/02/2016 13:18:45: TCPIP started\r21/02/2016 13:18:48: TCPIP ended\r21/02/2016 13:18:48: file downloaded (10928 bytes): /dts/SCC/tmp/DTS-MP3000-'RCC_VOL.CSV'\r21/02/2016 13:18:48: File /dts/SCC/tmp/'RCC_VOL.CSV' merged\r21/02/2016 13:18:49: BIRT started: RCC/Disk/RCC_Capacity_DevType\r21/02/2016 13:18:57: BIRT successful: RCC/Disk/RCC_Capacity_DevType\r21/02/2016 13:18:57: file uploaded: /dts/SCC/tmp/RCC_Capacity_DevType.pdf\r21/02/2016 13:18:57: Background job ended\r	\N	2016-02-21 18:18:41.219152	2016-02-21 18:18:57.172451	\N	\N	\N		f	2	8	2	2016-02-21 18:18:41.175226	2016-02-21 18:18:57.197657	\N
+78	t	f	f	t	t	f	Ken DLM Reports	Background run finished	\N	21/02/2016 13:16:20: Autorun job queued\r21/02/2016 13:16:51: Background job started\r21/02/2016 13:16:51: BIRT started: RCC/DLM/RCC_DLm_Configuration\r21/02/2016 13:16:56: BIRT successful: RCC/DLM/RCC_DLm_Configuration\r21/02/2016 13:16:56: BIRT started: RCC/DLM/RCC_DLm_Throughput\r21/02/2016 13:17:04: BIRT successful: RCC/DLM/RCC_DLm_Throughput\r21/02/2016 13:17:04: BIRT started: RCC/DLM/RCC_DLm_Filesystem\r21/02/2016 13:17:11: BIRT successful: RCC/DLM/RCC_DLm_Filesystem\r21/02/2016 13:17:11: BIRT started: RCC/DLM/RCC_DLm_Mounts\r21/02/2016 13:17:19: BIRT successful: RCC/DLM/RCC_DLm_Mounts\r21/02/2016 13:17:19: BIRT started: RCC/DLM/RCC_DLm_Dashboard\r21/02/2016 13:17:27: BIRT successful: RCC/DLM/RCC_DLm_Dashboard\r21/02/2016 13:17:27: file uploaded: /dts/SCC/tmp/RCC_DLm_Configuration.pdf\r21/02/2016 13:17:27: file uploaded: /dts/SCC/tmp/RCC_DLm_Throughput.pdf\r21/02/2016 13:17:27: file uploaded: /dts/SCC/tmp/RCC_DLm_Filesystem.pdf\r21/02/2016 13:17:27: file uploaded: /dts/SCC/tmp/RCC_DLm_Mounts.pdf\r21/02/2016 13:17:27: file uploaded: /dts/SCC/tmp/RCC_DLm_Dashboard.pdf\r21/02/2016 13:17:27: email attachment: /dts/SCC/tmp/RCC_DLm_Configuration.pdf\r21/02/2016 13:17:27: email attachment: /dts/SCC/tmp/RCC_DLm_Throughput.pdf\r21/02/2016 13:17:27: email attachment: /dts/SCC/tmp/RCC_DLm_Filesystem.pdf\r21/02/2016 13:17:27: email attachment: /dts/SCC/tmp/RCC_DLm_Mounts.pdf\r21/02/2016 13:17:27: email attachment: /dts/SCC/tmp/RCC_DLm_Dashboard.pdf\r21/02/2016 13:17:30: Email sent\r21/02/2016 13:17:30: Background job ended\r	\N	2016-02-21 18:16:20.465043	2016-02-21 18:17:27.721968	\N	\N	\N		t	2	6	2	2016-02-21 18:16:20.485148	2016-02-21 18:17:30.302488	\N
+81	t	f	f	t	t	f	DCC DLM Reports	Background run finished	\N	21/02/2016 13:29:07: Autorun job queued\r21/02/2016 13:29:55: Background job started\r21/02/2016 13:29:56: BIRT started: /DCC/performance\r21/02/2016 13:30:19: BIRT successful: /DCC/performance\r21/02/2016 13:30:19: BIRT started: /DCC/status\r21/02/2016 13:30:27: BIRT successful: /DCC/status\r21/02/2016 13:30:27: BIRT started: /DCC/config\r21/02/2016 13:30:36: BIRT successful: /DCC/config\r21/02/2016 13:30:36: BIRT started: /DCC/linux\r21/02/2016 13:30:45: BIRT successful: /DCC/linux\r21/02/2016 13:30:45: BIRT started: /DCC/capacity\r21/02/2016 13:30:51: BIRT successful: /DCC/capacity\r21/02/2016 13:30:51: BIRT started: /DCC/performance-h\r21/02/2016 13:31:01: BIRT successful: /DCC/performance-h\r21/02/2016 13:31:01: BIRT started: /DCC/replication\r21/02/2016 13:31:13: BIRT successful: /DCC/replication\r21/02/2016 13:31:13: file uploaded: /dts/SCC/tmp/performance.pdf\r21/02/2016 13:31:13: file uploaded: /dts/SCC/tmp/status.pdf\r21/02/2016 13:31:13: file uploaded: /dts/SCC/tmp/config.pdf\r21/02/2016 13:31:13: file uploaded: /dts/SCC/tmp/linux.pdf\r21/02/2016 13:31:13: file uploaded: /dts/SCC/tmp/capacity.pdf\r21/02/2016 13:31:13: file uploaded: /dts/SCC/tmp/performance-h.pdf\r21/02/2016 13:31:13: file uploaded: /dts/SCC/tmp/replication.pdf\r21/02/2016 13:31:13: email attachment: /dts/SCC/tmp/performance.pdf\r21/02/2016 13:31:13: email attachment: /dts/SCC/tmp/status.pdf\r21/02/2016 13:31:13: email attachment: /dts/SCC/tmp/config.pdf\r21/02/2016 13:31:13: email attachment: /dts/SCC/tmp/linux.pdf\r21/02/2016 13:31:13: email attachment: /dts/SCC/tmp/capacity.pdf\r21/02/2016 13:31:13: email attachment: /dts/SCC/tmp/performance-h.pdf\r21/02/2016 13:31:13: email attachment: /dts/SCC/tmp/replication.pdf\r21/02/2016 13:31:16: Email sent\r21/02/2016 13:31:16: Background job ended\r	\N	2016-02-21 18:29:06.980364	2016-02-21 18:31:13.475572	\N	\N	\N		t	2	3	2	2016-02-21 18:29:07.121414	2016-02-21 18:31:16.831246	\N
+\.
+
+
+--
+-- Name: runs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('runs_id_seq', 81, true);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY schema_migrations (version) FROM stdin;
+20150306164055
+20150306164142
+20150306164247
+20150306164343
+20150306164505
+20150306164529
+20150306165654
+20150306165840
+20150306165919
+20150306165959
+20150306170023
+20150306172411
+20150308164838
+20150308164854
+20150308235658
+20150308235725
+20150313004417
+20150313004522
+20150313004711
+20150314193554
+20150316213937
+20150325211500
+20150325211513
+20160217033006
+\.
+
+
+--
+-- Data for Name: ugroups; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY ugroups (id, name, description, racf_group, private, created_at, updated_at) FROM stdin;
+2	tom	\N	\N	t	2016-02-12 23:22:51.777119	2016-02-12 23:22:51.777119
+3	joe	\N	\N	t	2016-02-12 23:22:51.854888	2016-02-12 23:22:51.854888
+4	sam	\N	\N	t	2016-02-12 23:22:51.932785	2016-02-12 23:22:51.932785
+\.
+
+
+--
+-- Name: ugroups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('ugroups_id_seq', 4, true);
+
+
+--
+-- Data for Name: user_jobs; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY user_jobs (id, user_id, job_id) FROM stdin;
+\.
+
+
+--
+-- Name: user_jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('user_jobs_id_seq', 1, false);
+
+
+--
+-- Data for Name: user_ugroups; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY user_ugroups (id, user_id, ugroup_id, created_at, updated_at) FROM stdin;
+2	2	2	2016-02-12 23:22:51.780041	2016-02-12 23:22:51.780041
+3	3	3	2016-02-12 23:22:51.857424	2016-02-12 23:22:51.857424
+4	4	4	2016-02-12 23:22:51.935499	2016-02-12 23:22:51.935499
+\.
+
+
+--
+-- Name: user_ugroups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('user_ugroups_id_seq', 4, true);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: rcc
+--
+
+COPY users (id, username, name, department, phone, email, racf_userid, racf_group, racf_password, admin, password_digest, last_login, login_count, background, notify, cache, prompt_ok, prompt_cancel, prompt_values, prompt_fields, lpar_id, command_id, job_id, ugroup_id, created_at, updated_at) FROM stdin;
+3	joe	joe	\N	\N	\N	TOM	\N	\N	t	$2a$10$WUinqStfIVEh2LQDasmGKu6pRgHghsLXhPCj0hqMaQMtFR/6F.4lK	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016-02-12 23:22:51.85221	2016-02-12 23:22:51.85221
+4	sam	sam	\N	\N	\N	TOM	\N	\N	t	$2a$10$vV5h/k0C1zLPrLuVU/dCX.N/nYMuJJsQvPItveAbJMYWOBLuuVYJm	\N	0	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	2016-02-12 23:22:51.929835	2016-02-12 23:22:51.929835
+2	tom	tom			tom@dtssoftware.com	TOM		etitom	t	$2a$10$Ik7JcNU42g6wwPVfmogeQ.kHv79ROw42Fzba1Vr09oBu.E7u7hSXa	\N	0			\N	/admin/cloads/1/load	/admin/cloads/1	--- !ruby/hash:ActionController::Parameters\nUserid: tom\nPassword: etitom\n	---\n- Userid\n- Password\n	\N	\N	\N	\N	2016-02-12 23:22:51.774105	2016-02-16 11:32:01.139637
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
+--
+
+SELECT pg_catalog.setval('users_id_seq', 4, true);
+
+
+--
+-- Name: active_admin_comments_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY active_admin_comments
+    ADD CONSTRAINT active_admin_comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cgroups_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY cgroups
+    ADD CONSTRAINT cgroups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cload_items_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY cload_items
+    ADD CONSTRAINT cload_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cloads_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY cloads
+    ADD CONSTRAINT cloads_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: command_cgroups_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY command_cgroups
+    ADD CONSTRAINT command_cgroups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: command_restricts_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY command_restricts
+    ADD CONSTRAINT command_restricts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: commands_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY commands
+    ADD CONSTRAINT commands_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: delayed_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY delayed_jobs
+    ADD CONSTRAINT delayed_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: job_items_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY job_items
+    ADD CONSTRAINT job_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY jobs
+    ADD CONSTRAINT jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lgroups_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY lgroups
+    ADD CONSTRAINT lgroups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lpar_lgroups_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY lpar_lgroups
+    ADD CONSTRAINT lpar_lgroups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lpar_restricts_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY lpar_restricts
+    ADD CONSTRAINT lpar_restricts_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lpars_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY lpars
+    ADD CONSTRAINT lpars_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: notices_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY notices
+    ADD CONSTRAINT notices_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: run_commands_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY run_commands
+    ADD CONSTRAINT run_commands_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: run_views_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY run_views
+    ADD CONSTRAINT run_views_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: runs_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY runs
+    ADD CONSTRAINT runs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ugroups_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY ugroups
+    ADD CONSTRAINT ugroups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_jobs_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY user_jobs
+    ADD CONSTRAINT user_jobs_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_ugroups_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY user_ugroups
+    ADD CONSTRAINT user_ugroups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: rcc; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: delayed_jobs_priority; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX delayed_jobs_priority ON delayed_jobs USING btree (priority, run_at);
+
+
+--
+-- Name: index_active_admin_comments_on_author_type_and_author_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_active_admin_comments_on_author_type_and_author_id ON active_admin_comments USING btree (author_type, author_id);
+
+
+--
+-- Name: index_active_admin_comments_on_namespace; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_active_admin_comments_on_namespace ON active_admin_comments USING btree (namespace);
+
+
+--
+-- Name: index_active_admin_comments_on_resource_type_and_resource_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_active_admin_comments_on_resource_type_and_resource_id ON active_admin_comments USING btree (resource_type, resource_id);
+
+
+--
+-- Name: index_cloads_on_lpar_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_cloads_on_lpar_id ON cloads USING btree (lpar_id);
+
+
+--
+-- Name: index_command_cgroups_on_cgroup_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_command_cgroups_on_cgroup_id ON command_cgroups USING btree (cgroup_id);
+
+
+--
+-- Name: index_command_cgroups_on_command_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_command_cgroups_on_command_id ON command_cgroups USING btree (command_id);
+
+
+--
+-- Name: index_command_restricts_on_cgroup_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_command_restricts_on_cgroup_id ON command_restricts USING btree (cgroup_id);
+
+
+--
+-- Name: index_command_restricts_on_ugroup_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_command_restricts_on_ugroup_id ON command_restricts USING btree (ugroup_id);
+
+
+--
+-- Name: index_lpar_lgroups_on_lgroup_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_lpar_lgroups_on_lgroup_id ON lpar_lgroups USING btree (lgroup_id);
+
+
+--
+-- Name: index_lpar_lgroups_on_lpar_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_lpar_lgroups_on_lpar_id ON lpar_lgroups USING btree (lpar_id);
+
+
+--
+-- Name: index_lpar_restricts_on_lgroup_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_lpar_restricts_on_lgroup_id ON lpar_restricts USING btree (lgroup_id);
+
+
+--
+-- Name: index_lpar_restricts_on_ugroup_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_lpar_restricts_on_ugroup_id ON lpar_restricts USING btree (ugroup_id);
+
+
+--
+-- Name: index_notices_on_run_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_notices_on_run_id ON notices USING btree (run_id);
+
+
+--
+-- Name: index_notices_on_ugroup_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_notices_on_ugroup_id ON notices USING btree (ugroup_id);
+
+
+--
+-- Name: index_run_commands_on_command_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_run_commands_on_command_id ON run_commands USING btree (command_id);
+
+
+--
+-- Name: index_run_commands_on_job_item_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_run_commands_on_job_item_id ON run_commands USING btree (job_item_id);
+
+
+--
+-- Name: index_run_commands_on_lpar_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_run_commands_on_lpar_id ON run_commands USING btree (lpar_id);
+
+
+--
+-- Name: index_run_commands_on_run_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_run_commands_on_run_id ON run_commands USING btree (run_id);
+
+
+--
+-- Name: index_run_views_on_command_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_run_views_on_command_id ON run_views USING btree (command_id);
+
+
+--
+-- Name: index_run_views_on_job_item_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_run_views_on_job_item_id ON run_views USING btree (job_item_id);
+
+
+--
+-- Name: index_run_views_on_run_command_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_run_views_on_run_command_id ON run_views USING btree (run_command_id);
+
+
+--
+-- Name: index_run_views_on_run_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_run_views_on_run_id ON run_views USING btree (run_id);
+
+
+--
+-- Name: index_runs_on_job_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_runs_on_job_id ON runs USING btree (job_id);
+
+
+--
+-- Name: index_runs_on_ugroup_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_runs_on_ugroup_id ON runs USING btree (ugroup_id);
+
+
+--
+-- Name: index_runs_on_user_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_runs_on_user_id ON runs USING btree (user_id);
+
+
+--
+-- Name: index_user_jobs_on_job_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_user_jobs_on_job_id ON user_jobs USING btree (job_id);
+
+
+--
+-- Name: index_user_jobs_on_user_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_user_jobs_on_user_id ON user_jobs USING btree (user_id);
+
+
+--
+-- Name: index_user_ugroups_on_ugroup_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_user_ugroups_on_ugroup_id ON user_ugroups USING btree (ugroup_id);
+
+
+--
+-- Name: index_user_ugroups_on_user_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_user_ugroups_on_user_id ON user_ugroups USING btree (user_id);
+
+
+--
+-- Name: index_users_on_command_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_users_on_command_id ON users USING btree (command_id);
+
+
+--
+-- Name: index_users_on_job_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_users_on_job_id ON users USING btree (job_id);
+
+
+--
+-- Name: index_users_on_lpar_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_users_on_lpar_id ON users USING btree (lpar_id);
+
+
+--
+-- Name: index_users_on_ugroup_id; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE INDEX index_users_on_ugroup_id ON users USING btree (ugroup_id);
+
+
+--
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: rcc; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: fk_rails_02f028bcdd; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY command_restricts
+    ADD CONSTRAINT fk_rails_02f028bcdd FOREIGN KEY (ugroup_id) REFERENCES ugroups(id);
+
+
+--
+-- Name: fk_rails_0450c996fb; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY command_restricts
+    ADD CONSTRAINT fk_rails_0450c996fb FOREIGN KEY (cgroup_id) REFERENCES cgroups(id);
+
+
+--
+-- Name: fk_rails_08b1b9a9f8; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY user_jobs
+    ADD CONSTRAINT fk_rails_08b1b9a9f8 FOREIGN KEY (job_id) REFERENCES jobs(id);
+
+
+--
+-- Name: fk_rails_1dc74e616e; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY job_items
+    ADD CONSTRAINT fk_rails_1dc74e616e FOREIGN KEY (job_id) REFERENCES jobs(id);
+
+
+--
+-- Name: fk_rails_201af8fb05; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY lpar_restricts
+    ADD CONSTRAINT fk_rails_201af8fb05 FOREIGN KEY (lgroup_id) REFERENCES lgroups(id);
+
+
+--
+-- Name: fk_rails_28b0d4f5ce; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY run_views
+    ADD CONSTRAINT fk_rails_28b0d4f5ce FOREIGN KEY (job_item_id) REFERENCES job_items(id);
+
+
+--
+-- Name: fk_rails_398b1d142e; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY lpar_lgroups
+    ADD CONSTRAINT fk_rails_398b1d142e FOREIGN KEY (lpar_id) REFERENCES lpars(id);
+
+
+--
+-- Name: fk_rails_3ed74ffbf0; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY notices
+    ADD CONSTRAINT fk_rails_3ed74ffbf0 FOREIGN KEY (run_id) REFERENCES runs(id);
+
+
+--
+-- Name: fk_rails_4f04f7899c; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY run_views
+    ADD CONSTRAINT fk_rails_4f04f7899c FOREIGN KEY (run_id) REFERENCES runs(id);
+
+
+--
+-- Name: fk_rails_4f21a7695f; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY lpar_lgroups
+    ADD CONSTRAINT fk_rails_4f21a7695f FOREIGN KEY (lgroup_id) REFERENCES lgroups(id);
+
+
+--
+-- Name: fk_rails_5501d07e81; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY run_views
+    ADD CONSTRAINT fk_rails_5501d07e81 FOREIGN KEY (command_id) REFERENCES commands(id);
+
+
+--
+-- Name: fk_rails_60831594e7; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY user_ugroups
+    ADD CONSTRAINT fk_rails_60831594e7 FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: fk_rails_69c5e7515e; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY run_commands
+    ADD CONSTRAINT fk_rails_69c5e7515e FOREIGN KEY (command_id) REFERENCES commands(id);
+
+
+--
+-- Name: fk_rails_6d644cd46a; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY run_commands
+    ADD CONSTRAINT fk_rails_6d644cd46a FOREIGN KEY (job_item_id) REFERENCES job_items(id);
+
+
+--
+-- Name: fk_rails_75cea65b6b; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY run_commands
+    ADD CONSTRAINT fk_rails_75cea65b6b FOREIGN KEY (run_id) REFERENCES runs(id);
+
+
+--
+-- Name: fk_rails_9301172407; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY cload_items
+    ADD CONSTRAINT fk_rails_9301172407 FOREIGN KEY (command_id) REFERENCES commands(id);
+
+
+--
+-- Name: fk_rails_94f1d63da8; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY run_commands
+    ADD CONSTRAINT fk_rails_94f1d63da8 FOREIGN KEY (lpar_id) REFERENCES lpars(id);
+
+
+--
+-- Name: fk_rails_95878fa8ac; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY command_cgroups
+    ADD CONSTRAINT fk_rails_95878fa8ac FOREIGN KEY (command_id) REFERENCES commands(id);
+
+
+--
+-- Name: fk_rails_b8fb1177ad; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY user_jobs
+    ADD CONSTRAINT fk_rails_b8fb1177ad FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: fk_rails_b921e83c45; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY user_ugroups
+    ADD CONSTRAINT fk_rails_b921e83c45 FOREIGN KEY (ugroup_id) REFERENCES ugroups(id);
+
+
+--
+-- Name: fk_rails_c70811282f; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY run_views
+    ADD CONSTRAINT fk_rails_c70811282f FOREIGN KEY (run_command_id) REFERENCES run_commands(id);
+
+
+--
+-- Name: fk_rails_cc4ce7c87e; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY lpar_restricts
+    ADD CONSTRAINT fk_rails_cc4ce7c87e FOREIGN KEY (ugroup_id) REFERENCES ugroups(id);
+
+
+--
+-- Name: fk_rails_d0bdab4024; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY cloads
+    ADD CONSTRAINT fk_rails_d0bdab4024 FOREIGN KEY (lpar_id) REFERENCES lpars(id);
+
+
+--
+-- Name: fk_rails_d13d553f9b; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY command_cgroups
+    ADD CONSTRAINT fk_rails_d13d553f9b FOREIGN KEY (cgroup_id) REFERENCES cgroups(id);
+
+
+--
+-- Name: fk_rails_d450729c64; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY notices
+    ADD CONSTRAINT fk_rails_d450729c64 FOREIGN KEY (ugroup_id) REFERENCES ugroups(id);
+
+
+--
+-- Name: fk_rails_d7ec89e1af; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT fk_rails_d7ec89e1af FOREIGN KEY (lpar_id) REFERENCES lpars(id);
+
+
+--
+-- Name: fk_rails_efc49522cf; Type: FK CONSTRAINT; Schema: public; Owner: rcc
+--
+
+ALTER TABLE ONLY cload_items
+    ADD CONSTRAINT fk_rails_efc49522cf FOREIGN KEY (cload_id) REFERENCES cloads(id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
