@@ -56,5 +56,7 @@ reveal-md demo
 
 kill -9 $(lsof -i tcp:3000 -t)
 
+rails server -b 0.0.0.0
+
 xx
 

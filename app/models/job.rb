@@ -68,6 +68,8 @@ class Job < ActiveRecord::Base
 
   scope :with_jgroup, -> type { where("jgroup = ?", type) unless !type || type == "ALL"}
 
+  before_update :set_ar
+
   def self.ransackable_scopes(auth_object = nil)
     [:with_favorite, :with_private]
   end
@@ -78,6 +80,32 @@ class Job < ActiveRecord::Base
 
   def owner?(user)
     self.owner_id == user.id
+  end
+
+  #
+  #  set ar_start based on specified date and time
+  #
+  private
+  def set_ar
+
+    if self.ar_type_changed? or self.ar_start_date_changed? or self.ar_start_time_changed?
+
+      if !self.ar_start_date.blank?
+        sdate = self.ar_start_date
+      else
+        sdate = Time.now.to_date
+      end
+
+      if !self.ar_start_time.blank?
+        stime = self.ar_start_time
+      else
+        stime = Time.now.midnight
+      end
+
+      self.ar_start = DateTime.new(sdate.year, sdate.month, sdate.day, stime.hour, stime.min)
+
+    end
+
   end
 
 end

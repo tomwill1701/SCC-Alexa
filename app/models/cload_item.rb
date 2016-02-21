@@ -50,8 +50,10 @@ class CloadItem < ActiveRecord::Base
     hash.delete("batch")
     hash.delete("group")
     hash["source"] = cli["source"]
-    puts hash.inspect
+    # puts hash.inspect
+
     c = Command.find_by(name: cli.name)
+
     if c
       c.update(hash)
       cli.update(status: "Replaced")
@@ -59,11 +61,13 @@ class CloadItem < ActiveRecord::Base
       c = Command.create(hash)
       cli.update(status: "Added")
     end
+
     if cli["group"]
       cg = Cgroup.find_or_create_by(name: cli["group"])
-    #  cg.commands << c
+    # cg.commands << c
       CommandCgroup.find_or_create_by(command:c, cgroup: cg)
     end
+
   end
 
 

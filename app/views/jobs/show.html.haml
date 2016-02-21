@@ -14,10 +14,12 @@
     = bootstrap_nested_form_for @job do |f|
       .row
         .col-md-3= f.text_field :name, disabled: 'true'
-        .col-md-3= f.text_field :jtype, label: "Tab", disabled: 'true'
-        .col-md-3= f.text_field :cclass, label: "Class", disabled: 'true'
-        .col-md-3= f.text_field :run_type, disabled: 'true'
-        .col-md-3= f.number_field :keep_days, as: :number, disabled: 'true'
+        .col-md-2= f.text_field :jgroup, label: "Group", disabled:'true'
+        .col-md-2= f.text_field :jtype, label: "Tab", disabled: 'true'
+        .col-md-2= f.text_field :cclass, label: "Class", disabled: 'true'
+        .col-md-2= f.text_field :run_type, disabled: 'true'
+      .row
+        .col-md-2= f.number_field :keep_days, as: :number, disabled: 'true'
         .col-md-3= f.text_field :tags, disabled: 'true'
         .col-md-1= f.check_box :private, disabled: 'true'
         .col-md-1= f.check_box :notify, as: :boolean, disabled: 'true'

@@ -209,7 +209,7 @@ class JobsController < ApplicationController
   #
   def job_params
     params.require(:job).permit(:name, :description, :menu, :cclass, :tags, :jtype,
-    :jgroup, :private, :notify, :user_ids, :owner_id, :jgroup,
+    :jgroup, :private, :notify, :user_ids, :owner_id,
     :run_type, :keep_days, :cache, :delete_when,
     :ar_start_date, :ar_start_time, :ar_type, :ar_repeat, :ar_hour,
     :ar_wday, :ar_day, :ar_month, :ar_wdayt, :ar_file,

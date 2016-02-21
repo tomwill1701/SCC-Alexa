@@ -41,9 +41,7 @@ namespace :scc do
   #
   def autorun
 
-    jobs = Job.where("length(ar_type) > 0 AND
-        (ar_start_date is null OR ar_start_date <= ?) AND
-        (ar_start_time is null OR ar_start_time <= ?)", Date.today, Time.now)
+    jobs = Job.where("length(ar_type) > 0 AND ar_start <= now() ")
     jobs.each do |job|
 
       file_delete = nil
@@ -97,6 +95,7 @@ namespace :scc do
         #  see if the file exists and has changed since we last used it
         #
 	 last_mod = File.mtime(fn).to_s
+
         if File.exist?(fn) and !File.zero?(fn) and File.readable?(fn) and
            (job.ar_file_modified == nil or job.ar_file_modified != last_mod )
 

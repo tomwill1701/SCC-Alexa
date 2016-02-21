@@ -1,10 +1,12 @@
 = bootstrap_nested_form_for @job do |f|
   .row
     .col-md-3= f.text_field :name
-    .col-md-3= f.text_field :jtype, label: "Tab"
-    .col-md-3= f.text_field :cclass, label: "Class"
-    .col-md-3= f.select :run_type, %w{Real-Time Background External}, { label: "Run Type" }, { class: "selectpicker" }
-    .col-md-3= f.number_field :keep_days, as: :number
+    .col-md-2= f.select :jgroup, %w{Job Report}, { label: "Group" }, { class: "selectpicker" }
+    .col-md-2= f.text_field :jtype, label: "Tab"
+    .col-md-2= f.text_field :cclass, label: "Class"
+    .col-md-2= f.select :run_type, %w{Real-Time Background External}, { label: "Run Type" }, { class: "selectpicker" }
+  .row
+    .col-md-2= f.number_field :keep_days, as: :number
     .col-md-3= f.text_field :tags
     .col-md-1= f.check_box :private, as: :boolean
     .col-md-1= f.check_box :notify, as: :boolean
@@ -24,7 +26,6 @@
   .row
     .col-md-12= f.text_area :description, rows: '4'
     = f.hidden_field :owner_id, value: @job.owner_id
-    = f.hidden_field :jgroup, value: @job.jgroup
   .row
     .col-md-12
       %h2 Command Groups
