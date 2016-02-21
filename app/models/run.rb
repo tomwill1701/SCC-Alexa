@@ -266,6 +266,21 @@ class Run < ActiveRecord::Base
   def execute
 
     #
+    #  see if we have a trigger file we need to copy
+    #
+    if !self.file_trigger.blank?
+        fns = self.file_trigger.split(';')
+        fn = fns[0]
+        cfn = fns[1]
+        
+        if File.exist?(fn) and !File.zero?(fn) and File.readable?(fn) and cfn
+          FileUtils.cp(fn, cfn)
+        end
+
+    end
+
+
+    #
     #  build tcpip call for each run_command
     #
     self.xmlfile = Array.new

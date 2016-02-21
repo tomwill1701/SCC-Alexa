@@ -15,6 +15,6 @@
 .idea
 
 # Ignore uploaded files
-#/public/pdf
-#/public/scc/*
-#/public/uploads/*
+/public/pdf
+/public/scc/*
+/public/uploads/*

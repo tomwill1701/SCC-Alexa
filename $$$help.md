@@ -62,6 +62,9 @@ pg_dump scc_dev > sccdb_dump.txt
 
 pg_dump scc_dev < sccdb_dump.txt
 
+pg_dump -Fc --no-acl --no-owner -h localhost scc_dev  > mydb.dump
+
+
 
 xx
 

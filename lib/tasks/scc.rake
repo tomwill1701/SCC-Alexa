@@ -43,9 +43,9 @@ namespace :scc do
 
     jobs = Job.where("length(ar_type) > 0 AND ar_start <= now() ")
     jobs.each do |job|
-  binding.pry
 
       file_delete = nil
+      file_trigger = nil
 
       #
       #  hour of the day
@@ -88,26 +88,22 @@ namespace :scc do
         fn = fns[0]
         cfn = fns[1]
         if fn[0..0] != '/'
-          fn = Rails.root.to_s + "/tmp/" + fn
+          fn = Rails.root.to_s + "/data/" + fn
           cfn = Rails.root.to_s + "/tmp/" + cfn if cfn
         end
 
         #
         #  see if the file exists and has changed since we last used it
         #
-	 last_mod = File.mtime(fn).to_s
+        if File.exist?(fn) and !File.zero?(fn) and File.readable?(fn)
+          last_mod = File.mtime(fn).to_s
+          if job.ar_file_modified == nil or job.ar_file_modified != last_mod 
 
-        if File.exist?(fn) and !File.zero?(fn) and File.readable?(fn) and
-           (job.ar_file_modified == nil or job.ar_file_modified != last_mod )
-
-           job.ar_file_modified = last_mod
-
-           #
-           #  see if we need to copy to a new file
-           #
-           if cfn != nil
-             FileUtils.cp(fn, cfn)
-           end
+            job.ar_file_modified = last_mod
+            file_trigger = fn + ";" + cfn if cfn
+          else 
+            next
+          end
         else
           next
         end
@@ -123,6 +119,7 @@ namespace :scc do
       run << "Autorun job queued"
       run.auto_run = true
       run.file_delete = file_delete
+      run.file_trigger = file_trigger
       run.save
       RunJob.perform_later run
 

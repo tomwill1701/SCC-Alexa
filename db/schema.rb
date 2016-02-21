@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217033006) do
+ActiveRecord::Schema.define(version: 20160221230440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -294,12 +294,12 @@ ActiveRecord::Schema.define(version: 20160217033006) do
   add_index "run_views", ["run_id"], name: "index_run_views_on_run_id", using: :btree
 
   create_table "runs", force: :cascade do |t|
-    t.boolean  "background",  default: true
-    t.boolean  "cache",       default: true
-    t.boolean  "error",       default: false
-    t.boolean  "done",        default: false
-    t.boolean  "notify",      default: false
-    t.boolean  "debug",       default: false
+    t.boolean  "background",   default: true
+    t.boolean  "cache",        default: true
+    t.boolean  "error",        default: false
+    t.boolean  "done",         default: false
+    t.boolean  "notify",       default: false
+    t.boolean  "debug",        default: false
     t.string   "name"
     t.string   "status"
     t.string   "error_text"
@@ -311,13 +311,14 @@ ActiveRecord::Schema.define(version: 20160217033006) do
     t.datetime "delete_at"
     t.string   "delete_when"
     t.string   "note"
-    t.boolean  "auto_run",    default: false
+    t.boolean  "auto_run",     default: false
     t.integer  "ugroup_id"
     t.integer  "job_id"
     t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "file_delete"
+    t.string   "file_trigger"
   end
 
   add_index "runs", ["job_id"], name: "index_runs_on_job_id", using: :btree
