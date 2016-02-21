@@ -1387,7 +1387,7 @@ COPY delayed_jobs (id, priority, attempts, handler, last_error, run_at, locked_a
 -- Name: delayed_jobs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
 --
 
-SELECT pg_catalog.setval('delayed_jobs_id_seq', 63, true);
+SELECT pg_catalog.setval('delayed_jobs_id_seq', 64, true);
 
 
 --
@@ -1508,10 +1508,6 @@ SELECT pg_catalog.setval('lpars_id_seq', 3, true);
 --
 
 COPY notices (id, title, ugroup_id, run_id, created_at, updated_at) FROM stdin;
-49	Background job finished	2	86	2016-02-21 23:23:53.909134	2016-02-21 23:23:53.909134
-50	Background job finished	2	87	2016-02-21 23:26:12.136832	2016-02-21 23:26:12.136832
-51	Background job finished	2	88	2016-02-21 23:26:33.02342	2016-02-21 23:26:33.02342
-52	Background job finished	2	90	2016-02-21 23:27:39.138934	2016-02-21 23:27:39.138934
 \.
 
 
@@ -1519,7 +1515,7 @@ COPY notices (id, title, ugroup_id, run_id, created_at, updated_at) FROM stdin;
 -- Name: notices_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
 --
 
-SELECT pg_catalog.setval('notices_id_seq', 52, true);
+SELECT pg_catalog.setval('notices_id_seq', 53, true);
 
 
 --
@@ -1527,11 +1523,6 @@ SELECT pg_catalog.setval('notices_id_seq', 52, true);
 --
 
 COPY run_commands (id, model, rtext, done, error, add_lpar, error_text, status, source, data_acquired, cloud, compressed, merge_grid, download, hide, run_id, lpar_id, job_item_id, command_id, created_at, updated_at) FROM stdin;
-85	birt-attach-view DCC/*	eJzj5XLxdDMwNDAy0HVV8A9wDXL0c1HwDFYI8fdX8PH3c+flAgCB6weu\n	t	f	f	\N	\N	TCPIP	\N	f	t	f	f	f	86	2	3	41	2016-02-21 23:22:30.836032	2016-02-21 23:22:35.12054
-86		\N	f	f	f	\N	\N	\N	\N	f	f	f	f	f	87	\N	6	31	2016-02-21 23:25:30.942609	2016-02-21 23:25:30.942609
-87		\N	f	f	f	\N	\N	\N	\N	f	f	f	f	f	88	\N	8	42	2016-02-21 23:25:30.997265	2016-02-21 23:25:30.997265
-88	ENABLE OSJOB MONRUNM TCPIP *NAME=@IMPOOL	eJytmFuToygUgN+nyv9AZXamkt65AN5i16ZqiWJ0W8UF7O48zf//FwtoFOyk\nJ1sND4kezvk4nAuaBJ+KuoQ4yuD3B/APO4KWdXzoWtCRlh7+rtuesQYISbik\nRfBJ5LnWqCXjIPmBLhOAdUAMXUHOAOKfGP3EECWASICyRxw9xjAIehv47Vvw\n8IcCFbS5iLTAqBS1eALjqj3JKRgEOVE9W1CRH0TFXsCiUncl4y2RNeu0ih4H\nJQGkacAza4aWCi2X554eTrwuzA05LYtoQd4QIYxoduJIOMgrtTfAynGlklM6\nemRM9Nwvg1Wqi+T1MEPN/flg7PJz82H02aAd1ElF5l7WaYqiA/sSBHxoqNg2\ntZC7QMu2Kr2g56wYciXhNGe82Iq8oi3ZBXWXN0NBt7R7Fuqj0Aa7RawiLijf\nPlgig1T3wZ9moSBQ5ZZBjOD3WicLASNWV4+rGbzMAJX6kv47gJw1KrcH8HUQ\nvGyKHK1swpu0aEXTd0BQqZCdrLuBbjv6KrV0t7KMbcvRYnRis1lpJrZmXYKv\neu+/dEJEn4O/AIJAVrRzIFw1lUtJf0MJr1DOtGnYywq0vxmM7Fowel530lVU\nDtu+CDFQ8MJrSVVVbDlaRQrdzCVa51LZA45MV5oCAbo1QUl0DbqWoW1Z1rQp\npoDo+gfzqCgpVOFt9NRmpwRP9GzIa150i3cJsMsz3fRFEVvja1GtefEtHlc0\nWV98vPC0FGjxZg1KboEkk6RRTe+CjFSfBW9A6bsgyZ+ugZT4DWj/Xqhmh9xQ\nXXMoe48z++NyrviD4RXO2ADOuHA+m7k5dbk6gtTJhiBKkeKZqjMD7fe6Ft8O\n/Qj7AWO8PMMme+zYLwONXZdX6ss8BSz9sZBc/WxssaKyhboJLbu5YKxlJrv8\nPbu5Pqz93G+3ZEWN8B67S/YtjehuO2c5EN9j9/lt5pNMnzTKbtKDodlP6ygB\n+P+v9BltIclxlfyPI4ujeQXxiaxK4TI9IEXr7vzjyFY2YZxB4h959IhkpC2O\neNm3D6Q4AWd4QR6fht4nUqc7XKZ9ISP/yNgvkrfee1zIkyrNV/9I69nlC2nV\nui9k6B8ZeUY6LwHJfvwOIZyN0ukKwaXcouQyifCKZ58Ynly0ougLaUVRvZJM\nMcBxNi6FwjA2O8QQhlPfIvVKFpuLPY736YoXe3bxufPeiq/EPzL1j9x7R3as\nE63oZyieko9jmJmLPU5NahGOYJyOqURZHJlmwFmSpNnyW1P/a4RX/xqp34Zt\n3RHzX9F/hAOCFg==\n	t	f	f	\N	\N	TCPIP	\N	f	t	f	f	f	89	2	4	27	2016-02-21 23:27:15.059844	2016-02-21 23:27:17.870518
-89	ENABLE OSJOB MONRUNM TCPIP *NAME=RCCVOL,P2='WREC(CSV)' 	eJx1091v2jAQAPD3Sv4f7mEapCslToENRpBc+2BenQ/ZThBPqNsirVorUMsm\n8d/PTvfBvDRPZ9/Pd46dzL8eHu4X80+7L8fFfP/YLMiZkMs4GU3jwTl8LK4h\nK3Jd5RnkLMNUc14X6qJM0t5aI+9zU0c9MJZpi4KcGc69l7bQMLmkvxNQ5GCq\nXLANxMkwocMkphNgFuh0loxncUJIeVr+4k9tcv7qufEN5lDv7r8/NKCb/e7x\n4DNZIVD9WvTeT7RPei21HTBrGf8wqCWuwYmhuHv6NnTBlt/ubz/fHY5b0fyw\nx33j1y2lwrTns67SpWvc87N2U2LqBm3MVqmQ5sbHXDFjnkdEVwpNX0ljIyJz\nriqBfcxr029f3VWLIkLetIoQd7LTOKHxQPp9UminXTQLMsnfDIDApR9Bhsaw\nFQb06pQCSGMqhLWWFv0RahoFfvRi03HYFDloGqDJKVpKVAJel0Whtv6SAvu2\nw/JKC2ZD+a5bWvlfzWmHNBsjxb+Oxh2uct8lE4IHlHZQd28GdQCTrt6ZCdRV\nl3L/w0qXgRy9sEeBdSDHHdIWlqkt36jAdt2Q1ewnwc3qwQ==\n	t	f	f	\N	\N	TCPIP	\N	f	t	f	f	f	90	2	12	46	2016-02-21 23:27:25.07262	2016-02-21 23:27:30.53301
 \.
 
 
@@ -1539,7 +1530,7 @@ COPY run_commands (id, model, rtext, done, error, add_lpar, error_text, status, 
 -- Name: run_commands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
 --
 
-SELECT pg_catalog.setval('run_commands_id_seq', 89, true);
+SELECT pg_catalog.setval('run_commands_id_seq', 90, true);
 
 
 --
@@ -1547,28 +1538,6 @@ SELECT pg_catalog.setval('run_commands_id_seq', 89, true);
 --
 
 COPY run_views (id, name, file, file_type, hide, run_command_id, run_id, job_item_id, command_id, created_at, updated_at) FROM stdin;
-189	DCC BIRT Reports	\N	\N	t	85	86	3	41	2016-02-21 23:22:30.839253	2016-02-21 23:22:35.141708
-190	PDF performance.pdf	performance.pdf	http://192.168.0.44/scc/run_view/file/190/performance.pdf	f	85	86	\N	\N	2016-02-21 23:23:49.86604	2016-02-21 23:23:49.876976
-191	PDF status.pdf	status.pdf	http://192.168.0.44/scc/run_view/file/191/status.pdf	f	85	86	\N	\N	2016-02-21 23:23:49.888107	2016-02-21 23:23:49.892852
-192	PDF config.pdf	config.pdf	http://192.168.0.44/scc/run_view/file/192/config.pdf	f	85	86	\N	\N	2016-02-21 23:23:49.901603	2016-02-21 23:23:49.906232
-193	PDF linux.pdf	linux.pdf	http://192.168.0.44/scc/run_view/file/193/linux.pdf	f	85	86	\N	\N	2016-02-21 23:23:49.915183	2016-02-21 23:23:49.923418
-194	PDF capacity.pdf	capacity.pdf	http://192.168.0.44/scc/run_view/file/194/capacity.pdf	f	85	86	\N	\N	2016-02-21 23:23:49.93242	2016-02-21 23:23:49.936801
-195	PDF performance-h.pdf	performance-h.pdf	http://192.168.0.44/scc/run_view/file/195/performance-h.pdf	f	85	86	\N	\N	2016-02-21 23:23:49.945959	2016-02-21 23:23:49.950632
-196	PDF replication.pdf	replication.pdf	http://192.168.0.44/scc/run_view/file/196/replication.pdf	f	85	86	\N	\N	2016-02-21 23:23:49.959537	2016-02-21 23:23:49.965458
-197	Run Ken DCC Reports	\N	\N	t	86	87	6	31	2016-02-21 23:25:30.945036	2016-02-21 23:25:31.23483
-199	PDF RCC_DLm_Configuration.pdf	RCC_DLm_Configuration.pdf	http://192.168.0.44/scc/run_view/file/199/RCC_DLm_Configuration.pdf	f	86	87	\N	\N	2016-02-21 23:26:04.472249	2016-02-21 23:26:04.481913
-200	PDF RCC_DLm_Throughput.pdf	RCC_DLm_Throughput.pdf	http://192.168.0.44/scc/run_view/file/200/RCC_DLm_Throughput.pdf	f	86	87	\N	\N	2016-02-21 23:26:04.491887	2016-02-21 23:26:04.497022
-201	PDF RCC_DLm_Filesystem.pdf	RCC_DLm_Filesystem.pdf	http://192.168.0.44/scc/run_view/file/201/RCC_DLm_Filesystem.pdf	f	86	87	\N	\N	2016-02-21 23:26:04.508522	2016-02-21 23:26:04.515485
-202	PDF RCC_DLm_Mounts.pdf	RCC_DLm_Mounts.pdf	http://192.168.0.44/scc/run_view/file/202/RCC_DLm_Mounts.pdf	f	86	87	\N	\N	2016-02-21 23:26:04.525041	2016-02-21 23:26:04.530128
-203	PDF RCC_DLm_Dashboard.pdf	RCC_DLm_Dashboard.pdf	http://192.168.0.44/scc/run_view/file/203/RCC_DLm_Dashboard.pdf	f	86	87	\N	\N	2016-02-21 23:26:04.545434	2016-02-21 23:26:04.558973
-198	Run Ken SMS Reports	\N	\N	t	87	88	8	42	2016-02-21 23:25:30.999547	2016-02-21 23:26:12.178901
-204	PDF RCC_SMSINFO_MC.pdf	RCC_SMSINFO_MC.pdf	http://192.168.0.44/scc/run_view/file/204/RCC_SMSINFO_MC.pdf	f	87	88	\N	\N	2016-02-21 23:26:30.881593	2016-02-21 23:26:30.899003
-205	PDF RCC_SMSINFO_SC.pdf	RCC_SMSINFO_SC.pdf	http://192.168.0.44/scc/run_view/file/205/RCC_SMSINFO_SC.pdf	f	87	88	\N	\N	2016-02-21 23:26:30.912057	2016-02-21 23:26:30.916841
-206	PDF RCC_SMSINFO_DC.pdf	RCC_SMSINFO_DC.pdf	http://192.168.0.44/scc/run_view/file/206/RCC_SMSINFO_DC.pdf	f	87	88	\N	\N	2016-02-21 23:26:30.926511	2016-02-21 23:26:30.938269
-207	PDF RCC_SMSINFO_SG.pdf	RCC_SMSINFO_SG.pdf	http://192.168.0.44/scc/run_view/file/207/RCC_SMSINFO_SG.pdf	f	87	88	\N	\N	2016-02-21 23:26:30.947298	2016-02-21 23:26:30.952087
-208	DISK POOL SPACE USAGE	\N	\N	f	88	89	4	27	2016-02-21 23:27:15.063396	2016-02-21 23:27:15.063396
-209	KEN Volume Report	\N	\N	t	89	90	12	46	2016-02-21 23:27:25.075745	2016-02-21 23:27:25.075745
-210	PDF RCC_Capacity_DevType.pdf	RCC_Capacity_DevType.pdf	http://192.168.0.44/scc/run_view/file/210/RCC_Capacity_DevType.pdf	f	89	90	\N	\N	2016-02-21 23:27:39.085919	2016-02-21 23:27:39.103101
 \.
 
 
@@ -1576,7 +1545,7 @@ COPY run_views (id, name, file, file_type, hide, run_command_id, run_id, job_ite
 -- Name: run_views_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
 --
 
-SELECT pg_catalog.setval('run_views_id_seq', 210, true);
+SELECT pg_catalog.setval('run_views_id_seq', 216, true);
 
 
 --
@@ -1584,11 +1553,6 @@ SELECT pg_catalog.setval('run_views_id_seq', 210, true);
 --
 
 COPY runs (id, background, cache, error, done, notify, debug, name, status, error_text, log, total_data, start, "end", viewed, delete_at, delete_when, note, auto_run, ugroup_id, job_id, user_id, created_at, updated_at, file_delete, file_trigger) FROM stdin;
-87	t	f	f	t	t	f	Ken DLM Reports	Background run finished	\N	21/02/2016 18:25:30: Autorun job queued\r21/02/2016 18:25:31: Background job started\r21/02/2016 18:25:31: BIRT started: RCC/DLM/RCC_DLm_Configuration\r21/02/2016 18:25:36: BIRT successful: RCC/DLM/RCC_DLm_Configuration\r21/02/2016 18:25:36: BIRT started: RCC/DLM/RCC_DLm_Throughput\r21/02/2016 18:25:43: BIRT successful: RCC/DLM/RCC_DLm_Throughput\r21/02/2016 18:25:43: BIRT started: RCC/DLM/RCC_DLm_Filesystem\r21/02/2016 18:25:49: BIRT successful: RCC/DLM/RCC_DLm_Filesystem\r21/02/2016 18:25:49: BIRT started: RCC/DLM/RCC_DLm_Mounts\r21/02/2016 18:25:57: BIRT successful: RCC/DLM/RCC_DLm_Mounts\r21/02/2016 18:25:57: BIRT started: RCC/DLM/RCC_DLm_Dashboard\r21/02/2016 18:26:04: BIRT successful: RCC/DLM/RCC_DLm_Dashboard\r21/02/2016 18:26:04: file uploaded: /dts/SCC/tmp/RCC_DLm_Configuration.pdf\r21/02/2016 18:26:04: file uploaded: /dts/SCC/tmp/RCC_DLm_Throughput.pdf\r21/02/2016 18:26:04: file uploaded: /dts/SCC/tmp/RCC_DLm_Filesystem.pdf\r21/02/2016 18:26:04: file uploaded: /dts/SCC/tmp/RCC_DLm_Mounts.pdf\r21/02/2016 18:26:04: file uploaded: /dts/SCC/tmp/RCC_DLm_Dashboard.pdf\r21/02/2016 18:26:04: email attachment: /dts/SCC/tmp/RCC_DLm_Configuration.pdf\r21/02/2016 18:26:04: email attachment: /dts/SCC/tmp/RCC_DLm_Throughput.pdf\r21/02/2016 18:26:04: email attachment: /dts/SCC/tmp/RCC_DLm_Filesystem.pdf\r21/02/2016 18:26:04: email attachment: /dts/SCC/tmp/RCC_DLm_Mounts.pdf\r21/02/2016 18:26:04: email attachment: /dts/SCC/tmp/RCC_DLm_Dashboard.pdf\r21/02/2016 18:26:12: Email sent\r21/02/2016 18:26:12: Background job ended\r	\N	2016-02-21 23:25:30.928419	2016-02-21 23:26:04.573391	\N	\N	\N		t	2	6	2	2016-02-21 23:25:30.939829	2016-02-21 23:26:12.142779	\N	/dts/SCC/data/kendcc;/dts/SCC/tmp/LDATA.XML
-86	t	f	f	t	t	f	DCC DLM Reports	Background run finished	\N	21/02/2016 18:22:30: Autorun job queued\r21/02/2016 18:22:34: Background job started\r21/02/2016 18:22:34: TCPIP started\r21/02/2016 18:22:35: TCPIP ended\r21/02/2016 18:22:35: BIRT started: DCC/performance\r21/02/2016 18:22:56: BIRT successful: DCC/performance\r21/02/2016 18:22:56: BIRT started: DCC/status\r21/02/2016 18:23:04: BIRT successful: DCC/status\r21/02/2016 18:23:04: BIRT started: DCC/config\r21/02/2016 18:23:14: BIRT successful: DCC/config\r21/02/2016 18:23:14: BIRT started: DCC/linux\r21/02/2016 18:23:22: BIRT successful: DCC/linux\r21/02/2016 18:23:22: BIRT started: DCC/capacity\r21/02/2016 18:23:29: BIRT successful: DCC/capacity\r21/02/2016 18:23:29: BIRT started: DCC/performance-h\r21/02/2016 18:23:38: BIRT successful: DCC/performance-h\r21/02/2016 18:23:38: BIRT started: DCC/replication\r21/02/2016 18:23:49: BIRT successful: DCC/replication\r21/02/2016 18:23:49: file uploaded: /dts/SCC/tmp/performance.pdf\r21/02/2016 18:23:49: file uploaded: /dts/SCC/tmp/status.pdf\r21/02/2016 18:23:49: file uploaded: /dts/SCC/tmp/config.pdf\r21/02/2016 18:23:49: file uploaded: /dts/SCC/tmp/linux.pdf\r21/02/2016 18:23:49: file uploaded: /dts/SCC/tmp/capacity.pdf\r21/02/2016 18:23:49: file uploaded: /dts/SCC/tmp/performance-h.pdf\r21/02/2016 18:23:49: file uploaded: /dts/SCC/tmp/replication.pdf\r21/02/2016 18:23:50: email attachment: /dts/SCC/tmp/performance.pdf\r21/02/2016 18:23:50: email attachment: /dts/SCC/tmp/status.pdf\r21/02/2016 18:23:50: email attachment: /dts/SCC/tmp/config.pdf\r21/02/2016 18:23:50: email attachment: /dts/SCC/tmp/linux.pdf\r21/02/2016 18:23:50: email attachment: /dts/SCC/tmp/capacity.pdf\r21/02/2016 18:23:50: email attachment: /dts/SCC/tmp/performance-h.pdf\r21/02/2016 18:23:50: email attachment: /dts/SCC/tmp/replication.pdf\r21/02/2016 18:23:53: Email sent\r21/02/2016 18:23:53: Background job ended\r	\N	2016-02-21 23:22:30.685266	2016-02-21 23:23:49.972256	\N	\N	\N		t	2	3	2	2016-02-21 23:22:30.832862	2016-02-21 23:23:53.918219	\N	/dts/SCC/data/ldata.xml;/dts/SCC/tmp/dccdata.xml
-90	t	f	f	t	f	f	Ken Volume Report	Background run finished	\N	21/02/2016 18:27:25: Background job queued\r21/02/2016 18:27:27: Background job started\r21/02/2016 18:27:27: TCPIP started\r21/02/2016 18:27:30: TCPIP ended\r21/02/2016 18:27:30: file downloaded (10928 bytes): /dts/SCC/tmp/DTS-MP3000-'RCC_VOL.CSV'\r21/02/2016 18:27:30: File /dts/SCC/tmp/'RCC_VOL.CSV' merged\r21/02/2016 18:27:30: BIRT started: RCC/Disk/RCC_Capacity_DevType\r21/02/2016 18:27:39: BIRT successful: RCC/Disk/RCC_Capacity_DevType\r21/02/2016 18:27:39: file uploaded: /dts/SCC/tmp/RCC_Capacity_DevType.pdf\r21/02/2016 18:27:39: Background job ended\r	\N	2016-02-21 23:27:25.113695	2016-02-21 23:27:39.119247	\N	\N	\N		f	2	8	2	2016-02-21 23:27:25.068705	2016-02-21 23:27:39.142019	\N	\N
-88	t	f	f	t	t	f	Ken SMS Reports	Background run finished	\N	21/02/2016 18:25:31: Autorun job queued\r21/02/2016 18:26:12: Background job started\r21/02/2016 18:26:12: BIRT started: RCC/SMS/RCC_SMSINFO_MC\r21/02/2016 18:26:16: BIRT successful: RCC/SMS/RCC_SMSINFO_MC\r21/02/2016 18:26:16: BIRT started: RCC/SMS/RCC_SMSINFO_SC\r21/02/2016 18:26:21: BIRT successful: RCC/SMS/RCC_SMSINFO_SC\r21/02/2016 18:26:21: BIRT started: RCC/SMS/RCC_SMSINFO_DC\r21/02/2016 18:26:26: BIRT successful: RCC/SMS/RCC_SMSINFO_DC\r21/02/2016 18:26:26: BIRT started: RCC/SMS/RCC_SMSINFO_SG\r21/02/2016 18:26:30: BIRT successful: RCC/SMS/RCC_SMSINFO_SG\r21/02/2016 18:26:30: file uploaded: /dts/SCC/tmp/RCC_SMSINFO_MC.pdf\r21/02/2016 18:26:30: file uploaded: /dts/SCC/tmp/RCC_SMSINFO_SC.pdf\r21/02/2016 18:26:30: file uploaded: /dts/SCC/tmp/RCC_SMSINFO_DC.pdf\r21/02/2016 18:26:30: file uploaded: /dts/SCC/tmp/RCC_SMSINFO_SG.pdf\r21/02/2016 18:26:30: email attachment: /dts/SCC/tmp/RCC_SMSINFO_MC.pdf\r21/02/2016 18:26:30: email attachment: /dts/SCC/tmp/RCC_SMSINFO_SC.pdf\r21/02/2016 18:26:30: email attachment: /dts/SCC/tmp/RCC_SMSINFO_DC.pdf\r21/02/2016 18:26:30: email attachment: /dts/SCC/tmp/RCC_SMSINFO_SG.pdf\r21/02/2016 18:26:33: Email sent\r21/02/2016 18:26:33: Background job ended\r	\N	2016-02-21 23:25:30.983198	2016-02-21 23:26:30.958671	\N	\N	\N		t	2	7	2	2016-02-21 23:25:30.994348	2016-02-21 23:26:33.02972	\N	/dts/SCC/data/kensms;/dts/SCC/tmp/RCCSMS.XML
-89	f	f	f	t	f	f	Disk Space Grid	Real-time run finished	\N	21/02/2016 18:27:15: TCPIP started\r21/02/2016 18:27:17: TCPIP ended\r	\N	2016-02-21 23:27:15.106133	2016-02-21 23:27:17.903516	2016-02-21 23:27:17.930231	\N	\N		f	2	4	2	2016-02-21 23:27:15.05589	2016-02-21 23:27:17.996419	\N	\N
 \.
 
 
@@ -1596,7 +1560,7 @@ COPY runs (id, background, cache, error, done, notify, debug, name, status, erro
 -- Name: runs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: rcc
 --
 
-SELECT pg_catalog.setval('runs_id_seq', 90, true);
+SELECT pg_catalog.setval('runs_id_seq', 91, true);
 
 
 --
