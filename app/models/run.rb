@@ -484,7 +484,7 @@ class Run < ActiveRecord::Base
       File.open(fn) do |f|
         rv = RunView.create(run: self, run_command: rc, file: f,
                             name: title)
-        if rv.file.mounted_as == :file
+        if rv.file.mounted_as == :file && ENV["SERVER_IP"]
           rv.file_type = ENV["SERVER_IP"] + rv.file.url
         end
         self << "file uploaded: #{fn}"
