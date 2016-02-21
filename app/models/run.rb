@@ -124,7 +124,8 @@ class Run < ActiveRecord::Base
             #
             #  build a new RunCommand that we will send to a lpar
             #
-            ctext = ctype(lpar, command, command.model.strip)
+            ctext = command.model.gsub(";","\n").split("\n").first.strip
+            ctext = ctype(lpar, command, ctext)
             @rc = RunCommand.new(run: self, lpar: lpar, model: ctext, job_item: ji, command: command)
             self.run_commands << @rc
             if %w(difcmd mvscmd).include? command.ctype.downcase
@@ -376,12 +377,12 @@ class Run < ActiveRecord::Base
       #
       #  if external see what commands we have
       #
-      if rv.command.ctype.downcase == "external"
+      if %w(external csv xml).include?(rv.command.ctype.downcase)
 
         rv.hide = true
         rv.save
 
-        ecmds = rv.command.model.gsub(";","\n").strip.split('\n')
+        ecmds = rv.command.model.gsub(";","\n").strip.split("\n")
         ecmds.each do |cmd|
           oper = cmd.split(' ')
           oper[0] = "" if oper.count == 0
