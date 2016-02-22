@@ -268,10 +268,16 @@ class Run < ActiveRecord::Base
     #
     #  see if we have a trigger file we need to copy
     #
-    if !self.file_trigger.blank?
-        fns = self.file_trigger.split(';')
+    if !self.job.ar_file.blank?
+        fns = self.job.ar_file.split(';')
         fn = fns[0]
         cfn = fns[1]
+        if fn[0..0] != '/'
+          fn = Rails.root.to_s + "/data/" + fn
+          cfn = Rails.root.to_s + "/tmp/" + cfn if cfn
+        end
+
+   binding.pry
         
         if File.exist?(fn) and !File.zero?(fn) and File.readable?(fn) and cfn
           FileUtils.cp(fn, cfn)
