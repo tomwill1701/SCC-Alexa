@@ -276,8 +276,6 @@ class Run < ActiveRecord::Base
           fn = Rails.root.to_s + "/data/" + fn
           cfn = Rails.root.to_s + "/tmp/" + cfn if cfn
         end
-
-   binding.pry
         
         if File.exist?(fn) and !File.zero?(fn) and File.readable?(fn) and cfn
           FileUtils.cp(fn, cfn)
@@ -401,6 +399,9 @@ class Run < ActiveRecord::Base
       if %w(external csv xml).include?(rv.command.ctype.downcase)
 
         rv.hide = true
+        rv.command.model.gsub!("&RailsRoot",  Rails.root.to_s)
+        rv.command.model.gsub!("&tmp",  Rails.root.to_s + "/tmp")
+        rv.command.model.gsub!("&data",  Rails.root.to_s + "/data")
         rv.save
 
         ecmds = rv.command.model.gsub(";","\n").strip.split("\n")
@@ -409,6 +410,7 @@ class Run < ActiveRecord::Base
           oper[0] = "" if oper.count == 0
           func = oper[0].downcase
           fn = oper[1] if oper[1]
+          cmdtext = oper[1..-1].join(' ')
 
           #
           #  run a birt report
@@ -462,15 +464,14 @@ class Run < ActiveRecord::Base
           #
           #  run a linux command
           #
-          if func == "sh"
-            self << "sh started: #{fn}"
+          if func == "command"
+            self << "command started: #{cmdtext}"
             self.save
-            cmd = "sh " + fn
-            crc = system(cmd)
+            crc = system(cmdtext)
             if crc
-              self << "sh successful: #{fn}"
+              self << "command successful: #{cmdtext}"
             else
-              self << "sh failed: #{fn}"
+              self << "command failed: #{cmdtext}"
               self.error = true
             end
             self.save
