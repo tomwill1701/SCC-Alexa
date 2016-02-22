@@ -8,7 +8,7 @@
         .col-md-12
           .form-group.chardin_box
             = f.label :name
-            = f.search_field :name_cont
+            = f.select :name_eq, Run.order(:name).uniq.pluck(:name), include_blank: true
             = f.label :note_cont
             = f.search_field :note_cont
             = f.label "Run on"

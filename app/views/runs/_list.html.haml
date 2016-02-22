@@ -2,7 +2,6 @@
   %tr
     %th=sort_link @q, :name, "Jobname"
     %th=sort_link @q, :status, "Status"
-    %th=sort_link @q, :status, "Group"
     %th=sort_link @q, :error, "Error"
     %th=sort_link @q, :start, "Ran on"
     %th=sort_link @q, :viewed, "Last viewed"
@@ -11,18 +10,12 @@
     %tr
       %td= link_to run.name, job_path(run.job), class: 'btn btn-default btn-xs'
       %td= run.status
-      %td= run.ugroup.name
       %td= run.error
       %td= run.start
       %td= run.viewed
       %td= run.delete_at.try(:strftime, '%b %d, %Y')
-      %td.dropdown
-        %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button", class: 'btn btn-success btn-xs'}
-          View
-          %span.caret
-        %ul.dropdown-menu
-          %li= link_to 'Report', job_run_view_path(run)
-          %li= link_to 'Details', run_path(run)
+      %td= link_to 'Report', job_run_view_path(run)
+      %td= link_to 'Details', run_path(run)
       %td= link_to 'Delete', run, method: :delete, class: 'btn btn-primary btn-xs'
 
 .chardin_box{ :'data-position' => 'top' }
