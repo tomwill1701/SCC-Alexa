@@ -205,7 +205,7 @@ class Run < ActiveRecord::Base
       return "REXX #{ctext}"
     elsif command.ctype.downcase == "external"
       return ctext
-    elsif %w(grid chart xml csv).include?(command.ctype.downcase)
+    elsif %w(grid chart xml csv data).include?(command.ctype.downcase)
       mon = lpar.monproc
       mon = "MONRUNM" unless mon
       if ctext.downcase[0..3] == "dif "
@@ -296,7 +296,7 @@ class Run < ActiveRecord::Base
         exec.lpar = rc.lpar
         exec.cmd = rc.model
         exec.command = rc
-        if %w(xml csv).include?(exec.command.command.ctype.downcase) & !exec.command.command.file.blank?
+        if %w(xml csv data).include?(exec.command.command.ctype.downcase) & !exec.command.command.file.blank?
           exec.filename = Rails.root.to_s + "/tmp/" + exec.lpar.name + "-" + exec.command.command.file
           exec.xmlfile = Rails.root.to_s + "/tmp/" + exec.command.command.file
         end
@@ -327,12 +327,12 @@ class Run < ActiveRecord::Base
       execgroup.errors = true if exec.errors
 
       #
-      #  if we downloaded a dataset then build log message and keep the first 1k for display
+      #  if we downloaded a dataset then build log message and keep the first 4k for display
       #
       if exec.file && !exec.errors
         self << "file downloaded (#{exec.rlength} bytes): #{exec.file.path}"
         f = File.open(exec.file.path)
-        rc.rtext = f.read(1000)
+        rc.rtext = f.read(4096)
         f.close
         if exec.xmlfile
           procxml(exec)
@@ -362,7 +362,7 @@ class Run < ActiveRecord::Base
       path = f.path
       f.close
       fr = open(path).gets
-      if fr[0..0] == "<"
+      if fr && fr[0..0] == "<"
         f = File.open(path, "a")
         f << '</root>'
         f.close
@@ -396,7 +396,7 @@ class Run < ActiveRecord::Base
       #
       #  if external see what commands we have
       #
-      if %w(external csv xml).include?(rv.command.ctype.downcase)
+      if %w(external csv xml data).include?(rv.command.ctype.downcase)
 
         rv.hide = true
         rv.command.model.gsub!("&RailsRoot",  Rails.root.to_s)
@@ -567,7 +567,7 @@ class Run < ActiveRecord::Base
     #
     fi = File.open(exec.file, 'r')
     while(line=fi.gets("\r"))
-      if exec.command.command.ctype.downcase == "csv" && line[0..9] == "MON10103-I"
+      if %w(csv data).include?(exec.command.command.ctype.downcase) && line[0..9] == "MON10103-I"
           fo << line[11..-1] + "\n"
       elsif line[0..0] == "<" && !["<html>", "<?xml ", "<root>", "</root"].include?(line[0..5])
         fo << line + "\n"

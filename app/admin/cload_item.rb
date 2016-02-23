@@ -76,7 +76,7 @@ ActiveAdmin.register CloadItem do
       input :file
       input :keys
       input :ctype, label: "Type", as: :select,
-        collection: ["DIFCmd", "MVSCmd", "Grid", "Chart", "External"]
+        collection: ["DIFCmd", "MVSCmd", "Grid", "Chart", "External", "XML", "CSV", "Data"]
       input :cclass, label: "Class"
       input :tags
       input :size
