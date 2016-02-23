@@ -14,8 +14,8 @@
       %td= run.start
       %td= run.viewed
       %td= run.delete_at.try(:strftime, '%b %d, %Y')
-      %td= link_to 'Report', job_run_view_path(run)
-      %td= link_to 'Details', run_path(run)
+      %td= link_to 'Report', job_run_view_path(run), class: 'btn btn-success btn-xs'
+      %td= link_to 'Details', run_path(run), class: 'btn btn-danger btn-xs'
       %td= link_to 'Delete', run, method: :delete, class: 'btn btn-primary btn-xs'
 
 .chardin_box{ :'data-position' => 'top' }

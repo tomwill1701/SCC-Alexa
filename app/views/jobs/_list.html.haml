@@ -11,6 +11,7 @@
       %td= job.run_type
       %td= job.updated_at
       %td= link_to 'Run', run_job_path(job), class: 'btn btn-success btn-xs'
+      %td= link_to 'Past Runs', runs_path(q: {job_id_eq: job.id}), class: 'btn btn-danger btn-xs'
       - if job.favorite_job?(current_user)
         %td= link_to 'Unfav', unfavorite_job_path(job), method: :delete, class: 'btn btn-warning btn-xs'
       -else

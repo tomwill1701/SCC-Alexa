@@ -52,7 +52,7 @@ class Run < ActiveRecord::Base
   #  ransack filters
   #
   def self.ransackable_scopes(auth_object = nil)
-    [:with_background, :with_error, :with_done, :with_nv, :name]
+    [:with_background, :with_error, :with_done, :with_nv, :name, :job_id]
   end
 
   #
