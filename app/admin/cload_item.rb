@@ -3,7 +3,7 @@ ActiveAdmin.register CloadItem do
   belongs_to :cload
   config.paginate = false
 
-  actions :index, :show
+  actions :index, :show, :destroy
 
   scope :all, default: true
   scope("New") { |scope| scope.where(status: "New") }
