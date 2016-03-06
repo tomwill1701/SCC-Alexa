@@ -4,10 +4,12 @@
 //= require turbolinks
 //= require cocoon
 //= require bootstrap-datepicker
-//= require dhtmlxgrid.js
-//= require ext/dhtmlxgrid_filter.js
-//= require ext/dhtmlxgrid_export.js
-//= require loading_overlay.js
+//= require dhtmlxgrid
+//= require ext/dhtmlxgrid_filter
+//= require ext/dhtmlxgrid_export
+//= require loading_overlay
+//= require bootstrap
+
 
 $(function(){
 $('.clickable').on('click',function(){
