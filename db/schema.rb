@@ -191,7 +191,7 @@ ActiveRecord::Schema.define(version: 20160221230440) do
     t.boolean  "ar_active",        default: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.string   "ar_file_modified"
+    t.datetime "ar_file_modified"
   end
 
   create_table "lgroups", force: :cascade do |t|

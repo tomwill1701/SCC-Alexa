@@ -5,7 +5,7 @@ gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'faker'
 gem 'fog'
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 gem 'jquery-rails'
 gem 'rails', '4.2.0'
 gem 'sass-rails', '~> 5.0'
@@ -40,7 +40,7 @@ group :production do
 end
 
 group :development, :test do
-  gem 'annotate'
+  gem 'annotate', '~> 2.7.1'
   gem 'awesome_print'
   gem 'byebug'
   gem 'dotenv-rails'

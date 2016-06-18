@@ -1,11 +1,11 @@
 
 class ExecGroup
 
-  attr_accessor :execs, :errors, :requests, :prompts, :current_user
+  attr_accessor :execs, :errors, :request, :prompts, :current_user
 
   def initialize
-    @execs = Array.new
-    @request = Array.new
+    self.execs = Array.new
+    self.request = Array.new
   end
 
   def run_one(cmd, lpar, current_user)
@@ -35,7 +35,7 @@ class ExecGroup
       req = Typhoeus::Request.new("http://#{lpar.ip}:#{lpar.port}/#{e.cmd}".gsub(' ','+'),
           userpwd: "#{userid}:#{password}" )
       hydra.queue(req)
-      @request << req
+      self.request << req
 
       if e.filename
         e.file = File.open(e.filename, 'w')
@@ -63,7 +63,7 @@ class ExecGroup
     #
     #  look at each response
     #
-    @request.each_with_index do |request, x|
+    request.each_with_index do |request, x|
       response = request.response
       exec = execs[x]
       exec.connect_time = response.connect_time
@@ -82,7 +82,7 @@ class ExecGroup
         #
         elsif response.code == 401
           bad_password = true
-          @prompts = ["Userid", "Password"]
+          self.prompts = ["Userid", "Password"]
         elsif response.code == 0
           add_error(response.return_message)
         else

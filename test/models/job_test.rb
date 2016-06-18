@@ -32,7 +32,7 @@
 #  ar_active        :boolean          default(FALSE)
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  ar_file_modified :datetime
+#  ar_file_modified :string
 #
 
 require 'test_helper'
