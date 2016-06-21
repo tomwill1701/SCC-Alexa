@@ -17,8 +17,6 @@
 
 class RunView < ActiveRecord::Base
 
-  include Rails.application.routes.url_helpers
-
   belongs_to :run
   belongs_to :run_command
   belongs_to :job_item
@@ -30,10 +28,6 @@ class RunView < ActiveRecord::Base
                 :options, :size, :title, :file_url
 
   mount_uploader :file, ExtUploader
-
-  def view_url
-    return run_view_path(self)
-  end
 
   #
   #  return url or extended url
