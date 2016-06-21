@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  namespace :api do
+    resources :jobs, only: [:index, :show, :run]
+    resources :runs, only: [:index, :show, :destroy]
+  end
+
   ActiveAdmin.routes(self)
   match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
