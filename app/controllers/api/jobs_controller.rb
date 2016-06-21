@@ -1,6 +1,7 @@
 class Api::JobsController < Api::ApiController
 
   def index
+    #render  json: Job.for_user(current_user).to_json(include: { runs: { include: :run_views } })
     render json: Job.for_user(current_user).with_jgroup(@title)
   end
 
@@ -9,8 +10,4 @@ class Api::JobsController < Api::ApiController
     render json: list
   end
 
-  private
-  def list_params
-    params.require("todo_list").permit("title")
-  end
 end
