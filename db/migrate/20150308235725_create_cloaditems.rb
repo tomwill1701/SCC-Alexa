@@ -19,6 +19,10 @@ class CreateCloaditems < ActiveRecord::Migration
       t.string :status
       t.string :group
       t.string :preload
+      t.string :tab
+      t.string :env
+      t.string :prompt
+      t.string :related
       t.integer :cache_time
       t.string :file
       t.boolean :hide, default: false

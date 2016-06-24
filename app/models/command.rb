@@ -21,6 +21,10 @@
 #  cclass      :string
 #  tags        :string
 #  preload     :string
+#  tab         :string
+#  env         :string
+#  prompt      :string
+#  related     :string
 #  cache_time  :integer          default(0)
 #  rscript     :text
 #  vscript     :text

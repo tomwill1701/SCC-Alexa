@@ -19,6 +19,10 @@ class CreateCommands < ActiveRecord::Migration
       t.string :cclass
       t.string :tags
       t.string :preload
+      t.string :tab
+      t.string :env
+      t.string :prompt
+      t.string :related
       t.integer :cache_time, default: 0
       t.text   :rscript
       t.text   :vscript

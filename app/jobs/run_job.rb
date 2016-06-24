@@ -1,4 +1,5 @@
 class RunJob < ActiveJob::Base
+require 'urbanairship'
 
   queue_as :run
 
@@ -29,6 +30,19 @@ class RunJob < ActiveJob::Base
     run.status = "Background run finished"
     Notice.create(title: "Background job finished", ugroup: run.ugroup, run: run)
     run.save
+
+    job = run.job
+    if job.alert_message.present? && job.alert_types.present?
+      key = ENV["ALERT_KEY"]
+      secret = ENV["ALERT_SECRET"]
+      site = ENV["ALERT_SITE"]
+      airship = Urbanairship::Client.new(key: key, secret: secret)
+      push = airship.create_push
+      push.audience = Urbanairship.tag(job.alert_types, group: site)
+      push.notification = Urbanairship.notification(alert: job.alert_message)
+      push.device_types = Urbanairship.all
+      push.send_push
+    end
 
     #
     #  delete trigger file name

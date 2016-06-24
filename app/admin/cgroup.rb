@@ -1,6 +1,5 @@
 ActiveAdmin.register Cgroup do
 
-
   menu label: "Command Groups", parent: "Commands"
 
   permit_params :id, :name, :description

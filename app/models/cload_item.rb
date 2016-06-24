@@ -21,6 +21,10 @@
 #  status      :string
 #  group       :string
 #  preload     :string
+#  tab         :string
+#  env         :string
+#  prompt      :string
+#  related     :string
 #  cache_time  :integer
 #  file        :string
 #  hide        :boolean          default(FALSE)

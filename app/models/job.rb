@@ -17,6 +17,9 @@
 #  notify_group     :boolean          default(TRUE)
 #  cache            :boolean          default(TRUE)
 #  debug            :boolean          default(TRUE)
+#  from_command     :boolean          default(FALSE)
+#  alert_types      :string
+#  alert_message    :string
 #  owner_id         :integer
 #  ar_start         :datetime
 #  ar_start_date    :date

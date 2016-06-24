@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221230440) do
+ActiveRecord::Schema.define(version: 20160622010953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,13 @@ ActiveRecord::Schema.define(version: 20160221230440) do
   add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+
+  create_table "alerts", force: :cascade do |t|
+    t.string   "device_id"
+    t.string   "alert_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "cgroups", force: :cascade do |t|
     t.string   "name"
@@ -58,6 +65,10 @@ ActiveRecord::Schema.define(version: 20160221230440) do
     t.string   "status"
     t.string   "group"
     t.string   "preload"
+    t.string   "tab"
+    t.string   "env"
+    t.string   "prompt"
+    t.string   "related"
     t.integer  "cache_time"
     t.string   "file"
     t.boolean  "hide",        default: false
@@ -116,6 +127,10 @@ ActiveRecord::Schema.define(version: 20160221230440) do
     t.string   "cclass"
     t.string   "tags"
     t.string   "preload"
+    t.string   "tab"
+    t.string   "env"
+    t.string   "prompt"
+    t.string   "related"
     t.integer  "cache_time",  default: 0
     t.text     "rscript"
     t.text     "vscript"
@@ -176,6 +191,9 @@ ActiveRecord::Schema.define(version: 20160221230440) do
     t.boolean  "notify_group",     default: true
     t.boolean  "cache",            default: true
     t.boolean  "debug",            default: true
+    t.boolean  "from_command",     default: false
+    t.string   "alert_types"
+    t.string   "alert_message"
     t.integer  "owner_id"
     t.datetime "ar_start"
     t.date     "ar_start_date"
@@ -191,7 +209,7 @@ ActiveRecord::Schema.define(version: 20160221230440) do
     t.boolean  "ar_active",        default: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.datetime "ar_file_modified"
+    t.string   "ar_file_modified"
   end
 
   create_table "lgroups", force: :cascade do |t|

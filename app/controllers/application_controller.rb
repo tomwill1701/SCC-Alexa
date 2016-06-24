@@ -19,8 +19,31 @@ class ApplicationController < ActionController::Base
   #  also make sure we have a prompt values hash for this user
   #
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
+
+    #
+    #  try using session id
+    #
+    if !@current_user
+      @current_user ||= User.find_by(id: session[:user_id])
+    end
+
+=begin
+    #
+    #  try basic http auth
+    #
+    if !@current_user
+      user, password = ActionController::HttpAuthentication::Basic::user_name_and_password(request)
+      if name.length > 0
+        user = User.find_by(name: user)
+        if user && user.authenticate(password)
+          @current_user = user
+        end
+      end
+    end
+=end
+
     return @current_user
+
   end
 
   #

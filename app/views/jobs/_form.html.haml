@@ -12,6 +12,9 @@
     .col-md-1= f.check_box :notify, as: :boolean
     .col-md-1= f.check_box :cache, as: :boolean
   .row
+    .col-md-3= f.text_field :alert_types
+    .col-md-3= f.text_field :alert_message
+  .row
     .col-md-2= f.select :ar_type, %w{Minute Hour Day Month Once}, { label: "Auto Run", include_blank: true },
         { class: "selectpicker" }
     .col-md-2= f.text_field :ar_start_date, label: "Start Date", class: 'datepicker'

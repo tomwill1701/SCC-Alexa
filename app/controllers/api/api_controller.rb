@@ -11,7 +11,6 @@ module Api
 
     def authenticate
       authenticate_or_request_with_http_basic do |name, password|
-        Rails.logger.info "API authentication:#{name} #{password}"
         user = User.find_by(name: name)
         if user && user.authenticate(password)
           @current_user = user

@@ -1,0 +1,450 @@
+# Logfile created on 2016-06-23 17:35:20 -0400 by logger.rb/47272
+D, [2016-06-23 17:35:20#56447] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 17:35:20#56447] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 21:35:20 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 17:39:17#56523] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 17:39:17#56523] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 21:39:17 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 17:40:51#56641] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 17:40:51#56641] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 21:40:51 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:02:59#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:02:59#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:02:59 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:03:10#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:03:12#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:03:12 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:03:33#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:03:34#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:03:34 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:03:39#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:03:39#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:03:39 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:05:01#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:05:02#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:05:02 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:06:11#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:06:12#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:06:12 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:08:06#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:08:07#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:08:07 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:09:28#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:09:29#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:09:29 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:16:47#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:16:47#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:16:47 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:18:37#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:18:38#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:18:38 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:20:04#57655] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:20:05#57655] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:20:04 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:20:40#57875] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 18:20:41#57875] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:20:41 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:24:17#57948] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 18:24:17#57948] DEBUG -- Urbanairship: Received 401 response. Headers:
+	{:www_authenticate=>"Basic realm=\"API\"", :content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"54", :date=>"Thu, 23 Jun 2016 22:24:17 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Unauthorized", "error_code"=>40101}
+D, [2016-06-23 18:24:43#58004] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 18:24:44#58004] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 22:24:44 GMT", :last_modified=>"Thu, 23 Jun 2016 22:24:44 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 22:24:44 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"f859916e-22be-4405-8de0-21a49c648681", "push_ids"=>["e414199d-906c-4997-bdb4-544441cc26e0"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 18:24:44#58004]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	f859916e-22be-4405-8de0-21a49c648681
+push_ids:	["e414199d-906c-4997-bdb4-544441cc26e0"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 18:27:44#58074] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":"all","notification":{"alert":"Hello, world!"},"device_types":"all"}
+D, [2016-06-23 18:27:44#58074] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 22:27:44 GMT", :last_modified=>"Thu, 23 Jun 2016 22:27:44 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 22:27:44 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"d13f72d8-9eb2-4bc0-a73c-7e4dd67657ba", "push_ids"=>["39e472f7-6178-4993-a38b-0cd6a2b4f199"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 18:27:44#58074]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	d13f72d8-9eb2-4bc0-a73c-7e4dd67657ba
+push_ids:	["39e472f7-6178-4993-a38b-0cd6a2b4f199"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 18:36:26#58183] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 18:36:27#58183] DEBUG -- Urbanairship: Received 400 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"117", :date=>"Thu, 23 Jun 2016 22:36:27 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Could not parse request body.", "error_code"=>40561, "details"=>{"error"=>"Unknown tag group 'DTS'"}}
+E, [2016-06-23 18:36:27#58183] ERROR -- Urbanairship: Request failed with status 400: '40561 Could not parse request body.': {"ok"=>false, "error"=>"Could not parse request body.", "error_code"=>40561, "details"=>{"error"=>"Unknown tag group 'DTS'"}}
+D, [2016-06-23 18:37:58#58246] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 18:37:59#58246] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 22:37:59 GMT", :last_modified=>"Thu, 23 Jun 2016 22:37:59 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 22:37:59 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"edbe44dd-5ee7-47d4-8ab3-fe5616d23a0b", "push_ids"=>["b51e2ed2-51a5-4667-a1cd-796780626063"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 18:37:59#58246]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	edbe44dd-5ee7-47d4-8ab3-fe5616d23a0b
+push_ids:	["b51e2ed2-51a5-4667-a1cd-796780626063"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 18:38:23#58302] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag5"}]},"notification":{"alert":"BREAKING: Important news is 1"},"device_types":"all"}
+D, [2016-06-23 18:38:24#58302] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 22:38:24 GMT", :last_modified=>"Thu, 23 Jun 2016 22:38:24 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 22:38:24 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"b3b31f91-b7a8-4c2f-814c-a2e284275e8f", "push_ids"=>["fbeeea44-4b65-400b-8b66-5d5c91425d35"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 18:38:24#58302]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	b3b31f91-b7a8-4c2f-814c-a2e284275e8f
+push_ids:	["fbeeea44-4b65-400b-8b66-5d5c91425d35"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 18:38:29#58074] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"tag":"tag1","group":"DTS"},"notification":{"alert":"test"},"device_types":"all"}
+D, [2016-06-23 18:38:29#58074] DEBUG -- Urbanairship: Received 400 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"117", :date=>"Thu, 23 Jun 2016 22:38:30 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Could not parse request body.", "error_code"=>40561, "details"=>{"error"=>"Unknown tag group 'DTS'"}}
+E, [2016-06-23 18:38:29#58074] ERROR -- Urbanairship: Request failed with status 400: '40561 Could not parse request body.': {"ok"=>false, "error"=>"Could not parse request body.", "error_code"=>40561, "details"=>{"error"=>"Unknown tag group 'DTS'"}}
+D, [2016-06-23 18:40:14#58364] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 18:40:16#58364] DEBUG -- Urbanairship: Received 400 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"117", :date=>"Thu, 23 Jun 2016 22:40:16 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Could not parse request body.", "error_code"=>40561, "details"=>{"error"=>"Unknown tag group 'DTS'"}}
+E, [2016-06-23 18:40:16#58364] ERROR -- Urbanairship: Request failed with status 400: '40561 Could not parse request body.': {"ok"=>false, "error"=>"Could not parse request body.", "error_code"=>40561, "details"=>{"error"=>"Unknown tag group 'DTS'"}}
+D, [2016-06-23 18:40:22#58074] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"tag":"tag1","group":"DTS"},"notification":{"alert":"test"},"device_types":"all"}
+D, [2016-06-23 18:40:23#58074] DEBUG -- Urbanairship: Received 400 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"117", :date=>"Thu, 23 Jun 2016 22:40:23 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Could not parse request body.", "error_code"=>40561, "details"=>{"error"=>"Unknown tag group 'DTS'"}}
+E, [2016-06-23 18:40:23#58074] ERROR -- Urbanairship: Request failed with status 400: '40561 Could not parse request body.': {"ok"=>false, "error"=>"Could not parse request body.", "error_code"=>40561, "details"=>{"error"=>"Unknown tag group 'DTS'"}}
+D, [2016-06-23 18:41:51#58074] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"tag":"tag1","group":"DTS"},"notification":{"alert":"test"},"device_types":"all"}
+D, [2016-06-23 18:41:53#58074] DEBUG -- Urbanairship: Received 400 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :content_length=>"117", :date=>"Thu, 23 Jun 2016 22:41:52 GMT", :connection=>"close"}
+Body:
+	{"ok"=>false, "error"=>"Could not parse request body.", "error_code"=>40561, "details"=>{"error"=>"Unknown tag group 'DTS'"}}
+E, [2016-06-23 18:41:53#58074] ERROR -- Urbanairship: Request failed with status 400: '40561 Could not parse request body.': {"ok"=>false, "error"=>"Could not parse request body.", "error_code"=>40561, "details"=>{"error"=>"Unknown tag group 'DTS'"}}
+D, [2016-06-23 18:42:10#58429] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 18:42:11#58429] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 22:42:10 GMT", :last_modified=>"Thu, 23 Jun 2016 22:42:10 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 22:42:10 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"fcc74487-32c5-4f6a-9d62-5233efedc6b3", "push_ids"=>["8a276da0-5a3d-46fe-b9e6-c2eedeebbdfd"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 18:42:11#58429]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	fcc74487-32c5-4f6a-9d62-5233efedc6b3
+push_ids:	["8a276da0-5a3d-46fe-b9e6-c2eedeebbdfd"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 18:46:22#58669] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 18:46:22#58669] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 22:46:22 GMT", :last_modified=>"Thu, 23 Jun 2016 22:46:22 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 22:46:22 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"c9b95b7a-bed0-4aa0-8b3d-4c981e40b6fa", "push_ids"=>["2c16324b-9803-4d8b-91c9-1ce62de9db13"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 18:46:22#58669]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	c9b95b7a-bed0-4aa0-8b3d-4c981e40b6fa
+push_ids:	["2c16324b-9803-4d8b-91c9-1ce62de9db13"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 18:53:20#58781] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 18:53:21#58781] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 22:53:21 GMT", :last_modified=>"Thu, 23 Jun 2016 22:53:21 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 22:53:21 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"3a2d4918-cb87-4394-b1c5-d1595b05270e", "push_ids"=>["6c635f51-0a7e-4737-8f5e-0948bb0a26ee"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 18:53:21#58781]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	3a2d4918-cb87-4394-b1c5-d1595b05270e
+push_ids:	["6c635f51-0a7e-4737-8f5e-0948bb0a26ee"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 18:53:37#58835] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 18:53:37#58835] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 22:53:37 GMT", :last_modified=>"Thu, 23 Jun 2016 22:53:37 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 22:53:37 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"9cfc6825-20a3-415c-81c4-c6c5cdde2446", "push_ids"=>["40fdd35f-2615-4088-a868-2f6a4984ed26"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 18:53:37#58835]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	9cfc6825-20a3-415c-81c4-c6c5cdde2446
+push_ids:	["40fdd35f-2615-4088-a868-2f6a4984ed26"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 19:00:02#58939] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news is happening"},"device_types":"all"}
+D, [2016-06-23 19:00:02#58939] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 23:00:02 GMT", :last_modified=>"Thu, 23 Jun 2016 23:00:02 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 23:00:02 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"9301689b-d47c-4c85-9e14-4ed15493f54a", "push_ids"=>["a709a4ea-ad13-4852-a96e-6a64c21c0de3"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 19:00:02#58939]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	9301689b-d47c-4c85-9e14-4ed15493f54a
+push_ids:	["a709a4ea-ad13-4852-a96e-6a64c21c0de3"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 19:00:58#59003] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news is 2"},"device_types":"all"}
+D, [2016-06-23 19:01:00#59003] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 23:01:00 GMT", :last_modified=>"Thu, 23 Jun 2016 23:01:00 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 23:01:00 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"45609c69-66ae-4aaa-b945-71b6eedad95c", "push_ids"=>["a932fe90-1274-4fb6-9127-70034fb6fe59"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 19:01:00#59003]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	45609c69-66ae-4aaa-b945-71b6eedad95c
+push_ids:	["a932fe90-1274-4fb6-9127-70034fb6fe59"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 19:01:29#59061] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS"}]},"notification":{"alert":"BREAKING: Important news is 2"},"device_types":"all"}
+D, [2016-06-23 19:01:30#59061] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Thu, 23 Jun 2016 23:01:30 GMT", :last_modified=>"Thu, 23 Jun 2016 23:01:30 GMT", :content_length=>"152", :date=>"Thu, 23 Jun 2016 23:01:30 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"c52c8069-723a-497d-afbc-4639de3c8ef9", "push_ids"=>["b5fe5747-bee1-4b00-b3be-b614f0749bf5"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-23 19:01:30#59061]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	c52c8069-723a-497d-afbc-4639de3c8ef9
+push_ids:	["b5fe5747-bee1-4b00-b3be-b614f0749bf5"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-23 21:52:28#58074] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"tag":"tag1","group":"DTS"},"notification":{"alert":"test"},"device_types":"all"}
+D, [2016-06-23 21:52:28#58074] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"tag":"tag1","group":"DTS"},"notification":{"alert":"test"},"device_types":"all"}
+D, [2016-06-23 21:52:28#58074] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"tag":"tag1","group":"DTS"},"notification":{"alert":"test"},"device_types":"all"}
+D, [2016-06-24 14:12:31#58074] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"tag":"tag1","group":"DTS"},"notification":{"alert":"test"},"device_types":"all"}
+D, [2016-06-24 14:12:31#58074] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"tag":"tag1","group":"DTS"},"notification":{"alert":"test"},"device_types":"all"}
+D, [2016-06-24 14:12:31#58074] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"tag":"tag1","group":"DTS"},"notification":{"alert":"test"},"device_types":"all"}
