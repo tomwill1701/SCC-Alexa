@@ -5,8 +5,8 @@ cl = UA::Client.new(key: 'yu0NtsbAQZGyMlLRUV4Apw', secret:'SfrCSuZuRMyk34eV6SPtx
 
 push = cl.create_push
 push.audience = UA.and(
-   UA.tag('tag1', group: "DTS")
+   UA.tag('tag1', group: "DTS2")
 )
-push.notification = UA.notification(alert: 'BREAKING: Important news is 2')
+push.notification = UA.notification(alert: 'BREAKING: Important news is 3')
 push.device_types = UA.all
 push.send_push

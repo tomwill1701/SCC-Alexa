@@ -38,6 +38,7 @@ require 'urbanairship'
       site = ENV["ALERT_SITE"]
       airship = Urbanairship::Client.new(key: key, secret: secret)
       push = airship.create_push
+      tags = job.alert_types.split(',')
       push.audience = Urbanairship.tag(job.alert_types, group: site)
       push.notification = Urbanairship.notification(alert: job.alert_message)
       push.device_types = Urbanairship.all
