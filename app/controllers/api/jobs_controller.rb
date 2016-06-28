@@ -14,10 +14,10 @@ class Api::JobsController < Api::ApiController
   def run
     @run = Run.new
     @run.build(@job, current_user)
-    @run.save
     @run.status = "Background run queued"
     @run << "Job created from API"
     @run << "Background job queued"
+    @run.start = DateTime.now
     @run.save
     render json: @run
     RunJob.perform_later @run

@@ -44,4 +44,8 @@ class JobSerializer < ActiveModel::Serializer
 
   has_many :runs
 
+  def runs
+    object.runs.order('start desc')
+  end
+
 end
