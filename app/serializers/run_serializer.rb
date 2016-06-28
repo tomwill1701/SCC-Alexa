@@ -32,7 +32,7 @@
 
 class RunSerializer < ActiveModel::Serializer
 
-  attributes :id, :error, :done, :name, :status, :error_text
+  attributes :id, :error, :start, :end, :name, :status, :error_text, :log
 
   has_many :run_commands
 

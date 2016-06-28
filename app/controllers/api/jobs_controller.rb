@@ -11,6 +11,18 @@ class Api::JobsController < Api::ApiController
     render json: @job
   end
 
+  def run
+    @run = Run.new
+    @run.build(@job, current_user)
+    @run.save
+    @run.status = "Background run queued"
+    @run << "Job created from API"
+    @run << "Background job queued"
+    @run.save
+    render json: @run
+    RunJob.perform_later @run
+  end
+
   #
   #  find the job for the passed id
   #

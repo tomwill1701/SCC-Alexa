@@ -7,6 +7,6 @@ push = cl.create_push
 push.audience = UA.and(
    UA.tag('tag1', group: "DTS2")
 )
-push.notification = UA.notification(alert: 'BREAKING: Important news is 3')
+push.notification = UA.notification(alert: 'BREAKING: Important news')
 push.device_types = UA.all
 push.send_push

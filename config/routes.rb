@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
 
   namespace :api do
-    resources :jobs, only: [:index, :show, :run]
+    resources :jobs do
+      member do
+        get 'index'
+        get 'show'
+        get 'run'
+      end
+    end
     resources :runs, only: [:index, :show, :destroy]
   end
 

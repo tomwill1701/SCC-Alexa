@@ -796,3 +796,165 @@ push_ids:	["864b0857-f3b4-4a27-80a5-cba9ea08fbd1"]
 message_ids:	[]
 content_urls:	[]
 
+D, [2016-06-26 19:32:01#66519] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news is 3"},"device_types":"all"}
+D, [2016-06-26 19:32:01#66519] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Sun, 26 Jun 2016 23:32:00 GMT", :last_modified=>"Sun, 26 Jun 2016 23:32:00 GMT", :content_length=>"152", :date=>"Sun, 26 Jun 2016 23:32:00 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"6a63835a-63be-4302-9294-97d1949f75f0", "push_ids"=>["d9dc354d-3b12-4b72-8951-4bc4f0d7aa36"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-26 19:32:01#66519]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	6a63835a-63be-4302-9294-97d1949f75f0
+push_ids:	["d9dc354d-3b12-4b72-8951-4bc4f0d7aa36"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-26 19:32:21#66577] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news is 3"},"device_types":"all"}
+D, [2016-06-26 19:32:22#66577] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Sun, 26 Jun 2016 23:32:21 GMT", :last_modified=>"Sun, 26 Jun 2016 23:32:21 GMT", :content_length=>"152", :date=>"Sun, 26 Jun 2016 23:32:21 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"e847e135-aa84-4a48-a08a-5afd15db0e0e", "push_ids"=>["fb653154-eecc-40c3-a519-155d86871d95"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-26 19:32:22#66577]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	e847e135-aa84-4a48-a08a-5afd15db0e0e
+push_ids:	["fb653154-eecc-40c3-a519-155d86871d95"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-26 19:33:39#66639] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news is 3"},"device_types":"all"}
+D, [2016-06-26 19:33:40#66639] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Sun, 26 Jun 2016 23:33:39 GMT", :last_modified=>"Sun, 26 Jun 2016 23:33:39 GMT", :content_length=>"152", :date=>"Sun, 26 Jun 2016 23:33:39 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"e533660b-d91d-417d-a161-b17e1e26b9d6", "push_ids"=>["6c97db4c-3bdd-47c6-9139-48df3de80fb8"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-26 19:33:40#66639]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	e533660b-d91d-417d-a161-b17e1e26b9d6
+push_ids:	["6c97db4c-3bdd-47c6-9139-48df3de80fb8"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-26 19:35:32#66786] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news is 3"},"device_types":"all"}
+D, [2016-06-26 19:35:32#66786] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Sun, 26 Jun 2016 23:35:31 GMT", :last_modified=>"Sun, 26 Jun 2016 23:35:31 GMT", :content_length=>"152", :date=>"Sun, 26 Jun 2016 23:35:31 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"2b4a140d-fab5-4156-ad36-fcb564015eb0", "push_ids"=>["1969eb26-c1e5-49fd-a2ef-39364c80fb88"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-26 19:35:32#66786]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	2b4a140d-fab5-4156-ad36-fcb564015eb0
+push_ids:	["1969eb26-c1e5-49fd-a2ef-39364c80fb88"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-26 19:36:00#66841] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news is 3"},"device_types":"all"}
+D, [2016-06-26 19:36:00#66841] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Sun, 26 Jun 2016 23:35:59 GMT", :last_modified=>"Sun, 26 Jun 2016 23:35:59 GMT", :content_length=>"152", :date=>"Sun, 26 Jun 2016 23:35:59 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"22b69c92-3c0d-485f-8636-96e37e267a4e", "push_ids"=>["454677bc-3a47-4e4c-836f-be656e445b18"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-26 19:36:00#66841]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	22b69c92-3c0d-485f-8636-96e37e267a4e
+push_ids:	["454677bc-3a47-4e4c-836f-be656e445b18"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-27 02:14:08#65797] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"tag":"tag1","group":"DTS2"},"notification":{"alert":"test2"},"device_types":"all"}
+D, [2016-06-27 02:14:09#65797] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Mon, 27 Jun 2016 06:14:09 GMT", :last_modified=>"Mon, 27 Jun 2016 06:14:09 GMT", :content_length=>"152", :date=>"Mon, 27 Jun 2016 06:14:09 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"8b802733-965e-4003-be15-ee6c785d4021", "push_ids"=>["a1a4fa0a-01df-4198-820b-e0f299f84d9f"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-27 02:14:09#65797]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	8b802733-965e-4003-be15-ee6c785d4021
+push_ids:	["a1a4fa0a-01df-4198-820b-e0f299f84d9f"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-27 15:20:49#82069] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news is 3"},"device_types":"all"}
+D, [2016-06-27 15:20:50#82069] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Mon, 27 Jun 2016 19:20:50 GMT", :last_modified=>"Mon, 27 Jun 2016 19:20:50 GMT", :content_length=>"152", :date=>"Mon, 27 Jun 2016 19:20:50 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"3ad1ca50-fdaf-492b-b011-744bb5c5c33d", "push_ids"=>["c2ea7615-a3af-4613-9b0a-ea7dfc86241a"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-27 15:20:50#82069]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	3ad1ca50-fdaf-492b-b011-744bb5c5c33d
+push_ids:	["c2ea7615-a3af-4613-9b0a-ea7dfc86241a"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-27 15:21:12#82125] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news"},"device_types":"all"}
+D, [2016-06-27 15:21:13#82125] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Mon, 27 Jun 2016 19:21:14 GMT", :last_modified=>"Mon, 27 Jun 2016 19:21:14 GMT", :content_length=>"152", :date=>"Mon, 27 Jun 2016 19:21:14 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"4a868409-f10e-4172-abc8-b90ab074da9a", "push_ids"=>["70645fb3-c566-466f-9bf6-b3a833cf1149"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-27 15:21:13#82125]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	4a868409-f10e-4172-abc8-b90ab074da9a
+push_ids:	["70645fb3-c566-466f-9bf6-b3a833cf1149"]
+message_ids:	[]
+content_urls:	[]
+
+D, [2016-06-27 15:21:23#82178] DEBUG -- Urbanairship: Making POST request to https://go.urbanairship.com/api/push/.
+	Headers:
+		content-type: application/json
+		accept: application/vnd.urbanairship+json; version=3
+	Body:
+{"audience":{"and":[{"tag":"tag1","group":"DTS2"}]},"notification":{"alert":"BREAKING: Important news"},"device_types":"all"}
+D, [2016-06-27 15:21:24#82178] DEBUG -- Urbanairship: Received 202 response. Headers:
+	{:content_type=>"application/vnd.urbanairship+json;version=3", :data_attribute=>"push_ids", :cache_control=>"max-age=0", :expires=>"Mon, 27 Jun 2016 19:21:24 GMT", :last_modified=>"Mon, 27 Jun 2016 19:21:24 GMT", :content_length=>"152", :date=>"Mon, 27 Jun 2016 19:21:24 GMT", :connection=>"keep-alive"}
+Body:
+	{"ok"=>true, "operation_id"=>"56a70df3-270d-41ab-9c17-d7cc75fddfe1", "push_ids"=>["489348f4-fa87-491c-b34d-0a818accb674"], "message_ids"=>[], "content_urls"=>[]}
+I, [2016-06-27 15:21:24#82178]  INFO -- Urbanairship: Received [202] response code. 
+Headers: 	Body:
+ok:	true
+operation_id:	56a70df3-270d-41ab-9c17-d7cc75fddfe1
+push_ids:	["489348f4-fa87-491c-b34d-0a818accb674"]
+message_ids:	[]
+content_urls:	[]
+
