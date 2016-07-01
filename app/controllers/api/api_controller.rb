@@ -11,7 +11,7 @@ module Api
 
     def authenticate
       authenticate_or_request_with_http_basic do |name, password|
-        user = User.find_by(name: name)
+        user = User.find_by(username: name)
         if user && user.authenticate(password)
           @current_user = user
           true

@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
   #  try to sign this user in
   #
   def signin
-    @current_user = User.find_by(name: params[:name]).try(:authenticate, params[:password])
+    @current_user = User.find_by(username: params[:name]).try(:authenticate, params[:password])
     if @current_user
       session[:user_id] = @current_user.id
       redirect_to home_index_path

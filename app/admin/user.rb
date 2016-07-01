@@ -2,7 +2,7 @@ ActiveAdmin.register User do
 
   permit_params :id, :name, :department, :phone, :email, :lpar_id,
         :racf_userid, :racf_group, :racf_password, :admin, :password,
-        :background, :notify, :last_login, :login_count, :cache,
+        :background, :notify, :last_login, :login_count, :cache, :username,
         user_ugroups_attributes: [:id, :name, :user_id, :ugroup_id, :_destroy]
 
 
