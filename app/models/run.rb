@@ -277,9 +277,11 @@ class Run < ActiveRecord::Base
           fn = Rails.root.to_s + "/data/" + fn
           cfn = Rails.root.to_s + "/tmp/" + cfn if cfn
         end
-        
+        self << "looking at copy file: #{fn} to #{cfn}"
+
         if File.exist?(fn) and !File.zero?(fn) and File.readable?(fn) and cfn
           FileUtils.cp(fn, cfn)
+          self << "copy file finished: #{fn} to #{cfn}"
         end
 
     end
