@@ -281,7 +281,7 @@ class Run < ActiveRecord::Base
 
         if File.exist?(fn) and !File.zero?(fn) and File.readable?(fn) and cfn
           FileUtils.cp(fn, cfn)
-          self << "copy file finished: #{fn} to #{cfn}"
+          self << "copy done: #{fn} to #{cfn}"
         end
 
     end

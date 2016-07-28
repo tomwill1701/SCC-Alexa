@@ -8,7 +8,11 @@ Rails.application.routes.draw do
         get 'run'
       end
     end
-    resources :runs, only: [:index, :show, :destroy]
+    resources :runs, only: [:index, :show] do
+      member do
+        get 'delete'
+      end
+    end
   end
 
   ActiveAdmin.routes(self)

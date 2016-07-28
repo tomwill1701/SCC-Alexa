@@ -29,7 +29,7 @@ class Cload < ActiveRecord::Base
     #  build an array of hashes for each cload item we need to create
     #
     remap = {"desc" => "description", "type" => "ctype", "cmd" => "model",
-      "tag" => "tags", "class" => "cclass"}
+      "tag" => "tags", "class" => "cclass", "widget" => ""}
       cmd = Cload.s_to_hash(string, remap)
 
       #

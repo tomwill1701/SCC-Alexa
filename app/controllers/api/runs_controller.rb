@@ -1,6 +1,6 @@
 class Api::RunsController < Api::ApiController
 
-  before_action :set_run, only: [:show, :destroy]
+  before_action :set_run, only: [:show, :delete]
 
   #
   #  index
@@ -19,10 +19,10 @@ class Api::RunsController < Api::ApiController
   #
   #  delete function
   #
-  def destroy
+  def delete
     @run.destroy
-    ender status: 200, json: {
-      message: "Run successfully deleted.",
+    render status: 200, json: {
+      message: "Run successfully deleted",
       run: @run
     }.to_json
   end
@@ -34,7 +34,6 @@ class Api::RunsController < Api::ApiController
 
   def set_run
     @run = current_user.runs.find(params[:id])
-    # @run = Run.find(params[:id]) if current_user
   end
 
 end
