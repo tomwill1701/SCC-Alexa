@@ -31,8 +31,8 @@ class ExecGroup
       password = current_user.prompt("Password")
       userid = current_user.racf_userid if userid.blank?
       password = current_user.racf_password if password.blank?
-    
-      req = Typhoeus::Request.new("http://#{lpar.ip}:#{lpar.port}/#{e.cmd}".gsub(' ','+'),
+
+      req = Typhoeus::Request.new("http://#{lpar.ip}:#{lpar.port}/API1#{e.cmd}".gsub(' ','+'),
           userpwd: "#{userid}:#{password}" )
       hydra.queue(req)
       self.request << req
