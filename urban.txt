@@ -1,0 +1,48 @@
+curl -X POST -u "jPwPvdPPTCW-iwuloYqWCQ:n_hHWZIWQb-N2Q07WIRR9A" \
+   -H "Content-Type: application/json" \
+   -H "Accept: application/vnd.urbanairship+json; version=3;" \
+   --data '{"device_types": ["ios"], "audience": {"tag": "test", "group": "DTS"}, "notification": {"alert": "Hello!", "ios": {"extra": { "cmdname": "dif status"}}}}' \
+   https://go.urbanairship.com/api/push/
+
+# dev
+
+curl -v -X POST -u "yu0NtsbAQZGyMlLRUV4Apw:SfrCSuZuRMyk34eV6SPtxA" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/vnd.urbanairship+json; version=3;" \
+  --data '{"device_types": ["ios"], "audience": {"tag": "test", "group": "dts"}, "notification": {"alert": "Hello!", "ios": {"extra": { "cmdname": "dif status"}}}}' \
+  https://go.urbanairship.com/api/push/
+
+  curl -v -X POST -u "yu0NtsbAQZGyMlLRUV4Apw:SfrCSuZuRMyk34eV6SPtxA" \
+    -H "Content-Type: application/json" \
+    -H "Accept: application/vnd.urbanairship+json; version=3;" \
+    --data '{"device_types": ["ios"], "audience": {"tag": "test", "group": "dts"}, "notification": {"alert": "Hello!", "ios": {"extra": { "command": "dif status"}}}}' \
+    http://192.168.0.20:56789
+
+    curl -X POST http://textbelt.com/text \
+   -d number=9192801362 \
+   -d "message=I sent this message for free with textbelt.com"
+
+
+   **** firebase
+
+   curl -X POST --header "Authorization:key=AIzaSyCFQjbPK59dUNeWM5y8qlfLM9l-IWJ2CAo" \
+   --Header "Content-Type: application/json" \
+   --data '{"to":"/topics/-KRy9TLK-Qt6bBDv0JPq","data": {"message": "This is a GCM Topic Message"}}' \
+    https://fcm.googleapis.com/fcm/send
+
+
+    curl -X POST --header "Authorization:key=AIzaSyCFQjbPK59dUNeWM5y8qlfLM9l-IWJ2CAo" \
+    --Header "Content-Type: application/json" \
+    --data '{"to":"/topics/--KXHmKkkHFzMDi3jMwh_","data": {"id": "-KXHmKkkHFzMDi3jMwh_"}, "content_available":true}' \
+     https://fcm.googleapis.com/fcm/send
+
+     curl -X POST --header "Authorization:key=AIzaSyCFQjbPK59dUNeWM5y8qlfLM9l-IWJ2CAo" \
+     --Header "Content-Type: application/json" \
+     --data '{"to":"/topics/-KYEYPIqWxy32CGnLmMc","priority" : "high", "data": {"id": "-KYEYPIqWxy32CGnLmMc"}, "content_available":true}' \
+      https://fcm.googleapis.com/fcm/send
+
+    curl -X GET --header "Authorization:key=AIzaSyCFQjbPK59dUNeWM5y8qlfLM9l-IWJ2CAo" \
+      https://iid.googleapis.com/iid/info/fznRDgJAtpQ:APA91bHI7bbOexBXJPzB0xmd9ERzK5vdxj_tvxd4CJv498hoZfCfhFPSc90YNT6GroTz99ovRwvcic5pIWi0seFfnptie5l0Lzw-A-1uDOwo6g4N0XhuIvMDGwRO81oHy8X-RYVsRYJG?details=true
+
+
+
