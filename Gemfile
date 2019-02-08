@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 
 gem 'pg'
+gem 'sprockets', '3.6.3'
 gem 'activeadmin', '~> 1.0.0.pre2'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'faker'
 gem 'fog'
 gem 'jbuilder'
 gem 'jquery-rails'
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.8'
 gem 'sass-rails', '~> 5.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'thin'
@@ -36,7 +37,9 @@ gem "bootstrap-sass", '~> 3.3.6'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'addressable', '~> 2.3.5'
 gem 'urbanairship', '~> 3.2.3'
-#gem 'rack-mini-profiler'
+gem 'omniauth', '~> 1.6.1'
+gem 'omniauth-auth0', '~> 2.0.0'
+gem 'ralyxa'
 
 group :production do
   gem 'rails_12factor'
@@ -54,3 +57,4 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'letter_opener'
 end
+

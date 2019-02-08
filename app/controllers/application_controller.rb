@@ -27,21 +27,6 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find_by(id: session[:user_id])
     end
 
-=begin
-    #
-    #  try basic http auth
-    #
-    if !@current_user
-      user, password = ActionController::HttpAuthentication::Basic::user_name_and_password(request)
-      if name.length > 0
-        user = User.find_by(name: user)
-        if user && user.authenticate(password)
-          @current_user = user
-        end
-      end
-    end
-=end
-
     return @current_user
 
   end

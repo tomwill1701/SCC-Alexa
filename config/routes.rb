@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   namespace :api do
+
     resources :jobs do
       member do
         get 'index'
@@ -13,7 +14,15 @@ Rails.application.routes.draw do
         get 'delete'
       end
     end
+
+    namespace :alexa do
+      resource :handler, only: [:create]
+    end
+
   end
+
+  get 'auth/auth0/callback' => 'auth0#callback'
+  get 'auth/failure' => 'auth0#failure'
 
   ActiveAdmin.routes(self)
   match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
@@ -23,6 +32,7 @@ Rails.application.routes.draw do
 
   post 'application/signin'
   delete 'application/signout'
+  get 'application/signout'
 
   get 'prompt/show'
   post 'prompt/create'

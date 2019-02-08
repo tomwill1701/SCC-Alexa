@@ -53,8 +53,8 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :user_ugroups, allow_destroy: true,
       reject_if: proc { |a| a[:ugroup_id].blank? }
 
-  validates :name, presence: true
-  validates :name, uniqueness: true
+  validates :username, presence: true
+  validates :username, uniqueness: true
 
   after_save :reset_group
   after_destroy :delete_group
